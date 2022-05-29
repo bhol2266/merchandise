@@ -3,6 +3,9 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    backgroundImage: {
+      'banner': "url('../public/homepageImages/banner.png')",
+    },
     extend: {
 
       animation: {
@@ -11,7 +14,7 @@ module.exports = {
       keyframes: theme => ({
         fadeIn: {
           '0%': { opacity: 0 },
-          '100%':  { opacity: 1 },
+          '100%': { opacity: 1 },
         },
       }),
 
@@ -19,11 +22,11 @@ module.exports = {
         "sm": "500px",
         'md': '750px',
         'lg': "1000px",
-        '2xl':"1250px"
+        '2xl': "1250px"
       },
       colors: {
         'github': '#24292F',
-        'theme':'#00AEEF'
+        'theme': '#00AEEF'
 
       },
       fontFamily: {
@@ -34,6 +37,7 @@ module.exports = {
         poppins: ['Poppins'],
         DMsans: ['DM Sans'],
         Opensans: ['Open Sans'],
+        SFuiDisplay: ['SF UI Display'],
 
       }
     },
@@ -43,7 +47,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('tailwind-scrollbar-hide','@tailwindcss/line-clamp')]
-    
-    
-  }
+    require('tailwind-scrollbar-hide', '@tailwindcss/line-clamp')]
+
+
+}
