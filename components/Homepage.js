@@ -63,6 +63,29 @@ const items = [
     },
 ]
 
+const featuredCreators = [
+    {
+        name: "Don't know who?",
+        image: "happyman.png",
+        payload: {}
+    },
+    {
+        name: "Nina",
+        image: "woman.png",
+        payload: {}
+    },
+    {
+        name: "Steph",
+        image: "woman2.png",
+        payload: {}
+    },
+    {
+        name: "Alina",
+        image: "woman3.png",
+        payload: {}
+    },
+]
+
 export const Homepage = () => {
 
 
@@ -108,6 +131,7 @@ export const Homepage = () => {
                         No cost, no hassle, no risk.</h2>
                 </div>
             </div>
+
             <div className='px-[12px] h-[440px] mt-[12px] flex flex-col'>
                 <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full'></img>
 
@@ -136,6 +160,42 @@ export const Homepage = () => {
                 {items.map(obj => {
                     return (
                         <Item key={obj.name} details={obj} />
+                    )
+                })}
+            </div>
+
+            <div className='h-[555px] px-[12px] '>
+
+                <h1 className='font-SFuiDisplay text-[12px] font-semibold  mt-[20px] w-[168] h-[38px] ml-[20px]'>
+                    WANT TO PLACE BULK
+                    ORDERS ?
+                </h1>
+
+                <h2 className='w-[251px] h-[139px] font-SFuiDisplay font-light text-[12px] ml-[20px]'>In publishing and graphic
+                    design, Lorem ipsum is a placeholder
+                    text commonly used to demonstrate
+                    the visual form of a document or a
+                    typeface without relying on meaningful
+                    content. Lorem ipsum may be used as
+                    a placeholder before the final copy is
+                </h2>
+
+                <button className='content-center w-[180px] h-[40px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-bold mx-auto mb-[20px]   ml-[20px]'>PLACE ORDERS
+                </button>
+
+                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[260px] object-cover'></img>
+
+                <h2 className='w-[160px] font-inter text-[13px] mt-[20px]'>FEATURED CREATORS</h2>
+
+            </div>
+
+            <div className='grid grid-cols-2 gap-4 mx-auto w-fit mb-8'>
+                {featuredCreators.map(item => {
+                    return (
+                        <div key={item.name}>
+                            <img src={`./homepageImages/${item.image}`} className='cursor-pointer w-[170px] h-[170px] object-cover'></img>
+                            <h1 className='font-inter text-[12px] mt-[6px] text-center mx-auto'>{item.name}</h1>
+                        </div>
                     )
                 })}
             </div>
