@@ -164,7 +164,7 @@ export const Homepage = () => {
                 })}
             </div>
 
-            <div className='h-[555px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  lg:flex lg:items-center lg:justify-around '>
+            <div className='h-[525px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  lg:flex lg:items-center lg:justify-around '>
 
                 <div className='ml-[20px]'>
                     <h1 className='font-SFuiDisplay text-[12px] lg:text-[18px] font-bold  mt-[20px] w-[168] h-[38px] lg:mb-8 '>
@@ -190,7 +190,7 @@ export const Homepage = () => {
 
             </div>
 
-            <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mt-[20px] mx-[12px] lg:mx-[50px] lg-my-[60px]'>FEATURED CREATORS</h2>
+            <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mx-[12px] mb-4 lg:mx-[50px] lg:my-[50px]'>FEATURED CREATORS</h2>
 
             <div className='grid grid-cols-2 gap-4 mx-auto w-fit mb-8 lg:grid-cols-4 lg:gap-16'>
                 {featuredCreators.map(item => {
@@ -205,7 +205,7 @@ export const Homepage = () => {
 
 
             <div className='my-[20px] text-[16px] font-bold lg:text-[36px] lg:font-medium'>
-                <h1 className=' text-[#54BAB9] mb-[5px] font-Abhayalibre text-center w-fit mx-auto tracking-[0.5em]	'>CLOSM MAKES EVERYDAY</h1>
+                <h1 className=' text-[#54BAB9] font-Abhayalibre text-center w-fit mx-auto tracking-[0.5em]	'>CLOSM MAKES EVERYDAY</h1>
                 <h1 className=' text-[#54BAB9] mb-[10px] font-Abhayalibre text-center w-fit mx-auto tracking-[0.5em]	'>AWESOME</h1>
             </div>
 
