@@ -164,7 +164,7 @@ export const Homepage = () => {
                 })}
             </div>
 
-            <div className='h-[525px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  lg:flex lg:items-center lg:justify-around lg:mt-10'>
+            <div className='h-[525px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  lg:flex lg:items-center lg:justify-around lg:mt-10 sm:w-fit'>
 
                 <div className='ml-[20px]'>
                     <h1 className='font-SFuiDisplay text-[12px] lg:text-[18px] font-bold  mt-[20px] w-[168] h-[38px] lg:mb-8 '>
