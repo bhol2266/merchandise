@@ -156,7 +156,7 @@ export const Homepage = () => {
             </div>
 
             {/* Products list  */}
-            <div className='px-[12px] grid grid-cols-2 w-fit gap-x-6 mx-auto  gap-y-6  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5  justify-center'>
+            <div className='sm:px-[12px] px-[3px] grid grid-cols-2 w-fit gap-x-6 mx-auto  gap-y-6  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5  justify-center'>
                 {items.map(obj => {
                     return (
                         <Item key={obj.name} details={obj} />

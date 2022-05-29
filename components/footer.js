@@ -35,7 +35,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <h2 className='font-DMsans text-[10px]  text-[#c0c0c0] text-center mx-auto mt-2  '>© 2022 closm.com</h2>
+      <h2 className='font-DMsans text-[10px] lg:text-[14px]  text-[#c0c0c0] text-center mx-auto mt-2  '>© 2022 closm.com</h2>
     </div>
   )
 }
