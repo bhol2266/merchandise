@@ -91,7 +91,7 @@ export const Homepage = () => {
 
     return (
         <div className=''>
-            <h1 className='font-manrope text-[9px] text-center py-2 pb-5 text-white bg-[#54BAB9] h-[25px]'>
+            <h1 className='font-manrope text-[9px] lg:text-[14px] text-center text-white bg-[#54BAB9] py-2'>
                 USE COUPON  “  GHSGDHSSAHGAH9678  “  TO GET EXTRA 20% DISCOUNT
             </h1>
 
@@ -99,7 +99,7 @@ export const Homepage = () => {
 
             <div className='flex justify-between px-[20px] h-[65px] items-center '>
                 <Link href="/">
-                    <h1 className='text-[25px] text-[#BE8024] font-delius cursor-pointer '>Closm</h1>
+                    <h1 className='text-[25px] text-[#BE8024] font-delius cursor-pointer lg:text-[30px] '>Closm</h1>
                 </Link>
 
                 <div className='flex space-x-8 items-center justify-center'>
@@ -118,45 +118,45 @@ export const Homepage = () => {
                 </div>
             </div>
 
-            <div className=' h-[665px] bg-banner w-full bg-no-repeat bg-cover flex items-center justify-center'>
+            <div className=' h-[665px] bg-banner w-full bg-no-repeat bg-cover lg:bg-banner_wide flex lg:h-[560px] items-center justify-center'>
 
-                <div className='w-[332px] h-[132px] flex flex-col left-[100px]'>
+                <div className='w-[332px] h-[132px] lg:w-[584px] lg:h-[212px] flex flex-col left-[100px]'>
                     <div className='mx-auto mb-[38px] flex justify-around space-x-6'>
-                        <button className='content-center font-bold rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897]'>Search</button>
-                        <button className='content-center font-bold rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897]'>Print</button>
+                        <button className='content-center font-black rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897] lg:w-[200px] lg:h-[60px] lg:text-[24px]'>SEARCH</button>
+                        <button className='content-center font-black rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897] lg:w-[200px] lg:h-[60px] lg:text-[24px]'>PRINT</button>
                     </div>
 
-                    <h2 className='text-[12px] text-[#f5f5f5] font-SFuiDisplay'>A simple solution for creating and selling products that engage
+                    <h2 className='text-[12px] text-[#f5f5f5] font-SFuiDisplay text-center lg:text-[20px]  mx-auto'>A simple solution for creating and selling products that engage
                         your fans and help you monetize your content.
                         No cost, no hassle, no risk.</h2>
                 </div>
             </div>
 
-            <div className='px-[12px] h-[440px] mt-[12px] flex flex-col'>
-                <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full'></img>
+            <div className='px-[12px] h-[440px] mt-[12px] flex flex-col lg:flex-row lg:justify-around lg:px-[45px] lg:mr-[100px] '>
+                <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full lg:h-[520px] lg:w-[800px]'></img>
 
-                <h1 className='my-[20px] font-semibold text-[12px] w-[145px] text-center mx-auto font-SFuiDisplay'>JOIN US & SELL YOUR
-                    OWM MERCHANDISE</h1>
+                <div className='lg:w-[338px] lg:h-[450px] flex flex-col  lg:justify-between lg:pt-4'>
+                    <h1 className='mt-[20px]   font-bold text-[12px] w-[145px] text-center mx-auto font-SFuiDisplay lg:w-[217px] h-[52px] lg:text-[18px]'>JOIN US & SELL YOUR
+                        OWM MERCHANDISE</h1>
 
-                <h2 className='px-[12px] font-light text-[12px] text-center mx-auto font-SFuiDisplay'>Now you can join us & sell your own merchandise
-                    completely free without any hidden charges. Create your
-                    own Brand & Monetize. Join us today & become
-                    a part of our evergrowing
-                    Closm Family.</h2>
+                    <h2 className='px-[12px] w-[338px]  h-[92px] font-light text-[12px] text-center mx-auto font-SFuiDisplay lg:w-[260px] lg:h-[180px] lg:text-[18px] lg:px-[30px] lg:mb-14  mb-2'>Now you can join us & sell your own merchandise
+                        completely free without any hidden charges. Create your
+                        own Brand & Monetize. Join us today & become
+                        a part of our evergrowing
+                        Closm Family.</h2>
 
-                <button className='content-center w-[180px] h-[40px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-bold mx-auto mt-[20px]'>JOIN</button>
-            </div>
-            <div className='flex px-[13px] items-center justify-between my-[20px]'>
-                <h1 className='font-inter text-[13px]'>ALL PRODUCTS</h1>
-                <div className='flex items-center space-x-1 cursor-pointer'>
-                    <img src='./homepageImages/filter.png' className='cursor-pointer w-[14px] h-[14px]'></img>
-                    <h1 className='font-inter text-[13px]'>FILTER</h1>
-
+                    <button className='w-[180px] h-[40px] lg:w-[250px] lg:h-[60px] lg:text-[24px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-black mx-auto hover:bg-[#3f9897]'>JOIN</button>
                 </div>
             </div>
 
+            <div className='flex px-[13px] items-center justify-between my-[20px]  lg:mt-[120px] lg:px-[50px]'>
+                <h1 className='font-inter text-[13px] lg:text-[22px]'>FEATURED PRODUCTS</h1>
+                <h1 className='font-inter text-[13px] text-[#54BAB9] lg:text-[22px] cursor-pointer hover:text-red-400'>SEE ALL</h1>
+
+            </div>
+
             {/* Products list  */}
-            <div className='px-[12px] grid grid-cols-2 w-fit gap-x-6 mx-auto  gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 '>
+            <div className='px-[12px] grid grid-cols-2 w-fit gap-x-6 mx-auto  gap-y-6  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5  justify-center'>
                 {items.map(obj => {
                     return (
                         <Item key={obj.name} details={obj} />
@@ -164,40 +164,49 @@ export const Homepage = () => {
                 })}
             </div>
 
-            <div className='h-[555px] px-[12px] '>
+            <div className='h-[555px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  lg:flex lg:items-center lg:justify-around '>
 
-                <h1 className='font-SFuiDisplay text-[12px] font-semibold  mt-[20px] w-[168] h-[38px] ml-[20px]'>
-                    WANT TO PLACE BULK
-                    ORDERS ?
-                </h1>
+                <div className='ml-[20px]'>
+                    <h1 className='font-SFuiDisplay text-[12px] lg:text-[18px] font-bold  mt-[20px] w-[168] h-[38px] lg:mb-8 '>
+                        WANT TO PLACE BULK
+                        ORDERS ?
+                    </h1>
 
-                <h2 className='w-[251px] h-[139px] font-SFuiDisplay font-light text-[12px] ml-[20px]'>In publishing and graphic
-                    design, Lorem ipsum is a placeholder
-                    text commonly used to demonstrate
-                    the visual form of a document or a
-                    typeface without relying on meaningful
-                    content. Lorem ipsum may be used as
-                    a placeholder before the final copy is
-                </h2>
+                    <h2 className='w-[251px] h-[139px] font-SFuiDisplay font-light text-[12px] lg:text-[15px] lg:mb-12'>In publishing and graphic
+                        design, Lorem ipsum is a placeholder
+                        text commonly used to demonstrate
+                        the visual form of a document or a
+                        typeface without relying on meaningful
+                        content. Lorem ipsum may be used as
+                        a placeholder before the final copy is
+                    </h2>
 
-                <button className='content-center w-[180px] h-[40px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-bold mx-auto mb-[20px]   ml-[20px]'>PLACE ORDERS
-                </button>
+                    <button className='w-[180px] h-[40px] lg:w-[250px] lg:h-[60px] lg:text-[24px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-black mx-auto '>PLACE ORDERS</button>
 
-                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[260px] object-cover'></img>
+                </div>
 
-                <h2 className='w-[160px] font-inter text-[13px] mt-[20px]'>FEATURED CREATORS</h2>
+                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[260px] object-cover xl:w-[800px] xl:h-[520px] lg:w-[500px] lg:h-[400px] mt-3 lg:mt-0'></img>
+
 
             </div>
 
-            <div className='grid grid-cols-2 gap-4 mx-auto w-fit mb-8'>
+            <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mt-[20px] mx-[12px] lg:mx-[50px] lg-my-[60px]'>FEATURED CREATORS</h2>
+
+            <div className='grid grid-cols-2 gap-4 mx-auto w-fit mb-8 lg:grid-cols-4 lg:gap-16'>
                 {featuredCreators.map(item => {
                     return (
                         <div key={item.name}>
-                            <img src={`./homepageImages/${item.image}`} className='cursor-pointer w-[170px] h-[170px] object-cover'></img>
-                            <h1 className='font-inter text-[12px] mt-[6px] text-center mx-auto'>{item.name}</h1>
+                            <img src={`./homepageImages/${item.image}`} className='cursor-pointer w-[170px] h-[170px] lg:w-[300px] lg:h-[300px] object-cover'></img>
+                            <h1 className='font-inter text-[12px] mt-[6px] text-center mx-auto lg:hidden'>{item.name}</h1>
                         </div>
                     )
                 })}
+            </div>
+
+
+            <div className='my-[20px] text-[16px] font-bold lg:text-[36px] lg:font-medium'>
+                <h1 className=' text-[#54BAB9] mb-[5px] font-Abhayalibre text-center w-fit mx-auto tracking-[0.5em]	'>CLOSM MAKES EVERYDAY</h1>
+                <h1 className=' text-[#54BAB9] mb-[10px] font-Abhayalibre text-center w-fit mx-auto tracking-[0.5em]	'>AWESOME</h1>
             </div>
 
 

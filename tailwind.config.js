@@ -5,6 +5,7 @@ module.exports = {
   theme: {
     backgroundImage: {
       banner: "url('/homepageImages/banner.png')",
+      banner_wide: "url('/homepageImages/banner-wide.png')",
     },
     extend: {
 
@@ -38,6 +39,7 @@ module.exports = {
         DMsans: ['DM Sans'],
         Opensans: ['Open Sans'],
         SFuiDisplay: ['SF UI Display'],
+        Abhayalibre: ['Abhaya Libre'],
 
       }
     },
