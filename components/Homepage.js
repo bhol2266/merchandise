@@ -108,18 +108,20 @@ export const Homepage = () => {
                         No cost, no hassle, no risk.</h2>
                 </div>
             </div>
+            <div className='px-[12px] h-[440px] mt-[12px] flex flex-col'>
+                <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full'></img>
 
-            <img src='./homepageImages/banner2.png' className='cursor-pointer p-[12px] pb-0 h-[228px] object-cover w-full'></img>
+                <h1 className='my-[20px] font-semibold text-[12px] w-[145px] text-center mx-auto font-SFuiDisplay'>JOIN US & SELL YOUR
+                    OWM MERCHANDISE</h1>
 
-            <h1 className='my-[20px] font-semibold text-[12px] w-[145px] text-center mx-auto font-SFuiDisplay'>Join us & sell your
-                own merchandise</h1>
+                <h2 className='px-[12px] font-light text-[12px] text-center mx-auto font-SFuiDisplay'>Now you can join us & sell your own merchandise
+                    completely free without any hidden charges. Create your
+                    own Brand & Monetize. Join us today & become
+                    a part of our evergrowing
+                    Closm Family.</h2>
 
-            <h2 className='px-[12px] font-light text-[12px] text-center mx-auto font-SFuiDisplay'>Now you can join us & sell your own merchandise
-                completely free without any hidden charges. Create your
-                own Brand & Monetize. Join us today & become
-                a part of our evergrowing
-                Closm Family.</h2>
-
+                <button className='w-[180px] h-[40px] bg-[#54BAB9] rounded text-white px-[28px] py-[11px] font-inter font-bold mx-auto mt-[20px]'>JOIN</button>
+            </div>
             <div className='flex px-[13px] items-center justify-between my-[20px]'>
                 <h1 className='font-inter text-[13px]'>ALL PRODUCTS</h1>
                 <div className='flex items-center space-x-1 cursor-pointer'>
