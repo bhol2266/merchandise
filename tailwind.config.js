@@ -4,7 +4,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     backgroundImage: {
-      'banner': "url('../public/homepageImages/banner.png')",
+      banner: "url('../public/homepageImages/banner.png')",
     },
     extend: {
 
