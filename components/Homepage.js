@@ -99,8 +99,8 @@ export const Homepage = () => {
 
                 <div className='w-[332px] h-[132px] flex flex-col left-[100px]'>
                     <div className='mx-auto mb-[38px] flex justify-around space-x-6'>
-                        <button className='font-bold rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px] py-[11px] text-white font-inter hover:bg-[#3f9897]'>Search</button>
-                        <button className='font-bold rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px] py-[11px] text-white font-inter hover:bg-[#3f9897]'>Print</button>
+                        <button className='content-center font-bold rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897]'>Search</button>
+                        <button className='content-center font-bold rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897]'>Print</button>
                     </div>
 
                     <h2 className='text-[12px] text-[#f5f5f5] font-SFuiDisplay'>A simple solution for creating and selling products that engage
@@ -120,7 +120,7 @@ export const Homepage = () => {
                     a part of our evergrowing
                     Closm Family.</h2>
 
-                <button className='w-[180px] h-[40px] bg-[#54BAB9] rounded text-white px-[28px] py-[11px] font-inter font-bold mx-auto mt-[20px]'>JOIN</button>
+                <button className='content-center w-[180px] h-[40px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-bold mx-auto mt-[20px]'>JOIN</button>
             </div>
             <div className='flex px-[13px] items-center justify-between my-[20px]'>
                 <h1 className='font-inter text-[13px]'>ALL PRODUCTS</h1>
