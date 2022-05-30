@@ -10,7 +10,8 @@ const Youtuber = () => {
         <div>
             <Navigation />
 
-            <img src='./youtuber_assets/youtuber_banner.png' className='cursor-pointer w-full h-[150px] px-[12px] rounded '></img>
+            <img src='./youtuber_assets/youtuber_banner.png' className='cursor-pointer w-full h-[150px] px-[12px] rounded  md:hidden'></img>
+            <img src='./youtuber_assets/youtuber_banner_wide.png' className='cursor-pointer w-full h-[330px] px-[12px] rounded hidden md:flex '></img>
 
             <div className='flex px-[13px] items-center justify-between my-[20px]  lg:mt-[120px] lg:px-[50px]'>
                 <h1 className='font-inter text-[13px] lg:text-[22px]'>FEATURED PRODUCTS</h1>
@@ -20,7 +21,7 @@ const Youtuber = () => {
 
             <Itemlist />
 
-            <div className='flex space-x-3 my-10 items-center justify-around w-3/4 mx-auto'>
+            <div className='flex space-x-3 my-16 items-center justify-around w-3/4 lg:w-1/2 mx-auto'>
                 {pages.map(page => {
                     return (
                         <>
