@@ -132,7 +132,7 @@ export const Homepage = () => {
                 </div>
             </div>
 
-            <div className='px-[12px] h-[440px] mt-[12px] flex flex-col lg:flex-row lg:justify-around lg:px-[45px] lg:mr-[100px] '>
+            <div className='px-[12px] h-[440px] mt-[12px] lg:mt-[30px] flex flex-col lg:flex-row lg:justify-around lg:px-[45px] lg:mr-[100px] '>
                 <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full lg:h-[520px] lg:w-[800px]'></img>
 
                 <div className='lg:w-[338px] lg:h-[450px] flex flex-col  lg:justify-between lg:pt-4'>
@@ -164,7 +164,7 @@ export const Homepage = () => {
                 })}
             </div>
 
-            <div className='h-[525px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  lg:flex lg:items-center lg:justify-around lg:mt-10 sm:w-fit'>
+            <div className='h-[525px] sm:h-[400px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10 '>
 
                 <div className='ml-[20px]'>
                     <h1 className='font-SFuiDisplay text-[12px] lg:text-[18px] font-bold  mt-[20px] w-[168] h-[38px] lg:mb-8 '>
@@ -185,14 +185,14 @@ export const Homepage = () => {
 
                 </div>
 
-                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[260px] object-cover xl:w-[800px] xl:h-[520px] lg:w-[500px] lg:h-[400px] mt-3 lg:mt-0'></img>
+                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[260px] sm:h-[200px] object-cover xl:w-[800px] xl:h-[520px] lg:w-[500px] lg:h-[400px] mt-3 lg:mt-0'></img>
 
 
             </div>
 
             <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mx-[12px] mb-4 lg:mx-[50px] lg:my-[50px]'>FEATURED CREATORS</h2>
 
-            <div className='grid grid-cols-2 gap-4 mx-auto w-fit mb-8 lg:grid-cols-4 lg:gap-16'>
+            <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 mx-auto w-fit mb-8 lg:grid-cols-4 lg:gap-16'>
                 {featuredCreators.map(item => {
                     return (
                         <div key={item.name}>
