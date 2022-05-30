@@ -27,7 +27,8 @@ module.exports = {
       },
       colors: {
         'github': '#24292F',
-        'theme': '#00AEEF'
+        'theme': '#54BAB9',
+        'whitte':"#ffffff"
 
       },
       fontFamily: {

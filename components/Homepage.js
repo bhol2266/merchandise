@@ -1,67 +1,10 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { Item } from './item'
-import LoginMenu from './LoginMenu'
+import { Itemlist } from './itemlist'
+import { Navigation } from './Navigation'
 
 
-const items = [
-    {
-        name: "Jet Black Half Sleeve T-Shirt",
-        price: 499,
-        mrp: 799,
-        discount: 30,
-        img: "item1"
-    },
-    {
-        name: "Jet Black Half Sleeve T-Shirt",
-        price: 499,
-        mrp: 799,
-        discount: 30,
-        img: "item2"
-    },
-    {
-        name: "Jet Black Half Sleeve T-Shirt",
-        price: 499,
-        mrp: 799,
-        discount: 30,
-        img: "item3"
-    },
-    {
-        name: "Jet Black Half Sleeve T-Shirt",
-        price: 499,
-        mrp: 799,
-        discount: 30,
-        img: "item4"
-    },
-    {
-        name: "Jet Black Half Sleeve T-Shirt",
-        price: 499,
-        mrp: 799,
-        discount: 30,
-        img: "item1"
-    },
-    {
-        name: "Jet Black Half Sleeve T-Shirt",
-        price: 499,
-        mrp: 799,
-        discount: 30,
-        img: "item2"
-    },
-    {
-        name: "Jet Black Half Sleeve T-Shirt",
-        price: 499,
-        mrp: 799,
-        discount: 30,
-        img: "item3"
-    },
-    {
-        name: "Jet Black Half Sleeve T-Shirt",
-        price: 499,
-        mrp: 799,
-        discount: 30,
-        img: "item4"
-    },
-]
 
 const featuredCreators = [
     {
@@ -91,32 +34,8 @@ export const Homepage = () => {
 
     return (
         <div className=''>
-            <h1 className='font-manrope text-[9px] lg:text-[14px] text-center text-white bg-[#54BAB9] py-2'>
-                USE COUPON  “  GHSGDHSSAHGAH9678  “  TO GET EXTRA 20% DISCOUNT
-            </h1>
 
-
-
-            <div className='flex justify-between px-[20px] h-[65px] items-center '>
-                <Link href="/">
-                    <h1 className='text-[25px] text-[#BE8024] font-delius cursor-pointer lg:text-[30px] '>Closm</h1>
-                </Link>
-
-                <div className='flex space-x-8 items-center justify-center'>
-                    <Link href="/">
-                        <img src='./homepageImages/search.png' className='cursor-pointer w-[20px] h-[20px]'></img>
-                    </Link>
-                    <Link href="/">
-                        <img src='./homepageImages/cloth.png' className='cursor-pointer w-[20px] h-[20px]'></img>
-                    </Link>
-
-                    <LoginMenu />
-                    <Link href="/">
-                        <img src='./homepageImages/cart.png' className='cursor-pointer w-[20px] h-[20px]'></img>
-                    </Link>
-
-                </div>
-            </div>
+            <Navigation />
 
             <div className=' h-[665px] bg-banner w-full bg-no-repeat bg-cover lg:bg-banner_wide flex lg:h-[560px] items-center justify-center'>
 
@@ -155,14 +74,7 @@ export const Homepage = () => {
 
             </div>
 
-            {/* Products list  */}
-            <div className='sm:px-[12px] px-[4px] grid grid-cols-2 sm:grid-cols-3 w-fit sm:gap-x-6 gap-x-2 mx-auto  gap-y-6  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5  justify-center'>
-                {items.map(obj => {
-                    return (
-                        <Item key={obj.name} details={obj} />
-                    )
-                })}
-            </div>
+            <Itemlist />
 
             <div className='h-[525px] sm:h-[400px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10 '>
 
