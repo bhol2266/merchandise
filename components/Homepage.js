@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { Item } from './item'
-import { Itemlist } from './itemlist'
+import { Itemlist } from './Itemlist'
 import { Navigation } from './Navigation'
 
 
