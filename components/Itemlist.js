@@ -1,6 +1,5 @@
 import React from 'react'
-import { Item } from './Item'
-
+import { Item } from './item'
 const items = [
     {
         name: "Jet Black Half Sleeve T-Shirt",
@@ -72,6 +71,7 @@ export const Itemlist = () => {
                 })
             }
         </div >
+
 
     )
 }
