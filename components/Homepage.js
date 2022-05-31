@@ -67,11 +67,7 @@ export const Homepage = () => {
                 </div>
             </div>
 
-            <div className='flex px-[13px] items-center justify-between my-[20px]  lg:mt-[120px] lg:px-[50px]'>
-                <h1 className='font-inter text-[13px] lg:text-[22px]'>FEATURED PRODUCTS</h1>
-                <h1 className='font-inter text-[13px] text-[#54BAB9] lg:text-[22px] cursor-pointer hover:text-red-400'>SEE ALL</h1>
-
-            </div>
+         
 
             <Itemlist />
 

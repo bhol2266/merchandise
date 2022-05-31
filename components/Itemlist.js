@@ -62,15 +62,21 @@ const items = [
 
 export const Itemlist = () => {
     return (
-        < div className='sm:px-[12px] px-[4px] grid grid-cols-2 sm:grid-cols-3 w-fit sm:gap-x-6 gap-x-2 mx-auto  gap-y-6  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5  justify-center' >
-            {
-                items.map(obj => {
-                    return (
-                        <Item key={obj.name} details={obj} />
-                    )
-                })
-            }
-        </div >
+        <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
+            <div className='flex items-center justify-between my-[20px]  lg:mt-[120px] '>
+                <h1 className='font-inter text-[13px] lg:text-[22px]'>FEATURED PRODUCTS</h1>
+                <h1 className='font-inter text-[13px] text-[#54BAB9] lg:text-[22px] cursor-pointer hover:text-red-400'>FILTER</h1>
+            </div>
+
+            < div className='gap-4 lg:gap-8  grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5' >                {
+                    items.map(obj => {
+                        return (
+                            <Item key={obj.name} details={obj} />
+                        )
+                    })
+                }
+            </div >
+        </div>
 
 
     )

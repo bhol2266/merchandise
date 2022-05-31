@@ -8,7 +8,9 @@ module.exports = {
       banner_wide: "url('/homepageImages/banner-wide.png')",
     },
     extend: {
-
+      aspectRatio: {
+        'item': '61 / 50',
+      },
       animation: {
         fade: 'fadeIn 1s ease',
       },
@@ -20,6 +22,7 @@ module.exports = {
       }),
 
       screens: {
+        "xs": "370",
         "sm": "500px",
         'md': '750px',
         'lg': "1000px",

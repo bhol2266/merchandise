@@ -13,11 +13,7 @@ const Youtuber = () => {
             <img src='./youtuber_assets/youtuber_banner.png' className='cursor-pointer w-full h-[150px] px-[12px] rounded  md:hidden'></img>
             <img src='./youtuber_assets/youtuber_banner_wide.png' className='cursor-pointer w-full h-[330px] px-[12px] rounded hidden md:flex '></img>
 
-            <div className='flex px-[13px] items-center justify-between my-[20px]  lg:mt-[120px] lg:px-[50px]'>
-                <h1 className='font-inter text-[13px] lg:text-[22px]'>FEATURED PRODUCTS</h1>
-                <h1 className='font-inter text-[13px] text-[#54BAB9] lg:text-[22px] cursor-pointer hover:text-red-400'>FILTER</h1>
-
-            </div>
+           
 
             <Itemlist />
 
