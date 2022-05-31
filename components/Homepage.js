@@ -99,7 +99,7 @@ export const Homepage = () => {
 
             <div className='mx-[12px] mb-4 lg:mx-[50px]'>
 
-                <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mb-4  lg:mb-8 lg:mt-16'>FEATURED CREATORS</h2>
+                <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mb-4 lg:mt-16'>FEATURED CREATORS</h2>
 
                 <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 lg:grid-cols-4 lg:gap-16'>
                     {featuredCreators.map(item => {
