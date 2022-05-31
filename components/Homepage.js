@@ -67,7 +67,7 @@ export const Homepage = () => {
                 </div>
             </div>
 
-         
+
 
             <Itemlist />
 
@@ -92,22 +92,25 @@ export const Homepage = () => {
 
                 </div>
 
-                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[260px] sm:h-[200px] object-cover xl:w-[800px] xl:h-[520px] lg:w-[500px] lg:h-[400px] mt-3 lg:mt-0'></img>
+                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[260px] sm:h-[150px] md:h-[200px] object-cover xl:w-[800px] xl:h-[520px] lg:w-[500px] lg:h-[400px] mt-3 lg:mt-0'></img>
 
 
             </div>
 
-            <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mx-[12px] mb-4 lg:mx-[50px] lg:my-[50px]'>FEATURED CREATORS</h2>
+            <div className='mx-[12px] mb-4 lg:mx-[50px]'>
 
-            <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 mx-auto w-fit mb-8 lg:grid-cols-4 lg:gap-16'>
-                {featuredCreators.map(item => {
-                    return (
-                        <div key={item.name}>
-                            <img src={`./homepageImages/${item.image}`} className='cursor-pointer w-[170px] h-[170px] lg:w-[300px] lg:h-[300px] object-cover'></img>
-                            <h1 className='font-inter text-[12px] mt-[6px] text-center mx-auto lg:hidden'>{item.name}</h1>
-                        </div>
-                    )
-                })}
+                <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mb-4  lg:mb-8 lg:mt-16'>FEATURED CREATORS</h2>
+
+                <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 lg:grid-cols-4 lg:gap-16'>
+                    {featuredCreators.map(item => {
+                        return (
+                            <div key={item.name}>
+                                <img src={`./homepageImages/${item.image}`} className='cursor-pointer w-[170px] h-[170px] lg:w-[300px] lg:h-[300px] object-cover'></img>
+                                <h1 className='font-inter text-[12px] mt-[6px] text-center mx-auto lg:hidden'>{item.name}</h1>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
 
 
