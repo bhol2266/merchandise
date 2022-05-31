@@ -7,7 +7,7 @@ export const Item = (obj) => {
     return (
         <div className=''>
             <Link href="/">
-                <a className='rounded flex flex-col bg-green-300 '>
+                <a className='rounded flex flex-col '>
                     <img src={`./homepageImages/${img}.png`} className='cursor-pointer aspect-[item] '></img>
 
                     <div className='ml-[7px]'>
