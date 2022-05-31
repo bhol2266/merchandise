@@ -68,8 +68,9 @@ export const Homepage = () => {
             </div>
 
 
-
-            <Itemlist />
+            <div className='mt-[10px]'>
+                <Itemlist />
+            </div>
 
             <div className='h-[525px] sm:h-[400px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10 '>
 
