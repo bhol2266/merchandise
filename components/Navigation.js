@@ -12,7 +12,7 @@ export const Navigation = () => {
 
 
 
-            <div className='flex justify-between px-[20px] h-[65px] items-center '>
+            <div className='flex justify-between px-[20px] lg:px-[55px] h-[65px] items-center '>
                 <Link href="/">
                     <h1 className='text-[25px] text-[#BE8024] font-delius cursor-pointer lg:text-[30px] '>Closm</h1>
                 </Link>
