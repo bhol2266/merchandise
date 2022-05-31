@@ -50,8 +50,8 @@ export const Homepage = () => {
                 </div>
             </div>
 
-            <div className='px-[12px] h-[440px] mt-[12px] lg:mt-[30px] flex flex-col lg:flex-row lg:justify-around lg:px-[50px] lg:mr-[100px] '>
-                <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full lg:h-[520px] lg:w-[800px]'></img>
+            <div className='px-[12px] h-[440px] mt-[12px] lg:mt-[30px] flex flex-col lg:flex-row lg:justify-around lg:px-[50px] lg:mr-[100px]'>
+                <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full lg:h-[450px] lg:w-[800px] '></img>
 
                 <div className='lg:w-[338px] lg:h-[450px] flex flex-col  lg:justify-between lg:pt-4'>
                     <h1 className='mt-[20px]   font-bold text-[12px] w-[145px] text-center mx-auto font-SFuiDisplay lg:w-[217px] h-[52px] lg:text-[18px]'>JOIN US & SELL YOUR
@@ -68,9 +68,8 @@ export const Homepage = () => {
             </div>
 
 
-            <div className='mt-[10px]'>
-                <Itemlist />
-            </div>
+            <Itemlist />
+
 
             <div className='h-[525px] sm:h-[400px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10 '>
 
