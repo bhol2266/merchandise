@@ -2,44 +2,48 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
 </head>
 <style>
-    .container {
-        height: 500;
-        padding: 10px;
-        background-color: aquamarine;
-        display: grid;
-        grid-gap: 10px;
-        grid-template-columns: 33% 33% 33%;
-    }
+      #partitioned {
+            
+            padding-left: 15px;
+            padding-bottom: 5px;
+            letter-spacing: 42px;
+            border: 0;
+            background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+            background-position: bottom;
+            background-size: 50px 1px;
+            background-repeat: repeat-x;
+            background-position-x: 35px;
+            width: 220px;
+            outline: none;
+      }
 
-    .item {
-        height: 100px;
-        border: 2px solid black;
-        background: red;
-    }
+      #divInner {
+            left: 0;
+            position: sticky;
+      }
+
+      #divOuter {
+            width: 190px;
+            overflow: hidden;
+      }
 </style>
 
 <body>
 
-    <div class="container">
-        <div class="item">Item1</div>
-        <div class="item">Item2</div>
-        <div class="item">Item3</div>
-        <div class="item">Item4</div>
-        <div class="item">Item5</div>
-        <div class="item">Item6</div>
-        <div class="item">Item7</div>
-        <div class="item">Item8</div>
-        <div class="item">Item9</div>
-        <div class="item">Item10</div>
-        <div class="item">Item11</div>
-        <div class="item">Item12</div>
-    </div>
+
+      <div id="divOuter">
+            <div id="divInner">
+                  <input id="partitioned" type="text" maxlength="4"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        onKeyPress="if(this.value.length==4) return false;" />
+            </div>
+      </div>
 </body>
 
 </html>

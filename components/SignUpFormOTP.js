@@ -1,0 +1,110 @@
+import React, { useState } from 'react'
+import { CheckCircleIcon } from '@heroicons/react/solid'
+import { XCircleIcon } from '@heroicons/react/solid'
+import Link from 'next/link'
+import styles from '../styles/OTP.module.css'
+
+export const SignUpFormOTP = () => {
+
+    const [Email, setEmail] = useState('')
+
+
+    const validateEmail = (email) => {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            return (true)
+        }
+        return (false)
+    };
+
+    const closeSidebar = () => {
+
+    }
+
+
+    return (
+        <div className='w-[330px] flex shadow-lg'>
+            <img src='./signUpFormBar.png' className='w-[54px] h-screen bg-gradient-to-r from-[#ffffff] to-[#9DA667] '></img>
+
+            <div className='ml-[28px]'>
+                <div className='flex items-center  mt-[32px]  justify-between '>
+                    <h1 className='text-[24px] text-[#BE8024] font-delius cursor-pointer lg:text-[30px] '>Clossum</h1>
+                    <XCircleIcon onClick={closeSidebar} className='h-[36px] text-[#8e8e8e] cursor-pointer' />
+                </div>
+
+
+
+                <h2 className='mt-[50px] font-inter text-[18px] text-[#323232]'>
+                    SIGN UP
+                </h2>
+
+                <div className='flex space-x-4 items-center mt-[23px] border-[#323232] border-b-[1px]  w-[220px]'>
+                    <input onChange={(e) => { setEmail(e.target.value); console.log() }} className='text-[#323232] pb-1  outline-none ' type='text' placeholder='E-Mail' />
+                    {Email.length > 10 &&
+                        <>
+                            <CheckCircleIcon className={`text-green-400 h-[16px] ${validateEmail(Email) ? "" : "hidden"}`} />
+                            <XCircleIcon className={`text-red-400 h-[16px] ${!validateEmail(Email) ? "" : "hidden"}`} />
+                        </>
+                    }
+
+                </div>
+
+                <div>
+                    <h2 className='font-inter text-[11px] w-[210px] h-[26px] mt-[21px]'>
+                        Please enter the 6-digit code we sent to
+                        a****@g***.com.
+                    </h2>
+
+                    <h3 className='text-[#001857] text-[11px] font-inter mt-[8px] cursor-pointer hover:text-[#0044ff]'>Need Help ?</h3>
+
+
+
+                    <div id="divOuter">
+                        <div id="divInner">
+                            <input id="partitioned" type="text" maxlength="4"                               />
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+                {/* Bottom */}
+                <h2 className='text-center w-[220px]  font-inter text-[12px] mt-[54px]'>By continuing, you agree to Clossum's
+                    Terms of Use and Privacy Policy.
+                </h2>
+                <button className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
+
+                <div className='w-[73px] h-[51px] mx-auto mt-[31px] ml-[60px]'>
+                    <h2 className='text-center  font-inter text-[#323232] text-[11px]'>Continue with</h2>
+                    <div className='mt-[26px] flex justify-between'>
+                        <Link href='\'>
+                            <img src='./login/google.png' className='h-[25px] w-[25px] cursor-pointer'></img>
+                        </Link>
+
+
+                        <Link href='\'>
+                            <img src='./login/facebook.png' className='h-[25px] w-[25px] cursor-pointer'></img>
+                        </Link>
+
+                    </div>
+
+                </div>
+
+                <div className='flex items-center mt-[40px] space-x-[10px] ml-[15px]'>
+                    <h2 className='text-center  font-inter text-[#313131] text-[13px]'>Existing user ?</h2>
+
+                    <button className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-[#54BAB9] rounded-[5px] hover:bg-[#519d9b] hover:text-white '>Sign In</button>
+                </div>
+
+            </div>
+
+            <div>
+
+            </div>
+
+
+        </div>
+    )
+}

@@ -10,9 +10,9 @@ const Youtuber = () => {
         <div>
             <Navigation />
 
-            <img src='./youtuber_assets/youtuber_banner.png' className='cursor-pointer w-full h-[150px] px-[12px] lg:px-[50px] rounded  md:hidden'></img>
+            <img src='./youtuber_assets/youtuber_banner.png' className='cursor-pointer w-full  px-[12px] lg:px-[50px] rounded   md:hidden mt-[15px]'></img>
 
-            <img src='./youtuber_assets/youtuber_banner_wide.png' className='cursor-pointer w-full h-[330px] px-[12px]  lg:px-[50px]  rounded hidden md:flex mt-[25px]'></img>
+            <img src='./youtuber_assets/youtuber_banner_wide.png' className='cursor-pointer w-full px-[12px]  lg:px-[50px]   rounded hidden md:flex mt-[25px]'></img>
 
            
 
