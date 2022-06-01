@@ -36,7 +36,7 @@ export const LoginForm = () => {
 
 
     return (
-        <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-10 bg-white ${loginSidebar ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
+        <div className={` overflow-hidden flex shadow-lg fixed top-0 right-0  z-10 bg-white ${loginSidebar ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
             <img src='./signUpFormBar.png' className='min-w-[54px] h-screen'></img>
 
             <div className='ml-[28px]'>
