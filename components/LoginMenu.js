@@ -1,5 +1,4 @@
 import { Menu, Transition } from '@headlessui/react'
-// import { ChevronDownIcon } from '@heroicons/react/solid'
 import { Fragment, useContext } from 'react'
 import videosContext from '../context/videos/videosContext'
 
