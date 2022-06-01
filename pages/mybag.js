@@ -29,7 +29,7 @@ const Mybag = () => {
                     <BagItem />
                 </div>
 
-                <div className=' h-[500px] lg:w-[400px] rounded-[10px] border-[1px] border-[#BBBBBB] mx-auto mt-[10px] lg:mt-[0px] py-[20px]'>
+                <div className=' lg:h-[500px] h-[420px] mb-4 lg:w-[400px] rounded-[10px] border-[1px] border-[#BBBBBB] mx-auto mt-[10px] lg:mt-[0px] py-[20px]'>
                     <h1 className='px-[20px] font-inter font-semibold text-[12px] lg:text-[18px] text-[#323232]'>TOTAL PRICE</h1>
 
                     <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
