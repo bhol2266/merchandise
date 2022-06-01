@@ -3,7 +3,7 @@ import { BagItem } from '../components/bagItem'
 
 const Mybag = () => {
     return (
-        <div className='px-[13px] lg:px-[45px]'>
+        <div className='px-[13px] lg:px-[45px] xl:w-4/5 mx-auto'>
 
             <div className='flex items-center justify-between lg:text-[22px] lg:px-[10px]'>
                 <h1 className='text-[#323232] lg:text-[22px] text-[18px] font-inter'>MY BAG</h1>
@@ -18,10 +18,10 @@ const Mybag = () => {
                 </div>
             </div>
 
-            <div className='lg:flex'>
+            <div className='lg:flex lg:w-full lg:justify-between  '>
 
                 {/* Item  */}
-                <div className=''>
+                <div className='items-center justify-center flex flex-col '>
                     <BagItem />
                     <BagItem />
                     <BagItem />
@@ -29,7 +29,7 @@ const Mybag = () => {
                     <BagItem />
                 </div>
 
-                <div className=' lg:h-[500px] h-[420px] mb-4 lg:w-[400px] rounded-[10px] border-[1px] border-[#BBBBBB] mx-auto mt-[10px] lg:mt-[0px] py-[20px]'>
+                <div className=' lg:h-[500px] h-[420px] sm:w-[400px]  mb-4 lg:w-[400px] rounded-[10px] border-[1px] border-[#BBBBBB]  mt-[10px] lg:mt-[0px] py-[20px] mx-auto lg:mx-0 sticky top-10'>
                     <h1 className='px-[20px] font-inter font-semibold text-[12px] lg:text-[18px] text-[#323232]'>TOTAL PRICE</h1>
 
                     <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
@@ -64,8 +64,8 @@ const Mybag = () => {
                         <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>6969 INR</h1>
                     </div>
 
-                    <div className='px-[18px]'>
-                        <button className='w-full lg:text-[16px]  text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-4 font-inter font-semibold'>
+                    <div className='px-8 lg:px-16'>
+                        <button className='w-full  lg:text-[16px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-4 font-inter font-semibold'>
                             PROCEED TO CHECKOUT
                         </button>
                     </div>
