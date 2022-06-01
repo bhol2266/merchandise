@@ -5,6 +5,8 @@ import '../styles/nProgress.css'
 import Router from 'next/router'
 import VideoState from '../context/videos/VideoState'
 import Head from 'next/head'
+import { Navigation } from '../components/Navigation'
+import { Footer } from '../components/footer'
 function MyApp({ Component, pageProps }) {
 
   Router.events.on("routeChangeStart", (url) => {
@@ -31,7 +33,9 @@ function MyApp({ Component, pageProps }) {
       </Head> */}
 
       <VideoState>
+        <Navigation />
         <Component {...pageProps} />
+        <Footer />
       </VideoState>
     </>
   )

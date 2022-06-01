@@ -37,7 +37,6 @@ export const Homepage = () => {
 
 
 
-            <Navigation />
 
             <div className=' h-[665px] bg-banner w-full bg-no-repeat bg-cover lg:bg-banner_wide flex lg:h-[560px] items-center justify-center'>
 

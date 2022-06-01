@@ -20,11 +20,9 @@ export default function Home() {
 
       <LoginForm />
       <SignUpForm />
-      
+
       <Homepage />
-      <div className=''>
-        <Footer />
-      </div>
+
     </div>
   )
 }

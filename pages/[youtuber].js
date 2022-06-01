@@ -8,7 +8,6 @@ const Youtuber = () => {
     const pages = ['1', '2', '3', '4', '5', '6', '7']
     return (
         <div>
-            <Navigation />
 
             <img src='./youtuber_assets/youtuber_banner.png' className='cursor-pointer w-full  px-[12px] lg:px-[50px] rounded   md:hidden mt-[15px]'></img>
 
@@ -29,7 +28,6 @@ const Youtuber = () => {
                 })}
             </div>
 
-            <Footer />
 
         </div>
     )
