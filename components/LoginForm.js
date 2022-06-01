@@ -6,7 +6,7 @@ import videosContext from '../context/videos/videosContext'
 
 export const LoginForm = () => {
 
-    const { loginSidebar, setloginSidebar } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(videosContext)
 
     const [Email, setEmail] = useState('')
     const [password, setpassword] = useState('')
@@ -20,13 +20,23 @@ export const LoginForm = () => {
         return (false)
     };
 
+
     const closeSidebar = () => {
         setloginSidebar(false)
+        setsingUpForm_Sidebar(false)
+        setsignUpFormOTP_Sidebar(false)
+
+    }
+
+    const ClickHereHandler = () => {
+        setloginSidebar(false)
+        setsingUpForm_Sidebar(true)
     }
 
 
+
     return (
-        <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-50 bg-white ${loginSidebar ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
+        <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-10 bg-white ${loginSidebar ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
             <img src='./signUpFormBar.png' className='min-w-[54px] h-screen'></img>
 
             <div className='ml-[28px]'>
@@ -55,7 +65,7 @@ export const LoginForm = () => {
                 <div className='flex items-center mt-[35px] space-x-[10px] ml-[15px]'>
                     <h2 className='text-center  font-inter text-[#313131] text-[13px] '>Forgot Password ?</h2>
 
-                    <h2 className='text-center  font-inter text-[#313131] text-[13px] cursor-pointer hover:text-red-500'>Click Here</h2>
+                    <h2 onClick={ClickHereHandler} className='text-center  font-inter text-[#313131] text-[13px] cursor-pointer hover:text-red-500'>Click Here</h2>
                 </div>
 
                 <div className='w-[73px] h-[51px] mx-auto mt-[41px] ml-[60px]'>

@@ -4,6 +4,8 @@ import { useContext } from 'react'
 import { Footer } from '../components/footer'
 import { Homepage } from '../components/Homepage'
 import { LoginForm } from '../components/LoginForm'
+import { SignUpForm } from '../components/SignUpForm'
+
 
 export default function Home() {
 
@@ -17,6 +19,8 @@ export default function Home() {
       </Head>
 
       <LoginForm />
+      <SignUpForm />
+      
       <Homepage />
       <div className=''>
         <Footer />

@@ -11,7 +11,7 @@ const VideoState = (props) => {
 
   const [loginSidebar, setloginSidebar] = useState(false)
   const [singUpForm_Sidebar, setsingUpForm_Sidebar] = useState(false)
-  const [signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebae] = useState(false)
+  const [signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar] = useState(false)
 
 
   
@@ -21,7 +21,7 @@ const VideoState = (props) => {
 
 
     return (
-        <videosContext.Provider value={{loginSidebar, setloginSidebar,singUpForm_Sidebar, setsingUpForm_Sidebar,signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebae}}>
+        <videosContext.Provider value={{loginSidebar, setloginSidebar,singUpForm_Sidebar, setsingUpForm_Sidebar,signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar}}>
             {props.children}
         </videosContext.Provider>
     )

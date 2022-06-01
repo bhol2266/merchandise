@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
+import videosContext from '../context/videos/videosContext'
 
 
 export const SignUpForm = () => {
+
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(videosContext)
 
     const [Email, setEmail] = useState('')
     const [firstName, setfirstName] = useState('')
@@ -22,13 +25,18 @@ export const SignUpForm = () => {
         return (false)
     };
 
+   
     const closeSidebar = () => {
+        setloginSidebar(false)
+        setsingUpForm_Sidebar(false)
+        setsignUpFormOTP_Sidebar(false)
 
     }
 
 
+
     return (
-        <div className='w-[330px] flex shadow-lg'>
+        <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-50 bg-white ${singUpForm_Sidebar ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
             <img src='./signUpFormBar.png' className='min-w-[54px] h-screen'></img>
 
             <div className='ml-[28px]'>
