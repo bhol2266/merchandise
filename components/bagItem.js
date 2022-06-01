@@ -34,7 +34,7 @@ export const BagItem = () => {
                 </div>
             </div>
 
-            <div className='flex flex-col justify-between  h-[122px] p-1'>
+            <div className='flex flex-col justify-between  h-[122px] lg:h-[220px] p-1'>
                 <XIcon className='w-[20px] lg:w-[30px] text-[#454545] cursor-pointer' />
                 <HeartIcon className='w-[20px] lg:w-[30px] text-[#B0888C] cursor-pointer' />
             </div>
