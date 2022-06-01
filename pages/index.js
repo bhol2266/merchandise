@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { Footer } from '../components/footer'
 import { Homepage } from '../components/Homepage'
 import { LoginForm } from '../components/LoginForm'
+import LoginMenu from '../components/LoginMenu'
 import { SignUpForm } from '../components/SignUpForm'
 
 
