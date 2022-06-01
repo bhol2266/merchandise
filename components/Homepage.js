@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Itemlist } from './Itemlist'
+import LoginMenu from './LoginMenu'
 import { Navigation } from './Navigation'
 
 
@@ -32,7 +33,9 @@ export const Homepage = () => {
 
 
     return (
-        <div className=''>
+        <div className='relative'>
+
+
 
             <Navigation />
 

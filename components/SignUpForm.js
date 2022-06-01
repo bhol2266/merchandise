@@ -29,7 +29,7 @@ export const SignUpForm = () => {
 
     return (
         <div className='w-[330px] flex shadow-lg'>
-            <img src='./signUpFormBar.png' className='w-[54px]  h-screen bg-gradient-to-r from-[#ffffff] to-[#9DA667] '></img>
+            <img src='./signUpFormBar.png' className='min-w-[54px] h-screen'></img>
 
             <div className='ml-[28px]'>
                 <div className='flex items-center  mt-[32px]  justify-between '>

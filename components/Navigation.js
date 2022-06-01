@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
 import LoginMenu from './LoginMenu'
 
 
 export const Navigation = () => {
+
     return (
         <div className='shadow-lg'>
             <h1 className='font-manrope text-[9px] lg:text-[14px] text-center text-white bg-[#54BAB9] py-2'>

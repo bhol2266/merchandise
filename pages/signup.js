@@ -6,9 +6,9 @@ import { SignUpFormOTP } from '../components/SignUpFormOTP'
 const Signup = () => {
     return (
         <div>
-            <SignUpFormOTP/>
-            {/* <LoginForm />
-            <SignUpForm /> */}
+            {/* <SignUpFormOTP/> */}
+            <LoginForm />
+            {/* <SignUpForm /> */}
         </div>
     )
 }

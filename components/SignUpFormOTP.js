@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import styles from '../styles/OTP.module.css'
 
 export const SignUpFormOTP = () => {
 
     const [Email, setEmail] = useState('')
+    const [OTP, setOTP] = useState(null)
 
 
     const validateEmail = (email) => {
@@ -50,7 +50,7 @@ export const SignUpFormOTP = () => {
 
                 <div>
                     <h2 className='font-inter text-[11px] w-[210px] h-[26px] mt-[21px]'>
-                        Please enter the 6-digit code we sent to
+                        Please enter the 5-digit code we sent to
                         a****@g***.com.
                     </h2>
 
@@ -58,9 +58,9 @@ export const SignUpFormOTP = () => {
 
 
 
-                    <div id="divOuter">
-                        <div id="divInner">
-                            <input id="partitioned" type="text" maxlength="4"                               />
+                    <div className="divOuter mt-[20px]">
+                        <div className="divInner">
+                            <input onChange={e => {setOTP(e.target.value);console.log(e.target.value);}} className="partitioned" type="text" maxlength="5" />
                         </div>
                     </div>
 

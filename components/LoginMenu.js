@@ -1,12 +1,19 @@
 import { Menu, Transition } from '@headlessui/react'
 // import { ChevronDownIcon } from '@heroicons/react/solid'
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
+import videosContext from '../context/videos/videosContext'
 
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 function LoginMenu() {
+  const { loginSidebar, setloginSidebar } = useContext(videosContext)
+
+  const openLoginForm = () => {
+    setloginSidebar(true)
+  }
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -30,7 +37,7 @@ function LoginMenu() {
 
 
           <Menu.Item>
-            <button className='text-white w-[150px] h-[30px] text-[11px] font-inter px-[25px] py-[7px] bg-[#54BAB9] hover:bg-[#3f9897] rounded mt-[24px] mx-auto'>
+            <button onClick={openLoginForm} className='text-white w-[150px] h-[30px] text-[11px] font-inter px-[25px] py-[7px] bg-[#54BAB9] hover:bg-[#3f9897] rounded mt-[24px] mx-auto'>
               Sign In / Sign Up
             </button>
           </Menu.Item>

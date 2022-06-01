@@ -9,8 +9,9 @@ import { useRouter } from "next/router";
 
 const VideoState = (props) => {
 
-    const router = useRouter();
-    const [location, setlocation] = useState(null)
+  const [loginSidebar, setloginSidebar] = useState(false)
+  const [singUpForm_Sidebar, setsingUpForm_Sidebar] = useState(false)
+  const [signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebae] = useState(false)
 
 
   
@@ -20,7 +21,7 @@ const VideoState = (props) => {
 
 
     return (
-        <videosContext.Provider value={{ location,setlocation }}>
+        <videosContext.Provider value={{loginSidebar, setloginSidebar,singUpForm_Sidebar, setsingUpForm_Sidebar,signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebae}}>
             {props.children}
         </videosContext.Provider>
     )

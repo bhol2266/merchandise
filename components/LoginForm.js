@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-
+import videosContext from '../context/videos/videosContext'
 
 export const LoginForm = () => {
 
-    const [Email, setEmail] = useState('')
-    const [firstName, setfirstName] = useState('')
-    const [lastName, setlastName] = useState('')
-    const [phone, setphone] = useState('')
-    const [password, setpassword] = useState('')
-    const [confirmPassword, setconfirmPassword] = useState('')
-    const [validateEmailState, setvalidateEmailState] = useState(null)
+    const { loginSidebar, setloginSidebar } = useContext(videosContext)
 
+    const [Email, setEmail] = useState('')
+    const [password, setpassword] = useState('')
+    const [sidebarclose, setsidebarclose] = useState(true)
 
 
     const validateEmail = (email) => {
@@ -24,13 +21,13 @@ export const LoginForm = () => {
     };
 
     const closeSidebar = () => {
-
+        setloginSidebar(false)
     }
 
 
     return (
-        <div className='w-[330px] flex shadow-lg'>
-            <img src='./signUpFormBar.png' className='w-[54px] h-screen bg-gradient-to-r from-[#ffffff] to-[#9DA667] '></img>
+        <div className={`w-[330px] flex shadow-lg absolute top-0 right-0 z-50 bg-white ${loginSidebar ? "" : "hidden"} transition ease-in-out duration-400`}>
+            <img src='./signUpFormBar.png' className='min-w-[54px] h-screen'></img>
 
             <div className='ml-[28px]'>
                 <div className='flex items-center  mt-[32px]  justify-between '>
@@ -77,7 +74,7 @@ export const LoginForm = () => {
 
                 </div>
 
-                <div className='flex items-center mt-[200px] space-x-[10px] ml-[15px]'>
+                <div className='flex items-center mt-[150px] space-x-[10px] ml-[15px]'>
                     <h2 className='text-center  font-inter text-[#313131] text-[13px]'>New user ?</h2>
 
                     <button className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-[#54BAB9] rounded-[5px] hover:bg-[#519d9b] hover:text-white '>Sign Up</button>
