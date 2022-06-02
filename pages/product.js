@@ -27,7 +27,7 @@ const Product = () => {
 
     }
     return (
-        <div className='px-[13px] lg:px-[45px] my-[15px]'>
+        <div className='px-[15px] lg:px-[45px] my-[15px]'>
             <div>
                 <div className='h-[316px] flex items-center justify-between'>
                     <div className='flex flex-col h-full  justify-between'>
@@ -90,7 +90,7 @@ const Product = () => {
                         </div>
                     </div>
 
-                    <div className='mt-[15px] pb-[15px] border-b-[0.5px] border-[#CCCCCC] flex items-center justify-between '>
+                    <div className='mt-[15px] pb-[15px] flex items-center justify-between '>
                         <div>
                             <h1 className='font-inter text-[11px] text-[#5A5A5A]'>Quantity</h1>
                             <div className='mt-[8px] flex items-center justify-around lg:w-[120px] lg:h-[36px] w-[86px] h-[30px] rounded-md border-[1px] border-[#E5E5E5] shadow'>
@@ -110,7 +110,25 @@ const Product = () => {
 
                         </div>
                     </div>
+
+
+                    <div className='flex items-center'>
+                        <img src='./homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]'></img>
+                        <button className='grow lg:text-[16px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-4 font-inter font-semibold'>
+                            ADD TO BAG
+                        </button>
+                    </div>
                 </div>
+            </div>
+
+            <div className='mt-[40px] px-2'>
+                <div className='flex items-center space-x-[25px]'>
+                    <h2 className='text-[13px] text-[#787885] font-inter'>Description</h2>
+                    <h2 className='font-inter text-[#54BAB9] text-[13px] border-b-[1.5px] border-[#54BAB9]'>Return Policy</h2>
+                </div>
+
+                <h2 className='text-[12px] font-DMsans mt-[13px] text-[#313131]'>Return Policy</h2>
+                <p>100% Cotton</p>
             </div>
         </div>
     )
