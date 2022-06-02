@@ -9,7 +9,7 @@ export const BagItem = () => {
 
     const [itemQuantity, setitemQuantity] = useState(1)
     return (
-        <div className='w-full h-[140px]  justify-between lg:h-[240px] lg:w-full flex items-center  pb-[15px] mb-[15px] lg:pb-[20px] lg:mb-[20px] border-b-[1px] border-[#EAEAEA] shadow '>
+        <div className='w-full h-[140px]   justify-between lg:h-[240px] lg:w-full flex items-center  pb-[15px] mb-[15px] lg:pb-[20px] lg:mb-[20px] border-b-[1px] border-[#EAEAEA] shadow '>
 
             <div className='flex h-full'>
                 <img className='w-[100px] h-[122px] lg:h-[220px]  lg:w-[181px] ' src='./homepageImages/woman2.png'></img>

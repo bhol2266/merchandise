@@ -18,7 +18,7 @@ const Mybag = () => {
                 </div>
             </div>
 
-            <div className=' mx-auto  md:flex lg:w-full lg:justify-between md:space-x-4 lg:space-x-4 xl:space-x-32  '>
+            <div className=' mx-auto  md:flex  lg:justify-between md:space-x-4 lg:space-x-4 xl:space-x-36  '>
 
                 {/* Item  */}
                 <div className='items-center justify-center flex flex-col md:grow'>
