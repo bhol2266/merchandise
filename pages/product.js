@@ -154,7 +154,7 @@ const Product = () => {
 
             </div>
 
-            <div>
+            <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
                 <Itemlist />
             </div>
         </div>
