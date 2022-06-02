@@ -13,10 +13,11 @@ const Youtuber = () => {
 
             <img src='./youtuber_assets/youtuber_banner_wide.png' className='cursor-pointer w-full px-[12px]  lg:px-[50px]   rounded hidden md:flex mt-[25px]'></img>
 
-           
 
-            <Itemlist />
 
+            <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
+                <Itemlist />
+            </div>
             <div className='flex space-x-3 my-16 items-center justify-around w-3/4 lg:w-1/2 mx-auto'>
                 {pages.map(page => {
                     return (

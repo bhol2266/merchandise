@@ -62,7 +62,7 @@ const items = [
 
 export const Itemlist = () => {
     return (
-        <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
+        <div className=''>
             <div className='flex items-center justify-between my-[20px]  lg:my-[50px] '>
                 <h1 className='font-inter text-[13px] lg:text-[22px]'>FEATURED PRODUCTS</h1>
                 <h1 className='font-inter text-[13px] text-[#54BAB9] lg:text-[22px] cursor-pointer hover:text-red-400'>FILTER</h1>
