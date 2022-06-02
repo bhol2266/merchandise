@@ -29,20 +29,25 @@ const Product = () => {
     }
     return (
         <div className='px-[15px] lg:px-[45px] my-[15px]'>
-            <div>
-                <div className='h-[316px] flex items-center justify-between'>
-                    <div className='flex flex-col h-full  justify-between'>
+            <div className='lg:h-[450px] md:flex md:space-x-8 md:justify-around sm:items-center sm:justify-between'>
+                <div className=' h-[316px] sm:justify-around md:h-[380px] lg:h-full  flex items-center justify-between sm:space-x-3'>
+
+                    <div className='flex flex-col h-full  justify-between lg:hidden'>
                         {slideImages.map(image => {
                             return (
-                                <img key={image} cla src={`./product/${image}.png`} className='h-[95px]' ></img>
+                                <img key={image} cla src={`./product/${image}.png`} className='h-[95px] ' ></img>
                             )
                         })}
                     </div>
 
-                    <img cla src='./product/image.png' className='h-full w-[259px] ' ></img>
+                    <div className='overflow-scroll flex items-center'>
+                        <img cla src='./product/image.png' className='h-full w-[259px] lg:w-[442px] ' ></img>
+                        <img cla src='./product/image.png' className='h-full w-[259px] lg:w-[442px] ' ></img>
+                        <img cla src='./product/image.png' className='h-full w-[259px] lg:w-[442px] ' ></img>
+                    </div>
                 </div>
 
-                <div>
+                <div className='grow'>
                     <div className='mt-[15px] pb-[15px] border-b-[0.5px] border-[#CCCCCC] '>
                         <div className='w-full flex items-center justify-between'>
                             <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>Jet Black Half Sleeve T-Shirt</h2>
