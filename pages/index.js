@@ -3,9 +3,7 @@ import Image from 'next/image'
 import { useContext } from 'react'
 import { Footer } from '../components/footer'
 import { Homepage } from '../components/Homepage'
-import { LoginForm } from '../components/LoginForm'
-import LoginMenu from '../components/LoginMenu'
-import { SignUpForm } from '../components/SignUpForm'
+
 
 
 export default function Home() {
@@ -19,8 +17,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <LoginForm />
-      <SignUpForm />
 
       <Homepage />
 

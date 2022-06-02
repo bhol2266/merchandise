@@ -7,6 +7,10 @@ import VideoState from '../context/videos/VideoState'
 import Head from 'next/head'
 import { Navigation } from '../components/Navigation'
 import { Footer } from '../components/footer'
+import { LoginForm } from '../components/LoginForm'
+import { SignUpForm } from '../components/SignUpForm'
+
+
 function MyApp({ Component, pageProps }) {
 
   Router.events.on("routeChangeStart", (url) => {
@@ -34,6 +38,8 @@ function MyApp({ Component, pageProps }) {
 
       <VideoState>
         <Navigation />
+        <LoginForm />
+        <SignUpForm />
         <Component {...pageProps} />
         <Footer />
       </VideoState>
