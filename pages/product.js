@@ -37,7 +37,7 @@ const Product = () => {
         <div className='px-[15px] lg:px-[45px] my-[15px]'>
 
 
-            <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-8 md:h-[410px] md:flex md:space-x-4 lg:justify-between md:justify-around items-center sm:justify-between lg:mt-[35px] '>
+            <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-8 md:h-[410px] md:flex md:space-x-4 lg:justify-between md:justify-around items-center sm:justify-between mt-[20px] lg:mt-[35px] '>
 
 
                 {/* Product Image and subcolours */}
