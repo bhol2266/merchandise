@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
+import { Itemlist } from '../components/Itemlist'
 
 const slideImages = ["image1", "image2", "image3"]
 const colorsAvailable = [
@@ -121,14 +122,40 @@ const Product = () => {
                 </div>
             </div>
 
-            <div className='mt-[40px] px-2'>
+            <div className='mt-[20px] px-2'>
                 <div className='flex items-center space-x-[25px]'>
                     <h2 className='text-[13px] text-[#787885] font-inter'>Description</h2>
-                    <h2 className='font-inter text-[#54BAB9] text-[13px] border-b-[1.5px] border-[#54BAB9]'>Return Policy</h2>
+                    <h2 className='cursor-pointer font-inter text-[#54BAB9] text-[13px] border-b-[1.5px] border-[#54BAB9]'>Return Policy</h2>
                 </div>
 
                 <h2 className='text-[12px] font-DMsans mt-[13px] text-[#313131]'>Return Policy</h2>
-                <p>100% Cotton</p>
+                <div className='space-x-2 flex items-center pl-2 mt-[6px]'>
+                    <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
+                    <p className='text-[10px]'>100% Cotton</p>
+                </div>
+                <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
+                    <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
+                    <p className='text-[10px]'>Made In India</p>
+                </div>
+
+                <h1 className='text-[10px] font-inter text-[#313131] mt-[8px] leading-[20px]'>
+                    Amp your style with this YUMM Men's Round Neck Varsity Half Sleeve T-Shirt.
+                    Style this t-shirt with a pair of jeans andsliders for a get-together with friends.
+                    Country of Origin : India
+
+                    REGULAR FIT
+
+                    Fitted at Chest and Straight on Waist Down
+
+                    180 GSM SJ COTTON, COTTON LYCRA
+
+                    Classic, lightweight jersey fabric comprising 100% cotton.
+                </h1>
+
+            </div>
+
+            <div>
+                <Itemlist />
             </div>
         </div>
     )
