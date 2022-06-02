@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { HeartIcon } from '@heroicons/react/outline'
@@ -21,6 +21,7 @@ const sizeAvailable = [
     { name: "2XL", selected: false }]
 
 const Product = () => {
+    const scrollbarRef = useRef(null)
     const [itemQuantity, setitemQuantity] = useState(1)
     const [pincode, setpincode] = useState('31245')
 
@@ -28,32 +29,41 @@ const Product = () => {
     const checkPincode = () => {
 
     }
+
+    const scroll = (scrollOffset) => {
+        scrollbarRef.current.scrollLeft += scrollOffset;
+      };
     return (
         <div className='px-[15px] lg:px-[45px] my-[15px]'>
 
 
-            <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-36 md:h-[410px] md:flex md:space-x-4 md:justify-around items-center sm:justify-between bg-green-300'>
+            <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-8 md:h-[410px] md:flex md:space-x-4 lg:justify-between md:justify-around items-center sm:justify-between lg:mt-[35px] '>
 
 
                 {/* Product Image and subcolours */}
 
 
-                <div className=' h-[316px] lg:w-[900px] md:h-full   sm:justify-around flex items-center justify-between space-x-3 '>
+                <div className=' h-[316px] lg:w-[1000px] md:h-full   sm:justify-around flex items-center justify-start space-x-3 '>
 
                     <div className='flex flex-col h-full  justify-between lg:hidden'>
                         {slideImages.map(image => {
                             return (
-                                <img key={image} cla src={`./product/${image}.png`} className='h-[95px] ' ></img>
+                                <img key={image} cla src={`./product/${image}.png`} className='h-[95px] ' />
                             )
                         })}
                     </div>
-
-                    <div className='overflow-scroll hidden lg:flex items-center'>
-                        <img cla src='./product/image.png' className='h-full w-[259px] lg:w-[442px] ' ></img>
-                        <img cla src='./product/image.png' className='h-full w-[259px] lg:w-[442px] ' ></img>
-                        <img cla src='./product/image.png' className='h-full w-[259px] lg:w-[442px] ' ></img>
+                    <div className='hidden lg:flex items-center h-full'>
+                        <img onClick={() => scroll(-482)} src='./product/left.png' className='h-[20px] text-[#54BAB9] text-center  font-semibold my-auto mr-[30px] cursor-pointer ' />
+                        <div ref={scrollbarRef}  className=' flex items-center scrollbar-hide overflow-x-auto h-full space-x-[15px]'>
+                            <img cla src='./product/product.png' className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
+                            <img cla src='./product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
+                            <img cla src='./product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
+                            <img cla src='./product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
+                        </div>
+                        <img onClick={() => scroll(482)} src='./product/right.png' className='h-[20px] text-[#54BAB9] text-center font-semibold my-auto ml-[30px] cursor-pointer' />
                     </div>
-                    <img cla src='./product/image.png' className='grow sm:grow-0 h-full object-fill  lg:hidden' ></img>
+
+                    <img cla src='./product/product.png' className=' h-full object-fill  lg:hidden' />
 
                 </div>
 
@@ -61,7 +71,7 @@ const Product = () => {
                 {/* Product price , colour, quantity, ADD TO BAG button */}
 
 
-                <div className='flex flex-col justify-between md:w-[290px]  h-[410px] lg:h-[520px] lg:w-[400px] lg:mr-[59px] bg-red-300 pt-[15px] lg:pt-[15px] '>
+                <div className='flex flex-col justify-between md:w-[290px]  h-[410px] lg:h-[520px] lg:w-[400px] lg:mr-[59px] pt-[15px] lg:pt-[15px] '>
                     <div className=' pb-[15px] border-b-[0.5px] border-[#CCCCCC] '>
                         <div className='w-full flex lg:flex-col lg:items-start lg:space-y-2 items-center justify-between'>
                             <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>Jet Black Half Sleeve T-Shirt</h2>
@@ -82,7 +92,7 @@ const Product = () => {
                         <div className='mt-[15px] flex items-center space-x-[6px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
                             {colorsAvailable.map(image => {
                                 return (
-                                    <img key={image.name} cla src={`./product/${image.name}.png`} className={`h-[35px] lg:h-[50px] ${image.selected ? "border-[2px]" : ""} border-[#54BAB9] rounded-lg`} ></img>
+                                    <img key={image.name} cla src={`./product/${image.name}.png`} className={`h-[35px] lg:h-[50px] ${image.selected ? "border-[2px]" : ""} border-[#54BAB9] rounded-lg`} />
 
                                 )
                             })}
@@ -94,7 +104,7 @@ const Product = () => {
                         <div className='flex items-center justify-between'>
                             <h1 className='text-[11px] lg:text-[13px] text-[#5A5A5A] font-inter'>Choose Size</h1>
                             <div className='flex items-center space-x-1'>
-                                <img className='lg:h-[18px]' src='./product/size_chart.svg'></img>
+                                <img className='lg:h-[18px]' src='./product/size_chart.svg' />
                                 <h1 className='cursor-pointer text-[10px] lg:text-[14px] text-[#54BAB9] font-inter'>Size Chart</h1>
                             </div>
                         </div>
@@ -134,7 +144,7 @@ const Product = () => {
 
                     <div className='flex items-center mt-2'>
                         {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]'/> */}
-                        <img src='./homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]'></img>
+                        <img src='./homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
                         <button className=' lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
                             ADD TO BAG
                         </button>
@@ -150,21 +160,21 @@ const Product = () => {
 
             <div className='mt-[20px] px-2'>
                 <div className='flex items-center space-x-[25px]'>
-                    <h2 className='text-[13px] text-[#787885] font-inter'>Description</h2>
-                    <h2 className='cursor-pointer font-inter text-[#54BAB9] text-[13px] border-b-[1.5px] border-[#54BAB9]'>Return Policy</h2>
+                    <h2 className='text-[13px] lg:text-[18px] text-[#787885] font-inter'>Description</h2>
+                    <h2 className='cursor-pointer font-inter text-[#54BAB9] text-[13px] lg:text-[18px] border-b-[1.5px] border-[#54BAB9]'>Return Policy</h2>
                 </div>
 
-                <h2 className='text-[12px] font-DMsans mt-[13px] text-[#313131]'>Return Policy</h2>
+                <h2 className='text-[12px] lg:text-[24px] font-DMsans mt-[13px] lg:mt-[20px] text-[#313131]'>Return Policy</h2>
                 <div className='space-x-2 flex items-center pl-2 mt-[6px]'>
                     <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
-                    <p className='text-[10px]'>100% Cotton</p>
+                    <p className='text-[10px] lg:text-[18px]'>100% Cotton</p>
                 </div>
                 <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
                     <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
-                    <p className='text-[10px]'>Made In India</p>
+                    <p className='text-[10px] lg:text-[18px]'>Made In India</p>
                 </div>
 
-                <h1 className='text-[10px] font-inter text-[#313131] mt-[8px] leading-[20px]'>
+                <h1 className='text-[10px] lg:text-[16px] font-inter text-[#313131] mt-[8px] lg:mt-[20px] leading-[20px]'>
                     Amp your style with this YUMM Men&apos;s Round Neck Varsity Half Sleeve T-Shirt.
                     Style this t-shirt with a pair of jeans andsliders for a get-together with friends.
                     Country of Origin : India
