@@ -139,7 +139,7 @@ const Product = () => {
                 </div>
 
                 <h1 className='text-[10px] font-inter text-[#313131] mt-[8px] leading-[20px]'>
-                    Amp your style with this YUMM Men's Round Neck Varsity Half Sleeve T-Shirt.
+                    Amp your style with this YUMM Men&apos;s Round Neck Varsity Half Sleeve T-Shirt.
                     Style this t-shirt with a pair of jeans andsliders for a get-together with friends.
                     Country of Origin : India
 
