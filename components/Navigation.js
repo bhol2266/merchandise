@@ -18,7 +18,7 @@ export const Navigation = () => {
                     <h1 className='text-[25px] text-[#BE8024] font-delius cursor-pointer lg:text-[30px] '>Closm</h1>
                 </Link>
 
-                <div className='flex space-x-[50px] items-center justify-center'>
+                <div className='flex space-x-[15px] sm:space-x-[30px] lg:space-x-[50px] items-center justify-center'>
                     <Link href="/">
                         <img src='./homepageImages/search.png' className='cursor-pointer w-[20px] h-[20px]'></img>
                     </Link>
