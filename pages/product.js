@@ -43,7 +43,7 @@ const Product = () => {
                 {/* Product Image and subcolours */}
 
 
-                <div className=' h-[316px] lg:w-[1000px] md:h-full   sm:justify-around flex items-center justify-start space-x-3 '>
+                <div className=' h-[316px] lg:w-[1000px] md:h-full justify-around flex items-center  space-x-3 '>
 
                     <div className='flex flex-col h-full  justify-between lg:hidden'>
                         {slideImages.map(image => {
