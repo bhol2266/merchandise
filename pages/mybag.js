@@ -5,7 +5,7 @@ const Mybag = () => {
     return (
         <div className='px-[13px] lg:px-[45px]  mx-auto'>
 
-            <div className='flex items-center justify-between lg:text-[22px] lg:px-[10px] sm:w-4/5 md:w-full mx-auto'>
+            <div className='flex items-center justify-between lg:text-[22px] lg:px-[10px] '>
                 <h1 className='text-[#323232] lg:text-[22px] text-[18px] font-inter'>MY BAG</h1>
 
                 <div className='lg:w-[260px] h-[17px] flex items-center my-[20px] mx-2'>
@@ -18,7 +18,7 @@ const Mybag = () => {
                 </div>
             </div>
 
-            <div className=' mx-auto sm:w-4/5 md:w-full md:flex lg:w-full lg:justify-between md:space-x-4 lg:space-x-4 xl:space-x-32  '>
+            <div className=' mx-auto  md:flex lg:w-full lg:justify-between md:space-x-4 lg:space-x-4 xl:space-x-32  '>
 
                 {/* Item  */}
                 <div className='items-center justify-center flex flex-col md:grow'>
