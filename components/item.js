@@ -27,7 +27,7 @@ export const Item = ({ obj }) => {
                             <h3 className='font-inter text-[9px] lg:text-[13px] text-[#787885] line-through '>₹{mrp}</h3>
                         </div>
                         <div className='flex justify-between items-start'>
-                            <h2 className='font-inter  text-[13px] lg:text-[16px] text-[#C25050] py-1'>{discount}% OFF</h2>
+                            <h2 className='font-inter  text-[13px] lg:text-[16px] text-[#C25050] py-1'>{discount} OFF</h2>
 
                         </div>
 
