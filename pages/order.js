@@ -19,10 +19,10 @@ const Order = () => {
                 <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Delivery bt Saturday 20 October" }} />
 
 
-                <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman3.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Cancelled" }} />
+                {/* <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman3.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Cancelled" }} />
 
 
-                <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman2.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Delivery bt Saturday 20 October" }} />
+                <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman2.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Delivery bt Saturday 20 October" }} /> */}
 
 
 

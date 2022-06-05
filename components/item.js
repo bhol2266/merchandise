@@ -5,7 +5,7 @@ import Link from 'next/link'
 export const Item = ({ obj }) => {
     const { price, mrp, discount } = obj.node
     const name = obj.node.title
-    const img = "http://45.79.120.101/" + obj.node.image[0].image
+    const img = "https://closm.com/" + obj.node.image[0].image
 
     console.log(price);
     console.log(mrp);

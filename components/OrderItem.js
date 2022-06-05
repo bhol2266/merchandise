@@ -97,12 +97,6 @@ export const OrderItem = ({ orderDetails }) => {
 
                                 <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] '>Order delivered</h2>
                             </div>
-
-
-
-
-
-
                         </div>
 
                     </div>
