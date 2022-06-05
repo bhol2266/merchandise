@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Itemlist } from './Itemlist'
 import LoginMenu from './LoginMenu'
 import { Navigation } from './Navigation'
-
+import { QueryG } from '../lib/serverConfig'
 
 
 const featuredCreators = [
@@ -29,14 +29,40 @@ const featuredCreators = [
     },
 ]
 
+
+
 export const Homepage = () => {
+
+    useEffect(() => {
+        QueryG(`query{
+            products{
+              edges{
+              node{
+                title
+                 image{
+                  imageName
+                  image
+                } 
+                price
+                mrp
+                discount
+              }
+              }
+            }
+          }`)
+            .then(res => {
+                setitems(res.data.data.products.edges)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
+
+    const [items, setitems] = useState([])
 
 
     return (
         <div className='relative'>
-
-
-
 
             <div className=' h-[665px] bg-banner w-full bg-no-repeat bg-cover lg:bg-banner_wide flex lg:h-[560px] items-center justify-center'>
 
@@ -69,9 +95,11 @@ export const Homepage = () => {
                 </div>
             </div>
 
-            <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
-                <Itemlist />
-            </div>
+            {items &&
+                <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
+                    <Itemlist items={items} />
+                </div>
+            }
 
 
             <div className='h-[525px] sm:h-[400px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10 '>

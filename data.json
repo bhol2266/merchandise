@@ -1,0 +1,72 @@
+{
+    "data": {
+        "products": {
+            "edges": [
+                {
+                    "node": {
+                        "title": "def",
+                        "image": [
+                            {
+                                "imageName": "product 1",
+                                "image": "/media/Screenshot_2022-02-21_at_5.27.37_AM.png"
+                            }
+                        ],
+                        "price": 199,
+                        "mrp": 269,
+                        "discount": "30%"
+                    }
+                },
+                {
+                    "node": {
+                        "title": "abcd",
+                        "image": [
+                            {
+                                "imageName": "testing image",
+                                "image": "/media/Screenshot_2022-02-21_at_5.27.37_AM.png"
+                            }
+                        ],
+                        "price": 1000,
+                        "mrp": 300,
+                        "discount": "30%"
+                    }
+                },
+                {
+                    "node": {
+                        "title": "Blue Tshirt",
+                        "image": [
+                            {
+                                "imageName": "Blue",
+                                "image": "/media/tee4.png"
+                            },
+                            {
+                                "imageName": "Blue",
+                                "image": "/media/tee7.png"
+                            }
+                        ],
+                        "price": 500,
+                        "mrp": 500,
+                        "discount": "10%"
+                    }
+                },
+                {
+                    "node": {
+                        "title": "Black Tshirt",
+                        "image": [
+                            {
+                                "imageName": "Blue",
+                                "image": "/media/tee4.png"
+                            },
+                            {
+                                "imageName": "Black",
+                                "image": "/media/tee8.png"
+                            }
+                        ],
+                        "price": 1000,
+                        "mrp": 1000,
+                        "discount": "20%"
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,12 +1,32 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import videosContext from '../context/videos/videosContext'
+import { GetToken, GetRefreshToken, GetFirstName, GetLastName } from '../lib/CookieLib'
+import { QueryG } from '../lib/serverConfig'
+
+
 
 export const LoginForm = () => {
 
     const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(videosContext)
+
+
+    useEffect(() => {
+
+
+            // QueryG(`mutation{\n  tokenAuth(email:\"${Email}\",password:\"${password}\"){\n    success\n    errors\n    token\n    refreshToken\n  }\n}`)
+            //     .then(res => {
+            //         // this.setState({ productItems: res.data.data.products.edges })
+            //         console.log("res.data");
+            //         console.log(JSON.stringify(res.data));
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //     })
+    }, [])
+
 
     const [Email, setEmail] = useState('')
     const [password, setpassword] = useState('')
@@ -65,7 +85,7 @@ export const LoginForm = () => {
                 <div className='flex items-center mt-[35px] space-x-[10px] ml-[15px]'>
                     <h2 className='text-center  font-inter text-[#313131] text-[13px] '>Forgot Password ?</h2>
 
-                    <h2 onClick={ClickHereHandler} className='text-center  font-inter text-[#313131] text-[13px] cursor-pointer hover:text-red-500'>Click Here</h2>
+                    <h2  className='text-center  font-inter text-[#313131] text-[13px] cursor-pointer hover:text-red-500'>Click Here</h2>
                 </div>
 
                 <div className='w-[73px] h-[51px] mx-auto mt-[41px] ml-[60px]'>
@@ -87,7 +107,7 @@ export const LoginForm = () => {
                 <div className='flex items-center mt-[150px] space-x-[10px] ml-[15px]'>
                     <h2 className='text-center  font-inter text-[#313131] text-[13px]'>New user ?</h2>
 
-                    <button className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-[#54BAB9] rounded-[5px] hover:bg-[#519d9b] hover:text-white '>Sign Up</button>
+                    <button onClick={ClickHereHandler} className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-[#54BAB9] rounded-[5px] hover:bg-[#519d9b] hover:text-white '>Sign Up</button>
                 </div>
 
             </div>

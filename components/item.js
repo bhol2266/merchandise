@@ -2,13 +2,22 @@ import React from 'react'
 import Link from 'next/link'
 
 
-export const Item = (obj) => {
-    const { name, price, mrp, discount, img } = obj.details
+export const Item = ({ obj }) => {
+    const { price, mrp, discount } = obj.node
+    const name = obj.node.title
+    const img = "http://45.79.120.101/" + obj.node.image[0].image
+
+    console.log(price);
+    console.log(mrp);
+    console.log(discount);
+    console.log(name);
+    console.log(img);
+
     return (
         <div className=''>
             <Link href="/">
                 <a className='rounded flex flex-col '>
-                    <img src={`./homepageImages/${img}.png`} className='cursor-pointer aspect-[item] '></img>
+                    <img src={img} className='cursor-pointer aspect-[item] '></img>
 
                     <div className='ml-[7px]'>
                         <h1 className='font-inter text-[11px] lg:text-[16px] text-[#19191D]  py-1'>{name}
