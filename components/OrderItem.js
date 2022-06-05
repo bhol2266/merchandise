@@ -47,56 +47,35 @@ export const OrderItem = ({ orderDetails }) => {
                     <h2 className='text-[10px] lg:text-[11px] text-[#323232] font-inter mt-[10px]'>delivery Partner : Shiprocket</h2>
 
                     {/* tracking diagram  */}
-                    <div className='lg:flex-col flex items-center w-[180px] lg:w-[280px]   mt-[40px] lg:mt-0 '>
 
-                        <div className='flex flex-col  items-start'>
-                            <div className='  '>
-                                <div className='flex items-center'>
-                                    <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full bg-[#54BAB9]'></p>
-                                    <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] '>Seller is processing your order</h2>
+                    <div className='lg:flex-col flex items-center w-[180px] h-[180px] lg:w-[280px]   mt-[40px] lg:mt-0 '>
 
-                                </div>
+                        <div className='flex flex-col items-center '>
+                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
+                            <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
 
-                                <span className='lg:h-[53px] h-[29px] border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9]'></span>
+                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
+                            <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+
+                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
+                            <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+
+                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
+                            <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+
+                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
+
+                        </div>
+
+                        <div className=' flex flex-col  h-full'>
+                            <h2 className='text-[10px] text-[#323232] font-inter ml-[30px]'>Seller is processing your order</h2>
+                            <div className='ml-[30px] mt-3'>
+                                <h2 className='text-[10px] text-[#323232] font-inter'>Order dispatched</h2>
+                                <h2 className='text-[9px] text-[#323232] font-inter ml-2'>Delivery by 20 oct</h2>
                             </div>
-
-                            <div className='flex items-start justify-between'>
-                                <div className=' flex flex-col  items-center '>
-                                    <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full bg-[#54BAB9]'></p>
-                                    <span className='lg:h-[53px] h-[29px] border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9]'></span>
-                                </div>
-
-                                <div className='ml-[30px] '>
-                                    <h2 className='text-[10px] text-[#323232] font-inter'>Order dispatched</h2>
-                                    <h2 className='text-[9px] text-[#323232] font-inter ml-2'>Delivery by 20 oct</h2>
-                                </div>
-                            </div>
-                            <div className='flex items-start  '>
-                                <div className='flex flex-col  items-center'>
-                                    <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1px] border-[#54BAB9]'></p>
-                                    <span className='lg:h-[53px] h-[29px] border-r-[1.5px] lg:border-r-[2px] border-[#ffffff] '></span>
-                                </div>
-
-                                <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] '>Order recived at your
-                                    nearest Hub</h2>
-                            </div>
-
-                            <div className='flex items-start  '>
-                                <div className=' flex flex-col  items-center'>
-                                    <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1px] border-[#54BAB9]'></p>
-                                    <span className='lg:h-[53px] h-[29px] border-r-[1.5px] lg:border-r-[2px] border-[#ffffff] '></span>
-                                </div>
-
-                                <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] '>Out for delivery</h2>
-                            </div>
-                            <div className='flex items-start  item-center '>
-                                <div className=' flex flex-col  items-center'>
-                                    <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1px] border-[#54BAB9]'></p>
-
-                                </div>
-
-                                <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] '>Order delivered</h2>
-                            </div>
+                            <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-3'>Order recived at your</h2>
+                            <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-6'>Out for delivery</h2>
+                            <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-6'>Order delivered</h2>
                         </div>
 
                     </div>
