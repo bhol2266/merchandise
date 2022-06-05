@@ -156,8 +156,6 @@ const Product = () => {
 
             {/* Description, Return Policy */}
 
-
-
             <div className='mt-[20px] px-2'>
                 <div className='flex items-center space-x-[25px]'>
                     <h2 className='text-[13px] lg:text-[18px] text-[#787885] font-inter'>Description</h2>
@@ -193,9 +191,9 @@ const Product = () => {
 
             {/* Featured Products */}
 
-            <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
+            {/* <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
                 <Itemlist />
-            </div>
+            </div> */}
         </div>
     )
 }
