@@ -11,7 +11,7 @@ export const OrderItem = ({ orderDetails }) => {
     return (
         <div className=' mb-4'>
 
-            <div onClick={() => setopenTracking(!openTracking)} className='flex  h-[122px]'>
+            <div onClick={() => setopenTracking(!openTracking)} className='flex  h-[122px] lg:h-[220px]'>
 
                 <img src={img} className='cursor-pointer h-[122px] w-[100px] lg:w-[181px] lg:h-[220px] mb-2'></img>
 
@@ -48,7 +48,7 @@ export const OrderItem = ({ orderDetails }) => {
 
                     {/* tracking diagram  */}
 
-                    <div className='lg:flex-col flex items-center w-[180px] h-[180px] lg:w-[280px]   mt-[40px] lg:mt-0 '>
+                    <div className='flex items-center w-[180px] h-[140px]  mt-[40px] '>
 
                         <div className='flex flex-col items-center '>
                             <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
@@ -61,9 +61,7 @@ export const OrderItem = ({ orderDetails }) => {
                             <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
 
                             <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
-                            <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
 
-                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
 
                         </div>
 
@@ -75,20 +73,32 @@ export const OrderItem = ({ orderDetails }) => {
                             </div>
                             <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-3'>Order recived at your</h2>
                             <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-6'>Out for delivery</h2>
-                            <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-6'>Order delivered</h2>
+
                         </div>
 
                     </div>
 
                     {/* Shipping Address */}
                     <div className='mt-[40px] '>
-                        <h2 className='text-[13px] lg:text-[13px] text-[#323232] font-inter'>Shipping Address</h2>
-                        <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>SLorem Ipsum is simply dummy
-                            text of the printing and typesetting industry. Lorem
-                            Ipsum has been the industry&apos;s standard dummy text ever
-                            since the 1500s, when an unknown printer took a galley
-                            of type and scrambled it to make a type specimen book. .</h2>
+                        <div >
+                            <h2 className='text-[13px] lg:text-[13px] text-[#323232] font-inter'>Shipping Address</h2>
+                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>SLorem Ipsum is simply dummy
+                                text of the printing and typesetting industry. Lorem
+                                Ipsum has been the industry&apos;s standard dummy text ever
+                                since the 1500s, when an unknown printer took a galley
+                                of type and scrambled it to make a type specimen book. .</h2>
 
+                        </div>
+
+                        <div className='mt-[20px] '>
+                            <h2 className='text-[13px] lg:text-[13px] text-[#323232] font-inter'>Billing Address</h2>
+                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>SLorem Ipsum is simply dummy
+                                text of the printing and typesetting industry. Lorem
+                                Ipsum has been the industry&apos;s standard dummy text ever
+                                since the 1500s, when an unknown printer took a galley
+                                of type and scrambled it to make a type specimen book. .</h2>
+
+                        </div>
                     </div>
 
                     <div className='mt-[30px] flex items-center justify-between '>
