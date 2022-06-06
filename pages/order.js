@@ -16,7 +16,7 @@ const Order = () => {
             </div>
 
 
-            <div className='flex  flex-wrap  items-center justify-between  xl:space-y-[40px] md:space-y-[40px] '>
+            <div className='flex  flex-wrap  items-center justify-between  xl:space-y-[40px] md:space-y-[40px] mb-8'>
                 
                 <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Delivery bt Saturday 20 October" }} />
 
