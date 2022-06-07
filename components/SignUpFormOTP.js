@@ -42,7 +42,7 @@ export const SignUpFormOTP = () => {
     }
 
     return (
-        <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-50 bg-white ${signUpFormOTP_Sidebae ? "w-[330px]" : "w-[330px]"} transition-all duration-300 `}>
+        <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-50 bg-white ${signUpFormOTP_Sidebae ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
             <img src='./signUpFormBar.png' className='w-[54px] h-screen bg-gradient-to-r from-[#ffffff] to-[#9DA667] '></img>
 
             <div className='ml-[28px]'>
