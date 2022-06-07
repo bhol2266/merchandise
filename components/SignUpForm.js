@@ -4,8 +4,7 @@ import { XCircleIcon } from '@heroicons/react/solid'
 import videosContext from '../context/videos/videosContext'
 import { GetToken, GetRefreshToken, GetFirstName, GetLastName } from '../lib/CookieLib'
 import { QueryG } from '../lib/serverConfig'
-
-
+import { SignUpUser } from '../lib/serverConfig'
 export const SignUpForm = () => {
 
     useEffect(() => {
@@ -18,7 +17,6 @@ export const SignUpForm = () => {
     const [Email, setEmail] = useState('')
     const [firstName, setfirstName] = useState('')
     const [lastName, setlastName] = useState('')
-    const [username, setusername] = useState('')
     const [phone, setphone] = useState('')
     const [password, setpassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
@@ -41,34 +39,56 @@ export const SignUpForm = () => {
 
     }
 
-    const continueButton = (e) => {
+    const continueButton = async (e) => {
         e.preventDefault();
         if (Email.length > 10 && !validateEmail(Email)) {
             alert("Please Enter Email correctly")
             return
         }
+        if (phone.length < 10) {
+            alert("Enter 10 digit Mobile number")
+            return
+        }
+        if (firstName.length < 2) {
+            alert("Enter First name")
+            return
+        }
+        if (lastName.length < 2) {
+            alert("Enter Last name")
+            return
+        }
+        if (password.length < 2) {
+            alert("Enter Passowrd ")
+            return
+        }
+        if (confirmPassword.length < 2) {
+            alert("Enter Confirm Password ")
+            return
+        }
 
-        QueryG(`mutation{
-            register(email:${Email},username:${username},password1:${password},password2:${confirmPassword},firstName:${firstName},lastName:${lastName}){
-              success
-              errors
-              refreshToken
-              token
+        if (!(password === confirmPassword)) {
+            alert("Confirm Password did not match")
+            return
+        }
+
+        const jsonMessage = await SignUpUser(Email, firstName, lastName, phone, password, confirmPassword)
+
+        if (jsonMessage.success === true) {
+            alert("Success")
+        }
+        try {
+            if (jsonMessage.errors.username[0].message) {
+                alert(jsonMessage.errors.username[0].message)
             }
-          }`)
-            .then(res => {
-                console.log(JSON.stringify(res.data));
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        } catch (error) {
+            var message = ''
 
-        // setTimeout(() => {
-        //     setloginSidebar(false)
-        //     setsingUpForm_Sidebar(false)
-        //     setsignUpFormOTP_Sidebar(true)
-        // }, 1000);
+            jsonMessage.errors.password2.map(obj => {
+                message = message + " " + obj.message
+            })
+            alert(message)
 
+        }
 
     }
 
@@ -108,9 +128,8 @@ export const SignUpForm = () => {
 
                     <input required={true} onChange={e => setlastName(e.target.value)} className='text-[#323232] w-[220px] pb-1 border-[#323232] border-b-[1px] outline-none mt-[23px]' type='text' placeholder='Last Name' />
 
-                    <input required={true} onChange={e => setusername(e.target.value)} className='text-[#323232] w-[220px] pb-1 border-[#323232] border-b-[1px] outline-none mt-[23px]' type='text' placeholder='Username' />
 
-                    <input required={true} onChange={e => setphone(e.target.value)} className='text-[#323232] w-[220px] pb-1 border-[#323232] border-b-[1px] outline-none mt-[23px]' type='number' placeholder='Phone' maxLength={10} />
+                    <input required={true} value={phone} onChange={(e) => { if (e.target.value.length <= 10) { setphone(e.target.value) } }} className='text-[#323232] w-[220px] pb-1 border-[#323232] border-b-[1px] outline-none mt-[23px]' type='number' placeholder='Phone' maxLength={10} />
 
                     <input required={true} onChange={e => setpassword(e.target.value)} className='text-[#323232] w-[220px] pb-1 border-[#323232] border-b-[1px] outline-none mt-[23px]' type='password' placeholder='Password' />
 
@@ -121,9 +140,9 @@ export const SignUpForm = () => {
                     <h2 className='text-center w-[220px]  font-inter text-[12px] mt-[54px]'>By continuing, you agree to Clossum&apos;s
                         Terms of Use and Privacy Policy.
                     </h2>
-                    <button type='submit' className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
+                    <button onClick={continueButton} type='submit' className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
 
-               
+
 
                     <div className='flex items-center mt-[35px] space-x-[10px] ml-[15px]'>
                         <h2 className='text-center  font-inter text-[#313131] text-[13px]'>Existing user ?</h2>

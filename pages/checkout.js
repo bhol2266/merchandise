@@ -36,7 +36,7 @@ const statesOfINdia = ["Andhra Pradesh",
     "Delhi",
     "Lakshadweep",
     "Puducherry"]
-const Address = () => {
+const CheckOut = () => {
 
     const second = ''
 
