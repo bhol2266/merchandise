@@ -99,10 +99,10 @@ const Address = () => {
 
                     <div className='flex items-center justify-between space-x-6'>
                         <h2 className='text-[12px] lg:text-[16px] text-[#323232] font-inter mt-[20px] mb-4 lg:mb-6 w-full'>BILLING ADDRESS</h2>
-                        <div class="flex justify-center">
-                            <div class="form-check form-switch flex items-center space-x-2">
-                                <input class=" form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top  bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
-                                <label class="text-[12px] form-check-label inline-block text-gray-800" for="flexSwitchCheckChecked">Same as Shipping Address</label>
+                        <div className="flex justify-center">
+                            <div className="form-check form-switch flex items-center space-x-2">
+                                <input className=" form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top  bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
+                                <label className="text-[12px] form-check-label inline-block text-gray-800" htmlFor="flexSwitchCheckChecked">Same as Shipping Address</label>
                             </div>
                         </div>
                     </div>
