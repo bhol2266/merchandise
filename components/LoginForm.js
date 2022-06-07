@@ -40,7 +40,8 @@ export const LoginForm = () => {
         setloginSidebar(false)
         setsingUpForm_Sidebar(true)
     }
-    const SignIn = async () => {
+    const SignIn = async (e) => {
+        e.preventDefault()
         if (!Email || !password) {
             alert("Enter credentials correctly")
             return
@@ -57,7 +58,7 @@ export const LoginForm = () => {
             SetEmail(Email)
             setloggedIn(true)
             closeSidebar()
-            // window.location.reload()
+            window.location.reload()
             return
         }
         if (jsonMessage.success === false) {
