@@ -42,7 +42,7 @@ export const SignUpFormOTP = () => {
     }
 
     return (
-        <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-50 bg-white ${signUpFormOTP_Sidebae ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
+        <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-50 bg-white ${signUpFormOTP_Sidebae ? "w-[330px]" : "w-[330px]"} transition-all duration-300 `}>
             <img src='./signUpFormBar.png' className='w-[54px] h-screen bg-gradient-to-r from-[#ffffff] to-[#9DA667] '></img>
 
             <div className='ml-[28px]'>
@@ -57,16 +57,7 @@ export const SignUpFormOTP = () => {
                     Enter Verification Code
                 </h2>
 
-                {/* <div className='flex space-x-4 items-center mt-[23px] border-[#323232] border-b-[1px]  w-[220px]'>
-                    <input onChange={(e) => { setEmail(e.target.value); console.log() }} className='text-[#323232] pb-1  outline-none ' type='text' placeholder='E-Mail' />
-                    {Email.length > 10 &&
-                        <>
-                            <CheckCircleIcon className={`text-green-400 h-[16px] ${validateEmail(Email) ? "" : "hidden"}`} />
-                            <XCircleIcon className={`text-red-400 h-[16px] ${!validateEmail(Email) ? "" : "hidden"}`} />
-                        </>
-                    }
-
-                </div> */}
+           
 
                 <div>
                     <h2 className='font-inter text-[11px] w-[210px] h-[26px] mt-[21px]'>
