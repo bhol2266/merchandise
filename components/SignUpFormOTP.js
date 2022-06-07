@@ -8,18 +8,13 @@ import { GetToken } from '../lib/CookieLib'
 export const SignUpFormOTP = () => {
 
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, loggedIn, setloggedIn } = useContext(videosContext)
 
     const [Email, setEmail] = useState('')
     const [OTP, setOTP] = useState(null)
 
 
-    const validateEmail = (email) => {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-            return (true)
-        }
-        return (false)
-    };
+
 
     const closeSidebar = () => {
         setloginSidebar(false)
@@ -35,6 +30,7 @@ export const SignUpFormOTP = () => {
             setloginSidebar(false)
             setsingUpForm_Sidebar(false)
             setsignUpFormOTP_Sidebar(false)
+            setloggedIn(true)
             return
         }
         if (jsonMessage.error === true) {

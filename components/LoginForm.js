@@ -3,29 +3,17 @@ import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import videosContext from '../context/videos/videosContext'
-import { GetToken, GetRefreshToken, GetFirstName, GetLastName } from '../lib/CookieLib'
-import { QueryG } from '../lib/serverConfig'
+import { SignInUser } from '../lib/serverConfig'
+import { SetToken, SetRefreshToken, SetFirstName, SetLastName, SetEmail } from '../lib/CookieLib'
 
 
 
 export const LoginForm = () => {
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, setloggedIn } = useContext(videosContext)
 
 
-    useEffect(() => {
 
-
-            // QueryG(`mutation{\n  tokenAuth(email:\"${Email}\",password:\"${password}\"){\n    success\n    errors\n    token\n    refreshToken\n  }\n}`)
-            //     .then(res => {
-            //         // this.setState({ productItems: res.data.data.products.edges })
-            //         console.log("res.data");
-            //         console.log(JSON.stringify(res.data));
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //     })
-    }, [])
 
 
     const [Email, setEmail] = useState('')
@@ -52,6 +40,31 @@ export const LoginForm = () => {
         setloginSidebar(false)
         setsingUpForm_Sidebar(true)
     }
+    const SignIn = async () => {
+        if (!Email || !password) {
+            alert("Enter credentials correctly")
+            return
+        }
+        if (!validateEmail(Email)) {
+            alert("Enter Email correctly")
+            return
+        }
+        const jsonMessage = await SignInUser(Email, password)
+        console.log(JSON.stringify(jsonMessage));
+        if (jsonMessage.success === true) {
+            SetToken(jsonMessage.token)
+            SetRefreshToken(jsonMessage.refreshToken)
+            SetEmail(Email)
+            setloggedIn(true)
+            closeSidebar()
+            // window.location.reload()
+            return
+        }
+        if (jsonMessage.success === false) {
+            alert(jsonMessage.errors.nonFieldErrors[0].message)
+            return
+        }
+    }
 
 
 
@@ -70,22 +83,22 @@ export const LoginForm = () => {
                 <h2 className='mt-[50px] font-inter text-[18px] text-[#323232]'>
                     LOGIN
                 </h2>
-
-                <input onChange={(e) => { setEmail(e.target.value); console.log() }} className='text-[#323232] pb-1  outline-none border-[#323232] border-b-[1px] w-[220px] mt-[31px]' type='text' placeholder='E-Mail/Phone' />
-
-
-                <input onChange={e => setpassword(e.target.value)} className='text-[#323232] w-[220px] pb-1 border-[#323232] border-b-[1px] outline-none mt-[23px]' type='password' placeholder='Password' />
+                <form>
+                    <input required onChange={(e) => { setEmail(e.target.value); console.log() }} className='text-[#323232] pb-1  outline-none border-[#323232] border-b-[1px] w-[220px] mt-[31px]' type='text' placeholder='E-Mail/Phone' />
 
 
+                    <input required onChange={e => setpassword(e.target.value)} className='text-[#323232] w-[220px] pb-1 border-[#323232] border-b-[1px] outline-none mt-[23px]' type='password' placeholder='Password' />
 
-                {/* Bottom */}
 
-                <button className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[20px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Login</button>
 
+                    {/* Bottom */}
+
+                    <button type='submit' onClick={SignIn} className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[20px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Login</button>
+                </form>
                 <div className='flex items-center mt-[35px] space-x-[10px] ml-[15px]'>
                     <h2 className='text-center  font-inter text-[#313131] text-[13px] '>Forgot Password ?</h2>
 
-                    <h2  className='text-center  font-inter text-[#313131] text-[13px] cursor-pointer hover:text-red-500'>Click Here</h2>
+                    <h2 className='text-center  font-inter text-[#313131] text-[13px] cursor-pointer hover:text-red-500'>Click Here</h2>
                 </div>
 
                 <div className='w-[73px] h-[51px] mx-auto mt-[41px] ml-[60px]'>

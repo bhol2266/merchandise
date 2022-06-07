@@ -1,15 +1,24 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Footer } from '../components/footer'
 import { Homepage } from '../components/Homepage'
 import { QueryG } from '../lib/serverConfig'
 import { apiip } from '../lib/serverConfig';
-
+import { GetEmail, } from '../lib/CookieLib'
+import videosContext from '../context/videos/videosContext'
+import { checkCookies } from 'cookies-next';
 
 
 export default function Home() {
-
+  const { setloggedIn } = useContext(videosContext)
+  useEffect(() => {
+    if (checkCookies('email')) {
+      setloggedIn(true)
+    } else {
+      setloggedIn(false)
+    }
+  }, [])
 
   return (
     <div className='relative' >
@@ -37,7 +46,7 @@ export default function Home() {
 //          image{
 //           imageName
 //           image
-//         } 
+//         }
 //         price
 //         mrp
 //         discount

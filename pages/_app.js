@@ -22,6 +22,9 @@ function MyApp({ Component, pageProps }) {
     NProgress.done();
   })
 
+
+
+
   return (
     <>
 
@@ -42,7 +45,7 @@ function MyApp({ Component, pageProps }) {
         <LoginForm />
         <SignUpForm />
         <SignUpFormOTP />
-        
+
         <Component {...pageProps} />
         <Footer />
       </VideoState>
