@@ -13,7 +13,7 @@ export const SignUpForm = () => {
 
     }, [])
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, setOTPemail } = useContext(videosContext)
 
     const [Email, setEmail] = useState('')
     const [firstName, setfirstName] = useState('')
@@ -23,7 +23,7 @@ export const SignUpForm = () => {
     const [password, setpassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
     const [validateEmailState, setvalidateEmailState] = useState(null)
-
+    setOTPemail(Email)
 
 
     const validateEmail = (email) => {
@@ -41,15 +41,34 @@ export const SignUpForm = () => {
 
     }
 
-    const continueButton = () => {
-        
-        QueryG(`mutation{\n  register(email:\"${Email}\",username:\"${username}\",password1:\"${password}\",password2:\"${password}\",firstName:\"${firstName}\",lastName:\"${lastName}\"){\n    success\n    errors\n    ${GetRefreshToken}\n    ${GetToken}\n  }\n}`)
+    const continueButton = (e) => {
+        e.preventDefault();
+        if (Email.length > 10 && !validateEmail(Email)) {
+            alert("Please Enter Email correctly")
+            return
+        }
+
+        QueryG(`mutation{
+            register(email:${Email},username:${username},password1:${password},password2:${confirmPassword},firstName:${firstName},lastName:${lastName}){
+              success
+              errors
+              refreshToken
+              token
+            }
+          }`)
             .then(res => {
                 console.log(JSON.stringify(res.data));
             })
             .catch(err => {
                 console.log(err);
             })
+
+        // setTimeout(() => {
+        //     setloginSidebar(false)
+        //     setsingUpForm_Sidebar(false)
+        //     setsignUpFormOTP_Sidebar(true)
+        // }, 1000);
+
 
     }
 
@@ -102,13 +121,16 @@ export const SignUpForm = () => {
                     <h2 className='text-center w-[220px]  font-inter text-[12px] mt-[54px]'>By continuing, you agree to Clossum&apos;s
                         Terms of Use and Privacy Policy.
                     </h2>
-                    <button onClick={continueButton} className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
+                    <button type='submit' className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
+
+               
 
                     <div className='flex items-center mt-[35px] space-x-[10px] ml-[15px]'>
                         <h2 className='text-center  font-inter text-[#313131] text-[13px]'>Existing user ?</h2>
 
-                        <button type='submit' className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-[#54BAB9] rounded-[5px] hover:bg-[#519d9b] hover:text-white '>Sign In</button>
+                        <button type="submit" value="submit" className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-[#54BAB9] rounded-[5px] hover:bg-[#519d9b] hover:text-white '>Sign In</button>
                     </div>
+
                 </form>
 
 

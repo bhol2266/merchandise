@@ -13,15 +13,18 @@ const VideoState = (props) => {
   const [singUpForm_Sidebar, setsingUpForm_Sidebar] = useState(false)
   const [signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar] = useState(false)
 
+  //this the email in which otp is send during signUp and show this email in OTP sidebar
+  const [OTPemail, setOTPemail] = useState(null)
 
+
+  
   
 
 
 
 
-
     return (
-        <videosContext.Provider value={{loginSidebar, setloginSidebar,singUpForm_Sidebar, setsingUpForm_Sidebar,signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar}}>
+        <videosContext.Provider value={{loginSidebar, setloginSidebar,singUpForm_Sidebar, setsingUpForm_Sidebar,signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar ,OTPemail, setOTPemail}}>
             {props.children}
         </videosContext.Provider>
     )

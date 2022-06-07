@@ -7,7 +7,7 @@ import videosContext from '../context/videos/videosContext'
 export const SignUpFormOTP = () => {
 
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebae } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail } = useContext(videosContext)
 
     const [Email, setEmail] = useState('')
     const [OTP, setOTP] = useState(null)
@@ -23,7 +23,7 @@ export const SignUpFormOTP = () => {
     const closeSidebar = () => {
         setloginSidebar(false)
         setsingUpForm_Sidebar(false)
-        setsignUpFormOTP_Sidebae(false)
+        setsignUpFormOTP_Sidebar(false)
 
     }
 
@@ -40,11 +40,11 @@ export const SignUpFormOTP = () => {
 
 
 
-                <h2 className='mt-[50px] font-inter text-[18px] text-[#323232]'>
-                    SIGN UP
+                <h2 className='mt-[50px] font-inter text-[16px] text-[#323232]'>
+                    Enter Verification Code
                 </h2>
 
-                <div className='flex space-x-4 items-center mt-[23px] border-[#323232] border-b-[1px]  w-[220px]'>
+                {/* <div className='flex space-x-4 items-center mt-[23px] border-[#323232] border-b-[1px]  w-[220px]'>
                     <input onChange={(e) => { setEmail(e.target.value); console.log() }} className='text-[#323232] pb-1  outline-none ' type='text' placeholder='E-Mail' />
                     {Email.length > 10 &&
                         <>
@@ -53,12 +53,12 @@ export const SignUpFormOTP = () => {
                         </>
                     }
 
-                </div>
+                </div> */}
 
                 <div>
                     <h2 className='font-inter text-[11px] w-[210px] h-[26px] mt-[21px]'>
-                        Please enter the 5-digit code we sent to
-                        a****@g***.com.
+                        {`Please enter the 5-digit code we sent to
+                        ${OTPemail}.`}
                     </h2>
 
                     <h3 className='text-[#001857] text-[11px] font-inter mt-[8px] cursor-pointer hover:text-[#0044ff]'>Need Help ?</h3>
@@ -67,7 +67,7 @@ export const SignUpFormOTP = () => {
 
                     <div className="divOuter mt-[20px]">
                         <div className="divInner">
-                            <input onChange={e => {setOTP(e.target.value);console.log(e.target.value);}} className="partitioned" type="text" maxLength="5" />
+                            <input onChange={e => { setOTP(e.target.value); console.log(e.target.value); }} className="partitioned" type="text" maxLength="5" />
                         </div>
                     </div>
 

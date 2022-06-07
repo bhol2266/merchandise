@@ -9,6 +9,7 @@ import { Navigation } from '../components/Navigation'
 import { Footer } from '../components/footer'
 import { LoginForm } from '../components/LoginForm'
 import { SignUpForm } from '../components/SignUpForm'
+import { SignUpFormOTP } from '../components/SignUpFormOTP'
 
 
 function MyApp({ Component, pageProps }) {
@@ -40,6 +41,8 @@ function MyApp({ Component, pageProps }) {
         <Navigation />
         <LoginForm />
         <SignUpForm />
+        <SignUpFormOTP />
+        
         <Component {...pageProps} />
         <Footer />
       </VideoState>
