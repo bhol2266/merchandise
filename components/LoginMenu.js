@@ -3,14 +3,14 @@ import { Fragment, useContext } from 'react'
 import videosContext from '../context/videos/videosContext'
 import { GetToken, GetEmail } from '../lib/CookieLib'
 import { removeCookies } from 'cookies-next';
-
+import Router, { useRouter } from 'next/router';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 function LoginMenu() {
 
-
+  const router = useRouter();
   const { loginSidebar, setloginSidebar, loggedIn, setloggedIn } = useContext(videosContext)
 
 
@@ -28,7 +28,7 @@ function LoginMenu() {
     removeCookies('lastName');
     removeCookies('csrftoken');
     removeCookies('sessionid');
-    window.location.reload();
+    router.push('/')
   }
 
 

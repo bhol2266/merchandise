@@ -5,10 +5,13 @@ import Link from 'next/link'
 import videosContext from '../context/videos/videosContext'
 import { SignInUser } from '../lib/serverConfig'
 import { SetToken, SetRefreshToken, SetFirstName, SetLastName, SetEmail } from '../lib/CookieLib'
+import { useRouter } from 'next/router'
 
 
 
 export const LoginForm = () => {
+
+    const router = useRouter()
 
     const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, setloggedIn } = useContext(videosContext)
 
@@ -58,7 +61,7 @@ export const LoginForm = () => {
             SetEmail(Email)
             setloggedIn(true)
             closeSidebar()
-            window.location.reload()
+            router.push('/')
             return
         }
         if (jsonMessage.success === false) {

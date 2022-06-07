@@ -5,7 +5,10 @@ import Link from 'next/link'
 import videosContext from '../context/videos/videosContext'
 import { VerifyOTP } from '../lib/serverConfig'
 import { GetToken } from '../lib/CookieLib'
+import Router, { useRouter } from 'next/router';
+
 export const SignUpFormOTP = () => {
+    const router = useRouter();
 
 
     const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, loggedIn, setloggedIn } = useContext(videosContext)
@@ -23,14 +26,14 @@ export const SignUpFormOTP = () => {
 
     }
 
-    const verifyOTP = async () => {
+    const verifyOTP = async (e) => {
+        e.preventDefault()
         const jsonMessage = await VerifyOTP(OTP, GetToken())
         console.log(jsonMessage);
         if (jsonMessage.success === true) {
-            setloginSidebar(false)
-            setsingUpForm_Sidebar(false)
-            setsignUpFormOTP_Sidebar(false)
+            closeSidebar()
             setloggedIn(true)
+            router.push('/')
             return
         }
         if (jsonMessage.error === true) {
