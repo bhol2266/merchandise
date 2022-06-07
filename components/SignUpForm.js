@@ -4,13 +4,12 @@ import { XCircleIcon } from '@heroicons/react/solid'
 import videosContext from '../context/videos/videosContext'
 import { GetToken, GetRefreshToken, GetFirstName, GetLastName } from '../lib/CookieLib'
 import { QueryG } from '../lib/serverConfig'
-import { SignUpUser } from '../lib/serverConfig'
+import { SignUpUser, SendOTP } from '../lib/serverConfig'
+import { BeatLoader } from 'react-spinners'
+import { SetToken, SetRefreshToken, SetFirstName, SetLastName, SetEmail } from '../lib/CookieLib'
+
 export const SignUpForm = () => {
 
-    useEffect(() => {
-
-
-    }, [])
 
     const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, setOTPemail } = useContext(videosContext)
 
@@ -21,6 +20,7 @@ export const SignUpForm = () => {
     const [password, setpassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
     const [validateEmailState, setvalidateEmailState] = useState(null)
+    const [continueClicked, setcontinueClicked] = useState(false)
     setOTPemail(Email)
 
 
@@ -71,24 +71,51 @@ export const SignUpForm = () => {
             return
         }
 
+        setcontinueClicked(true)
+
         const jsonMessage = await SignUpUser(Email, firstName, lastName, phone, password, confirmPassword)
 
+        console.log(jsonMessage);
+
         if (jsonMessage.success === true) {
-            alert("Success")
+            SetToken(jsonMessage.token)
+            SetRefreshToken(jsonMessage.refreshToken)
+            SetFirstName(firstName)
+            SetLastName(lastName)
+            SetEmail(Email)
+            const resMsg = await SendOTP(jsonMessage.token)
+            console.log(resMsg);
+            if (resMsg.sendVerificationOtp.includes("OTP is successfully send")) {
+                setloginSidebar(false)
+                setsingUpForm_Sidebar(false)
+                setsignUpFormOTP_Sidebar(true)
+            }
+            setcontinueClicked(false)
+
+            return
         }
+
+
         try {
             if (jsonMessage.errors.username[0].message) {
                 alert(jsonMessage.errors.username[0].message)
             }
         } catch (error) {
-            var message = ''
 
-            jsonMessage.errors.password2.map(obj => {
-                message = message + " " + obj.message
-            })
-            alert(message)
+            try {
+                if (jsonMessage.errors.email[0].message) {
+                    alert(jsonMessage.errors.email[0].message)
+                }
+            } catch (error) {
+                var message = ''
+                jsonMessage.errors.password2.map(obj => {
+                    message = message + " " + obj.message
+                })
+                alert(message)
+            }
 
         }
+        setcontinueClicked(false)
 
     }
 
@@ -140,9 +167,16 @@ export const SignUpForm = () => {
                     <h2 className='text-center w-[220px]  font-inter text-[12px] mt-[54px]'>By continuing, you agree to Clossum&apos;s
                         Terms of Use and Privacy Policy.
                     </h2>
-                    <button onClick={continueButton} type='submit' className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
 
+                    {!continueClicked &&
+                        <button onClick={continueButton} type='submit' className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
+                    }
 
+                    {continueClicked &&
+                        <div className='w-16 mx-auto  mt-4'>
+                            <BeatLoader color='#519d9b' size={16} />
+                        </div>
+                    }
 
                     <div className='flex items-center mt-[35px] space-x-[10px] ml-[15px]'>
                         <h2 className='text-center  font-inter text-[#313131] text-[13px]'>Existing user ?</h2>

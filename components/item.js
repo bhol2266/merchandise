@@ -7,11 +7,7 @@ export const Item = ({ obj }) => {
     const name = obj.node.title
     const img = "https://closm.com/" + obj.node.image[0].image
 
-    console.log(price);
-    console.log(mrp);
-    console.log(discount);
-    console.log(name);
-    console.log(img);
+ 
 
     return (
         <div className=''>

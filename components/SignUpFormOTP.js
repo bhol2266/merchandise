@@ -3,7 +3,8 @@ import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import videosContext from '../context/videos/videosContext'
-
+import { VerifyOTP } from '../lib/serverConfig'
+import { GetToken } from '../lib/CookieLib'
 export const SignUpFormOTP = () => {
 
 
@@ -27,6 +28,19 @@ export const SignUpFormOTP = () => {
 
     }
 
+    const verifyOTP = async () => {
+        const jsonMessage = await VerifyOTP(OTP, GetToken())
+        console.log(jsonMessage);
+        if (jsonMessage.success === true) {
+            setloginSidebar(false)
+            setsingUpForm_Sidebar(false)
+            setsignUpFormOTP_Sidebar(false)
+            return
+        }
+        if (jsonMessage.error === true) {
+            alert(jsonMessage.message)
+        }
+    }
 
     return (
         <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-50 bg-white ${signUpFormOTP_Sidebae ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
@@ -57,7 +71,7 @@ export const SignUpFormOTP = () => {
 
                 <div>
                     <h2 className='font-inter text-[11px] w-[210px] h-[26px] mt-[21px]'>
-                        {`Please enter the 5-digit code we sent to
+                        {`Please enter the 4-digit code we sent to
                         ${OTPemail}.`}
                     </h2>
 
@@ -67,7 +81,7 @@ export const SignUpFormOTP = () => {
 
                     <div className="divOuter mt-[20px]">
                         <div className="divInner">
-                            <input onChange={e => { setOTP(e.target.value); console.log(e.target.value); }} className="partitioned" type="text" maxLength="5" />
+                            <input onChange={e => { setOTP(e.target.value); console.log(e.target.value); }} className="partitioned" type="text" maxLength="4" />
                         </div>
                     </div>
 
@@ -81,7 +95,7 @@ export const SignUpFormOTP = () => {
                 <h2 className='text-center w-[220px]  font-inter text-[12px] mt-[54px]'>By continuing, you agree to Clossum&apos;s
                     Terms of Use and Privacy Policy.
                 </h2>
-                <button className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
+                <button onClick={verifyOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[18px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Continue</button>
 
                 <div className='w-[73px] h-[51px] mx-auto mt-[31px] ml-[60px]'>
                     <h2 className='text-center  font-inter text-[#323232] text-[11px]'>Continue with</h2>
