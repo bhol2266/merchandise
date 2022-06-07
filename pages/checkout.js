@@ -189,4 +189,4 @@ const CheckOut = () => {
         </div>
     )
 }
-export default Address
+export default CheckOut
