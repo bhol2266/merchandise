@@ -112,8 +112,8 @@ const CheckOut = () => {
                     <input value={mobilenumber} onChange={e => { if (e.target.value.length <= 10) { setmobilenumber(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Mobile Number' />
 
 
-                    <div className='flex space-x-4 sm:w-[300px] lg:w-[300px] overflow-hidden'>
-                        <select onChange={e => setstate(e.target.value)} className='w-[145px] text-[13px] outline-none border-b-[1px] border-[#323232] pb-1 '>
+                    <div className='flex space-x-4  sm:w-[300px] lg:w-[300px] overflow-hidden'>
+                        <select onChange={e => setstate(e.target.value)} className='w-[145px] text-[14px] outline-none border-b-[1px] border-[#323232] pb-1 '>
                             <option value="none" selected disabled hidden>Select State</option>
 
                             {statesOfINdia.map(state => {
@@ -174,12 +174,12 @@ const CheckOut = () => {
 
 
                     <div className='flex space-x-4 sm:w-[300px] lg:w-[300px] overflow-hidden'>
-                        <select value={state_billing} onChange={e => setstate_billing(e.target.value)} className='w-[145px] text-[13px] outline-none border-b-[1px] border-[#323232] pb-1 '>
+                        <select value={state_billing} onChange={e => setstate_billing(e.target.value)} className='w-[145px] text-[14px] outline-none border-b-[1px] border-[#323232] pb-1 '>
                             <option value="none" selected disabled hidden>Select State</option>
 
                             {statesOfINdia.map(state => {
                                 return (
-                                    <option key={state} value={state} >{state}</option>
+                                    <option  key={state} value={state} >{state}</option>
 
                                 )
                             })}
