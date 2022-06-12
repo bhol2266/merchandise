@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import Link from 'next/link'
 import LoginMenu from './LoginMenu'
-
+import videosContext from '../context/videos/videosContext'
 
 export const Navigation = () => {
-
+    const { youtuberLogo } = useContext(videosContext)
     return (
         <div className='shadow-lg'>
             <h1 className='font-manrope text-[9px] lg:text-[14px] text-center text-white bg-[#54BAB9] py-2'>
@@ -15,7 +15,7 @@ export const Navigation = () => {
 
             <div className='flex justify-between px-[20px] lg:px-[55px] h-[65px] items-center '>
                 <Link href="/">
-                    <h1 className='text-[25px] text-[#BE8024] font-delius cursor-pointer lg:text-[30px] '>Closm</h1>
+                    <img src={youtuberLogo} className='cursor-pointer  h-[40px] md:h-[50px]'></img>
                 </Link>
 
                 <div className='flex space-x-[15px] sm:space-x-[30px] lg:space-x-[50px] items-center justify-center'>
@@ -27,7 +27,7 @@ export const Navigation = () => {
                     </Link>
 
                     <LoginMenu />
-                    
+
                     <Link href="/mybag">
                         <img src='./homepageImages/cart.png' className='cursor-pointer w-[20px] h-[20px]'></img>
                     </Link>

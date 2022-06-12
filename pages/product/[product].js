@@ -1,11 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { HeartIcon } from '@heroicons/react/outline'
-import { Itemlist } from '../components/Itemlist'
+import { Itemlist } from '../../components/Itemlist'
+import { QueryG } from '../../lib/serverConfig'
+
 
 const slideImages = ["image1", "image2", "image3"]
-const colorsAvailable = [
+const colorsailable = [
     { name: "r1", selected: false },
     { name: "r2", selected: true },
     { name: "r3", selected: false },
@@ -20,50 +22,86 @@ const sizeAvailable = [
     { name: "XL", selected: false },
     { name: "2XL", selected: false }]
 
-const Product = () => {
+const Product = ({ productdetails }) => {
+    const {
+        title,
+        price,
+        mrp,
+        discount,
+        description,
+        colors,
+    } = productdetails;
+
+
     const scrollbarRef = useRef(null)
     const [itemQuantity, setitemQuantity] = useState(1)
     const [pincode, setpincode] = useState('31245')
+    const [colorsAvailable, setcolorsAvailable] = useState(colors)
+    const [currentImageShowing, setcurrentImageShowing] = useState('')
+    const [currentColorShowing, setcurrentColorShowing] = useState('')
+    const [slideImages, setslideImages] = useState([])
+
+    useEffect(() => {
+        setcurrentImageShowing(colors[0].image[0].image);
+        setcurrentColorShowing(colors[0].color);
+        var array = []
+        colors[0].image.map(item => {
+            array.push(item.image)
+        })
+        setslideImages(array)
+    }, [])
+
 
 
     const checkPincode = () => {
 
     }
+    const selectColorClick = (url, color, index) => {
+        setcurrentImageShowing(url)
+        setcurrentColorShowing(color)
+
+        var array = []
+        colors[index].image.map(item => {
+            array.push(item.image)
+        })
+        setslideImages(array)
+
+    }
 
     const scroll = (scrollOffset) => {
         scrollbarRef.current.scrollLeft += scrollOffset;
-      };
+    };
     return (
         <div className='px-[15px] lg:px-[45px] my-[15px]'>
 
 
-            <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-8 md:h-[410px] md:flex md:space-x-4 lg:justify-between md:justify-around items-center sm:justify-between mt-[20px] lg:mt-[35px] '>
+            <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-8 md:h-[410px] md:flex md:space-x-4 lg:justify-between xl:justify-start md:justify-around  items-center sm:justify-between mt-[20px] lg:mt-[35px] xl:space-x-36'>
 
 
                 {/* Product Image and subcolours */}
 
 
-                <div className=' h-[316px] lg:w-[1000px] md:h-full justify-around flex items-center  space-x-3 '>
+                <div className=' h-[316px] lg:w-[950px] md:h-full justify-around flex items-center  space-x-3'>
 
-                    <div className='flex flex-col h-full  justify-between lg:hidden'>
+                    <div className='flex flex-col h-full  justify-start lg:hidden space-y-4'>
                         {slideImages.map(image => {
                             return (
-                                <img key={image} cla src={`./product/${image}.png`} className='h-[95px] ' />
+                                <img onClick={()=>{setcurrentImageShowing(image)}} key={image} src={"https://closm.com/" + image} className='h-[95px] ' />
                             )
                         })}
                     </div>
                     <div className='hidden lg:flex items-center h-full'>
-                        <img onClick={() => scroll(-482)} src='./product/left.png' className='h-[20px] text-[#54BAB9] text-center  font-semibold my-auto mr-[30px] cursor-pointer ' />
-                        <div ref={scrollbarRef}  className=' flex items-center scrollbar-hide overflow-x-auto h-full space-x-[15px]'>
-                            <img cla src='./product/product.png' className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
-                            <img cla src='./product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
-                            <img cla src='./product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
-                            <img cla src='./product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
+                        <img onClick={() => scroll(-482)} src='./../product/left.png' className='h-[20px] text-[#54BAB9] text-center  font-semibold my-auto mr-[30px] cursor-pointer ' />
+                        <div ref={scrollbarRef} className=' flex items-center scrollbar-hide overflow-x-auto h-full space-x-[15px]'>
+                            <img cla src='./../product/product.png' className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
+                            <img cla src='./../product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
+                            <img cla src='./../product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
+                            <img cla src='./../product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
                         </div>
-                        <img onClick={() => scroll(482)} src='./product/right.png' className='h-[20px] text-[#54BAB9] text-center font-semibold my-auto ml-[30px] cursor-pointer' />
+                        <img onClick={() => scroll(482)} src='./../product/right.png' className='h-[20px] text-[#54BAB9] text-center font-semibold my-auto ml-[30px] cursor-pointer' />
                     </div>
 
-                    <img cla src='./product/product.png' className=' h-full object-fill  lg:hidden' />
+                    <img src={"https://closm.com/" + currentImageShowing} className=' h-full object-fill  lg:hidden' />
 
                 </div>
 
@@ -71,28 +109,28 @@ const Product = () => {
                 {/* Product price , colour, quantity, ADD TO BAG button */}
 
 
-                <div className='flex flex-col justify-between md:w-[290px]  h-[410px] lg:h-[520px] lg:w-[400px] lg:mr-[59px] pt-[15px] lg:pt-[15px] '>
+                <div className='flex flex-col justify-between md:w-[290px]  h-[410px] lg:h-[520px] lg:w-[400px] lg:mr-[59px]  pt-[15px] lg:pt-[15px] '>
                     <div className=' pb-[15px] border-b-[0.5px] border-[#CCCCCC] '>
                         <div className='w-full flex lg:flex-col lg:items-start lg:space-y-2 items-center justify-between'>
-                            <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>Jet Black Half Sleeve T-Shirt</h2>
-                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>30% OFF</h3>
+                            <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>{title}</h2>
+                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discount} OFF</h3>
                         </div>
 
                         <div className='flex items-center space-x-1 justify-start '>
-                            <h2 className='font-inter  text-[15px] lg:text-[24px] font-semibold text-[#19191D]'>₹499</h2>
-                            <h3 className='font-inter text-[10px] lg:text-[13px] text-[#787885] line-through '>₹799</h3>
+                            <h2 className='font-inter  text-[15px] lg:text-[24px] font-semibold text-[#19191D]'>₹{price}</h2>
+                            <h3 className='font-inter text-[10px] lg:text-[13px] text-[#787885] line-through '>₹{mrp}</h3>
                         </div>
                     </div>
 
                     <div className='mt-[15px]'>
                         <div className='flex items-center space-x-[10px]'>
                             <h1 className='text-[11px] lg:text-[13px] text-[#444444]'>Choose Colour</h1>
-                            <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>(Beige White)</h1>
+                            <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({currentColorShowing})</h1>
                         </div>
-                        <div className='mt-[15px] flex items-center space-x-[6px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
-                            {colorsAvailable.map(image => {
+                        <div className='mt-[15px] flex items-center space-x-[12px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
+                            {colorsAvailable && colorsAvailable.map((obj, index) => {
                                 return (
-                                    <img key={image.name} cla src={`./product/${image.name}.png`} className={`h-[35px] lg:h-[50px] ${image.selected ? "border-[2px]" : ""} border-[#54BAB9] rounded-lg`} />
+                                    <img onClick={() => selectColorClick(obj.image[0].image, obj.color, index)} key={obj.id} src={"https://closm.com/" + obj.image[0].image} className={`h-[50px] lg:h-[70px]  border-[#54BAB9] rounded-lg ${currentImageShowing === obj.image[0].image ? "border-[2px]" : ""}`} />
 
                                 )
                             })}
@@ -104,7 +142,7 @@ const Product = () => {
                         <div className='flex items-center justify-between'>
                             <h1 className='text-[11px] lg:text-[13px] text-[#5A5A5A] font-inter'>Choose Size</h1>
                             <div className='flex items-center space-x-1'>
-                                <img className='lg:h-[18px]' src='./product/size_chart.svg' />
+                                <img className='lg:h-[18px]' src='./../product/size_chart.svg' />
                                 <h1 className='cursor-pointer text-[10px] lg:text-[14px] text-[#54BAB9] font-inter'>Size Chart</h1>
                             </div>
                         </div>
@@ -144,7 +182,7 @@ const Product = () => {
 
                     <div className='flex items-center mt-2'>
                         {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]'/> */}
-                        <img src='./homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
+                        <img src='./../homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
                         <button className=' lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
                             ADD TO BAG
                         </button>
@@ -199,3 +237,54 @@ const Product = () => {
 }
 
 export default Product
+
+
+export async function getServerSideProps(context) {
+
+    const { product } = context.query;
+
+
+    var productdetails = {}
+    await QueryG(`query{
+        products(id:"${product}"){
+        edges{
+          node{
+            id
+              title
+              price
+              mrp
+              discount
+              description
+              colors{
+                id
+                color
+                image{
+                  image
+                }
+          }
+        }
+      }
+    }
+}`)
+        .then(res => {
+
+            var obj = res.data.data.products.edges[0].node;
+            productdetails = {
+                title: obj.title,
+                price: obj.price,
+                mrp: obj.mrp,
+                discount: obj.discount,
+                description: obj.description,
+                colors: obj.colors,
+            }
+
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    return {
+        props: {
+            productdetails: productdetails
+        }, // will be passed to the page component as props
+    }
+}

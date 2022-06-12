@@ -4,66 +4,26 @@
             "edges": [
                 {
                     "node": {
-                        "title": "def",
-                        "image": [
-                            {
-                                "imageName": "product 1",
-                                "image": "/media/Screenshot_2022-02-21_at_5.27.37_AM.png"
-                            }
-                        ],
-                        "price": 199,
-                        "mrp": 269,
-                        "discount": "30%"
-                    }
-                },
-                {
-                    "node": {
-                        "title": "abcd",
-                        "image": [
-                            {
-                                "imageName": "testing image",
-                                "image": "/media/Screenshot_2022-02-21_at_5.27.37_AM.png"
-                            }
-                        ],
-                        "price": 1000,
-                        "mrp": 300,
-                        "discount": "30%"
-                    }
-                },
-                {
-                    "node": {
-                        "title": "Blue Tshirt",
-                        "image": [
-                            {
-                                "imageName": "Blue",
-                                "image": "/media/tee4.png"
-                            },
-                            {
-                                "imageName": "Blue",
-                                "image": "/media/tee7.png"
-                            }
-                        ],
-                        "price": 500,
-                        "mrp": 500,
-                        "discount": "10%"
-                    }
-                },
-                {
-                    "node": {
+                        "id": "UHJvZHVjdHNUeXBlOjQ=",
                         "title": "Black Tshirt",
-                        "image": [
-                            {
-                                "imageName": "Blue",
-                                "image": "/media/tee4.png"
-                            },
-                            {
-                                "imageName": "Black",
-                                "image": "/media/tee8.png"
-                            }
-                        ],
                         "price": 1000,
                         "mrp": 1000,
-                        "discount": "20%"
+                        "discount": "20%",
+                        "description": "Type-Polo Neck \r\nSleeve-Half Sleeve Fit-Slim \r\nFabric-Pure CottonSales Package-1 \r\nArmy Camouflage Printed Polo \r\nT-ShirtPack of Style \r\nCode-polo-camo Neck Type-Polo \r\nNeck",
+                        "colors": [
+                            {
+                                "id": "6",
+                                "color": "White",
+                                "image": [
+                                    {
+                                        "image": "/media/tee13.png"
+                                    },
+                                    {
+                                        "image": "/media/tee13_56BU37V.png"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 }
             ]

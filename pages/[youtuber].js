@@ -1,58 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Footer } from '../components/footer'
 import { Itemlist } from '../components/Itemlist'
 import { Navigation } from '../components/Navigation'
 import { QueryG } from '../lib/serverConfig'
 import Router, { useRouter } from 'next/router'
+import videosContext from '../context/videos/videosContext'
 
-function Youtuber({ story_details }) {
-
+function Youtuber({ youtuber, banner, logo, productlist,productid }) {
     const router = useRouter();
-    const { youtuber } = router.query;
-
-
-
 
     const pages = ['1', '2', '3', '4', '5', '6', '7']
-    const [items, setitems] = useState([])
-
-
-
+    const { setyoutuberLogo } = useContext(videosContext);
 
     useEffect(() => {
-        QueryG(`query{
-            products{
-              edges{
-              node{
-                title
-                 image{
-                  imageName
-                  image
-                } 
-                price
-                mrp
-                discount
-              }
-              }
-            }
-          }`)
-            .then(res => {
-                setitems(res.data.data.products.edges)
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        setyoutuberLogo(logo)
     }, [])
 
     return (
         <div>
-            <img src='./youtuber_assets/youtuber_banner.png' className='cursor-pointer w-full  px-[12px] lg:px-[50px] rounded   md:hidden mt-[15px]'></img>
-            <img src='./youtuber_assets/youtuber_banner_wide.png' className='cursor-pointer w-full px-[12px]  lg:px-[50px]   rounded hidden md:flex mt-[25px]'></img>
+            <img src={banner} className='cursor-pointer w-full h-48  px-[12px] lg:px-[50px] rounded   md:hidden mt-[15px]'></img>
+            <img src={banner} className='cursor-pointer w-full h-[330px] px-[12px]  lg:px-[50px]   rounded hidden md:flex mt-[25px]'></img>
 
 
-            {items &&
+            {productlist &&
                 <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
-                    <Itemlist items={items} />
+                    <Itemlist items={productlist} productid={productid} />
                 </div>
             }
 
@@ -71,3 +43,66 @@ function Youtuber({ story_details }) {
     )
 }
 export default Youtuber
+
+
+export async function getServerSideProps(context) {
+
+    const { youtuber } = context.query;
+
+    var banner = ""
+    var logo = ""
+    var productlist = []
+    var productid = ''
+    await QueryG(`query
+    {
+      youtuber(name:"kundan"){
+        id
+        name
+        logo
+        banner{
+          id
+          image
+        }
+        productsSet{
+          edges{
+            node{
+                id
+              title
+              price
+              mrp
+              discount
+              description
+              colors{
+                id
+                color
+                image{
+                  image
+                }
+              }
+            }
+          }
+        }
+      }
+    }`)
+        .then(res => {
+            logo = "https://closm.com/media/" + res.data.data.youtuber[0].logo
+            banner = "https://closm.com/" + res.data.data.youtuber[0].banner[0].image
+            productid=res.data.data.youtuber[0].productsSet.edges[0].node.id
+            res.data.data.youtuber[0].productsSet.edges.map(product => {
+                productlist.push(product)
+            })
+
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    return {
+        props: {
+            youtuber: youtuber,
+            banner: banner,
+            logo: logo,
+            productid: productid,
+            productlist: productlist
+        }, // will be passed to the page component as props
+    }
+}

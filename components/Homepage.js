@@ -95,11 +95,11 @@ export const Homepage = () => {
                 </div>
             </div>
 
-            {items &&
+            {/* {items &&
                 <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
                     <Itemlist items={items} />
                 </div>
-            }
+            } */}
 
 
             <div className='h-[525px] sm:h-[400px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10 '>
