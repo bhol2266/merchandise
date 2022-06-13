@@ -127,7 +127,7 @@ export const SignUpForm = () => {
 
     return (
         <div className={` overflow-hidden flex shadow-lg fixed top-0 right-0  z-50 bg-white ${singUpForm_Sidebar ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
-            <img src='./signUpFormBar.png' className='min-w-[54px] h-screen'></img>
+            <img src='/signUpFormBar.png' className='min-w-[54px] h-screen'></img>
 
             <div className='ml-[28px]'>
                 <div className='flex items-center  mt-[32px]  justify-between '>

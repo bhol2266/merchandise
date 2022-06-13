@@ -43,7 +43,7 @@ export const SignUpFormOTP = () => {
 
     return (
         <div className={` overflow-hidden flex shadow-lg absolute top-0 right-0  z-50 bg-white ${signUpFormOTP_Sidebae ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
-            <img src='./signUpFormBar.png' className='w-[54px] h-screen bg-gradient-to-r from-[#ffffff] to-[#9DA667] '></img>
+            <img src='/signUpFormBar.png' className='w-[54px] h-screen bg-gradient-to-r from-[#ffffff] to-[#9DA667] '></img>
 
             <div className='ml-[28px]'>
                 <div className='flex items-center  mt-[32px]  justify-between '>
@@ -91,12 +91,12 @@ export const SignUpFormOTP = () => {
                     <h2 className='text-center  font-inter text-[#323232] text-[11px]'>Continue with</h2>
                     <div className='mt-[26px] flex justify-between'>
                         <Link href='/'>
-                            <img src='./login/google.png' className='h-[25px] w-[25px] cursor-pointer'></img>
+                            <img src='/login/google.png' className='h-[25px] w-[25px] cursor-pointer'></img>
                         </Link>
 
 
                         <Link href='/'>
-                            <img src='./login/facebook.png' className='h-[25px] w-[25px] cursor-pointer'></img>
+                            <img src='/login/facebook.png' className='h-[25px] w-[25px] cursor-pointer'></img>
                         </Link>
 
                     </div>
