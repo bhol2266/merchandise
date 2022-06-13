@@ -61,7 +61,6 @@ export const LoginForm = () => {
             SetEmail(Email)
             setloggedIn(true)
             closeSidebar()
-            router.push('/')
             return
         }
         if (jsonMessage.success === false) {

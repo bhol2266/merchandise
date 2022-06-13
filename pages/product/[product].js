@@ -207,7 +207,7 @@ const Product = ({ productdetails }) => {
 
                     <div className='flex items-center mt-2'>
                         {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]'/> */}
-                        <img src='./../homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
+                        <img onClick={addtoBagClick} src='./../homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
                         <button onClick={addtoBagClick} className=' lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
                             ADD TO BAG
                         </button>
