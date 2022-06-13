@@ -40,10 +40,13 @@ const Product = ({ productdetails }) => {
     const [currentImageShowing, setcurrentImageShowing] = useState('')
     const [currentColorShowing, setcurrentColorShowing] = useState('')
     const [slideImages, setslideImages] = useState([])
+    const [currentColorIndexPos, setcurrentColorIndexPos] = useState('')
+    const [currentSize, setcurrentSize] = useState("M")
 
     useEffect(() => {
         setcurrentImageShowing(colors[0].image[0].image);
         setcurrentColorShowing(colors[0].color);
+        setcurrentColorIndexPos(0)
         var array = []
         colors[0].image.map(item => {
             array.push(item.image)
@@ -59,7 +62,7 @@ const Product = ({ productdetails }) => {
     const selectColorClick = (url, color, index) => {
         setcurrentImageShowing(url)
         setcurrentColorShowing(color)
-
+        setcurrentColorIndexPos(index)
         var array = []
         colors[index].image.map(item => {
             array.push(item.image)
@@ -93,10 +96,14 @@ const Product = ({ productdetails }) => {
                     <div className='hidden lg:flex items-center h-full'>
                         <img onClick={() => scroll(-482)} src='./../product/left.png' className='h-[20px] text-[#54BAB9] text-center  font-semibold my-auto mr-[30px] cursor-pointer ' />
                         <div ref={scrollbarRef} className=' flex items-center scrollbar-hide overflow-x-auto h-full space-x-[15px]'>
-                            <img cla src='./../product/product.png' className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
-                            <img cla src='./../product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
-                            <img cla src='./../product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
-                            <img cla src='./../product/product.png' className='h-full w-[259px] lg:w-[422px] lg:h-[515px] ' />
+
+                        {slideImages.map(image => {
+                            return (
+                                <img onClick={()=>{setcurrentImageShowing(image)}} key={image} src={"https://closm.com/" + image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
+                            )
+                        })}
+
+                           
                         </div>
                         <img onClick={() => scroll(482)} src='./../product/right.png' className='h-[20px] text-[#54BAB9] text-center font-semibold my-auto ml-[30px] cursor-pointer' />
                     </div>
@@ -130,7 +137,7 @@ const Product = ({ productdetails }) => {
                         <div className='mt-[15px] flex items-center space-x-[12px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
                             {colorsAvailable && colorsAvailable.map((obj, index) => {
                                 return (
-                                    <img onClick={() => selectColorClick(obj.image[0].image, obj.color, index)} key={obj.id} src={"https://closm.com/" + obj.image[0].image} className={`h-[50px] lg:h-[70px]  border-[#54BAB9] rounded-lg ${currentImageShowing === obj.image[0].image ? "border-[2px]" : ""}`} />
+                                    <img onClick={() => selectColorClick(obj.image[0].image, obj.color, index)} key={obj.id} src={"https://closm.com/" + obj.image[0].image} className={`h-[50px] lg:h-[70px]  border-[#54BAB9] rounded-lg ${currentColorIndexPos === index ? "border-[2px]" : ""}`} />
 
                                 )
                             })}
@@ -150,7 +157,7 @@ const Product = ({ productdetails }) => {
                         <div className='mt-[15px] flex items-center space-x-[17px]'>
                             {sizeAvailable.map(size => {
                                 return (
-                                    <div key={size.name} className={`${size.selected ? "border-[2px] border-[#54BAB9]" : "border-[1px] lg:border-[2px] border-[#E5E5E5] cursor-pointer"} h-[35px] w-[35px] lg:h-[40px] lg:w-[40px] rounded-lg  flex items-center justify-center`}>
+                                    <div onClick={()=>{setcurrentSize(size.name)}} key={size.name} className={`${size.name===currentSize ? "border-[2px] border-[#54BAB9]" : "border-[1px] lg:border-[2px] border-[#E5E5E5] cursor-pointer"} h-[35px] w-[35px] lg:h-[40px] lg:w-[40px] rounded-lg  flex items-center justify-center`}>
                                         <h1 className='text-[11px] lg:text-[16px] font-poppins font-light text-[#313131] text-center'>{size.name}</h1>
                                     </div>
                                 )
