@@ -56,8 +56,9 @@ const Product = ({ productdetails }) => {
 
 
 
-    const checkPincode = () => {
-
+    const checkPincode = async() => {
+        const response = await fetch(`https://api.postalpincode.in/pincode/${code}`)
+        response.text().then(data => console.log(data));
     }
     const selectColorClick = (url, color, index) => {
         setcurrentImageShowing(url)

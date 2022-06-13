@@ -21,8 +21,11 @@ export const SignUpForm = () => {
     const [confirmPassword, setconfirmPassword] = useState('')
     const [validateEmailState, setvalidateEmailState] = useState(null)
     const [continueClicked, setcontinueClicked] = useState(false)
-    setOTPemail(Email)
 
+    useEffect(() => {
+        setOTPemail(Email)
+    }, [])
+    
 
     const validateEmail = (email) => {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -75,7 +78,6 @@ export const SignUpForm = () => {
 
         const jsonMessage = await SignUpUser(Email, firstName, lastName, phone, password, confirmPassword)
 
-        console.log(jsonMessage);
 
         if (jsonMessage.success === true) {
             SetToken(jsonMessage.token)

@@ -90,12 +90,12 @@ export const SignUpFormOTP = () => {
                 <div className='w-[73px] h-[51px] mx-auto mt-[31px] ml-[60px]'>
                     <h2 className='text-center  font-inter text-[#323232] text-[11px]'>Continue with</h2>
                     <div className='mt-[26px] flex justify-between'>
-                        <Link href='\'>
+                        <Link href='/'>
                             <img src='./login/google.png' className='h-[25px] w-[25px] cursor-pointer'></img>
                         </Link>
 
 
-                        <Link href='\'>
+                        <Link href='/'>
                             <img src='./login/facebook.png' className='h-[25px] w-[25px] cursor-pointer'></img>
                         </Link>
 
