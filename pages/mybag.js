@@ -1,5 +1,6 @@
 import React from 'react'
 import { BagItem } from '../components/bagItem'
+import { QueryG } from '../../lib/serverConfig'
 
 const Mybag = () => {
     return (
@@ -79,3 +80,54 @@ const Mybag = () => {
     )
 }
 export default Mybag
+
+
+export async function getServerSideProps(context) {
+
+    const { product } = context.query;
+
+
+    var productdetails = {}
+    await QueryG(`query{
+        products(id:"${product}"){
+        edges{
+          node{
+            id
+              title
+              price
+              mrp
+              discount
+              description
+              colors{
+                id
+                color
+                image{
+                  image
+                }
+          }
+        }
+      }
+    }
+}`)
+        .then(res => {
+
+            var obj = res.data.data.products.edges[0].node;
+            productdetails = {
+                title: obj.title,
+                price: obj.price,
+                mrp: obj.mrp,
+                discount: obj.discount,
+                description: obj.description,
+                colors: obj.colors,
+            }
+
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    return {
+        props: {
+            productdetails: productdetails
+        }, // will be passed to the page component as props
+    }
+}

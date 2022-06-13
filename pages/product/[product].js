@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { HeartIcon } from '@heroicons/react/outline'
@@ -6,8 +6,7 @@ import { Itemlist } from '../../components/Itemlist'
 import { QueryG } from '../../lib/serverConfig'
 import { CheckIcon } from '@heroicons/react/solid'
 import { XIcon } from '@heroicons/react/solid'
-
-
+import videosContext from '../../context/videos/videosContext'
 
 const sizeAvailable = [
     { name: "S", selected: false },
@@ -49,12 +48,14 @@ const Product = ({ productdetails }) => {
         setslideImages(array)
     }, [])
 
+    const { loggedIn,setloginSidebar } = useContext(videosContext)
 
 
     const checkPincode = async () => {
         const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`)
-        await  response.text().then(data => setpincodeVerified(true)).catch(error=>setpincodeVerified(false));
+        await response.text().then(data => setpincodeVerified(true)).catch(error => setpincodeVerified(false));
     }
+
     const selectColorClick = (url, color, index) => {
         setcurrentImageShowing(url)
         setcurrentColorShowing(color)
@@ -70,6 +71,12 @@ const Product = ({ productdetails }) => {
     const scroll = (scrollOffset) => {
         scrollbarRef.current.scrollLeft += scrollOffset;
     };
+
+    const addtoBagClick = () => {
+        if (!loggedIn) {
+            setloginSidebar(true)
+        }
+    }
     return (
         <div className='px-[15px] lg:px-[45px] my-[15px]'>
 
@@ -180,18 +187,18 @@ const Product = ({ productdetails }) => {
                                         setpincode(e.target.value)
                                     }
                                     if (e.target.value.length === 6) {
-                                          checkPincode(e.target.value)
+                                        checkPincode(e.target.value)
                                     }
-                                    if(e.target.value.length <= 6){
+                                    if (e.target.value.length <= 6) {
                                         setpincodeVerified(false)
                                     }
                                 }} type='number' value={pincode} placeholder='Enter Pincode' />
                                 <h1 className='font-inter text-[11px] lg:text-[16px] text-[#323232] cursor-pointer hidden' onClick={checkPincode}>Check</h1>
 
-                               {pincodeVerified && <CheckIcon className='h-6 text-green-500'/>}
+                                {pincodeVerified && <CheckIcon className='h-6 text-green-500' />}
 
-                               {!pincodeVerified && pincode.length===6  && <XIcon className='h-6 text-red-500'/> }
-                               
+                                {!pincodeVerified && pincode.length === 6 && <XIcon className='h-6 text-red-500' />}
+
                             </div>
 
                         </div>
@@ -201,7 +208,7 @@ const Product = ({ productdetails }) => {
                     <div className='flex items-center mt-2'>
                         {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]'/> */}
                         <img src='./../homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
-                        <button className=' lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
+                        <button onClick={addtoBagClick} className=' lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
                             ADD TO BAG
                         </button>
                     </div>
