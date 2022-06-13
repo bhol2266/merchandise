@@ -20,16 +20,16 @@ export const Navigation = () => {
 
                 <div className='flex space-x-[15px] sm:space-x-[30px] lg:space-x-[50px] items-center justify-center'>
                     <Link href="/">
-                        <img src='./homepageImages/search.png' className='cursor-pointer w-[20px] h-[20px]'></img>
+                        <img src='/homepageImages/search.png' className='cursor-pointer w-[20px] h-[20px]'></img>
                     </Link>
                     <Link href="/product">
-                        <img src='./homepageImages/cloth.png' className='cursor-pointer w-[20px] h-[20px]'></img>
+                        <img src='/homepageImages/cloth.png' className='cursor-pointer w-[20px] h-[20px]'></img>
                     </Link>
 
                     <LoginMenu />
 
                     <Link href="/mybag">
-                        <img src='./homepageImages/cart.png' className='cursor-pointer w-[20px] h-[20px]'></img>
+                        <img src='/homepageImages/cart.png' className='cursor-pointer w-[20px] h-[20px]'></img>
                     </Link>
 
                 </div>

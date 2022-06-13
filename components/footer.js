@@ -8,17 +8,17 @@ export const Footer = () => {
       <div className='flex items-center w-[200px] justify-around mx-auto pt-[25px]'>
         <Link href='/'>
           <a>
-            <img className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]' src='./footer/twitter.png'></img>
+            <img className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]' src='/footer/twitter.png'></img>
           </a>
         </Link>
         <Link href='/'>
           <a>
-            <img className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]' src='./footer/facebook.png'></img>
+            <img className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]' src='/footer/facebook.png'></img>
           </a>
         </Link>
         <Link href='/'>
           <a>
-            <img className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]' src='./footer/insta.png'></img>
+            <img className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]' src='/footer/insta.png'></img>
           </a>
         </Link>
       </div>
