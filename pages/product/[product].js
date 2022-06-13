@@ -4,17 +4,11 @@ import { PlusIcon } from '@heroicons/react/solid'
 import { HeartIcon } from '@heroicons/react/outline'
 import { Itemlist } from '../../components/Itemlist'
 import { QueryG } from '../../lib/serverConfig'
+import { CheckIcon } from '@heroicons/react/solid'
+import { XIcon } from '@heroicons/react/solid'
 
 
-const slideImages = ["image1", "image2", "image3"]
-const colorsailable = [
-    { name: "r1", selected: false },
-    { name: "r2", selected: true },
-    { name: "r3", selected: false },
-    { name: "r1", selected: false },
-    { name: "r5", selected: false },
-    { name: "r6", selected: false },
-]
+
 const sizeAvailable = [
     { name: "S", selected: false },
     { name: "M", selected: true },
@@ -35,13 +29,14 @@ const Product = ({ productdetails }) => {
 
     const scrollbarRef = useRef(null)
     const [itemQuantity, setitemQuantity] = useState(1)
-    const [pincode, setpincode] = useState('31245')
     const [colorsAvailable, setcolorsAvailable] = useState(colors)
     const [currentImageShowing, setcurrentImageShowing] = useState('')
     const [currentColorShowing, setcurrentColorShowing] = useState('')
     const [slideImages, setslideImages] = useState([])
     const [currentColorIndexPos, setcurrentColorIndexPos] = useState('')
     const [currentSize, setcurrentSize] = useState("M")
+    const [pincode, setpincode] = useState('')
+    const [pincodeVerified, setpincodeVerified] = useState(false)
 
     useEffect(() => {
         setcurrentImageShowing(colors[0].image[0].image);
@@ -56,9 +51,9 @@ const Product = ({ productdetails }) => {
 
 
 
-    const checkPincode = async() => {
-        const response = await fetch(`https://api.postalpincode.in/pincode/${code}`)
-        response.text().then(data => console.log(data));
+    const checkPincode = async () => {
+        const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`)
+        await  response.text().then(data => setpincodeVerified(true)).catch(error=>setpincodeVerified(false));
     }
     const selectColorClick = (url, color, index) => {
         setcurrentImageShowing(url)
@@ -90,7 +85,7 @@ const Product = ({ productdetails }) => {
                     <div className='flex flex-col h-full  justify-start lg:hidden space-y-4'>
                         {slideImages.map(image => {
                             return (
-                                <img onClick={()=>{setcurrentImageShowing(image)}} key={image} src={"https://closm.com/" + image} className='h-[95px] ' />
+                                <img onClick={() => { setcurrentImageShowing(image) }} key={image} src={"https://closm.com/" + image} className='h-[95px] ' />
                             )
                         })}
                     </div>
@@ -98,13 +93,13 @@ const Product = ({ productdetails }) => {
                         <img onClick={() => scroll(-482)} src='./../product/left.png' className='h-[20px] text-[#54BAB9] text-center  font-semibold my-auto mr-[30px] cursor-pointer ' />
                         <div ref={scrollbarRef} className=' flex items-center scrollbar-hide overflow-x-auto h-full space-x-[15px]'>
 
-                        {slideImages.map(image => {
-                            return (
-                                <img onClick={()=>{setcurrentImageShowing(image)}} key={image} src={"https://closm.com/" + image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
-                            )
-                        })}
+                            {slideImages.map(image => {
+                                return (
+                                    <img onClick={() => { setcurrentImageShowing(image) }} key={image} src={"https://closm.com/" + image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
+                                )
+                            })}
 
-                           
+
                         </div>
                         <img onClick={() => scroll(482)} src='./../product/right.png' className='h-[20px] text-[#54BAB9] text-center font-semibold my-auto ml-[30px] cursor-pointer' />
                     </div>
@@ -158,7 +153,7 @@ const Product = ({ productdetails }) => {
                         <div className='mt-[15px] flex items-center space-x-[17px]'>
                             {sizeAvailable.map(size => {
                                 return (
-                                    <div onClick={()=>{setcurrentSize(size.name)}} key={size.name} className={`${size.name===currentSize ? "border-[2px] border-[#54BAB9]" : "border-[1px] lg:border-[2px] border-[#E5E5E5] cursor-pointer"} h-[35px] w-[35px] lg:h-[40px] lg:w-[40px] rounded-lg  flex items-center justify-center`}>
+                                    <div onClick={() => { setcurrentSize(size.name) }} key={size.name} className={`${size.name === currentSize ? "border-[2px] border-[#54BAB9]" : "border-[1px] lg:border-[2px] border-[#E5E5E5] cursor-pointer"} h-[35px] w-[35px] lg:h-[40px] lg:w-[40px] rounded-lg  flex items-center justify-center`}>
                                         <h1 className='text-[11px] lg:text-[16px] font-poppins font-light text-[#313131] text-center'>{size.name}</h1>
                                     </div>
                                 )
@@ -177,11 +172,26 @@ const Product = ({ productdetails }) => {
                         </div>
 
                         <div>
-                            <h1 className='font-inter text-[9px] lg:text-[11px] text-[#1B1B1B] w-[171px] lg: w-[200px] pr-4'>Enter PIN code to check delivery time &
+                            <h1 className='font-inter text-[9px] lg:text-[11px] text-[#1B1B1B] w-[171px] lg:w-[200px] pr-4'>Enter PIN code to check delivery time &
                                 Pay on Delivery Availability</h1>
                             <div className='mt-[10px] flex items-center justify-between  border-b-[0.5px] border-[#969696]'>
-                                <input className='outline-none text-[11px] lg:text-[14px] text-[#5A5A5A]' onChange={e => setpincode(e.target.value)} type='number' placeholder='Enter Pincode' />
-                                <h1 className='font-inter text-[11px] lg:text-[16px] text-[#323232] cursor-pointer' onClick={checkPincode}>Check</h1>
+                                <input className='outline-none text-[11px] lg:text-[14px] text-[#5A5A5A]' onChange={e => {
+                                    if (e.target.value.length <= 6) {
+                                        setpincode(e.target.value)
+                                    }
+                                    if (e.target.value.length === 6) {
+                                          checkPincode(e.target.value)
+                                    }
+                                    if(e.target.value.length <= 6){
+                                        setpincodeVerified(false)
+                                    }
+                                }} type='number' value={pincode} placeholder='Enter Pincode' />
+                                <h1 className='font-inter text-[11px] lg:text-[16px] text-[#323232] cursor-pointer hidden' onClick={checkPincode}>Check</h1>
+
+                               {pincodeVerified && <CheckIcon className='h-6 text-green-500'/>}
+
+                               {!pincodeVerified && pincode.length===6  && <XIcon className='h-6 text-red-500'/> }
+                               
                             </div>
 
                         </div>
