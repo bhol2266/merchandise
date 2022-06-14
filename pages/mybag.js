@@ -50,7 +50,7 @@ const Mybag = () => {
 
                     {bagitems && bagitems.map(item => {
                         return (
-                            <BagItem productdetails={item} />
+                            <BagItem key={productdetails.cartItemid} productdetails={item} />
 
                         )
                     })
