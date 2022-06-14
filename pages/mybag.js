@@ -1,8 +1,32 @@
-import React from 'react'
+import { Router, useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
 import { BagItem } from '../components/bagItem'
-import { QueryG } from '../../lib/serverConfig'
+import { GetbagItems } from '../lib/serverConfig';
 
 const Mybag = () => {
+
+    const router = useRouter()
+    const [bagitems, setbagitems] = useState([])
+    useEffect(async () => {
+        await GetbagItems().then(res => {
+            console.log(JSON.stringify(res.cart[0]));
+            var array = []
+            res.cart[0].items.map(obj => {
+                array.push(obj)
+            })
+            setbagitems(array)
+        }).catch(err => {
+            console.log(err);
+        })
+
+    }, [])
+
+    const checkout =() => {
+        if(bagitems){
+            router.push('/checkout') 
+        }
+    }
+
     return (
         <div className='px-[13px] lg:px-[45px]  mx-auto'>
 
@@ -23,11 +47,16 @@ const Mybag = () => {
 
                 {/* Item  */}
                 <div className='items-center justify-center flex flex-col md:grow'>
-                    <BagItem />
-                    <BagItem />
-                    <BagItem />
-                    <BagItem />
-                    <BagItem />
+
+                    {bagitems && bagitems.map(item => {
+                        return (
+                            <BagItem productdetails={item} />
+
+                        )
+                    })
+
+                    }
+
                 </div>
 
                 <div className=' lg:h-[500px] h-[420px] md:w-[300px]  mb-4 lg:w-[400px] rounded-[10px] border-[1px] border-[#BBBBBB]  mt-[10px] md:mt-[0px] py-[20px] mx-auto lg:mx-0 sticky top-10'>
@@ -66,7 +95,7 @@ const Mybag = () => {
                     </div>
 
                     <div className='px-8 lg:px-16'>
-                        <button className='w-full  lg:text-[16px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-4 font-inter font-semibold'>
+                        <button onClick={checkout} className='w-full  lg:text-[16px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-4 font-inter font-semibold'>
                             PROCEED TO CHECKOUT
                         </button>
                     </div>
@@ -82,52 +111,3 @@ const Mybag = () => {
 export default Mybag
 
 
-export async function getServerSideProps(context) {
-
-    const { product } = context.query;
-
-
-    var productdetails = {}
-    await QueryG(`query{
-        products(id:"${product}"){
-        edges{
-          node{
-            id
-              title
-              price
-              mrp
-              discount
-              description
-              colors{
-                id
-                color
-                image{
-                  image
-                }
-          }
-        }
-      }
-    }
-}`)
-        .then(res => {
-
-            var obj = res.data.data.products.edges[0].node;
-            productdetails = {
-                title: obj.title,
-                price: obj.price,
-                mrp: obj.mrp,
-                discount: obj.discount,
-                description: obj.description,
-                colors: obj.colors,
-            }
-
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    return {
-        props: {
-            productdetails: productdetails
-        }, // will be passed to the page component as props
-    }
-}

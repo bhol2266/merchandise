@@ -6,10 +6,8 @@ import { useRouter } from 'next/router'
 
 export const Navigation = () => {
     const { youtuberLogo } = useContext(videosContext)
-    const [logo, setlogo] = useState('')
 
     const router = useRouter()
-    console.log(youtuberLogo);
 
    
 

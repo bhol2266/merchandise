@@ -1,32 +1,24 @@
 {
-    "data": {
-        "products": {
-            "edges": [
-                {
-                    "node": {
-                        "id": "UHJvZHVjdHNUeXBlOjQ=",
-                        "title": "Black Tshirt",
-                        "price": 1000,
-                        "mrp": 1000,
-                        "discount": "20%",
-                        "description": "Type-Polo Neck \r\nSleeve-Half Sleeve Fit-Slim \r\nFabric-Pure CottonSales Package-1 \r\nArmy Camouflage Printed Polo \r\nT-ShirtPack of Style \r\nCode-polo-camo Neck Type-Polo \r\nNeck",
-                        "colors": [
-                            {
-                                "id": "6",
-                                "color": "White",
-                                "image": [
-                                    {
-                                        "image": "/media/tee13.png"
-                                    },
-                                    {
-                                        "image": "/media/tee13_56BU37V.png"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
+    "id": "7",
+    "items": [
+        {
+            "color": {
+                "id": "6",
+                "color": "White"
+            },
+            "product": {
+                "id": "UHJvZHVjdHNUeXBlOjQ=",
+                "title": "Black Tshirt",
+                "price": 1000,
+                "mrp": 1000,
+                "discount": "20%"
+            },
+            "quantity": 1
         }
-    }
+    ],
+    "itemBill": 1000,
+    "totalBill": 1200,
+    "discountPrice": 0,
+    "discountCoupen": null,
+    "deliveryCharges": 200
 }

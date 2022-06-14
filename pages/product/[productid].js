@@ -7,7 +7,8 @@ import { QueryG } from '../../lib/serverConfig'
 import { CheckIcon } from '@heroicons/react/solid'
 import { XIcon } from '@heroicons/react/solid'
 import videosContext from '../../context/videos/videosContext'
-
+import { Addtobag } from '../../lib/serverConfig'
+import { GetEmail } from '../../lib/CookieLib'
 const sizeAvailable = [
     { name: "S", selected: false },
     { name: "M", selected: true },
@@ -23,7 +24,9 @@ const Product = ({ productdetails }) => {
         discount,
         description,
         colors,
+        productid
     } = productdetails;
+
 
 
     const scrollbarRef = useRef(null)
@@ -48,7 +51,7 @@ const Product = ({ productdetails }) => {
         setslideImages(array)
     }, [])
 
-    const { loggedIn,setloginSidebar } = useContext(videosContext)
+    const { loggedIn, setloginSidebar } = useContext(videosContext)
 
 
     const checkPincode = async () => {
@@ -72,10 +75,20 @@ const Product = ({ productdetails }) => {
         scrollbarRef.current.scrollLeft += scrollOffset;
     };
 
-    const addtoBagClick = () => {
-        if (!loggedIn) {
+
+    const addtoBagClick = async () => {
+        if (!GetEmail()) {
             setloginSidebar(true)
+            return
         }
+
+        await Addtobag(productid, colors[currentColorIndexPos].id, itemQuantity).then(res => {
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err);
+        })
+
+
     }
     return (
         <div className='px-[15px] lg:px-[45px] my-[15px]'>
@@ -266,12 +279,10 @@ export default Product
 
 export async function getServerSideProps(context) {
 
-    const { product } = context.query;
-
-
+    const { productid } = context.query;
     var productdetails = {}
     await QueryG(`query{
-        products(id:"${product}"){
+        products(id:"${productid}"){
         edges{
           node{
             id
@@ -290,20 +301,22 @@ export async function getServerSideProps(context) {
         }
       }
     }
-}`)
-        .then(res => {
+}`).then(res => {
 
-            var obj = res.data.data.products.edges[0].node;
-            productdetails = {
-                title: obj.title,
-                price: obj.price,
-                mrp: obj.mrp,
-                discount: obj.discount,
-                description: obj.description,
-                colors: obj.colors,
-            }
+        var obj = res.data.data.products.edges[0].node;
+        productdetails = {
+            title: obj.title,
+            price: obj.price,
+            mrp: obj.mrp,
+            discount: obj.discount,
+            description: obj.description,
+            colors: obj.colors,
+            productid: productid
+        }
 
-        })
+
+
+    })
         .catch(err => {
             console.log(err);
         })

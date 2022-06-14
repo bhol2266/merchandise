@@ -16,7 +16,6 @@ const VideoState = (props) => {
 
     //this the email in which otp is send during signUp and show this email in OTP sidebar
     const [OTPemail, setOTPemail] = useState(null)
-    const [loggedIn, setloggedIn] = useState(false)
 
 
     //youtuberPage
@@ -31,7 +30,7 @@ const VideoState = (props) => {
 
 
     return (
-        <videosContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, loggedIn, setloggedIn,youtuberLogo, setyoutuberLogo }}>
+        <videosContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail,youtuberLogo, setyoutuberLogo }}>
             {props.children}
         </videosContext.Provider>
     )

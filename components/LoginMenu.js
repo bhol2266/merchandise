@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment, useContext } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import videosContext from '../context/videos/videosContext'
 import { GetToken, GetEmail } from '../lib/CookieLib'
 import { removeCookies } from 'cookies-next';
@@ -11,9 +11,16 @@ function classNames(...classes) {
 function LoginMenu() {
 
   const router = useRouter();
-  const { loginSidebar, setloginSidebar, loggedIn, setloggedIn } = useContext(videosContext)
+  const { loginSidebar, setloginSidebar } = useContext(videosContext)
+  const [loggedIn, setloggedIn] = useState(false)
 
-
+  useEffect(() => {
+    if (GetEmail()) {
+      setloggedIn(true)
+    }
+  }, [])
+  
+ 
   const openLoginForm = () => {
     setloginSidebar(true)
   }

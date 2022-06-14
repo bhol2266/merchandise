@@ -13,7 +13,7 @@ export const LoginForm = () => {
 
     const router = useRouter()
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, setloggedIn } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(videosContext)
 
 
 
@@ -43,6 +43,7 @@ export const LoginForm = () => {
         setloginSidebar(false)
         setsingUpForm_Sidebar(true)
     }
+    
     const SignIn = async (e) => {
         e.preventDefault()
         if (!Email || !password) {
@@ -59,7 +60,6 @@ export const LoginForm = () => {
             SetToken(jsonMessage.token)
             SetRefreshToken(jsonMessage.refreshToken)
             SetEmail(Email)
-            setloggedIn(true)
             closeSidebar()
             return
         }

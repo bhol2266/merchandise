@@ -11,14 +11,7 @@ import { checkCookies } from 'cookies-next';
 
 
 export default function Home() {
-  const { setloggedIn } = useContext(videosContext)
-  useEffect(() => {
-    if (checkCookies('email')) {
-      setloggedIn(true)
-    } else {
-      setloggedIn(false)
-    }
-  }, [])
+ 
 
   return (
     <div className='relative' >

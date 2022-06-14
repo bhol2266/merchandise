@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { addAddress, getAddress, updateAddress } from '../lib/serverConfig'
 
 const statesOfINdia = ["Andhra Pradesh",
     "Arunachal Pradesh",
@@ -40,6 +41,8 @@ const statesOfINdia = ["Andhra Pradesh",
 
 const CheckOut = () => {
 
+    //id from database shipping adress list
+    const [id, setid] = useState('')
 
     const [firstname, setfirstname] = useState('')
     const [lastname, setlastname] = useState('')
@@ -54,8 +57,8 @@ const CheckOut = () => {
 
 
     // Billing Address States 
-    const [sameAsShippingAddress, setsameAsShippingAddress] = useState(false)
-    const [firstname_billing, setfirstname_billing] = useState('')
+    const [sameAsShippingAddress, setsameAsShippingAddress] = useState(true)
+    const [firstname_billing, setfirstname_billing] = useState(firstname)
     const [lastname_billing, setlastname_billing] = useState('')
     const [mobilenumber_billing, setmobilenumber_billing] = useState('')
     const [state_billing, setstate_billing] = useState('')
@@ -92,10 +95,86 @@ const CheckOut = () => {
         }
     }
 
+    useEffect(async () => {
+        await getAddress().then((res) => {
+            console.log(res.shippingDetails)
+            if (res.shippingDetails) {
+                setfirstname(res.shippingDetails[0].firstName)
+                setlastname(res.shippingDetails[0].lastName)
+                setalternatePhonenumber(res.shippingDetails[0].altPhoneNum)
+                setaddress_billing(res.shippingDetails[0].billingAddress)
+                settown(res.shippingDetails[0].city)
+                setmobilenumber(res.shippingDetails[0].phoneNum)
+                setpincode(res.shippingDetails[0].pincode)
+                setaddress(res.shippingDetails[0].shippingAddress)
+                setlandmark(res.shippingDetails[0].shippingAddress)
+                setstate(res.shippingDetails[0].state)
+                setid(res.shippingDetails[0].id)
+                if (sameAsShippingAddress) {
+                    setfirstname_billing(res.shippingDetails[0].firstName)
+                    setlastname_billing(res.shippingDetails[0].lastName)
+                    setalternatePhonenumber_billing(res.shippingDetails[0].altPhoneNum)
+                    setaddress_billing(res.shippingDetails[0].billingAddress)
+                    settown_billing(res.shippingDetails[0].city)
+                    setmobilenumber_billing(res.shippingDetails[0].phoneNum)
+                    setpincode_billing(res.shippingDetails[0].pincode)
+                    setaddress_billing(res.shippingDetails[0].shippingAddress)
+                    setlandmark_billing(res.shippingDetails[0].shippingAddress)
+                    setstate_billing(res.shippingDetails[0].state)
+                }
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+
+    }, [])
+
 
     const searchPincode = async (code) => {
         const response = await fetch(`https://api.postalpincode.in/pincode/${code}`)
         response.text().then(data => console.log(data));
+    }
+
+    const checkout = async () => {
+        if (!firstname) {
+            alert("Enter firstname")
+            return
+        }
+        if (!lastname) {
+            alert("Enter lastname")
+            return
+        }
+        if (!mobilenumber) {
+            alert("Enter Mobile number")
+            return
+        }
+        if (!state) {
+            alert("Select state")
+            return
+        }
+        if (!pincode) {
+            alert("Enter pincode")
+            return
+        }
+        if (!town) {
+            alert("Enter town")
+            return
+        }
+        if (!landmark) {
+            alert("Enter landmark")
+            return
+        }
+        if (!address) {
+            alert("Enter address")
+            return
+        }
+
+        if (id) {
+            await updateAddress(firstname, lastname, alternatePhonenumber, id).then(res => console.log(res)).catch(error => console.log(error))
+            return
+        }
+        await addAddress(firstname, lastname, address, mobilenumber, address_billing, town, state, pincode, alternatePhonenumber).then(res => console.log(res)).catch(error => console.log(error))
+
     }
 
     return (
@@ -107,13 +186,13 @@ const CheckOut = () => {
 
                     <h2 className='text-[12px] lg:text-[16px] text-[#323232] font-inter mt-[20px] mb-2 lg:mb-6'>SHIPPING ADDRESS</h2>
 
-                    <input onChange={e => setfirstname(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='First Name' />
-                    <input onChange={e => setlastname(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Last Name' />
+                    <input value={firstname} onChange={e => setfirstname(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='First Name' />
+                    <input value={lastname} onChange={e => setlastname(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Last Name' />
                     <input value={mobilenumber} onChange={e => { if (e.target.value.length <= 10) { setmobilenumber(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Mobile Number' />
 
 
                     <div className='flex space-x-4  sm:w-[300px] lg:w-[300px] overflow-hidden'>
-                        <select onChange={e => setstate(e.target.value)} className='w-[145px] text-[14px] outline-none border-b-[1px] border-[#323232] pb-1 '>
+                        <select value={state} onChange={e => setstate(e.target.value)} className='w-[145px] text-[14px] outline-none border-b-[1px] border-[#323232] pb-1 '>
                             <option value="none" selected disabled hidden>Select State</option>
 
                             {statesOfINdia.map(state => {
@@ -139,13 +218,13 @@ const CheckOut = () => {
 
 
                     <div className='w-full flex space-x-4'>
-                        <input onChange={e => settown(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Town/City' />
+                        <input value={town} onChange={e => settown(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Town/City' />
 
-                        <input onChange={e => setlandmark(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Landmark/Street' />
+                        <input value={landmark} onChange={e => setlandmark(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Landmark/Street' />
 
                     </div>
 
-                    <input onChange={e => setaddress(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Address' />
+                    <input value={address} onChange={e => setaddress(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Address' />
                     <input value={alternatePhonenumber} onChange={e => { if (e.target.value.length <= 10) { setalternatePhonenumber(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Alternate Phone Number' />
                     <input onChange={e => setCountry(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] sm:w-[300px] lg:w-[300px] w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='India' value='India' />
 
@@ -161,7 +240,7 @@ const CheckOut = () => {
 
                         <div onClick={setBillingSame_Shipping} className='flex w-[150px] space-x-3 items-center pointer-events-auto'>
                             <label className="switch  ">
-                                <input onChange={e => setsameAsShippingAddress(e.target.checked)} type="checkbox" className='' />
+                                <input onChange={e => setsameAsShippingAddress(e.target.checked)} checked={sameAsShippingAddress} type="checkbox" className='' />
                                 <span className="slider round"></span>
                             </label>
                             <label className='text-[12px]  w-32'>Same as Billing Address</label>
@@ -179,7 +258,7 @@ const CheckOut = () => {
 
                             {statesOfINdia.map(state => {
                                 return (
-                                    <option  key={state} value={state} >{state}</option>
+                                    <option key={state} value={state} >{state}</option>
 
                                 )
                             })}
@@ -249,7 +328,7 @@ const CheckOut = () => {
                     </div>
 
                     <div className='px-8 lg:px-16'>
-                        <button className='w-full  lg:text-[12px] xl:text-[16px]    text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-2 font-inter font-semibold'>
+                        <button onClick={checkout} className='w-full  lg:text-[12px] xl:text-[16px]    text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-2 font-inter font-semibold'>
                             PROCEED TO CHECKOUT
                         </button>
                     </div>
