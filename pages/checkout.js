@@ -1,5 +1,9 @@
+import { noSSR } from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 import { addAddress, getAddress, updateAddress } from '../lib/serverConfig'
+import Head from 'next/head'
+import Script from 'next/script'
+import { setCookies, getCookie } from 'cookies-next'
 
 const statesOfINdia = ["Andhra Pradesh",
     "Arunachal Pradesh",
@@ -97,7 +101,6 @@ const CheckOut = () => {
 
     useEffect(async () => {
         await getAddress().then((res) => {
-            console.log(res.shippingDetails)
             if (res.shippingDetails) {
                 setfirstname(res.shippingDetails[0].firstName)
                 setlastname(res.shippingDetails[0].lastName)
@@ -132,10 +135,17 @@ const CheckOut = () => {
 
     const searchPincode = async (code) => {
         const response = await fetch(`https://api.postalpincode.in/pincode/${code}`)
-        response.text().then(data => console.log(data));
+
+        const message = await response.json()
+        console.log(message[0].Status);
+        if (message[0].Status === "Error") {
+            alert("Pincode Error")
+        }
+
+
     }
 
-    const checkout = async () => {
+    const initiatePayment = async () => {
         if (!firstname) {
             alert("Enter firstname")
             return
@@ -170,15 +180,70 @@ const CheckOut = () => {
         }
 
         if (id) {
-            await updateAddress(firstname, lastname, alternatePhonenumber, id).then(res => console.log(res)).catch(error => console.log(error))
-            return
+            await updateAddress(firstname, lastname, alternatePhonenumber, id)
         }
-        await addAddress(firstname, lastname, address, mobilenumber, address_billing, town, state, pincode, alternatePhonenumber).then(res => console.log(res)).catch(error => console.log(error))
+        else{
+            await addAddress(firstname, lastname, address, mobilenumber, address_billing, town, state, pincode, alternatePhonenumber)
+        }
+
+
+
+        let amount = 546
+        let orderId = Math.floor(Math.random() * Date.now())
+        const data = { cartId: "7", amount: "546", orderId, email:getCookie('email') }
+
+        const response = await fetch(`http://localhost:3000/api/PreTransaction`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        let transactionToken= await response.json();
+        console.log(transactionToken);
+
+
+        var config = {
+            "root": "",
+            "flow": "DEFAULT",
+            "data": {
+                "orderId": orderId,
+                "token": "", transactionToken,
+                "tokenType": "TXN_TOKEN",
+                "amount": amount
+            },
+            "handler": {
+                "notifyMerchant": function (eventName, data) {
+                    console.log("notifyMerchant handler function called");
+                    console.log("eventName => ", eventName);
+                    console.log("data => ", data);
+                }
+            }
+        };
+
+        if (window.Paytm && window.Paytm.CheckoutJS) {
+            window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
+                // initialze configuration using init method 
+                window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                    // after successfully updating configuration, invoke JS Checkout
+                    window.Paytm.CheckoutJS.invoke();
+                }).catch(function onError(error) {
+                    console.log("error => ", error);
+                });
+            });
+        }
 
     }
 
     return (
         <div className='p-[13px] lg:px-[45px] lg:py-[20px] '>
+            <Head>
+            <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+
+            </Head>
+            <Script type="application/javascript" crossorigin="anonymous" src={`${process.env.NEXT_PUBLIC_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.PAYTM_MID}.js`} />
+
+
             <h2 className='font-semibold text-[14px] lg:text-[22px] text-[#323232] font-inter'>ADDRESS</h2>
             <div className='flex flex-col lg:flex-row items-center lg:items-start lg:space-x-4  justify-between '>
 
@@ -328,8 +393,8 @@ const CheckOut = () => {
                     </div>
 
                     <div className='px-8 lg:px-16'>
-                        <button onClick={checkout} className='w-full  lg:text-[12px] xl:text-[16px]    text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-2 font-inter font-semibold'>
-                            PROCEED TO CHECKOUT
+                        <button onClick={initiatePayment} className='w-full  lg:text-[12px] xl:text-[16px]    text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-2 font-inter font-semibold'>
+                            PROCEED TO PAYMENT
                         </button>
                     </div>
                 </div>
@@ -338,3 +403,4 @@ const CheckOut = () => {
     )
 }
 export default CheckOut
+

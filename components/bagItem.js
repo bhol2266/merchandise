@@ -4,24 +4,59 @@ import { PlusIcon } from '@heroicons/react/solid'
 import { XIcon } from '@heroicons/react/outline'
 import { HeartIcon } from '@heroicons/react/outline'
 import { UpdatebagItems } from '../lib/serverConfig'
-// import { HeartIcon } from '@heroicons/react/solid'
+import { QueryG } from '../lib/serverConfig'
+export const BagItem = ({ productdetails,cartID }) => {
 
-export const BagItem = ({ productdetails }) => {
-
-    const { colorid, colorName } = productdetails.color
-    const { quantity,cartItemid } = productdetails
+    // const { colorid, colorName } = productdetails.color
+    const [imageURL, setimageURL] = useState("");
+    const { quantity } = productdetails
     const { id, title, price, mrp, discount, size } = productdetails.product
     const [itemQuantity, setitemQuantity] = useState(1)
 
     useEffect(async () => {
         setitemQuantity(quantity)
 
+
+        await QueryG(`query{
+            products(id:"${id}"){
+            edges{
+              node{
+                id
+                  title
+                  price
+                  mrp
+                  discount
+                  description
+                  colors{
+                    id
+                    color
+                    image{
+                      image
+                    }
+              }
+            }
+          }
+        }
+    }`).then(res => {
+
+            var obj = res.data.data.products.edges[0].node;
+            obj.colors.map(item => {
+                if (productdetails.color.id === item.id) {
+                    setimageURL(item.image[0].image)
+                }
+            })
+
+        })
+            .catch(err => {
+                console.log(err);
+            })
+
     }, [])
 
-    const updateDastabse =async (quantity) => {
-        await UpdatebagItems(quantity, cartItemid).then(res => {
+    // This is incomplete waiting for backend fix regarding cartID
+    const updateDastabse = async (quantity) => {
+        await UpdatebagItems(quantity, cartID).then(res => {
             console.log(res);
-            // setitemQuantity()
         })
             .catch(err => {
                 console.log(err);
@@ -35,7 +70,7 @@ export const BagItem = ({ productdetails }) => {
         <div className='w-full h-[140px]   justify-between lg:h-[240px] lg:w-full flex items-center  pb-[15px] mb-[15px] lg:pb-[20px] lg:mb-[20px] border-b-[1px] border-[#EAEAEA] shadow '>
 
             <div className='flex h-full'>
-                <img className='w-[100px] h-[122px] lg:h-[220px]  lg:w-[181px] ' src='./homepageImages/woman2.png'></img>
+                <img className='w-[100px] h-[122px] lg:h-[220px]  lg:w-[181px] ' src={"https://closm.com" + imageURL}></img>
 
                 <div className='ml-[10px] lg:ml-[16px]  pt-2 h-full  flex flex-col justify-between'>
                     <div>

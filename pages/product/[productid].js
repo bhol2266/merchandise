@@ -56,7 +56,16 @@ const Product = ({ productdetails }) => {
 
     const checkPincode = async () => {
         const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`)
-        await response.text().then(data => setpincodeVerified(true)).catch(error => setpincodeVerified(false));
+
+        const message = await response.json()
+        console.log(message[0].Status);
+        if (message[0].Status === "Error") {
+            setpincodeVerified(false)
+            alert("Pincode Error")
+        } else {
+            setpincodeVerified(true)
+        }
+
     }
 
     const selectColorClick = (url, color, index) => {

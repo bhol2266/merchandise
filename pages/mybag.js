@@ -2,28 +2,35 @@ import { Router, useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { BagItem } from '../components/bagItem'
 import { GetbagItems } from '../lib/serverConfig';
-
+import Head from 'next/head';
+import Script from 'next/script';
 const Mybag = () => {
 
     const router = useRouter()
     const [bagitems, setbagitems] = useState([])
+    const [cartItemId, setcartItemId] = useState([]);
     useEffect(async () => {
         await GetbagItems().then(res => {
-            console.log(JSON.stringify(res.cart[0]));
             var array = []
+            var cartitemIdArray = []
             res.cart[0].items.map(obj => {
                 array.push(obj)
             })
+            res.cart.map(item => {
+                cartitemIdArray.push(item.id)
+            })
+            setcartItemId(cartitemIdArray)
             setbagitems(array)
+
         }).catch(err => {
             console.log(err);
         })
 
     }, [])
 
-    const checkout =() => {
-        if(bagitems){
-            router.push('/checkout') 
+    const checkout = () => {
+        if (bagitems) {
+            router.push('/checkout')
         }
     }
 
@@ -46,11 +53,11 @@ const Mybag = () => {
             <div className=' mx-auto  md:flex  lg:justify-between md:space-x-4 lg:space-x-4 xl:space-x-56  '>
 
                 {/* Item  */}
-                <div className='items-center justify-center flex flex-col md:grow'>
+                <div className='items-center  flex flex-col md:grow'>
 
-                    {bagitems && bagitems.map(item => {
+                    {bagitems && bagitems.map((item,index) => {
                         return (
-                            <BagItem key={productdetails.cartItemid} productdetails={item} />
+                            <BagItem key={item.cartItemid} cartID={cartItemId[index]} productdetails={item} />
 
                         )
                     })
