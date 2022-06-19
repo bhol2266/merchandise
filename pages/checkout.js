@@ -146,6 +146,7 @@ const CheckOut = () => {
     }
 
     const initiatePayment = async () => {
+
         if (!firstname) {
             alert("Enter firstname")
             return
@@ -182,24 +183,23 @@ const CheckOut = () => {
         if (id) {
             await updateAddress(firstname, lastname, alternatePhonenumber, id)
         }
-        else{
+        else {
             await addAddress(firstname, lastname, address, mobilenumber, address_billing, town, state, pincode, alternatePhonenumber)
         }
 
 
-
         let amount = 546
         let orderId = Math.floor(Math.random() * Date.now())
-        const data = { cartId: "7", amount: "546", orderId, email:getCookie('email') }
+        const data = { cartId: "7", amount: "546", orderId, email: getCookie('email') }
 
-        const response = await fetch(`http://localhost:3000/api/PreTransaction`, {
+        const response = await fetch(`http://localhost:3000/api/paynow`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         })
-        let transactionToken= await response.json();
+        let transactionToken = await response.json();
         console.log(transactionToken);
 
 
@@ -238,10 +238,10 @@ const CheckOut = () => {
     return (
         <div className='p-[13px] lg:px-[45px] lg:py-[20px] '>
             <Head>
-            <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+                <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
 
             </Head>
-            <Script type="application/javascript" crossorigin="anonymous" src={`${process.env.NEXT_PUBLIC_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.PAYTM_MID}.js`} />
+            <Script type="application/javascript" crossorigin="anonymous" src={`http://localhost:3000/merchantpgpui/checkoutjs/merchants/WRmvJd50283584697830.js`} />
 
 
             <h2 className='font-semibold text-[14px] lg:text-[22px] text-[#323232] font-inter'>ADDRESS</h2>
