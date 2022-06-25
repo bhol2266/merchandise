@@ -60,8 +60,7 @@ import { Item } from './item'
 // ]
 
 
-export const Itemlist = ({items,productid}) => {
-
+export const Itemlist = ({items}) => {
 
     return (
         <div className=''>
@@ -73,7 +72,7 @@ export const Itemlist = ({items,productid}) => {
             < div className='gap-4 lg:gap-8  grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5' >                {
                 items.map(obj => {
                     return (
-                        <Item key={obj.title} obj={obj} productid={productid} />
+                        <Item key={obj.title} obj={obj}  />
                     )
                 })
             }

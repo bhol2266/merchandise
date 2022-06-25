@@ -3,15 +3,15 @@ import Link from 'next/link'
 import { loadGetInitialProps } from 'next/dist/shared/lib/utils'
 
 
-export const Item = ({ obj,productid }) => {
-    const { price, mrp, discount, title, description } = obj.node
+export const Item = ({ obj }) => {
+    const { price, mrp, discount, title, description,id } = obj.node
     const imageUrl = "https://closm.com/" + obj.node.colors[0].image[0].image
 
 
 
     return (
         <div className=''>
-            <Link href={`/product/${productid}`}>
+            <Link href={`/product/${id}`}>
                 <a className='rounded flex flex-col '>
                     <img src={imageUrl} className='cursor-pointer aspect-[item] '></img>
 

@@ -192,6 +192,7 @@ const CheckOut = () => {
         let orderId = Math.floor(Math.random() * Date.now())
         const data = { cartId: "7", amount: "546", orderId, email: getCookie('email') }
 
+
         const response = await fetch(`http://localhost:3000/api/paynow`, {
             method: "POST",
             headers: {
@@ -241,7 +242,7 @@ const CheckOut = () => {
                 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
 
             </Head>
-            <Script type="application/javascript" crossorigin="anonymous" src={`http://localhost:3000/merchantpgpui/checkoutjs/merchants/WRmvJd50283584697830.js`} />
+            <Script type="application/javascript" crossorigin="anonymous" src={` https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/WRmvJd50283584697830.js`} />
 
 
             <h2 className='font-semibold text-[14px] lg:text-[22px] text-[#323232] font-inter'>ADDRESS</h2>

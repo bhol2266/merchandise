@@ -95,7 +95,6 @@ export async function getServerSideProps(context) {
       }
     }`)
         .then(res => {
-            // console.log(JSON.stringifyres.data);
             logo = "https://closm.com/media/" + res.data.data.youtuber[0].logo
             banner = "https://closm.com/" + res.data.data.youtuber[0].banner[0].image
             productid = res.data.data.youtuber[0].productsSet.edges[0].node.id

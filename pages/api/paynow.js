@@ -1,5 +1,4 @@
 const https = require('https');
-
 const PaytmChecksum = require('paytmchecksum');
 
 
@@ -28,7 +27,8 @@ export default async function handler(req, res) {
         * Generate checksum by parameters we have in body
         * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
         */
-        PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), "MtVi12atyFDjDC#u")
+        const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), "MtVi12atyFDjDC#u")
+
         paytmParams.head = {
             "signature": checksum
         };
@@ -36,9 +36,9 @@ export default async function handler(req, res) {
         var post_data = JSON.stringify(paytmParams);
 
 
+
         const requestAsync = async () => {
             return new Promise((resolve, reject) => {
-
                 var options = {
 
                     /* for Staging */
@@ -63,17 +63,20 @@ export default async function handler(req, res) {
                     });
 
                     post_res.on('end', function () {
-                        // console.log('Response: ', response);
-                        // res.status(200).json(response)
-                        // console.log("This is the response");
+                        console.log('Response: ', response);
+                        resolve(response)
+
                     });
                 });
 
                 post_req.write(post_data);
                 post_req.end();
 
+
+
             })
         }
+
         let myr = await requestAsync()
         res.status(200).json(myr)
 

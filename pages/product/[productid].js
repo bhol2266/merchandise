@@ -9,12 +9,7 @@ import { XIcon } from '@heroicons/react/solid'
 import videosContext from '../../context/videos/videosContext'
 import { Addtobag } from '../../lib/serverConfig'
 import { GetEmail } from '../../lib/CookieLib'
-const sizeAvailable = [
-    { name: "S", selected: false },
-    { name: "M", selected: true },
-    { name: "L", selected: false },
-    { name: "XL", selected: false },
-    { name: "2XL", selected: false }]
+
 
 const Product = ({ productdetails }) => {
     const {
@@ -23,11 +18,10 @@ const Product = ({ productdetails }) => {
         mrp,
         discount,
         description,
+        sizeArray,
         colors,
         productid
     } = productdetails;
-
-
 
     const scrollbarRef = useRef(null)
     const [itemQuantity, setitemQuantity] = useState(1)
@@ -181,10 +175,10 @@ const Product = ({ productdetails }) => {
                         </div>
 
                         <div className='mt-[15px] flex items-center space-x-[17px]'>
-                            {sizeAvailable.map(size => {
+                            {sizeArray.map(size => {
                                 return (
-                                    <div onClick={() => { setcurrentSize(size.name) }} key={size.name} className={`${size.name === currentSize ? "border-[2px] border-[#54BAB9]" : "border-[1px] lg:border-[2px] border-[#E5E5E5] cursor-pointer"} h-[35px] w-[35px] lg:h-[40px] lg:w-[40px] rounded-lg  flex items-center justify-center`}>
-                                        <h1 className='text-[11px] lg:text-[16px] font-poppins font-light text-[#313131] text-center'>{size.name}</h1>
+                                    <div onClick={() => { setcurrentSize(size.size) }} key={size.name} className={`${size.size === currentSize ? "border-[2px] border-[#54BAB9]" : "border-[1px] lg:border-[2px] border-[#E5E5E5] cursor-pointer"} h-[35px] w-[35px] lg:h-[40px] lg:w-[40px] rounded-lg  flex items-center justify-center`}>
+                                        <h1 className='text-[11px] lg:text-[16px] font-poppins font-light text-[#313131] text-center'>{size.size}</h1>
                                     </div>
                                 )
                             })}
@@ -291,6 +285,7 @@ export async function getServerSideProps(context) {
 
     const { productid } = context.query;
     var productdetails = {}
+    var sizeArray = []
     await QueryG(`query{
         products(id:"${productid}"){
         edges{
@@ -301,6 +296,10 @@ export async function getServerSideProps(context) {
               mrp
               discount
               description
+              size{
+                id
+                size
+              }
               colors{
                 id
                 color
@@ -312,7 +311,6 @@ export async function getServerSideProps(context) {
       }
     }
 }`).then(res => {
-
         var obj = res.data.data.products.edges[0].node;
         productdetails = {
             title: obj.title,
@@ -321,6 +319,7 @@ export async function getServerSideProps(context) {
             discount: obj.discount,
             description: obj.description,
             colors: obj.colors,
+            sizeArray: obj.size,
             productid: productid
         }
 

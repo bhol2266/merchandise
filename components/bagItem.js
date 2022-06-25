@@ -3,15 +3,18 @@ import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { XIcon } from '@heroicons/react/outline'
 import { HeartIcon } from '@heroicons/react/outline'
-import { UpdatebagItems } from '../lib/serverConfig'
+import { UpdatebagItems, DeletebagItems } from '../lib/serverConfig'
 import { QueryG } from '../lib/serverConfig'
 export const BagItem = ({ productdetails, cartID }) => {
 
-    // const { colorid, colorName } = productdetails.color
+    // console.log(productdetails);
+
     const [imageURL, setimageURL] = useState("");
-    const { quantity } = productdetails
-    const { id, title, price, mrp, discount, size } = productdetails.product
+    const { quantity, size } = productdetails
+    const { id, title, price, mrp, discount, } = productdetails.product
     const [itemQuantity, setitemQuantity] = useState(1)
+    const colorName = productdetails.color.color;
+    // console.log(size);
 
     useEffect(async () => {
         setitemQuantity(quantity)
@@ -52,10 +55,18 @@ export const BagItem = ({ productdetails, cartID }) => {
 
     }, [])
 
-    // This is incomplete waiting for backend fix regarding cartID
     const updateDastabse = async (quantity) => {
-        await UpdatebagItems(quantity, cartID).then(res => {
+        await UpdatebagItems(quantity, productdetails.id).then(res => {
             console.log(res);
+        })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const deleteItem = async () => {
+        await DeletebagItems(productdetails.id).then(res => {
+            console.log(res);
+            window.location.reload();
         })
             .catch(err => {
                 console.log(err);
@@ -82,7 +93,7 @@ export const BagItem = ({ productdetails, cartID }) => {
                         </div>
                         <div className='mt-1 lg:mt-8'>
                             <h2 className='font-inter font-medium text-[#323232] text-[9px] lg:text-[14px]'>Size: (M)</h2>
-                            <h2 className='font-inter font-medium text-[#323232] text-[9px] lg:text-[14px]'>Colour : Sky Yellow</h2>
+                            <h2 className='font-inter font-medium text-[#323232] text-[9px] lg:text-[14px]'>Colour : {colorName}</h2>
                         </div>
                     </div>
 
@@ -98,7 +109,7 @@ export const BagItem = ({ productdetails, cartID }) => {
             </div>
 
             <div className='flex flex-col  h-full justify-between '>
-                <XIcon className='w-[20px] mr-[5px] mt-[3px] lg:w-[30px] text-[#454545] cursor-pointer' />
+                <XIcon onClick={deleteItem} className='w-[20px] mr-[5px] mt-[3px] lg:w-[30px] text-[#454545] cursor-pointer' />
                 <HeartIcon className='w-[20px] lg:w-[30px] mr-[5px] text-[#B0888C] cursor-pointer' />
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { Router, useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { BagItem } from '../components/bagItem'
-import { GetbagItems } from '../lib/serverConfig';
+import { GetbagItems, applyCoupon } from '../lib/serverConfig';
 import Head from 'next/head';
 import Script from 'next/script';
 const Mybag = () => {
@@ -9,10 +9,23 @@ const Mybag = () => {
     const router = useRouter()
     const [bagitems, setbagitems] = useState([])
     const [cartItemId, setcartItemId] = useState([]);
+    const [totalAmount, settotalAmount] = useState();
+    const [totalDiscountAmount, settotalDiscountAmount] = useState();
+    const [totalMRP, settotalMRP] = useState();
+    const [couponDiscount, setcouponDiscount] = useState(0);
+    const [deliveryCharge, setdeliveryCharge] = useState();
+    const [COUPONCODE, setCOUPONCODE] = useState('Nill');
+    const [CouponBtn, setCouponBtn] = useState("APPLY COUPON");
 
     useEffect(async () => {
         await GetbagItems().then(res => {
-            console.log(res);
+            console.log(res.cart[0]);
+
+            settotalDiscountAmount(res.cart[0].discountPrice)
+            settotalMRP(res.cart[0].itemBill)
+            settotalAmount(res.cart[0].totalBill)
+            setcouponDiscount(res.cart[0].discountCoupen.discount)
+            setCOUPONCODE(res.cart[0].discountCoupen.copenCode)
             var array = []
             var cartitemIdArray = []
             res.cart[0].items.map(obj => {
@@ -29,6 +42,22 @@ const Mybag = () => {
 
     }, [])
 
+
+
+    const applyCouponfunc = async () => {
+
+        await applyCoupon(COUPONCODE).then(res => {
+            console.log(res.applyCoupen);
+            settotalDiscountAmount(res.applyCoupen.discountPrice)
+            settotalAmount(res.applyCoupen.totalBill)
+            setcouponDiscount(res.applyCoupen.coupenDiscount)
+            setCouponBtn("REMOVE COUPON")
+        }).catch(err => {
+            console.log(err);
+        })
+
+
+    }
     const checkout = () => {
         if (bagitems) {
             router.push('/checkout')
@@ -71,23 +100,23 @@ const Mybag = () => {
                     <h1 className='px-[20px] font-inter font-semibold text-[12px] lg:text-[18px] text-[#323232]'>TOTAL PRICE</h1>
 
                     <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>ITEMS (4)</h1>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>569 INR</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>ITEMS ({bagitems.length})</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{totalMRP} INR</h1>
                     </div>
                     <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
                         <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>DISCOUNT</h1>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>1964 INR</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{totalDiscountAmount} INR</h1>
                     </div>
                     <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
                         <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>DELIVERY CHARGES</h1>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>NONE</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{deliveryCharge}</h1>
                     </div>
 
                     <div className='mt-[12px] lg:mt-[16px] flex items-start justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>APPLY COUPONS</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>APPLY COUPON</h1>
                         <div className='flex flex-col items-end'>
-                            <h1 className='text-center w-[115px] lg:w-[171px] lg:h-[30px]  h-[20px] border-[1px] border-[#323232] rounded-[5px] text-[11px] lg:text-[16px] text-[#323232] font-inter'>AHBDGYFUBFG</h1>
-                            <h1 className='mt-[7px] text-[10px] lg:text-[12px] text-[#323232] font-inter cursor-pointer hover:text-red-500'>{"BROWSE COUPONS >"}</h1>
+                            <input type='text' value={COUPONCODE} onChange={e => (setCOUPONCODE(e.target.value.toUpperCase()))} className='text-center w-[115px] lg:w-[171px] lg:h-[30px]  h-[20px] border-[1px] border-[#323232] rounded-[5px] text-[11px] lg:text-[16px] text-[#323232] font-inter'/>
+                            <h1 onClick={applyCouponfunc} className='mt-[7px] text-[10px] lg:text-[12px]  font-inter cursor-pointer hover:text-red-500 underline text-red-700 '>{CouponBtn}</h1>
 
                         </div>
 
@@ -95,11 +124,11 @@ const Mybag = () => {
 
                     <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
                         <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>COUPON DISCOUNT</h1>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>569 INR</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{couponDiscount} INR</h1>
                     </div>
                     <div className='mt-[14px] flex items-center justify-between px-[20px] pb-[14px]  border-[#E5E5E5]'>
-                        <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>TOTAL AMMOUNT</h1>
-                        <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>6969 INR</h1>
+                        <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>TOTAL AMOUNT</h1>
+                        <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>{totalAmount} INR</h1>
                     </div>
 
                     <div className='px-8 lg:px-16'>
