@@ -5,7 +5,7 @@ import { XIcon } from '@heroicons/react/outline'
 import { HeartIcon } from '@heroicons/react/outline'
 import { UpdatebagItems } from '../lib/serverConfig'
 import { QueryG } from '../lib/serverConfig'
-export const BagItem = ({ productdetails,cartID }) => {
+export const BagItem = ({ productdetails, cartID }) => {
 
     // const { colorid, colorName } = productdetails.color
     const [imageURL, setimageURL] = useState("");
@@ -15,7 +15,6 @@ export const BagItem = ({ productdetails,cartID }) => {
 
     useEffect(async () => {
         setitemQuantity(quantity)
-
 
         await QueryG(`query{
             products(id:"${id}"){

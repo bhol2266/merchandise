@@ -51,7 +51,7 @@ const Product = ({ productdetails }) => {
         setslideImages(array)
     }, [])
 
-    const { loggedIn, setloginSidebar } = useContext(videosContext)
+    const { setloginSidebar } = useContext(videosContext)
 
 
     const checkPincode = async () => {
@@ -91,8 +91,9 @@ const Product = ({ productdetails }) => {
             return
         }
 
-        await Addtobag(productid, colors[currentColorIndexPos].id, itemQuantity).then(res => {
+        await Addtobag(productid, colors[currentColorIndexPos].id, itemQuantity, currentSize).then(res => {
             console.log(res.data);
+            alert("added to bag")
         }).catch(err => {
             console.log(err);
         })

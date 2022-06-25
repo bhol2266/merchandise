@@ -61,6 +61,7 @@ export const LoginForm = () => {
             SetRefreshToken(jsonMessage.refreshToken)
             SetEmail(Email)
             closeSidebar()
+            window.location.reload();
             return
         }
         if (jsonMessage.success === false) {

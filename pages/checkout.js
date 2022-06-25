@@ -245,7 +245,7 @@ const CheckOut = () => {
 
 
             <h2 className='font-semibold text-[14px] lg:text-[22px] text-[#323232] font-inter'>ADDRESS</h2>
-            <div className='flex flex-col lg:flex-row items-center lg:items-start lg:space-x-4  justify-between '>
+            <div className='flex flex-col lg:flex-row items-center lg:items-start lg:space-x-8  justify-between '>
 
                 <div className='flex flex-col space-y-4 sm:w-[300px] lg:w-[300px] mb-4 w-full' >
 

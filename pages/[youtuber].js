@@ -6,7 +6,7 @@ import { QueryG } from '../lib/serverConfig'
 import Router, { useRouter } from 'next/router'
 import videosContext from '../context/videos/videosContext'
 
-function Youtuber({ youtuber, banner, logo, productlist,productid }) {
+function Youtuber({ youtuber, banner, logo, productlist, productid, youtuberNotFound }) {
     const router = useRouter();
 
     const pages = ['1', '2', '3', '4', '5', '6', '7']
@@ -18,25 +18,34 @@ function Youtuber({ youtuber, banner, logo, productlist,productid }) {
 
     return (
         <div>
-            <img src={banner} className='cursor-pointer w-full h-48  px-[12px] lg:px-[50px] rounded   md:hidden mt-[15px]'></img>
-            <img src={banner} className='cursor-pointer w-full h-[330px] px-[12px]  lg:px-[50px]   rounded hidden md:flex mt-[25px]'></img>
+            {!youtuberNotFound && <div>
+                <img src={banner} className='cursor-pointer w-full h-48  px-[12px] lg:px-[50px] rounded   md:hidden mt-[15px]'></img>
+                <img src={banner} className='cursor-pointer w-full h-[330px] px-[12px]  lg:px-[50px]   rounded hidden md:flex mt-[25px]'></img>
 
 
-            {productlist &&
-                <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
-                    <Itemlist items={productlist} productid={productid} />
+                {productlist &&
+                    <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
+                        <Itemlist items={productlist} productid={productid} />
+                    </div>
+                }
+
+                <div className='flex space-x-3 my-16 items-center justify-around w-3/4 lg:w-1/2 mx-auto'>
+                    {pages.map(page => {
+                        return (
+                            <>
+                                <h1 className={`w-[30px] h-[30px] text-center rounded-full text-[18px] font-manrope bg-[#E9E9E9] text-[#313131]  ${page == '1' ? 'bg-theme text-whitte' : ''}`} key={page}>{page}</h1>
+                            </>
+                        )
+                    })}
                 </div>
-            }
 
-            <div className='flex space-x-3 my-16 items-center justify-around w-3/4 lg:w-1/2 mx-auto'>
-                {pages.map(page => {
-                    return (
-                        <>
-                            <h1 className={`w-[30px] h-[30px] text-center rounded-full text-[18px] font-manrope bg-[#E9E9E9] text-[#313131]  ${page == '1' ? 'bg-theme text-whitte' : ''}`} key={page}>{page}</h1>
-                        </>
-                    )
-                })}
+
             </div>
+            }
+            {youtuberNotFound && <div>
+
+                <h1 className='text-[20px] font-inter w-full h-full my-[200px] text-center'>Youtuber not found....</h1>
+            </div>}
 
 
         </div>
@@ -53,9 +62,10 @@ export async function getServerSideProps(context) {
     var logo = ""
     var productlist = []
     var productid = ''
+    var youtuberNotFound = null
     await QueryG(`query
     {
-      youtuber(name:"kundan"){
+      youtuber(name:"${youtuber}"){
         id
         name
         logo
@@ -85,9 +95,10 @@ export async function getServerSideProps(context) {
       }
     }`)
         .then(res => {
+            // console.log(JSON.stringifyres.data);
             logo = "https://closm.com/media/" + res.data.data.youtuber[0].logo
             banner = "https://closm.com/" + res.data.data.youtuber[0].banner[0].image
-            productid=res.data.data.youtuber[0].productsSet.edges[0].node.id
+            productid = res.data.data.youtuber[0].productsSet.edges[0].node.id
             res.data.data.youtuber[0].productsSet.edges.map(product => {
                 productlist.push(product)
             })
@@ -95,6 +106,7 @@ export async function getServerSideProps(context) {
         })
         .catch(err => {
             console.log(err);
+            youtuberNotFound = true
         })
     return {
         props: {
@@ -102,7 +114,8 @@ export async function getServerSideProps(context) {
             banner: banner,
             logo: logo,
             productid: productid,
-            productlist: productlist
+            productlist: productlist,
+            youtuberNotFound: youtuberNotFound
         }, // will be passed to the page component as props
     }
 }

@@ -9,8 +9,10 @@ const Mybag = () => {
     const router = useRouter()
     const [bagitems, setbagitems] = useState([])
     const [cartItemId, setcartItemId] = useState([]);
+
     useEffect(async () => {
         await GetbagItems().then(res => {
+            console.log(res);
             var array = []
             var cartitemIdArray = []
             res.cart[0].items.map(obj => {
@@ -21,7 +23,6 @@ const Mybag = () => {
             })
             setcartItemId(cartitemIdArray)
             setbagitems(array)
-
         }).catch(err => {
             console.log(err);
         })
@@ -55,7 +56,7 @@ const Mybag = () => {
                 {/* Item  */}
                 <div className='items-center  flex flex-col md:grow'>
 
-                    {bagitems && bagitems.map((item,index) => {
+                    {bagitems && bagitems.map((item, index) => {
                         return (
                             <BagItem key={item.cartItemid} cartID={cartItemId[index]} productdetails={item} />
 
