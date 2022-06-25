@@ -4,6 +4,8 @@ import { addAddress, getAddress, updateAddress } from '../lib/serverConfig'
 import Head from 'next/head'
 import Script from 'next/script'
 import { setCookies, getCookie } from 'cookies-next'
+import axios from 'axios';
+import { GetbagItems, applyCoupon } from '../lib/serverConfig';
 
 const statesOfINdia = ["Andhra Pradesh",
     "Arunachal Pradesh",
@@ -73,6 +75,32 @@ const CheckOut = () => {
     const [Country_billing, setCountry_billing] = useState('India')
     const [alternatePhonenumber_billing, setalternatePhonenumber_billing] = useState('')
 
+
+    //Bill Amount
+    const [bagitems, setbagitems] = useState([])
+    const [totalAmount, settotalAmount] = useState();
+    const [totalDiscountAmount, settotalDiscountAmount] = useState();
+    const [totalMRP, settotalMRP] = useState();
+    const [couponDiscount, setcouponDiscount] = useState(0);
+    const [deliveryCharge, setdeliveryCharge] = useState();
+    const [COUPONCODE, setCOUPONCODE] = useState('Nill');
+    const [CouponBtn, setCouponBtn] = useState("APPLY COUPON");
+
+    const applyCouponfunc = async () => {
+
+        await applyCoupon(COUPONCODE).then(res => {
+            console.log(res.applyCoupen);
+            settotalDiscountAmount(res.applyCoupen.discountPrice)
+            settotalAmount(res.applyCoupen.totalBill)
+            setcouponDiscount(res.applyCoupen.coupenDiscount)
+            setCouponBtn("REMOVE COUPON")
+        }).catch(err => {
+            console.log(err);
+        })
+
+
+    }
+
     const setBillingSame_Shipping = () => {
         if (!sameAsShippingAddress) {
             setfirstname_billing(firstname)
@@ -130,7 +158,26 @@ const CheckOut = () => {
             console.log(error)
         })
 
+        await GetbagItems().then(res => {
+            console.log(res.cart[0]);
+
+            settotalDiscountAmount(res.cart[0].discountPrice)
+            settotalMRP(res.cart[0].itemBill)
+            settotalAmount(res.cart[0].totalBill)
+            setcouponDiscount(res.cart[0].discountCoupen.discount)
+            setCOUPONCODE(res.cart[0].discountCoupen.copenCode)
+            var array = []
+            res.cart[0].items.map(obj => {
+                array.push(obj)
+            })
+            setbagitems(array)
+        }).catch(err => {
+            console.log(err);
+        })
+
     }, [])
+
+
 
 
     const searchPincode = async (code) => {
@@ -187,54 +234,82 @@ const CheckOut = () => {
             await addAddress(firstname, lastname, address, mobilenumber, address_billing, town, state, pincode, alternatePhonenumber)
         }
 
-
-        let amount = 546
-        let orderId = Math.floor(Math.random() * Date.now())
-        const data = { cartId: "7", amount: "546", orderId, email: getCookie('email') }
-
-
-        const response = await fetch(`http://localhost:3000/api/paynow`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        let transactionToken = await response.json();
-        console.log(transactionToken);
-
-
-        var config = {
-            "root": "",
-            "flow": "DEFAULT",
-            "data": {
-                "orderId": orderId,
-                "token": "", transactionToken,
-                "tokenType": "TXN_TOKEN",
-                "amount": amount
-            },
-            "handler": {
-                "notifyMerchant": function (eventName, data) {
-                    console.log("notifyMerchant handler function called");
-                    console.log("eventName => ", eventName);
-                    console.log("data => ", data);
-                }
-            }
-        };
-
-        if (window.Paytm && window.Paytm.CheckoutJS) {
-            window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
-                // initialze configuration using init method 
-                window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-                    // after successfully updating configuration, invoke JS Checkout
-                    window.Paytm.CheckoutJS.invoke();
-                }).catch(function onError(error) {
-                    console.log("error => ", error);
-                });
-            });
-        }
+        handlePayment();
 
     }
+
+
+    const initPayment = async (data) => {
+
+        const options = {
+            key: "rzp_test_3W4pX0KCXjczGe",
+            amount: data.amount,
+            currency: data.currency,
+            name: "The Fault In Our Stars",
+            description: "Test Transaction",
+            image: "https://images-na.ssl-images-amazon.com/images/I/817tHNcyAgL.jpg",
+            order_id: data.id,
+            handler: async (response) => {
+                try {
+                    const verifyUrl = "http://localhost:3000/api/razorpayVerify";
+                    const { data } = await axios.post(verifyUrl, response);
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            theme: {
+                color: "#3399cc",
+            },
+        };
+        const rzp1 = await new window.Razorpay(options);
+        rzp1.open();
+    };
+
+    const handlePayment = async () => {
+
+        const res = await initializeRazorpay();
+
+        if (!res) {
+            alert("Razorpay SDK Failed to load");
+            return;
+        }
+        try {
+            let parceldata = { amount: totalAmount }
+
+            const data = await fetch("/api/razorpayInitiate",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(parceldata)
+                });
+
+            const res = await data.json();
+            await initPayment(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const initializeRazorpay = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            // document.body.appendChild(script);
+
+            script.onload = () => {
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+
+            document.body.appendChild(script);
+        });
+    };
+
 
     return (
         <div className='p-[13px] lg:px-[45px] lg:py-[20px] '>
@@ -242,7 +317,7 @@ const CheckOut = () => {
                 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
 
             </Head>
-            <Script type="application/javascript" crossorigin="anonymous" src={` https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/WRmvJd50283584697830.js`} />
+            <Script type="application/javascript" crossorigin="anonymous" src={` https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/sInflX13949396370624.js`} />
 
 
             <h2 className='font-semibold text-[14px] lg:text-[22px] text-[#323232] font-inter'>ADDRESS</h2>
@@ -299,7 +374,7 @@ const CheckOut = () => {
 
                 {/* BILLING ADDRESS  */}
 
-                <div className={`w-full flex flex-col space-y-4 sm:w-[300px] lg:w-[300px] mb-6 ${sameAsShippingAddress ? "pointer-events-none brightness-95" : ""}`} >
+                <div className={`w-full flex flex-col space-y-4 sm:w-[300px] lg:w-[300px] mb-6 ${sameAsShippingAddress ? "pointer-events-none  text-gray-400 " : ""}`} >
 
                     <div className='flex items-center justify-between space-x-2 '>
                         <h2 className='text-[12px] lg:text-[16px] text-[#323232] font-inter mt-[20px] mb-4 lg:mb-6 w-full'>BILLING ADDRESS</h2>
@@ -309,7 +384,7 @@ const CheckOut = () => {
                                 <input onChange={e => setsameAsShippingAddress(e.target.checked)} checked={sameAsShippingAddress} type="checkbox" className='' />
                                 <span className="slider round"></span>
                             </label>
-                            <label className='text-[12px]  w-32'>Same as Billing Address</label>
+                            <label className='text-[12px]  w-32 text-black'>Same as Billing Address</label>
                         </div>
                     </div>
 
@@ -361,41 +436,41 @@ const CheckOut = () => {
                 <div className='w-full lg:h-fit h-[420px] sm:w-[300px] lg:w-[400px]   rounded-[10px] border-[1px] border-[#BBBBBB]  mt-[10px] md:mt-[0px] py-[20px] lg:py-[10px] mx-auto lg:mx-0 sticky top-10'>
                     <h1 className='px-[20px] font-inter font-semibold text-[12px] lg:text-[18px] text-[#323232]'>TOTAL PRICE</h1>
 
-                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] lg:px-[16px] lg:pb-[12px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>ITEMS (4)</h1>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>569 INR</h1>
+                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>ITEMS ({bagitems.length})</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{totalMRP} INR</h1>
                     </div>
-                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] lg:px-[16px] lg:pb-[12px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>DISCOUNT</h1>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>1964 INR</h1>
+                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>DISCOUNT</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{totalDiscountAmount} INR</h1>
                     </div>
-                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] lg:px-[16px] lg:pb-[12px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>DELIVERY CHARGES</h1>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>NONE</h1>
+                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>DELIVERY CHARGES</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{deliveryCharge}</h1>
                     </div>
 
-                    <div className='mt-[12px] lg:mt-[16px] flex items-start justify-between px-[20px] pb-[14px] lg:px-[16px] lg:pb-[12px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>APPLY COUPONS</h1>
+                    <div className='mt-[12px] lg:mt-[16px] flex items-start justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>APPLY COUPON</h1>
                         <div className='flex flex-col items-end'>
-                            <h1 className='text-center w-[115px] lg:w-[150px] lg:h-[25px]  h-[20px] border-[1px] border-[#323232] rounded-[5px] text-[11px] lg:text-[14px] text-[#323232] font-inter'>AHBDGYFUBFG</h1>
-                            <h1 className='mt-[7px] text-[10px] lg:text-[10px] text-[#323232] font-inter cursor-pointer hover:text-red-500'>{"BROWSE COUPONS >"}</h1>
+                            <input type='text' value={COUPONCODE} onChange={e => (setCOUPONCODE(e.target.value.toUpperCase()))} className='text-center w-[115px] lg:w-[171px] lg:h-[30px]  h-[20px] border-[1px] border-[#323232] rounded-[5px] text-[11px] lg:text-[16px] text-[#323232] font-inter' />
+                            <h1 onClick={applyCouponfunc} className='mt-[7px] text-[10px] lg:text-[12px]  font-inter cursor-pointer hover:text-red-500 underline text-red-700 '>{CouponBtn}</h1>
 
                         </div>
 
                     </div>
 
-                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] lg:px-[16px] lg:pb-[12px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>COUPON DISCOUNT</h1>
-                        <h1 className=' text-[11px] lg:text-[12px] text-[#323232] font-inter'>569 INR</h1>
+                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>COUPON DISCOUNT</h1>
+                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{couponDiscount} INR</h1>
                     </div>
-                    <div className='mt-[14px] flex items-center justify-between px-[20px] pb-[14px] lg:px-[16px] lg:pb-[12px]  border-[#E5E5E5]'>
+                    <div className='mt-[14px] flex items-center justify-between px-[20px] pb-[14px]  border-[#E5E5E5]'>
                         <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>TOTAL AMOUNT</h1>
-                        <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>6969 INR</h1>
+                        <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>{totalAmount} INR</h1>
                     </div>
 
                     <div className='px-8 lg:px-16'>
-                        <button onClick={initiatePayment} className='w-full  lg:text-[12px] xl:text-[16px]    text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-2 font-inter font-semibold'>
-                            PROCEED TO PAYMENT
+                        <button onClick={initiatePayment} className='w-full  lg:text-[16px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-4 font-inter font-semibold'>
+                            PROCEED TO PAYMENT {totalAmount}
                         </button>
                     </div>
                 </div>
