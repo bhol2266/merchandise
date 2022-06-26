@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { addAddress, getAddress, updateAddress } from '../lib/serverConfig'
 import Head from 'next/head'
 import Script from 'next/script'
-import { setCookies, getCookie } from 'cookies-next'
 import axios from 'axios';
 import { GetbagItems, applyCoupon } from '../lib/serverConfig';
+import { getCookie } from 'cookies-next'
 
 const statesOfINdia = ["Andhra Pradesh",
     "Arunachal Pradesh",
@@ -159,7 +159,7 @@ const CheckOut = () => {
         })
 
         await GetbagItems().then(res => {
-            console.log(res.cart[0]);
+            // console.log(res.cart[0]);
 
             settotalDiscountAmount(res.cart[0].discountPrice)
             settotalMRP(res.cart[0].itemBill)
@@ -245,21 +245,29 @@ const CheckOut = () => {
             key: "rzp_test_3W4pX0KCXjczGe",
             amount: data.amount,
             currency: data.currency,
-            name: "The Fault In Our Stars",
-            description: "Test Transaction",
-            image: "https://images-na.ssl-images-amazon.com/images/I/817tHNcyAgL.jpg",
+            name: "Pay to Closm.com",
+            description: "Payment",
+            image: "./logo.png",
             order_id: data.id,
             handler: async (response) => {
                 try {
                     const verifyUrl = "http://localhost:3000/api/razorpayVerify";
                     const { data } = await axios.post(verifyUrl, response);
-                    console.log(data);
+                    const { signatureIsValid, razorpay_order_id, razorpay_payment_id } = data;
+                    console.log(signatureIsValid);
+                    console.log(razorpay_order_id);
+                    console.log(razorpay_payment_id);
                 } catch (error) {
                     console.log(error);
                 }
             },
             theme: {
                 color: "#3399cc",
+            },
+            prefill: {
+                name: getCookie('firstname ') + getCookie('lastname'),
+                email: getCookie('email'),
+                contact: "9108825914",
             },
         };
         const rzp1 = await new window.Razorpay(options);

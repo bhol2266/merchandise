@@ -7,16 +7,18 @@ export default async function handler(req, res) {
 
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-        const sign = razorpay_order_id + "" + razorpay_payment_id
+     
+        let body = razorpay_order_id + "|" +razorpay_payment_id;
 
-        const expectedSign = crypto.createHmac("sha256", KEY_SECRET).update(sign.toString()).digest("hex");
-
-        if (razorpay_signature === expectedSign) {
-            console.log(req.body);
-            res.status(200).json({ message: 'Payment verified sucessfully' });
-        } else {
-            res.status(400).json({ message: 'Invalid signature sent' });
-        }
+        var expectedSignature = crypto.createHmac('sha256', KEY_SECRET)
+            .update(body.toString())
+            .digest('hex');
+     
+        var response = { "signatureIsValid": "false" }
+        if (expectedSignature === razorpay_signature)
+            response = { "signatureIsValid": "true",razorpay_order_id:razorpay_order_id,razorpay_payment_id:razorpay_payment_id }
+        res.send(response);
+    
 
     } catch (error) {
         console.log(error);
