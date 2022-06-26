@@ -6,7 +6,7 @@ import Script from 'next/script'
 import axios from 'axios';
 import { GetbagItems, applyCoupon } from '../lib/serverConfig';
 import { getCookie } from 'cookies-next'
-
+import Router, { useRouter } from 'next/router'
 const statesOfINdia = ["Andhra Pradesh",
     "Arunachal Pradesh",
     "Assam",
@@ -47,6 +47,7 @@ const statesOfINdia = ["Andhra Pradesh",
 
 const CheckOut = () => {
 
+    const router =useRouter()
     //id from database shipping adress list
     const [id, setid] = useState('')
 
@@ -257,6 +258,7 @@ const CheckOut = () => {
                     console.log(signatureIsValid);
                     console.log(razorpay_order_id);
                     console.log(razorpay_payment_id);
+                    router.push('/paymentsuccessfull')
                 } catch (error) {
                     console.log(error);
                 }
