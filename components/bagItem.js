@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { XIcon } from '@heroicons/react/outline'
@@ -10,11 +10,32 @@ export const BagItem = ({ productdetails, cartID }) => {
     // console.log(productdetails);
 
     const [imageURL, setimageURL] = useState("");
-    const { quantity, size } = productdetails
-    const { id, title, price, mrp, discount, } = productdetails.product
+    const { quantity } = productdetails
+    const { title, price, mrp, discount, id } = productdetails.product
     const [itemQuantity, setitemQuantity] = useState(1)
     const colorName = productdetails.color.color;
-    // console.log(size);
+    const size = productdetails.size.id;
+    const [sizeName, setsizeName] = useState('');
+
+
+    useEffect(() => {
+
+        if (size == 1) {
+            setsizeName('S')
+        }
+        if (size == 2) {
+            setsizeName('M')
+        }
+        if (size == 3) {
+            setsizeName('L')
+        }
+        if (size == 4) {
+            setsizeName('XL')
+        }
+        if (size == 5) {
+            setsizeName('2XL')
+        }
+    }, []);
 
     useEffect(async () => {
         setitemQuantity(quantity)
@@ -41,7 +62,7 @@ export const BagItem = ({ productdetails, cartID }) => {
         }
     }`).then(res => {
 
-            var obj = res.data.data.products.edges[0].node;
+        var obj = res.data.data.products.edges[0].node;
             obj.colors.map(item => {
                 if (productdetails.color.id === item.id) {
                     setimageURL(item.image[0].image)
@@ -92,7 +113,7 @@ export const BagItem = ({ productdetails, cartID }) => {
                             <h3 className='text-[#C25050] font-inter text-[9px] lg:text-[16px] ml-12px'>{discount}</h3>
                         </div>
                         <div className='mt-1 lg:mt-8'>
-                            <h2 className='font-inter font-medium text-[#323232] text-[9px] lg:text-[14px]'>Size: (M)</h2>
+                            <h2 className='font-inter font-medium text-[#323232] text-[9px] lg:text-[14px]'>Size: ({sizeName})</h2>
                             <h2 className='font-inter font-medium text-[#323232] text-[9px] lg:text-[14px]'>Colour : {colorName}</h2>
                         </div>
                     </div>

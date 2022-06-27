@@ -1,9 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { OrderItem } from '../components/OrderItem'
 import { ArrowDownIcon } from '@heroicons/react/outline'
 import { FilterIcon } from '@heroicons/react/outline'
+import { getOrderedItems } from '../lib/serverConfig'
+
+
 
 const Order = () => {
+
+    const [OrderItems, setOrderItems] = useState([]);
+
+
+
+    useEffect(async () => {
+        await getOrderedItems().then(res => {
+            console.log(res.transactionLogtype[0]);
+
+            var array = []
+            // var transactionsDeta
+            res.transactionLogtype[0].cart.items.map(obj => {
+                array.push(obj)
+            })
+
+            res.cart.map(item => {
+                cartitemIdArray.push(item.id)
+            })
+            setOrderItems(array)
+        }).catch(err => {
+            console.log(err);
+        })
+
+    }, [])
+
+
+
     return (
         <div className='px-[14px] lg:px-[50px] py-[15px]'>
 
@@ -17,14 +47,13 @@ const Order = () => {
 
 
             <div className='flex  flex-wrap  items-center justify-between  xl:space-y-[40px] md:space-y-[40px] mb-8'>
-                
-                <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Delivery bt Saturday 20 October" }} />
 
 
-                <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman3.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Cancelled" }} />
-
-
-                <OrderItem orderDetails={{ name: 'Jet Black Half Sleeve T-Shirt', img: './homepageImages/woman2.png', price: "599", mrp: "799", size: "M", colour: "Red", quantity: "1", deliveryMessage: "Delivery bt Saturday 20 October" }} />
+                {OrderItems.map(obj => {
+                    return (
+                        <OrderItem key={obj.product.id}  orderDetails={obj} />
+                    )
+                })}
 
 
 

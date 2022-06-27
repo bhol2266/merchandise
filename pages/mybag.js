@@ -19,13 +19,13 @@ const Mybag = () => {
 
     useEffect(async () => {
         await GetbagItems().then(res => {
-            console.log(res.cart[0]);
+            console.log(res);
 
             settotalDiscountAmount(res.cart[0].discountPrice)
             settotalMRP(res.cart[0].itemBill)
             settotalAmount(res.cart[0].totalBill)
-            setcouponDiscount(res.cart[0].discountCoupen.discount)
-            setCOUPONCODE(res.cart[0].discountCoupen.copenCode)
+            // setcouponDiscount(res.cart[0].discountCoupen.discount)
+            // setCOUPONCODE(res.cart[0].discountCoupen.copenCode)
             var array = []
             var cartitemIdArray = []
             res.cart[0].items.map(obj => {

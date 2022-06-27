@@ -15,8 +15,9 @@ export default async function handler(req, res) {
             .digest('hex');
 
         var response = { "signatureIsValid": "false" }
-        if (expectedSignature === razorpay_signature)
+        if (expectedSignature === razorpay_signature) {
             response = { "signatureIsValid": "true", razorpay_order_id: razorpay_order_id, razorpay_payment_id: razorpay_payment_id }
+        }
         res.send(response);
 
 

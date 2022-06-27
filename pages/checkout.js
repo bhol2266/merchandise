@@ -4,7 +4,7 @@ import { addAddress, getAddress, updateAddress } from '../lib/serverConfig'
 import Head from 'next/head'
 import Script from 'next/script'
 import axios from 'axios';
-import { GetbagItems, applyCoupon } from '../lib/serverConfig';
+import { GetbagItems, applyCoupon, addPaymentDetails } from '../lib/serverConfig';
 import { getCookie } from 'cookies-next'
 import Router, { useRouter } from 'next/router'
 const statesOfINdia = ["Andhra Pradesh",
@@ -47,9 +47,8 @@ const statesOfINdia = ["Andhra Pradesh",
 
 const CheckOut = () => {
 
-    const router =useRouter()
+    const router = useRouter()
     //id from database shipping adress list
-    const [id, setid] = useState('')
 
     const [firstname, setfirstname] = useState('')
     const [lastname, setlastname] = useState('')
@@ -86,7 +85,9 @@ const CheckOut = () => {
     const [deliveryCharge, setdeliveryCharge] = useState();
     const [COUPONCODE, setCOUPONCODE] = useState('Nill');
     const [CouponBtn, setCouponBtn] = useState("APPLY COUPON");
-
+    const [cartId, setcartId] = useState('');
+    const [shippingId, setshippingId] = useState('');
+  
     const applyCouponfunc = async () => {
 
         await applyCoupon(COUPONCODE).then(res => {
@@ -130,6 +131,7 @@ const CheckOut = () => {
 
     useEffect(async () => {
         await getAddress().then((res) => {
+            console.log(res);
             if (res.shippingDetails) {
                 setfirstname(res.shippingDetails[0].firstName)
                 setlastname(res.shippingDetails[0].lastName)
@@ -141,7 +143,8 @@ const CheckOut = () => {
                 setaddress(res.shippingDetails[0].shippingAddress)
                 setlandmark(res.shippingDetails[0].shippingAddress)
                 setstate(res.shippingDetails[0].state)
-                setid(res.shippingDetails[0].id)
+                setshippingId(res.shippingDetails[0].id)
+              
                 if (sameAsShippingAddress) {
                     setfirstname_billing(res.shippingDetails[0].firstName)
                     setlastname_billing(res.shippingDetails[0].lastName)
@@ -160,8 +163,7 @@ const CheckOut = () => {
         })
 
         await GetbagItems().then(res => {
-            // console.log(res.cart[0]);
-
+            setcartId(res.cart[0].id)
             settotalDiscountAmount(res.cart[0].discountPrice)
             settotalMRP(res.cart[0].itemBill)
             settotalAmount(res.cart[0].totalBill)
@@ -228,8 +230,9 @@ const CheckOut = () => {
             return
         }
 
-        if (id) {
-            await updateAddress(firstname, lastname, alternatePhonenumber, id)
+        if (shippingId) {
+            await updateAddress(firstname, lastname, alternatePhonenumber, shippingId)
+            // await addAddress(firstname, lastname, address, mobilenumber, address_billing, town, state, pincode, alternatePhonenumber)
         }
         else {
             await addAddress(firstname, lastname, address, mobilenumber, address_billing, town, state, pincode, alternatePhonenumber)
@@ -254,11 +257,15 @@ const CheckOut = () => {
                 try {
                     const verifyUrl = "http://localhost:3000/api/razorpayVerify";
                     const { data } = await axios.post(verifyUrl, response);
+
                     const { signatureIsValid, razorpay_order_id, razorpay_payment_id } = data;
-                    console.log(signatureIsValid);
-                    console.log(razorpay_order_id);
-                    console.log(razorpay_payment_id);
-                    router.push('/paymentsuccessfull')
+                    await addPaymentDetails(cartId, totalAmount, razorpay_payment_id, razorpay_order_id,shippingId).then(res => {
+                        console.log(res);
+                        router.push('/paymentsuccessfull')
+                    }).catch(error=>{
+                        console.log(error);
+                    })
+                 
                 } catch (error) {
                     console.log(error);
                 }

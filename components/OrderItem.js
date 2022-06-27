@@ -2,15 +2,78 @@ import React, { useEffect, useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { ArrowDownIcon } from '@heroicons/react/outline'
+import { QueryG } from '../lib/serverConfig'
 
 export const OrderItem = ({ orderDetails }) => {
 
 
-    const [itemQuantity, setitemQuantity] = useState(1)
-    const { name, img, price, mrp, size, colour, quantity, deliveryMessage } = orderDetails;
+    const { title, img, price, mrp, deliveryMessage, discount,id } = orderDetails.product;
+    const { quantity } = orderDetails;
+    const colour = orderDetails.color.color;
+    const size=orderDetails.size.id
+    const colorId=orderDetails.color.id
 
 
- 
+    
+    const [sizeName, setsizeName] = useState('');
+    const [imageURL, setimageURL] = useState("");
+
+
+    useEffect(async () => {
+
+        if (size == 1) {
+            setsizeName('S')
+        }
+        if (size == 2) {
+            setsizeName('M')
+        }
+        if (size == 3) {
+            setsizeName('L')
+        }
+        if (size == 4) {
+            setsizeName('XL')
+        }
+        if (size == 5) {
+            setsizeName('2XL')
+        }
+
+        await QueryG(`query{
+            products(id:"${id}"){
+            edges{
+              node{
+                id
+                  title
+                  price
+                  mrp
+                  discount
+                  description
+                  colors{
+                    id
+                    color
+                    image{
+                      image
+                    }
+              }
+            }
+          }
+        }
+    }`).then(res => {
+
+            var obj = res.data.data.products.edges[0].node;
+            obj.colors.map(item => {
+                if (colorId === item.id) {
+                    setimageURL(item.image[0].image)
+                }
+            })
+
+        })
+            .catch(err => {
+                console.log(err);
+            })
+    }, []);
+
+
+
 
     const [openTracking, setopenTracking] = useState(false)
     return (
@@ -18,20 +81,20 @@ export const OrderItem = ({ orderDetails }) => {
 
             <div onClick={() => { if (window.innerWidth <= 1000) { setopenTracking(!openTracking) } }} className='flex  h-[122px] xl:h-[220px] md:h-[150px]'>
 
-                <img src={img} className='cursor-pointer h-[122px] w-[100px] xl:w-[181px]  xl:h-[220px] md:h-[150px] md:w-[130px] mb-2'></img>
+                <img  src={"https://closm.com" + imageURL} className='cursor-pointer h-[122px] w-[100px] xl:w-[181px]  xl:h-[220px] md:h-[150px] md:w-[130px] mb-2'></img>
 
                 {/* Name and Price,Size, Colour, Quantity   */}
                 <div className='flex flex-col justify-between ml-[7px] lg:ml-6'>
                     <div>
-                        <h1 className='font-inter text-[12px] md:text-[13px] xl:text-[16px] text-[#19191D]  py-1'>{name} </h1>
+                        <h1 className='font-inter text-[12px] md:text-[13px] xl:text-[16px] text-[#19191D]  py-1'>{title} </h1>
 
                         <div className='flex items-center lg:mt-1 space-x-1 justify-start '>
-                            <h2 className='font-inter  text-[13px] md:text-[16px] xl:text-[24px] text-[#19191D]'>₹499</h2>
-                            <h3 className='font-inter text-[9px] md:text-[10px] xl:text-[13px] text-[#787885] line-through '>₹799</h3>
-                            <h3 className='text-[#C25050] font-inter text-[9px] md:text-[11px] xl:text-[13px] ml-12px'>30% OFF</h3>
+                            <h2 className='font-inter  text-[13px] md:text-[16px] xl:text-[24px] text-[#19191D]'>₹{price}</h2>
+                            <h3 className='font-inter text-[9px] md:text-[10px] xl:text-[13px] text-[#787885] line-through '>₹{mrp}</h3>
+                            <h3 className='text-[#C25050] font-inter text-[9px] md:text-[11px] xl:text-[13px] ml-12px'>{discount} OFF</h3>
                         </div>
 
-                        <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium mt-2'>Size: {size}</h2>
+                        <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium mt-2'>Size: {sizeName}</h2>
                         <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium'>Colour: {colour}</h2>
 
                         <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium'>Quantity : {quantity}</h2>
