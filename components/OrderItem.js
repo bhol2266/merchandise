@@ -6,7 +6,7 @@ import { QueryG, getAddress, getShippingDetails } from '../lib/serverConfig'
 
 export const OrderItem = ({ orderDetails }) => {
 
-    // console.log(orderDetails);
+    console.log(orderDetails);
 
 
     const { title, img, price, mrp, deliveryMessage, discount, id } = orderDetails.product;
@@ -16,7 +16,8 @@ export const OrderItem = ({ orderDetails }) => {
     const colorId = orderDetails.color.id
     const [shippingAddress, setshippingAddress] = useState('')
     const [billingAdress, setbillingAdress] = useState('')
-    const orderId=orderDetails.orderId;
+    const orderDate = orderDetails.shippingDate;
+    const orderId = orderDetails.orderId;
 
 
     const [sizeName, setsizeName] = useState('');
@@ -81,7 +82,7 @@ export const OrderItem = ({ orderDetails }) => {
                 if (obj.id === orderDetails.shippingid) {
                     setshippingAddress(obj.firstName + " " + obj.lastName + ", " + obj.shippingAddress + ", " + obj.city + ", " + obj.state + ", Pincode: " + obj.pincode + ", Mobile Number: " + obj.phoneNum + ", Alternate Mobile: " + obj.altPhoneNum)
                     setbillingAdress(obj.firstName + " " + obj.lastName + ", " + obj.shippingAddress + ", " + obj.city + ", " + obj.state + ", Pincode: " + obj.pincode + ", Mobile Number: " + obj.phoneNum + ", Alternate Mobile: " + obj.altPhoneNum)
-                    
+
                 }
             })
         }).catch(error => {
@@ -119,7 +120,7 @@ export const OrderItem = ({ orderDetails }) => {
                     </div>
 
 
-                    <h2 className={`brightness-150 text-start   text-[#323232] font-inter text-[9px] xl:text-[14px] md:text-[12px] ${deliveryMessage === "Cancelled" ? "text-red-500" : ""} `}>{deliveryMessage}</h2>
+                    <h2 className={`brightness-150 text-start   text-[#323232] font-inter text-[9px] xl:text-[14px] md:text-[12px] ${deliveryMessage === "Cancelled" ? "text-red-500" : ""} `}>{orderDate}</h2>
 
 
                 </div>
