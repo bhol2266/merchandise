@@ -79,6 +79,7 @@ export const BagItem = ({ productdetails, cartID }) => {
     const updateDastabse = async (quantity) => {
         await UpdatebagItems(quantity, productdetails.id).then(res => {
             console.log(res);
+            window.location.reload()
         })
             .catch(err => {
                 console.log(err);

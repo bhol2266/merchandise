@@ -14,7 +14,7 @@ const Mybag = () => {
     const [totalMRP, settotalMRP] = useState();
     const [couponDiscount, setcouponDiscount] = useState(0);
     const [deliveryCharge, setdeliveryCharge] = useState();
-    const [COUPONCODE, setCOUPONCODE] = useState('Nill');
+    const [COUPONCODE, setCOUPONCODE] = useState('');
     const [CouponBtn, setCouponBtn] = useState("APPLY COUPON");
 
     useEffect(async () => {
@@ -24,8 +24,17 @@ const Mybag = () => {
             settotalDiscountAmount(res.cart[0].discountPrice)
             settotalMRP(res.cart[0].itemBill)
             settotalAmount(res.cart[0].totalBill)
-            // setcouponDiscount(res.cart[0].discountCoupen.discount)
-            // setCOUPONCODE(res.cart[0].discountCoupen.copenCode)
+
+            try {
+                setcouponDiscount(res.cart[0].discountCoupen.discount)
+                setCOUPONCODE(res.cart[0].discountCoupen.copenCode)
+                setCouponBtn("REMOVE COUPON")
+
+            } catch (error) {
+
+            }
+
+
             var array = []
             var cartitemIdArray = []
             res.cart[0].items.map(obj => {
@@ -46,12 +55,26 @@ const Mybag = () => {
 
     const applyCouponfunc = async () => {
 
+        if (COUPONCODE.length < 3) {
+            alert("Error Coupon Code")
+            return
+        }
+
         await applyCoupon(COUPONCODE).then(res => {
-            console.log(res.applyCoupen);
-            settotalDiscountAmount(res.applyCoupen.discountPrice)
-            settotalAmount(res.applyCoupen.totalBill)
-            setcouponDiscount(res.applyCoupen.coupenDiscount)
-            setCouponBtn("REMOVE COUPON")
+            if (CouponBtn === 'APPLY COUPON') {
+                settotalDiscountAmount(res.applyCoupen.discountPrice)
+                settotalAmount(res.applyCoupen.totalBill)
+                setcouponDiscount(res.applyCoupen.coupenDiscount)
+                setCouponBtn("REMOVE COUPON")
+            } else {
+                settotalDiscountAmount(res.applyCoupen.discountPrice)
+                settotalAmount(res.applyCoupen.totalBill + couponDiscount)
+                setcouponDiscount(0)
+                setCouponBtn("APPLY COUPON")
+                setCOUPONCODE('')
+            }
+
+
         }).catch(err => {
             console.log(err);
         })
@@ -115,7 +138,7 @@ const Mybag = () => {
                     <div className='mt-[12px] lg:mt-[16px] flex items-start justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
                         <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>APPLY COUPON</h1>
                         <div className='flex flex-col items-end'>
-                            <input type='text' value={COUPONCODE} onChange={e => (setCOUPONCODE(e.target.value.toUpperCase()))} className='text-center w-[115px] lg:w-[171px] lg:h-[30px]  h-[20px] border-[1px] border-[#323232] rounded-[5px] text-[11px] lg:text-[16px] text-[#323232] font-inter'/>
+                            <input type='text' value={COUPONCODE} onChange={e => (setCOUPONCODE(e.target.value.toUpperCase()))} placeholder='Enter Promocode' className='text-center w-[115px] lg:w-[171px] lg:h-[30px]  h-[20px] border-[1px] border-[#323232] rounded-[5px] text-[11px] lg:text-[16px] text-[#323232] font-inter' />
                             <h1 onClick={applyCouponfunc} className='mt-[7px] text-[10px] lg:text-[12px]  font-inter cursor-pointer hover:text-red-500 underline text-red-700 '>{CouponBtn}</h1>
 
                         </div>
