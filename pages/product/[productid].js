@@ -48,17 +48,16 @@ const Product = ({ productdetails }) => {
     const { setloginSidebar } = useContext(videosContext)
 
 
-    const checkPincode = async () => {
-        const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`)
+
+    const checkPincode = async (code) => {
+        const response = await fetch(`https://api.postalpincode.in/pincode/${code}`)
 
         const message = await response.json()
         console.log(message[0].Status);
         if (message[0].Status === "Error") {
-            setpincodeVerified(false)
             alert("Pincode Error")
-        } else {
-            setpincodeVerified(true)
         }
+
 
     }
 
@@ -212,9 +211,9 @@ const Product = ({ productdetails }) => {
                                 }} type='number' value={pincode} placeholder='Enter Pincode' />
                                 <h1 className='font-inter text-[11px] lg:text-[16px] text-[#323232] cursor-pointer hidden' onClick={checkPincode}>Check</h1>
 
-                                {pincodeVerified && <CheckIcon className='h-6 text-green-500' />}
+                                {/* {pincodeVerified && <CheckIcon className='h-6 text-green-500' />}
 
-                                {!pincodeVerified && pincode.length === 6 && <XIcon className='h-6 text-red-500' />}
+                                {!pincodeVerified && pincode.length === 6 && <XIcon className='h-6 text-red-500' />} */}
 
                             </div>
 
