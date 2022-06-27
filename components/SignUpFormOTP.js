@@ -32,7 +32,6 @@ export const SignUpFormOTP = () => {
         console.log(jsonMessage);
         if (jsonMessage.success === true) {
             closeSidebar()
-            setloggedIn(true)
             router.push('/')
             return
         }

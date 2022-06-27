@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { OrderItem } from '../components/OrderItem'
 import { ArrowDownIcon } from '@heroicons/react/outline'
 import { FilterIcon } from '@heroicons/react/outline'
-import { getOrderedItems } from '../lib/serverConfig'
+import { getOrderedItems, } from '../lib/serverConfig'
 
 
 
@@ -11,24 +11,28 @@ const Order = () => {
     const [OrderItems, setOrderItems] = useState([]);
 
 
-
     useEffect(async () => {
         await getOrderedItems().then(res => {
-            console.log(res.transactionLogtype[0]);
-
             var array = []
-            // var transactionsDeta
-            res.transactionLogtype[0].cart.items.map(obj => {
-                array.push(obj)
+            res.transactionLogtype.map(obj => {
+                var shippingid = obj.shippingAddress.id
+                var shippingDate = obj.shippingDate
+                var orderId = obj.orderId
+                obj.cart.items.map(obj => {
+                    obj['shippingid'] = shippingid
+                    obj['shippingDate'] = shippingDate
+                    obj['orderId'] = orderId
+                    array.push(obj)
+                })
             })
 
-            res.cart.map(item => {
-                cartitemIdArray.push(item.id)
-            })
             setOrderItems(array)
         }).catch(err => {
             console.log(err);
         })
+
+
+
 
     }, [])
 
@@ -51,7 +55,7 @@ const Order = () => {
 
                 {OrderItems.map(obj => {
                     return (
-                        <OrderItem key={obj.product.id}  orderDetails={obj} />
+                        <OrderItem key={obj.product.id} orderDetails={obj} />
                     )
                 })}
 
@@ -63,3 +67,5 @@ const Order = () => {
 }
 
 export default Order
+
+

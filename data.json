@@ -1,24 +1,25 @@
 {
-    "id": "7",
-    "items": [
+    "id": "UHJvZHVjdHNUeXBlOjg=",
+    "title": "Tshirt",
+    "price": 500,
+    "mrp": 500,
+    "discount": "10%",
+    "description": "100% Cotton",
+    "colors": [
         {
-            "color": {
-                "id": "6",
-                "color": "White"
-            },
-            "product": {
-                "id": "UHJvZHVjdHNUeXBlOjQ=",
-                "title": "Black Tshirt",
-                "price": 1000,
-                "mrp": 1000,
-                "discount": "20%"
-            },
-            "quantity": 1
+            "id": "19",
+            "color": "Blue",
+            "image": [
+                {
+                    "image": "/media/tee14_V2uBpkE.png"
+                },
+                {
+                    "image": "/media/tee4_IEdrW0S.png"
+                },
+                {
+                    "image": "/media/tee7_MTWHfqW.png"
+                }
+            ]
         }
-    ],
-    "itemBill": 1000,
-    "totalBill": 1200,
-    "discountPrice": 0,
-    "discountCoupen": null,
-    "deliveryCharges": 200
+    ]
 }

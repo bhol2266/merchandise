@@ -87,11 +87,10 @@ const CheckOut = () => {
     const [CouponBtn, setCouponBtn] = useState("APPLY COUPON");
     const [cartId, setcartId] = useState('');
     const [shippingId, setshippingId] = useState('');
-  
+
     const applyCouponfunc = async () => {
 
         await applyCoupon(COUPONCODE).then(res => {
-            console.log(res.applyCoupen);
             settotalDiscountAmount(res.applyCoupen.discountPrice)
             settotalAmount(res.applyCoupen.totalBill)
             setcouponDiscount(res.applyCoupen.coupenDiscount)
@@ -131,7 +130,6 @@ const CheckOut = () => {
 
     useEffect(async () => {
         await getAddress().then((res) => {
-            console.log(res);
             if (res.shippingDetails) {
                 setfirstname(res.shippingDetails[0].firstName)
                 setlastname(res.shippingDetails[0].lastName)
@@ -144,7 +142,7 @@ const CheckOut = () => {
                 setlandmark(res.shippingDetails[0].shippingAddress)
                 setstate(res.shippingDetails[0].state)
                 setshippingId(res.shippingDetails[0].id)
-              
+
                 if (sameAsShippingAddress) {
                     setfirstname_billing(res.shippingDetails[0].firstName)
                     setlastname_billing(res.shippingDetails[0].lastName)
@@ -255,17 +253,12 @@ const CheckOut = () => {
             order_id: data.id,
             handler: async (response) => {
                 try {
-                    const verifyUrl = "http://localhost:3000/api/razorpayVerify";
+                    const verifyUrl = "/api/razorpayVerify";
                     const { data } = await axios.post(verifyUrl, response);
 
                     const { signatureIsValid, razorpay_order_id, razorpay_payment_id } = data;
-                    await addPaymentDetails(cartId, totalAmount, razorpay_payment_id, razorpay_order_id,shippingId).then(res => {
-                        console.log(res);
-                        router.push('/paymentsuccessfull')
-                    }).catch(error=>{
-                        console.log(error);
-                    })
-                 
+                    afterPaymentisDone(razorpay_order_id, razorpay_payment_id)
+
                 } catch (error) {
                     console.log(error);
                 }
@@ -326,6 +319,16 @@ const CheckOut = () => {
             document.body.appendChild(script);
         });
     };
+
+    const afterPaymentisDone = async (razorpay_order_id, razorpay_payment_id) => {
+        await addPaymentDetails(cartId, totalAmount, razorpay_payment_id, razorpay_order_id, shippingId).then(res => {
+            router.push('/paymentsuccessfull')
+        }).catch(error => {
+            console.log(error);
+        })
+
+
+    }
 
 
     return (

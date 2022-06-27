@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { ArrowDownIcon } from '@heroicons/react/outline'
-import { QueryG } from '../lib/serverConfig'
+import { QueryG, getAddress, getShippingDetails } from '../lib/serverConfig'
 
 export const OrderItem = ({ orderDetails }) => {
 
+    // console.log(orderDetails);
 
-    const { title, img, price, mrp, deliveryMessage, discount,id } = orderDetails.product;
+
+    const { title, img, price, mrp, deliveryMessage, discount, id } = orderDetails.product;
     const { quantity } = orderDetails;
     const colour = orderDetails.color.color;
-    const size=orderDetails.size.id
-    const colorId=orderDetails.color.id
+    const size = orderDetails.size.id
+    const colorId = orderDetails.color.id
+    const [shippingAddress, setshippingAddress] = useState('')
+    const [billingAdress, setbillingAdress] = useState('')
+    const orderId=orderDetails.orderId;
 
 
-    
     const [sizeName, setsizeName] = useState('');
     const [imageURL, setimageURL] = useState("");
 
@@ -70,6 +74,20 @@ export const OrderItem = ({ orderDetails }) => {
             .catch(err => {
                 console.log(err);
             })
+
+
+        await getAddress().then(res => {
+            res.shippingDetails.map(obj => {
+                if (obj.id === orderDetails.shippingid) {
+                    setshippingAddress(obj.firstName + " " + obj.lastName + ", " + obj.shippingAddress + ", " + obj.city + ", " + obj.state + ", Pincode: " + obj.pincode + ", Mobile Number: " + obj.phoneNum + ", Alternate Mobile: " + obj.altPhoneNum)
+                    setbillingAdress(obj.firstName + " " + obj.lastName + ", " + obj.shippingAddress + ", " + obj.city + ", " + obj.state + ", Pincode: " + obj.pincode + ", Mobile Number: " + obj.phoneNum + ", Alternate Mobile: " + obj.altPhoneNum)
+                    
+                }
+            })
+        }).catch(error => {
+            console.log(error);
+        })
+
     }, []);
 
 
@@ -81,7 +99,7 @@ export const OrderItem = ({ orderDetails }) => {
 
             <div onClick={() => { if (window.innerWidth <= 1000) { setopenTracking(!openTracking) } }} className='flex  h-[122px] xl:h-[220px] md:h-[150px]'>
 
-                <img  src={"https://closm.com" + imageURL} className='cursor-pointer h-[122px] w-[100px] xl:w-[181px]  xl:h-[220px] md:h-[150px] md:w-[130px] mb-2'></img>
+                <img src={"https://closm.com" + imageURL} className='cursor-pointer h-[122px] w-[100px] xl:w-[181px]  xl:h-[220px] md:h-[150px] md:w-[130px] mb-2'></img>
 
                 {/* Name and Price,Size, Colour, Quantity   */}
                 <div className='flex flex-col justify-between ml-[7px] lg:ml-6'>
@@ -112,7 +130,7 @@ export const OrderItem = ({ orderDetails }) => {
             {/*  For mobile screen to medium screen size  */}
             {openTracking &&
                 <div className='mt-[28px]'>
-                    <h2 className='text-[11px] lg:text-[11px] text-[#323232] font-inter'>Tracking ID : 63546253675364</h2>
+                    <h2 className='text-[11px] lg:text-[11px] text-[#323232] font-inter'>Tracking ID : {orderId}</h2>
                     <h2 className='text-[10px] lg:text-[11px] text-[#323232] font-inter mt-[10px]'>delivery Partner : Shiprocket</h2>
 
                     {/* tracking diagram  */}
@@ -151,21 +169,13 @@ export const OrderItem = ({ orderDetails }) => {
                     <div className='mt-[40px] '>
                         <div >
                             <h2 className='text-[13px] lg:text-[13px] text-[#323232] font-inter'>Shipping Address</h2>
-                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>SLorem Ipsum is simply dummy
-                                text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry&apos;s standard dummy text ever
-                                since the 1500s, when an unknown printer took a galley
-                                of type and scrambled it to make a type specimen book. .</h2>
+                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>{shippingAddress}</h2>
 
                         </div>
 
                         <div className='mt-[20px] '>
                             <h2 className='text-[13px] lg:text-[13px] text-[#323232] font-inter'>Billing Address</h2>
-                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>SLorem Ipsum is simply dummy
-                                text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry&apos;s standard dummy text ever
-                                since the 1500s, when an unknown printer took a galley
-                                of type and scrambled it to make a type specimen book. .</h2>
+                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>{billingAdress}</h2>
 
                         </div>
                     </div>
@@ -209,19 +219,13 @@ export const OrderItem = ({ orderDetails }) => {
                 <div className='xl:w-[272px] w-[200px]'>
                     <div >
                         <h2 className='xl:text-[16px] text-[13px]  text-[#323232] font-inter'>Shipping Address</h2>
-                        <h2 className='xl:text-[12px] text-[10px]  text-[#323232] font-inter mt-[6px] '>SLorem Ipsum is simply dummy
-                            text of the printing and typesetting industry. Lorem
-                            Ipsum has been the industry&apos;s standard dummy text
-                            .</h2>
+                        <h2 className='xl:text-[12px] text-[10px]  text-[#323232] font-inter mt-[6px] '>{shippingAddress}</h2>
 
                     </div>
 
                     <div className='mt-[20px] hidden xl:flex xl:flex-col '>
                         <h2 className='xl:text-[16px] text-[13px]  text-[#323232] font-inter'>Billing Address</h2>
-                        <h2 className='xl:text-[12px] text-[10px]  text-[#323232] font-inter mt-[6px] '>SLorem Ipsum is simply dummy
-                            text of the printing and typesetting industry. Lorem
-                            Ipsum has been the industry&apos;s standard dummy text
-                            .</h2>
+                        <h2 className='xl:text-[12px] text-[10px]  text-[#323232] font-inter mt-[6px] '>{billingAdress}</h2>
 
                     </div>
                 </div>
@@ -233,7 +237,7 @@ export const OrderItem = ({ orderDetails }) => {
 
             <div className='hidden md:flex flex-col justify-between  items-end xl:h-[220px] h-[150px]'>
                 <div>
-                    <h2 className='xl:text-[14px] text-[12px]   text-[#323232] font-inter text-right'>Tracking ID : 63546253675364</h2>
+                    <h2 className='xl:text-[14px] text-[12px]   text-[#323232] font-inter text-right'>Tracking ID : {orderId}</h2>
                     <h2 className='xl:text-[12px] text-[10px] text-[#323232] font-inter xl:mt-[8px] mt-1 text-right'>delivery Partner : Shiprocket</h2>
                 </div>
 
