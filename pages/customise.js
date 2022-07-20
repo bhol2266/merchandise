@@ -105,17 +105,17 @@ const Customise = () => {
                 <button onClick={() => { setFrontBackSelected("FRONT") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
                 <button onClick={() => { setFrontBackSelected("BACK") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
 
-                <input ref={inputFileRef} onChange={uploadFile} type="file" class="pt-1.5 pl-2 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer  file:hidden" />
+                <input ref={inputFileRef} onChange={uploadFile} type="file" className="pt-1.5 pl-2 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer  file:hidden" />
                 {/* <button onClick={() => { inputFileRef.current.onClick() }} className={`w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>UPLOAD</button> */}
 
 
             </div>
 
-            {/* <input type="file" class="pt-1.5 pl-1.5 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer file:hidden" /> */}
+            {/* <input type="file" className="pt-1.5 pl-1.5 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer file:hidden" /> */}
 
             {/* Canvas playground */}
-            <div className='flex items-center justify-center mt-[20px] p-[15px]'>
-                <img className='w-[331px] h-[406px]' src='./canvas/front.png'></img>
+            <div className='flex items-center justify-center mt-[20px]'>
+                <img className='w-[331px] h-[406px]  p-[10px]' src={`./canvas/${FrontBackSelected==='FRONT'? "front":"back"}.png`} ></img>
             </div>
 
 
