@@ -31,7 +31,17 @@ module.exports = {
       colors: {
         'github': '#24292F',
         'theme': '#54BAB9',
-        'whitte':"#ffffff"
+        'whitte':"#ffffff",
+        'Red':"#FF0000",
+        'Cyan':"#00FFFF",
+        'Blue':"#0000FF",
+        'Yellow':"#FFFF00",
+        'Lime':"#00FF00",
+        'Orange':"#FFA500",
+        'Grey':"#808080",
+        'Olive':"#808000",
+        'DarkBlue':"#00008B",
+        'Purple':"#800080",
 
       },
       fontFamily: {
