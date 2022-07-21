@@ -12,7 +12,6 @@ const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEE
 
 const chooseColours = ["Red", "Cyan", "Blue", "DarkBlue", "Purple", "Yellow", "Lime", "Orange", "Grey", "Olive", "Purple"]
 import { Menu, Transition } from '@headlessui/react'
-import Canvas from '../components/canvas'
 
 
 
