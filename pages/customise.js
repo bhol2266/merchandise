@@ -1,7 +1,7 @@
 import { defaults } from 'autoprefixer'
 import { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { } from '@heroicons/react/solid'
+import { XCircleIcon } from '@heroicons/react/solid'
 
 
 
@@ -12,6 +12,7 @@ const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEE
 
 const chooseColours = ["Red", "Cyan", "Blue", "DarkBlue", "Purple", "Yellow", "Lime", "Orange", "Grey", "Olive", "Purple"]
 import { Menu, Transition } from '@headlessui/react'
+import Canvas from '../components/canvas'
 
 
 
@@ -83,16 +84,33 @@ const Customise = () => {
                             <Menu.Items className="grid grid-cols-4  absolute gap-2  w-[180px] rounded-md shadow-lg z-10 mt-2 p-4 bg-white">
 
 
-                                {chooseColours.map(item => {
-                                    return (
-                                        <Menu.Item as='div' key={item}>
-                                            <p onClick={() => { setselectedColour(item) }} className={`h-5 w-5 rounded-full bg-${item}  mr-1 cursor-pointer`} />
-
-                                        </Menu.Item>
-                                    )
-                                })}
-
-
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('Red') }} className={`h-5 w-5 rounded-full text-Red bg-Red  mr-1 cursor-pointer`} />
+                                </Menu.Item>
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('Cyan') }} className={`h-5 w-5 rounded-full text-Cyan bg-Cyan  mr-1 cursor-pointer`} />
+                                </Menu.Item>
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('Blue') }} className={`h-5 w-5 rounded-full text-Blue bg-Blue  mr-1 cursor-pointer`} />
+                                </Menu.Item>
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('DarkBlue') }} className={`h-5 w-5 rounded-full text-DarkBlue bg-DarkBlue  mr-1 cursor-pointer`} />
+                                </Menu.Item>
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('Purple') }} className={`h-5 w-5 rounded-full text-Purple bg-Purple  mr-1 cursor-pointer`} />
+                                </Menu.Item>
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('Yellow') }} className={`h-5 w-5 rounded-full text-Yellow bg-Yellow  mr-1 cursor-pointer`} />
+                                </Menu.Item>
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('Lime') }} className={`h-5 w-5 rounded-full text-Lime bg-Lime  mr-1 cursor-pointer`} />
+                                </Menu.Item>
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('Orange') }} className={`h-5 w-5 rounded-full text-Orange bg-Orange  mr-1 cursor-pointer`} />
+                                </Menu.Item>
+                                <Menu.Item as='div'>
+                                    <XCircleIcon onClick={() => { setselectedColour('Grey') }} className={`h-5 w-5 rounded-full text-Grey bg-Grey  mr-1 cursor-pointer`} />
+                                </Menu.Item>
 
                             </Menu.Items>
                         </Transition>
@@ -115,7 +133,7 @@ const Customise = () => {
 
             {/* Canvas playground */}
             <div className='flex items-center justify-center mt-[20px]'>
-                <img className='w-[331px] h-[406px]  p-[10px]' src={`./canvas/${FrontBackSelected==='FRONT'? "front":"back"}.png`} ></img>
+                <img className='w-[331px] h-[406px]  p-[10px]' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} ></img>
             </div>
 
 
@@ -124,6 +142,7 @@ const Customise = () => {
                 <button onClick={() => { setFrontBackSelected("BACK") }} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>PROCEED TO OVERVIEW</button>
             </div>
 
+            <Canvas />
 
         </div>
     )
