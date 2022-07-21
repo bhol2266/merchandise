@@ -132,8 +132,9 @@ const Customise = () => {
             {/* <input type="file" className="pt-1.5 pl-1.5 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer file:hidden" /> */}
 
             {/* Canvas playground */}
-            <div className='flex items-center justify-center mt-[20px]'>
+            <div className='flex items-center justify-center mt-[20px] relative'>
                 <img className='w-[331px] h-[406px]  p-[10px]' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} ></img>
+                <canvas id="myCanvas" className='border-2 border-gray-400 rounded-lg absolute h-[220px] w-[155px] left-0 right-0 mx-auto' />
             </div>
 
 
@@ -142,7 +143,6 @@ const Customise = () => {
                 <button onClick={() => { setFrontBackSelected("BACK") }} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>PROCEED TO OVERVIEW</button>
             </div>
 
-            <Canvas />
 
         </div>
     )
