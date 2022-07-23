@@ -12,24 +12,18 @@ const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEE
 
 const chooseColours = ["Red", "Cyan", "Blue", "DarkBlue", "Purple", "Yellow", "Lime", "Orange", "Grey", "Olive", "Purple"]
 import { Menu, Transition } from '@headlessui/react'
+import Canvas from '../components/Canvas'
+import Canvasss from '../components/Canvasss'
 
 
 
 const Customise = () => {
 
 
-    const inputFileRef = useRef(null)
-
-
     const [selectedProduct, setselectedProduct] = useState("MEN T-SHIRT")
     const [selectedColour, setselectedColour] = useState('Red');
 
-    const [FrontBackSelected, setFrontBackSelected] = useState('FRONT');
 
-
-    const uploadFile = () => {
-
-    }
     return (
         <div className='mx-[14px] lg:mx-[50px] my-[15px]'>
 
@@ -118,29 +112,9 @@ const Customise = () => {
                 </div>
             </div>
 
-            <div className='flex items-center justify-between mt-6 mx-2'>
-                <button onClick={() => { setFrontBackSelected("FRONT") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
-                <button onClick={() => { setFrontBackSelected("BACK") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
 
-                <input ref={inputFileRef} onChange={uploadFile} type="file" className="pt-1.5 pl-2 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer  file:hidden" />
-                {/* <button onClick={() => { inputFileRef.current.onClick() }} className={`w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>UPLOAD</button> */}
-
-
-            </div>
-
-            {/* <input type="file" className="pt-1.5 pl-1.5 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer file:hidden" /> */}
-
-            {/* Canvas playground */}
-            <div className='flex items-center justify-center mt-[20px] relative'>
-                <img className='w-[331px] h-[406px]  p-[10px]' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} ></img>
-                <canvas id="myCanvas" className='border-2 border-gray-400 rounded-lg absolute h-[220px] w-[155px] left-0 right-0 mx-auto' />
-            </div>
-
-
-
-            <div className='flex items-center justify-center mt-[20px]'>
-                <button onClick={() => { setFrontBackSelected("BACK") }} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>PROCEED TO OVERVIEW</button>
-            </div>
+            {/* <Canvas /> */}
+            <Canvasss />
 
 
         </div>
