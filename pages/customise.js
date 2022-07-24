@@ -1,4 +1,3 @@
-import { defaults } from 'autoprefixer'
 import { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
@@ -22,6 +21,7 @@ const Customise = () => {
 
     const [selectedProduct, setselectedProduct] = useState("MEN T-SHIRT")
     const [selectedColour, setselectedColour] = useState('Red');
+
 
 
     return (
