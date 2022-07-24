@@ -67,15 +67,28 @@ const Canvasss = () => {
 
 
     const downloadCavasImage = () => {
-
+        // canvas.remove(canvas.getActiveObject());
     }
-    const resetCanvas = () => {
-        var json = canvas.toJSON();
+    const removeSelectedItem = () => {
+        if (typeof canvas.getActiveObject() === "undefined") {
+            alert('Select any item to remove!')
+        }
 
+        if (canvas.getActiveObject() === null) {
+            alert('Select any item to remove!')
+        }
+
+
+        console.log(canvas.getActiveObject());
+        canvas.remove(canvas.getActiveObject());
+    }
+
+    const resetCanvas = () => {
         canvas.clear();
-        
+        var json = canvas.toJSON();
         canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
     }
+
     const addText = () => {
         var text = new fabric.Text('GeeksforGeeks', {
             fill: 'green'
@@ -94,11 +107,17 @@ const Canvasss = () => {
             <div className='flex items-center justify-between mt-6 mx-2'>
                 <button onClick={() => { setFrontBackSelected("FRONT") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
                 <button onClick={() => { setFrontBackSelected("BACK") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
-                <button onClick={addText}  className='pt-1.5 pl-2 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Add Text</button>
 
-                <label className='pt-1.5 pl-2 w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>Upload Image</label>
+                <label className='w-[110px] h-[28px] text-center pt-1.5  bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>UPLOAD IMAGE</label>
                 <input id='uploader' ref={inputFileRef} onChange={uploadFile} type="file" className="hidden" />
             </div>
+
+            <div className='flex items-center justify-between mt-6 mx-2'>
+                <button onClick={addText} className='w-[78px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Add Text</button>
+                <button onClick={resetCanvas} className='w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Reset Canvas</button>
+                <button onClick={removeSelectedItem} className='w-[140px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Remove Seleted Item</button>
+            </div>
+
 
 
             {/* Canvas playground */}
@@ -108,7 +127,7 @@ const Canvasss = () => {
                     <canvas
                         ref={canvasRef}
                         id="myCanvas"
-                        className=' hover:border-[1px] hover:border-gray-400 rounded-lg  '
+                        className='border-[1px] border-gray-400 rounded-lg  '
                     />
                 </div>
             </div>
@@ -118,8 +137,7 @@ const Canvasss = () => {
 
 
             <div className='flex items-center justify-center mt-[20px] space-x-3'>
-                <button onClick={downloadCavasImage} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>Reset Canvas</button>
-                <button onClick={resetCanvas} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>PROCEED TO OVERVIEW</button>
+                <button onClick={downloadCavasImage} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>PROCEED TO OVERVIEW</button>
             </div>
 
 
