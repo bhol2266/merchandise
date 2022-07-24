@@ -139,9 +139,9 @@ const Canvasss = () => {
             <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
 
 
-            <div className='md:flex flex-row-reverse items-center justify-around md:mx-6 lg:mx-[50px] xl:mx-[200px]'>
+            <div className='md:flex flex-row-reverse items-center justify-around'>
 
-                <div className='lg:scale-125 xl:scale-150 xl:mr-[100px] md:mr-[50px]  sm:w-fit sm:mx-auto md:mx-0'>
+                <div className='lg:scale-125 xl:scale-150 xl:mr-[100px] md:mr-[50px]  sm:w-fit sm:mx-auto md:mx-0 mb-[20px]'>
 
                     <div className='flex space-x-2 md:space-x-0 md:space-y-2 md:flex-col items-center md:justify-between mt-6 mx-2'>
                         <button onClick={() => { setFrontBackSelected("FRONT") }} className={`w-[120px] h-[28px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
@@ -163,19 +163,15 @@ const Canvasss = () => {
 
 
                 {/* Canvas playground */}
-                <div className='mx-auto lg:mr-auto lg:ml-10 md:ml-5 mt-[20px]' ref={divToImageRef}>
-                    <div className='flex items-center justify-center  relative w-[331px] h-[406px]  lg:scale-150 md:scale-125 lg:my-24 md:my-12 mx-auto'>
-                        <img className='-z-50 absolute h-full   p-[10px]' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} ></img>
-
-                        <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg`}>
+                <div className='md:scale-110 md:my-10  lg:scale-125 lg:my-16'>
+                    <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit '>
+                        <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`}  ></img>
+                        <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-50 absolute `}>
                             <canvas
                                 ref={canvasRef}
                                 id="myCanvas"
-
                             />
                         </div>
-
-
                     </div>
                 </div>
 
