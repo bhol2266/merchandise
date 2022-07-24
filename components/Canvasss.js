@@ -2,6 +2,7 @@ import { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import { HexColorPicker } from "react-colorful";
+import * as htmlToImage from 'html-to-image';
 
 
 import Script from 'next/script';
@@ -15,6 +16,10 @@ const FontPicker = dynamic(() => import("font-picker-react"), {
 
 const Canvasss = () => {
 
+    const divToImageRef = useRef(null);
+
+
+
     const [canvas, setcanvas] = useState(null);
     const fontAPI = 'AIzaSyAZ0YPUkF0oXOhdK3J6EnfSqXZEDHOXQ_g'
     const inputFileRef = useRef(null)
@@ -25,6 +30,8 @@ const Canvasss = () => {
     const [openAddtextModaal, setopenAddtextModaal] = useState(false);
     const [activeFontFamily, setactiveFontFamily] = useState('Arimo');
     const [fabricText, setfabricText] = useState(null);
+    const [CanvasBorder, setCanvasBorder] = useState(true);
+    const [previewEditChanger, setpreviewEditChanger] = useState(false);
 
 
     //Fabric text color
@@ -71,9 +78,24 @@ const Canvasss = () => {
 
 
 
-    const downloadCavasImage = () => {
+    const downloadCavasImage = async () => {
+        setCanvasBorder(false)
+        const dataUrl = await htmlToImage.toPng(divToImageRef.current);
+
+        // download image
+        const link = document.createElement('a');
+        link.download = "html-to-img.png";
+        link.href = dataUrl;
+        link.click();
+        setCanvasBorder(true)
+    }
+    const preview = async () => {
+        setpreviewEditChanger(!previewEditChanger)
+        setCanvasBorder(!CanvasBorder)
 
     }
+
+
     const removeSelectedItem = () => {
         if (typeof canvas.getActiveObject() === "undefined") {
             alert('Select any item to remove!')
@@ -117,38 +139,43 @@ const Canvasss = () => {
             <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
 
 
-            <div className='sm:flex flex-row-reverse items-center justify-around md:mx-12 lg:mx-[150px]'>
+            <div className='md:flex flex-row-reverse items-center justify-around md:mx-6 lg:mx-[50px] xl:mx-[200px]'>
 
-                <div>
+                <div className='lg:scale-125 xl:scale-150 xl:mr-[100px] md:mr-[50px]  sm:w-fit sm:mx-auto md:mx-0'>
 
-                    <div className='flex items-center justify-between mt-6 mx-2'>
-                        <button onClick={() => { setFrontBackSelected("FRONT") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
-                        <button onClick={() => { setFrontBackSelected("BACK") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
+                    <div className='flex space-x-2 md:space-x-0 md:space-y-2 md:flex-col items-center md:justify-between mt-6 mx-2'>
+                        <button onClick={() => { setFrontBackSelected("FRONT") }} className={`w-[120px] h-[28px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
+                        <button onClick={() => { setFrontBackSelected("BACK") }} className={`w-[120px] h-[28px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
 
-                        <label className='w-[110px] h-[28px] text-center pt-1.5  bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>Add Image</label>
+                        <label className='w-[120px] h-[28px] text-center pt-1.5  bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>Add Image</label>
                         <input id='uploader' ref={inputFileRef} onChange={uploadFile} type="file" className="hidden" />
                     </div>
 
-                    <div className='flex items-center justify-between mt-6 mx-2'>
+                    <div className='flex space-x-2 md:space-x-0 md:space-y-2 md:flex-col items-center md:justify-between mt-6 mx-2'>
                         <button onClick={() => {
                             setopenAddtextModaal(true)
-                        }} className='w-[78px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Add Text</button>
-                        <button onClick={removeSelectedItem} className='w-[140px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Remove Seleted Item</button>
-                        <button onClick={resetCanvas} className='w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Clear All</button>
+                        }} className='w-[120px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px]'>Add Text</button>
+                        <button onClick={removeSelectedItem} className='w-[120px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Remove Seleted</button>
+                        <button onClick={resetCanvas} className='w-[120px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Clear All</button>
                     </div>
                 </div>
 
 
 
                 {/* Canvas playground */}
-                <div className='mx-auto lg:mr-auto lg:ml-10 md:ml-5 mt-[20px]'>
+                <div className='mx-auto lg:mr-auto lg:ml-10 md:ml-5 mt-[20px]' ref={divToImageRef}>
                     <div className='flex items-center justify-center  relative w-[331px] h-[406px]  lg:scale-150 md:scale-125 lg:my-24 md:my-12 mx-auto'>
                         <img className='-z-50 absolute h-full   p-[10px]' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} ></img>
-                        <canvas
-                            ref={canvasRef}
-                            id="myCanvas"
-                            className='border-[1px] border-gray-400 rounded-lg  '
-                        />
+
+                        <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg`}>
+                            <canvas
+                                ref={canvasRef}
+                                id="myCanvas"
+
+                            />
+                        </div>
+
+
                     </div>
                 </div>
 
@@ -158,8 +185,11 @@ const Canvasss = () => {
 
 
             <div className='flex items-center justify-center mt-[20px] space-x-3'>
-                <button onClick={downloadCavasImage} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>PROCEED TO OVERVIEW</button>
+                <button onClick={downloadCavasImage} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>Download</button>
+                <button onClick={preview} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>{previewEditChanger ? "Edit" : "Preview"}</button>
             </div>
+
+
 
 
 
@@ -167,7 +197,7 @@ const Canvasss = () => {
             {/* Add text modal */}
             <div className={`${openAddtextModaal ? "" : "hidden"} fixed top-0 right-0 left-0 z-50  justify-center items-center flex `}>
                 <div className="relative p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-                    <div className="relative rounded-lg shadow dark:bg-gray-700 bg-slate-200">
+                    <div className="relative rounded-lg shadow dark:bg-gray-700 bg-slate-100">
 
 
                         <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
@@ -200,6 +230,7 @@ const Canvasss = () => {
 
 
                             <button onClick={addText} className={`mx-auto block w-[150px] py-1 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>Confirm</button>
+
                         </div>
                     </div>
                 </div>
