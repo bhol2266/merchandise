@@ -14,8 +14,8 @@ const FontPicker = dynamic(() => import("font-picker-react"), {
 
 
 const Canvasss = () => {
-    let canvas = null
 
+    const [canvas, setcanvas] = useState(null);
     const fontAPI = 'AIzaSyAZ0YPUkF0oXOhdK3J6EnfSqXZEDHOXQ_g'
     const inputFileRef = useRef(null)
     const canvasRef = useRef(null)
@@ -24,8 +24,8 @@ const Canvasss = () => {
     const [imageUploadedinCanvas, setimageUploadedinCanvas] = useState(null);
     const [openAddtextModaal, setopenAddtextModaal] = useState(false);
     const [activeFontFamily, setactiveFontFamily] = useState('Arimo');
+    const [fabricText, setfabricText] = useState('');
 
-    console.log(activeFontFamily);
 
     //Fabric text color
     const [color, setColor] = useState("#000000");
@@ -33,12 +33,12 @@ const Canvasss = () => {
 
 
     useEffect(() => {
-
         canvas = new fabric.Canvas('myCanvas', {
             width: 150,
             height: 230,
         })
         canvas.renderAll()
+        setcanvas(canvas)
     }, []);
 
     const uploadFile = (e) => {
@@ -72,6 +72,7 @@ const Canvasss = () => {
 
 
     const downloadCavasImage = () => {
+
     }
     const removeSelectedItem = () => {
         if (typeof canvas.getActiveObject() === "undefined") {
@@ -93,13 +94,16 @@ const Canvasss = () => {
         canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
     }
 
-    const addText = () => {
-        setopenAddtextModaal(true)
-        // var text = new fabric.Text('GeeksforGeeks', {
-        //     fill: 'green'
-        // });
+    const addText = (e) => {
+        e.preventDefault()
+        var text = new fabric.Text(fabricText, {
+            fill: color,
+            fontFamily: activeFontFamily,
+            fontWeight: 'normal',
+        });
 
-        // canvas.add(text);
+        canvas.add(text);
+        setopenAddtextModaal(false)
 
     }
 
@@ -122,7 +126,9 @@ const Canvasss = () => {
                     </div>
 
                     <div className='flex items-center justify-between mt-6 mx-2'>
-                        <button onClick={addText} className='w-[78px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Add Text</button>
+                        <button onClick={() => {
+                            setopenAddtextModaal(true)
+                        }} className='w-[78px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Add Text</button>
                         <button onClick={removeSelectedItem} className='w-[140px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Remove Seleted Item</button>
                         <button onClick={resetCanvas} className='w-[98px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] '>Clear All</button>
                     </div>
@@ -131,8 +137,8 @@ const Canvasss = () => {
 
 
                 {/* Canvas playground */}
-                <div className='mx-auto lg:mr-auto lg:ml-10 md:ml-5'>
-                    <div className='flex  items-center justify-center mt-[20px] relative w-[331px] h-[406px]  lg:scale-150 md:scale-125 lg:my-24 md:my-12'>
+                <div className='mx-auto lg:mr-auto lg:ml-10 md:ml-5 mt-[20px]'>
+                    <div className='flex items-center justify-center  relative w-[331px] h-[406px]  lg:scale-150 md:scale-125 lg:my-24 md:my-12 mx-auto'>
                         <img className='-z-50 absolute h-full   p-[10px]' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} ></img>
                         <canvas
                             ref={canvasRef}
@@ -156,7 +162,7 @@ const Canvasss = () => {
 
             {/* Add text modal */}
             <div className={`${openAddtextModaal ? "" : "hidden"} fixed top-0 right-0 left-0 z-50  justify-center items-center flex `}>
-                <div className="relative p-4 w-full">
+                <div className="relative p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
                     <div className="relative rounded-lg shadow dark:bg-gray-700 bg-slate-200">
 
 
@@ -168,15 +174,8 @@ const Canvasss = () => {
 
                             <div className="py-3 flex items-start flex-col">
                                 <p className=' text-center text-[16px] font-poppins rounded-[4px] '>Add Text</p>
-                                <input style={{ color: color, fontFamily: activeFontFamily }} className=' rounded font-inter text-lg py-1  outline-none' placeholder='text....' type='text' id='text' />
+                                <input onChange={(e) => { setfabricText(e.target.value) }} style={{ color: color, fontFamily: activeFontFamily }} className=' rounded font-inter text-lg py-1  outline-none' placeholder='text....' type='text' id='text' />
                             </div>
-
-                            <div className="py-3 flex items-start flex-col space-y-1">
-                                <p className=' text-center text-[16px] font-inter rounded-[4px]'>Choose Text Colour</p>
-                                <HexColorPicker color={color} onChange={setColor} />
-                                <p style={{ backgroundColor: color, color: color }} className={`w-[200px] text-center text-[16px] font-inter rounded-[4px]`}>{color}</p>
-                            </div>
-
                             <div className="py-3 flex items-start flex-col space-y-1">
                                 <p className=' text-center text-[16px] font-inter rounded-[4px]'>Choose Font Style</p>
 
@@ -189,7 +188,14 @@ const Canvasss = () => {
                                 />
                             </div>
 
-                            <button onClick={downloadCavasImage} className={`mx-auto block w-[150px] py-1 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>Confirm</button>
+                            <div className="py-3 flex items-start flex-col space-y-1">
+                                <p className=' text-center text-[16px] font-inter rounded-[4px]'>Choose Text Colour</p>
+                                <HexColorPicker color={color} onChange={setColor} />
+                                <p style={{ backgroundColor: color, color: color }} className={`w-[200px] text-center text-[16px] font-inter rounded-[4px]`}>{color}</p>
+                            </div>
+
+
+                            <button onClick={addText} className={`mx-auto block w-[150px] py-1 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>Confirm</button>
                         </div>
                     </div>
                 </div>
