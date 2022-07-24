@@ -25,7 +25,7 @@ export const Navigation = () => {
                     <img src={router.pathname === "/"?"/logo.png":youtuberLogo} className='cursor-pointer  h-[25px] md:h-[30px]'></img>
                 </Link>
 
-                <div className='flex space-x-[22px] sm:space-x-[30px] lg:space-x-[50px] items-center justify-center'>
+                <div className='flex space-x-[30px] sm:space-x-[30px] lg:space-x-[50px] items-center justify-center'>
                     <Link href="/">
                         <img src='/homepageImages/search.png' className='cursor-pointer w-[20px] h-[20px]'></img>
                     </Link>

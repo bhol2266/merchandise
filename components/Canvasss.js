@@ -24,7 +24,7 @@ const Canvasss = () => {
     const [imageUploadedinCanvas, setimageUploadedinCanvas] = useState(null);
     const [openAddtextModaal, setopenAddtextModaal] = useState(false);
     const [activeFontFamily, setactiveFontFamily] = useState('Arimo');
-    const [fabricText, setfabricText] = useState('');
+    const [fabricText, setfabricText] = useState(null);
 
 
     //Fabric text color
@@ -96,6 +96,10 @@ const Canvasss = () => {
 
     const addText = (e) => {
         e.preventDefault()
+        if (fabricText === null) {
+            alert('enter text')
+            return
+        }
         var text = new fabric.Text(fabricText, {
             fill: color,
             fontFamily: activeFontFamily,
@@ -121,7 +125,7 @@ const Canvasss = () => {
                         <button onClick={() => { setFrontBackSelected("FRONT") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
                         <button onClick={() => { setFrontBackSelected("BACK") }} className={`w-[98px] h-[28px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
 
-                        <label className='w-[110px] h-[28px] text-center pt-1.5  bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>UPLOAD IMAGE</label>
+                        <label className='w-[110px] h-[28px] text-center pt-1.5  bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>Add Image</label>
                         <input id='uploader' ref={inputFileRef} onChange={uploadFile} type="file" className="hidden" />
                     </div>
 
