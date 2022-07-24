@@ -165,7 +165,7 @@ const Canvasss = () => {
                 {/* Canvas playground */}
                 <div className='md:scale-110 md:my-10  lg:scale-125 lg:my-16'>
                     <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit '>
-                        <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`}  ></img>
+                        <img className='sm:h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`}  ></img>
                         <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-50 absolute `}>
                             <canvas
                                 ref={canvasRef}
@@ -192,8 +192,8 @@ const Canvasss = () => {
 
             {/* Add text modal */}
             <div className={`${openAddtextModaal ? "" : "hidden"} fixed top-0 right-0 left-0 z-50  justify-center items-center flex `}>
-                <div className="relative p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-                    <div className="relative rounded-lg shadow dark:bg-gray-700 bg-slate-100">
+                <div className="relative p-4 w-full sm:w-1/2 mx-16 md:w-1/3 lg:w-1/4">
+                    <div className="relative rounded-lg shadow  bg-slate-200">
 
 
                         <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
