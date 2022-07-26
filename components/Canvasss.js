@@ -92,6 +92,8 @@ const Canvasss = () => {
     const preview = async () => {
         setpreviewEditChanger(!previewEditChanger)
         setCanvasBorder(!CanvasBorder)
+        canvas.discardActiveObject();
+        canvas.renderAll();
 
     }
 
@@ -165,7 +167,7 @@ const Canvasss = () => {
                 {/* Canvas playground */}
                 <div className='md:scale-110 md:my-10  lg:scale-125 lg:my-16'>
                     <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit '>
-                        <img className='sm:h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`}  ></img>
+                        <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`}  ></img>
                         <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-50 absolute `}>
                             <canvas
                                 ref={canvasRef}
