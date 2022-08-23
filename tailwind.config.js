@@ -8,6 +8,30 @@ module.exports = {
       banner_wide: "url('/homepageImages/banner-wide.png')",
     },
     extend: {
+      animation: {
+        'spii': 'wiggle 2s linear infinite',
+        'movement': 'movement 5s infinite'
+
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        movement: {
+          '0%, 20%, 40%, 60%, 80%, 100%': { transform: 'translateX(0rem)' },
+          '10%': { transform: 'translateX(2rem)' },
+          '30%': { transform: 'translateX(-2rem)' },
+          '50%': { transform: 'translateY(1rem)' },
+          '70%': { transform: 'translateY(-1rem)' },
+        }
+      },
+
+
+      backgroundImage: {
+        'creator_bg': "url('/creator/creator_bg.png')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      },
       aspectRatio: {
         'item': '61 / 50',
       },
@@ -60,7 +84,10 @@ module.exports = {
   },
 
   variants: {
-    extend: {},
+    extend: {
+      animation: ['hover', 'group-hover']
+
+    },
   },
   plugins: [
     require('tailwind-scrollbar-hide', '@tailwindcss/line-clamp')]
