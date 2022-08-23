@@ -9,8 +9,8 @@ module.exports = {
     },
     extend: {
       animation: {
-        'spii': 'wiggle 2s linear infinite',
-        'movement': 'movement 5s infinite'
+        spii: 'wiggle 2s linear infinite',
+        movement: 'movement 1s linear 1'
 
       },
       keyframes: {
@@ -19,11 +19,8 @@ module.exports = {
           '50%': { transform: 'rotate(3deg)' },
         },
         movement: {
-          '0%, 20%, 40%, 60%, 80%, 100%': { transform: 'translateX(0rem)' },
-          '10%': { transform: 'translateX(2rem)' },
-          '30%': { transform: 'translateX(-2rem)' },
-          '50%': { transform: 'translateY(1rem)' },
-          '70%': { transform: 'translateY(-1rem)' },
+          '0%': { transform: 'translateY(0px)' },
+          '100%': { transform: 'translateY(-10px)' },
         }
       },
 
@@ -35,15 +32,8 @@ module.exports = {
       aspectRatio: {
         'item': '61 / 50',
       },
-      animation: {
-        fade: 'fadeIn 1s ease',
-      },
-      keyframes: theme => ({
-        fadeIn: {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
-        },
-      }),
+
+
 
       screens: {
         "xs": "370",

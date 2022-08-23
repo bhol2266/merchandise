@@ -91,7 +91,9 @@ export const Homepage = () => {
                         a part of our evergrowing
                         Closm Family.</h2>
 
-                    <button className='w-[180px] h-[40px] lg:w-[250px] lg:h-[60px] lg:text-[24px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-black mx-auto hover:bg-[#3f9897]'>JOIN</button>
+                    <Link href='/partner_with_us'>
+                        <button className='w-[180px] h-[40px] lg:w-[250px] lg:h-[60px] lg:text-[24px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-black mx-auto hover:bg-[#3f9897]'>JOIN</button>
+                    </Link>
                 </div>
             </div>
 
