@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
-import videosContext from '../context/videos/videosContext'
+import MerchContext from '../context/MerchContext'
 import { GetToken, GetRefreshToken, GetFirstName, GetLastName } from '../lib/CookieLib'
 import { QueryG } from '../lib/serverConfig'
 import { SignUpUser, SendOTP } from '../lib/serverConfig'
@@ -11,7 +11,7 @@ import { SetToken, SetRefreshToken, SetFirstName, SetLastName, SetEmail } from '
 export const SignUpForm = () => {
 
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, setOTPemail } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, setOTPemail } = useContext(MerchContext)
 
     const [Email, setEmail] = useState('')
     const [firstName, setfirstName] = useState('')

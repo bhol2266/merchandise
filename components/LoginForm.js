@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import videosContext from '../context/videos/videosContext'
 import { SignInUser } from '../lib/serverConfig'
+import MerchContext from '../context/MerchContext'
 import { SetToken, SetRefreshToken, SetFirstName, SetLastName, SetEmail } from '../lib/CookieLib'
 import { useRouter } from 'next/router'
 
@@ -13,7 +13,7 @@ export const LoginForm = () => {
 
     const router = useRouter()
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(MerchContext)
 
 
 

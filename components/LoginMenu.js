@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useContext, useEffect, useState } from 'react'
-import videosContext from '../context/videos/videosContext'
+import MerchContext from '../context/MerchContext'
 import { GetToken, GetEmail } from '../lib/CookieLib'
 import { removeCookies } from 'cookies-next';
 import Router, { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ function classNames(...classes) {
 function LoginMenu() {
 
   const router = useRouter();
-  const { loginSidebar, setloginSidebar } = useContext(videosContext)
+  const { loginSidebar, setloginSidebar } = useContext(MerchContext)
   const [loggedIn, setloggedIn] = useState(false)
 
   useEffect(() => {

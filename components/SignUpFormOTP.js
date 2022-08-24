@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import videosContext from '../context/videos/videosContext'
+import MerchContext from '../context/MerchContext'
 import { VerifyOTP } from '../lib/serverConfig'
 import { GetToken } from '../lib/CookieLib'
 import Router, { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ export const SignUpFormOTP = () => {
     const router = useRouter();
 
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, loggedIn, setloggedIn } = useContext(videosContext)
+    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, loggedIn, setloggedIn } = useContext(MerchContext)
 
     const [Email, setEmail] = useState('')
     const [OTP, setOTP] = useState(null)

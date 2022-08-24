@@ -10,7 +10,8 @@ module.exports = {
     extend: {
       animation: {
         spii: 'wiggle 2s linear infinite',
-        movement: 'movement 1s linear 1'
+        movement: 'movement 1s linear 1',
+        colorModal: 'modal 0.5s ease-out 1',
 
       },
       keyframes: {
@@ -21,6 +22,11 @@ module.exports = {
         movement: {
           '0%': { transform: 'translateY(0px)' },
           '100%': { transform: 'translateY(-10px)' },
+        },
+        modal: {
+          '0%': { transform: 'translateY(700px)' },
+          '50%': { transform: 'translateY(-20px)' },
+          '100%': { transform: 'translateY(0px)' },
         }
       },
 

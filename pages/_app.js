@@ -3,14 +3,13 @@ import NProgress from 'nprogress'
 import '../styles/globals.css'
 import '../styles/nProgress.css'
 import Router from 'next/router'
-import VideoState from '../context/videos/VideoState'
 import Head from 'next/head'
 import { Navigation } from '../components/Navigation'
 import { Footer } from '../components/footer'
 import { LoginForm } from '../components/LoginForm'
 import { SignUpForm } from '../components/SignUpForm'
 import { SignUpFormOTP } from '../components/SignUpFormOTP'
-
+import GlobalStates from '../context/globalStates'
 
 function MyApp({ Component, pageProps }) {
 
@@ -40,7 +39,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
 
-      <VideoState>
+      <GlobalStates>
         <Navigation />
         <LoginForm />
         <SignUpForm />
@@ -48,7 +47,7 @@ function MyApp({ Component, pageProps }) {
 
         <Component {...pageProps} />
         <Footer />
-      </VideoState>
+      </GlobalStates>
     </>
   )
 }

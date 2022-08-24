@@ -6,8 +6,8 @@ import { Homepage } from '../components/Homepage'
 import { QueryG } from '../lib/serverConfig'
 import { apiip } from '../lib/serverConfig';
 import { GetEmail, } from '../lib/CookieLib'
-import videosContext from '../context/videos/videosContext'
 import { checkCookies } from 'cookies-next';
+import context from '../context/context'
 
 
 export default function Home() {

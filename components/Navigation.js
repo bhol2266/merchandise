@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import LoginMenu from './LoginMenu'
-import videosContext from '../context/videos/videosContext'
+import MerchContext from '../context/MerchContext'
 import { useRouter } from 'next/router'
 
 export const Navigation = () => {
-    const { youtuberLogo } = useContext(videosContext)
+    const { youtuberLogo } = useContext(MerchContext)
 
     const [user_creator_Mode, setuser_creator_Mode] = useState('user')
 
