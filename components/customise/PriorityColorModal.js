@@ -1,4 +1,4 @@
-import { XCircleIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { XCircleIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 import { useContext, useEffect, useState } from 'react';
 import MerchContext from '../../context/MerchContext';
 
@@ -39,6 +39,8 @@ const PriorityColorModal = () => {
                         )
                     })}
                 </div>
+
+
 
 
                 <button onClick={() => { setmodalVisible(!modalVisible) }} className={` w-[232px] block mx-auto py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer mt-5`}>Confirm</button>

@@ -74,6 +74,7 @@ module.exports = {
         Opensans: ['Open Sans'],
         SFuiDisplay: ['SF UI Display'],
         Abhayalibre: ['Abhaya Libre'],
+        Mont: ['Montserrat'],
 
       }
     },

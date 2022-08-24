@@ -1,8 +1,8 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import { HexColorPicker } from "react-colorful";
 import * as htmlToImage from 'html-to-image';
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 
 
 import Script from 'next/script';
@@ -157,25 +157,31 @@ const Canvas = () => {
 
 
 
-                {/* Canvas playground */}
-                <div className='md:scale-110 md:my-10  lg:scale-125 lg:my-16'>
-                    <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit '>
-                        <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`}  ></img>
-                        <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
-                            <canvas
-                                ref={canvasRef}
-                                id="myCanvas"
-                            />
+                <div className='flex items-center justify-center'>
+                    <div className='cursor-pointer rounded-xl h-[406px] flex items-center hover:bg-gray-300'>
+                        <ChevronLeftIcon className='h-[35px] text-black' />
+                    </div>
+                    {/* Canvas playground */}
+                    <div className='md:scale-110 md:my-10  lg:scale-125 lg:my-16'>
+                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit '>
+                            <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`}  ></img>
+                            <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
+                                <canvas
+                                    ref={canvasRef}
+                                    id="myCanvas"
+                                />
+                            </div>
                         </div>
+                    </div>
+
+                    <div className='cursor-pointer rounded-xl h-[406px] flex items-center hover:bg-gray-300'>
+
+                        <ChevronRightIcon className='h-[35px] text-black' />
                     </div>
                 </div>
 
 
                 <div className='grid grid-cols-2  space-x-2 md:space-x-0 md:space-y-2 md:flex-col items-center md:justify-between mt-6 mx-2'>
-                    {/* <button onClick={() => {
-                            setopenAddtextModaal(true)
-                        }} className='w-[120px] h-[28px] bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px]'>Add Text</button> */}
-
                     <button onClick={removeSelectedItem} className=' hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Remove Seleted</button>
                     <button onClick={resetCanvas} className=' hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Clear All</button>
                 </div>
@@ -238,6 +244,8 @@ const Canvas = () => {
                     </div>
                 </div>
             </div> */}
+
+          
 
 
 
