@@ -4,13 +4,13 @@ import { Itemlist } from '../components/Itemlist'
 import { Navigation } from '../components/Navigation'
 import { QueryG } from '../lib/serverConfig'
 import Router, { useRouter } from 'next/router'
-import videosContext from '../context/videos/videosContext'
+import MerchContext from '../context/MerchContext'
 
 function Youtuber({ youtuber, banner, logo, productlist, productid, youtuberNotFound }) {
     const router = useRouter();
 
     const pages = ['1', '2', '3', '4', '5', '6', '7']
-    const { setyoutuberLogo } = useContext(videosContext);
+    const { setyoutuberLogo } = useContext(MerchContext);
 
     useEffect(() => {
         setyoutuberLogo(logo)

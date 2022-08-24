@@ -6,7 +6,7 @@ import { Itemlist } from '../../components/Itemlist'
 import { QueryG } from '../../lib/serverConfig'
 import { CheckIcon } from '@heroicons/react/solid'
 import { XIcon } from '@heroicons/react/solid'
-import videosContext from '../../context/videos/videosContext'
+import MerchContext from '../../context/MerchContext'
 import { Addtobag } from '../../lib/serverConfig'
 import { GetEmail } from '../../lib/CookieLib'
 

@@ -7,7 +7,7 @@ import { QueryG } from '../lib/serverConfig'
 import { apiip } from '../lib/serverConfig';
 import { GetEmail, } from '../lib/CookieLib'
 import { checkCookies } from 'cookies-next';
-import context from '../context/context'
+import MerchContext from '../context/MerchContext'
 
 
 export default function Home() {
