@@ -227,7 +227,7 @@ const Canvas = () => {
 
 
                         {/* Canvas playground */}
-                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit'>
+                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit mt-2 lg:mt-3'>
                             <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} />
                             <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
                                 <canvas
