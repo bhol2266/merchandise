@@ -3,10 +3,15 @@ import { XCircleIcon } from '@heroicons/react/solid'
 import { HexColorPicker } from "react-colorful";
 import * as htmlToImage from 'html-to-image';
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import MerchContext from '../context/MerchContext';
+import ColorModal from './customise/ColorModal';
 
 
 import Script from 'next/script';
 import dynamic from "next/dynamic";
+
+const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
+]
 
 const FontPicker = dynamic(() => import("font-picker-react"), {
     ssr: false,
@@ -33,9 +38,13 @@ const Canvas = () => {
     const [CanvasBorder, setCanvasBorder] = useState(true);
     const [previewEditChanger, setpreviewEditChanger] = useState(false);
 
+    const [selectedProduct, setselectedProduct] = useState("MEN T-SHIRT")
+    const [selectedColour, setselectedColour] = useState('Red');
+    const { modalVisible, setmodalVisible, colours } = useContext(MerchContext);
+
 
     //Fabric text color
-    const [color, setColor] = useState("#000000");
+    // const [color, setColor] = useState("#000000");
 
 
 
@@ -135,36 +144,91 @@ const Canvas = () => {
 
     }
 
+    const slideRight = () => {
+
+    }
+
+    const slideLeft = () => {
+
+    }
+
 
     return (
-        <div>
-            <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
+
+        <div className='lg:flex items-center lg:items-start justify-between '>
 
 
-            <div className='md:flex flex-row-reverse items-center justify-around'>
+            {/* This is for small screen only  */}
+            <div className='lg:hidden sm:w-4/5 md:w-3/5  xl:w-[480px]  mx-auto flex items-start justify-between '>
+                <div>
+                    <h2 className='text-[12px] font-inter text-[#323232]'>Choose Product</h2>
 
-                <div className='lg:scale-125 xl:scale-150 xl:mr-[100px] md:mr-[50px]  sm:w-fit sm:mx-auto md:mx-0 mb-[20px]'>
+                    <select className='mt-[8px] w-[170px] min-h-[30px] text-[10px] font-inter rounded-xl text-[#323232] border-[1px] border-[#E5E5E5] p-2  outline-none' value={selectedProduct} onChange={e => setselectedProduct(e.target.value)}>
 
-                    <div className='grid grid-cols-3  md:flex-col items-center md:justify-between mt-6 mx-2'>
-                        <button onClick={() => { setFrontBackSelected("FRONT") }} className={`w-[120px] h-[28px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
-                        <button onClick={() => { setFrontBackSelected("BACK") }} className={`w-[120px] h-[28px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
 
-                        <label className='w-[120px] h-[28px] text-center pt-1.5  bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>UPLOAD</label>
-                        <input id='uploader' ref={inputFileRef} onChange={uploadFile} type="file" className="hidden" />
+
+                        {chooseProducts.map(item => {
+                            return (
+                                <option className='font-inter text-[#323232] text-[10px] my-4' key={item} value={item} >{item}</option>
+                            )
+                        })}
+
+                    </select>
+
+                </div>
+                <div className=''>
+
+                    <h2 className='text-[12px] font-inter text-[#323232]'>Product Colours</h2>
+
+
+
+                    <div onClick={() => { setmodalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[8px] w-[170px] cursor-pointer'>
+                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[0].hexcode }}></span>
+                        <h2 className='font-inter text-[#323232] text-[10px]'>{colours[0].name}</h2>
+                        <ChevronRightIcon className='h-[18px] text-[#323232]' />
                     </div>
+
+                    <h2 className='font-inter text-[10px] mt-[6px] text-[#323232]'>(16 Product Colour Selected)</h2>
+
+                    {/* Make background darker */}
+                    <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${modalVisible ? "" : "hidden"} `} />
+                    <ColorModal />
 
                 </div>
 
 
+            </div>
 
-                <div className='flex items-center justify-center'>
-                    <div className='cursor-pointer rounded-xl h-[406px] flex items-center hover:bg-gray-300'>
-                        <ChevronLeftIcon className='h-[35px] text-black' />
+
+            {/* CANVAS  */}
+            <div className='sm:w-4/5 md:w-3/5 lg:w-full  mx-auto lg:mx-0 '>
+                <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
+
+
+                <div className='flex flex-col items-center justify-around lg:justify-start'>
+
+
+                    <div className='grid lg:grid-cols-2 grid-cols-3 sm:px-6 lg:px-0  items-center justify-between mt-6 lg:mt-0   w-full'>
+                        <button onClick={() => { setFrontBackSelected("FRONT") }} className={` h-[28px] lg:h-[40px] lg:pt-[8px] lg:px-[50px] lg:pb-[10px] lg:text-[18px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
+                    
+                        <button onClick={() => { setFrontBackSelected("BACK") }} className={` h-[28px] lg:h-[40px] lg:pt-[8px] lg:px-[50px] lg:pb-[10px] lg:text-[18px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
+
+                        <label className='lg:hidden ml-1  h-[28px] text-center pt-1.5  bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>UPLOAD</label>
+                        <input id='uploader' ref={inputFileRef} onChange={uploadFile} type="file" className="hidden" />
                     </div>
-                    {/* Canvas playground */}
-                    <div className='md:scale-110 md:my-10  lg:scale-125 lg:my-16'>
-                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit '>
-                            <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`}  ></img>
+
+
+
+
+                    <div className='flex items-center justify-center relative w-full lg:scale-105 xl:scale-110 lg:m-8'>
+                        <div onClick={slideLeft} className='absolute left-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
+                            <ChevronLeftIcon className='h-[35px] text-black' />
+                        </div>
+
+
+                        {/* Canvas playground */}
+                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit'>
+                            <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} />
                             <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
                                 <canvas
                                     ref={canvasRef}
@@ -172,85 +236,117 @@ const Canvas = () => {
                                 />
                             </div>
                         </div>
+
+
+
+
+                        <div onClick={slideRight} className='absolute right-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
+                            <ChevronRightIcon className='h-[35px] text-black' />
+                        </div>
                     </div>
 
-                    <div className='cursor-pointer rounded-xl h-[406px] flex items-center hover:bg-gray-300'>
 
-                        <ChevronRightIcon className='h-[35px] text-black' />
+                    <div className='grid grid-cols-2  gap-3 mt-6 sm:px-6 w-full lg:hidden '>
+                        <button onClick={removeSelectedItem} className=' hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Remove Seleted</button>
+                        <button onClick={resetCanvas} className=' hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Clear All</button>
                     </div>
+
+
+                </div>
+
+            </div >
+
+
+
+            {/* This is for large screen only */}
+            <div className='hidden xl:ml-[100px] lg:ml-[50px] lg:flex items-start justify-start flex-col w-full '>
+
+
+                {/* Upload Art  */}
+                <div className='w-full '>
+                    <h2 className='text-[14px] font-inter mb-1'>Upload Art</h2>
+                    <label className='px-[90px] py-1.5  h-[28px] text-center  bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>UPLOAD</label>
+                    <input id='uploader' ref={inputFileRef} onChange={uploadFile} type="file" className="hidden" />
+
                 </div>
 
 
-                <div className='grid grid-cols-2  space-x-2 md:space-x-0 md:space-y-2 md:flex-col items-center md:justify-between mt-6 mx-2'>
-                    <button onClick={removeSelectedItem} className=' hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Remove Seleted</button>
-                    <button onClick={resetCanvas} className=' hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Clear All</button>
+                <div className='mt-8'>
+                    <h2 className='text-[15px] font-inter text-[#323232] ml-1'>Choose Product</h2>
+
+                    <select className='mt-[4px] w-[240px] 
+                     text-[10px] lg:text-[13px] font-inter rounded-xl text-[#323232] border-[1px] border-[#E5E5E5] p-2  outline-none' value={selectedProduct} onChange={e => setselectedProduct(e.target.value)}>
+
+
+
+                        {chooseProducts.map(item => {
+                            return (
+                                <option className='font-inter text-[#323232] text-[12px] my-4  lg:my-6' key={item} value={item} >{item}</option>
+                            )
+                        })}
+
+                    </select>
+
                 </div>
 
+                <div className='mt-2 flex items-start flex-col justify-start '>
+
+                    <h2 className='lg:text-[15px] font-inter text-[#323232] mt-4 ml-1'>Product Colours</h2>
+
+
+
+                    <div onClick={() => { setmodalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[4px] cursor-pointer scale-110 ml-2 w-[222px]'>
+                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[0].hexcode }}></span>
+                        <h2 className='font-inter text-[#323232] text-[12px]'>{colours[0].name}</h2>
+                        <ChevronRightIcon className='h-[18px] text-[#323232]' />
+                    </div>
+
+                    <h2 className='font-inter text-[12px] mt-[6px] text-[#323232]'>(16 Product Colour Selected)</h2>
+
+                    {/* Make background darker */}
+                    <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${modalVisible ? "" : "hidden"} `} />
+                    <ColorModal />
+
+                </div>
+
+
+
+                <div className='my-10 space-y-3 flex flex-col items-start  w-full'>
+                    <button onClick={removeSelectedItem} className='w-[240px] hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px] lg:text-[15px]'>Remove Seleted</button>
+                    <button onClick={resetCanvas} className='w-[240px] hover:text-white hover:bg-[#54BAB9] text-[12px] lg:text-[15px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Clear All</button>
+                </div>
+
+                <div className=''>
+                    <p className='text-[12px] font-inter  text-[#323232] w-[250px]'>A product colour that will be prioritised & will be showed in
+                        front page.</p>
+
+                    <h2 className='mt-2 text-[16px] font-inter font-medium text-[#323232] ml-1 '>Priority Colour</h2>
+                    <div onClick={() => { setmodalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[4px] w-[222px] cursor-pointer scale-110 ml-2'>
+                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[0].hexcode }}></span>
+                        <h2 className='font-inter text-[#323232] text-[12px]'>{colours[0].name}</h2>
+                        <ChevronRightIcon className='h-[18px] text-[#323232]' />
+                    </div>
+
+                </div>
 
             </div>
 
 
 
-
-
-            {/* <div className='flex items-center justify-center mt-[20px] space-x-3'>
-                <button onClick={downloadCavasImage} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>Download</button>
-                <button onClick={preview} className={` w-[250px] py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>{previewEditChanger ? "Edit" : "Preview"}</button>
-            </div> */}
-
-
-
-
-
-
-            {/* Add text modal */}
-            {/* <div className={`${openAddtextModaal ? "" : "hidden"} fixed top-0 right-0 left-0 z-50  justify-center items-center flex `}>
-                <div className="relative p-4 w-full sm:w-1/2 mx-16 md:w-1/3 lg:w-1/4">
-                    <div className="relative rounded-lg shadow  bg-slate-200">
-
-
-                        <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
-                            <svg onClick={() => { setopenAddtextModaal(false) }} aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                            <span className="sr-only">Close modal</span>
-                        </button>
-                        <div className='mx-4 py-6'>
-
-                            <div className="py-3 flex items-start flex-col">
-                                <p className=' text-center text-[16px] font-poppins rounded-[4px] '>Add Text</p>
-                                <input onChange={(e) => { setfabricText(e.target.value) }} style={{ color: color, fontFamily: activeFontFamily }} className=' rounded font-inter text-lg py-1  outline-none' placeholder='text....' type='text' id='text' />
-                            </div>
-                            <div className="py-3 flex items-start flex-col space-y-1">
-                                <p className=' text-center text-[16px] font-inter rounded-[4px]'>Choose Font Style</p>
-
-                                <FontPicker
-                                    apiKey={fontAPI}
-                                    activeFontFamily={activeFontFamily}
-                                    onChange={(nextFont) =>
-                                        setactiveFontFamily(nextFont.family)
-                                    }
-                                />
-                            </div>
-
-                            <div className="py-3 flex items-start flex-col space-y-1">
-                                <p className=' text-center text-[16px] font-inter rounded-[4px]'>Choose Text Colour</p>
-                                <HexColorPicker color={color} onChange={setColor} />
-                                <p style={{ backgroundColor: color, color: color }} className={`w-[200px] text-center text-[16px] font-inter rounded-[4px]`}>{color}</p>
-                            </div>
-
-
-                            <button onClick={addText} className={`mx-auto block w-[150px] py-1 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer`}>Confirm</button>
-
-                        </div>
-                    </div>
+            {/* This is just for small screens */}
+            <div className='mt-[20px] lg:hidden sm:w-4/5 md:w-3/5 mx-auto'>
+                <p className='text-[10px] font-inter  text-[#323232] '>A product colour that will be prioritised & will be showed in
+                    front page.</p>
+                <h2 className='my-[8px] text-[12px] font-inter font-medium text-[#323232] ml-1'>Priority Colour</h2>
+                <div onClick={() => { setmodalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[8px] w-[170px] cursor-pointer'>
+                    <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[0].hexcode }}></span>
+                    <h2 className='font-inter text-[#323232] text-[10px]'>{colours[0].name}</h2>
+                    <ChevronRightIcon className='h-[18px] text-[#323232]' />
                 </div>
-            </div> */}
 
-          
-
-
-
-
+            </div>
         </div>
+
     )
 };
 export default Canvas;
