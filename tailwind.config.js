@@ -24,7 +24,7 @@ module.exports = {
           '100%': { transform: 'translateY(-10px)' },
         },
         modal: {
-          '0%': { transform: 'translateY(700px)' },
+          '0%': { transform: 'translateY(1500px)' },
           '50%': { transform: 'translateY(-20px)' },
           '100%': { transform: 'translateY(0px)' },
         }
