@@ -4,8 +4,10 @@ import { loadGetInitialProps } from 'next/dist/shared/lib/utils'
 
 
 export const Item = ({ obj }) => {
-    const { price, mrp, discount, title, description,id } = obj.node
-    const imageUrl = "https://closm.com/" + obj.node.colors[0].image[0].image
+    const { price, mrp, discount, title, description,id,img } = obj
+
+ 
+    const imageUrl = "./homepageImages/" + img+'.png'
 
 
 
