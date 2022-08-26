@@ -238,7 +238,7 @@ const Canvas = () => {
                         <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit mt-4'>
 
 
-                            <img className='h-[406px] object-contain ' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
+                            <img className='h-[406px] object-contain' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
                             <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
                                 <canvas
                                     ref={canvasRef}
