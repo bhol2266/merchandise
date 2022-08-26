@@ -23,11 +23,11 @@ const Customise = () => {
 
 
     return (
-        <div className='mx-[14px] lg:mx-[50px] xl:mx-[100px] my-[15px] mb-16 '>
+        <div className='mx-[14px] lg:mx-[30px] xl:mx-[50px] 2xl:mx-[80px] my-[15px] mb-16 '>
             <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
 
             {/* Navbar  */}
-            <div className='flex items justify-between mb-4  lg:mb-[20px]'>
+            <div className='flex items justify-between mb-4  lg:mb-[10px]'>
                 <h1 className='text-[16px] lg:text-[18px] font-inter text-[#323232]'>ACCOUNT</h1>
                 <div className='flex items-center justify-between space-x-3 lg:space-x-6'>
                     <h2 onClick={() => { setcurrnetNavigation('PREVIEW') }} className={`hover:text-blue-700 cursor-pointer ${currnetNavigation === 'PREVIEW' ? "underline" : ""} text-[12px] lg:text-[14px] text-[#323232] font-inter`}>Preview & Edit</h2>
@@ -49,7 +49,7 @@ const Customise = () => {
             }
 
             {currnetNavigation === 'PUBLISHED_PRODUCT' &&
-                <publishedProducts />
+                <PublishedProducts />
             }
 
 

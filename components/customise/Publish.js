@@ -18,12 +18,12 @@ const Publish = () => {
 
 
     return (
-        <div className=' lg:flex items-center lg:items-start justify-between'>
+        <div className=' lg:flex items-center lg:items-start justify-between lg:px-4 2xl:px-12'>
 
             <Canvas />
 
             {/* PRICE and NAME  */}
-            <div className='mt-[40px] lg:mt-0 sm:w-4/5 md:w-3/5 lg:w-[280px] xl:w-[480px]  mx-auto lg:mx-0 '>
+            <div className='mt-[40px] lg:mt-0 sm:w-4/5 md:w-3/5 lg:w-[280px] xl:w-[480px] 2xl:w-[580px]  mx-auto lg:mx-0'>
                 <h2 className='text-[14px] lg:text-[16px] font-inter text-[#323232] mb-[21px] '>PRICE & NAME</h2>
 
                 <div className='flex-fles-col space-y-1 mb-[15px]'>

@@ -215,7 +215,7 @@ const Canvas = () => {
                 <div className='flex flex-col items-center justify-around lg:justify-start'>
 
 
-                    <div className='grid lg:grid-cols-2 grid-cols-3 sm:px-6 lg:px-0  items-center justify-between mt-6 lg:mt-0   w-full'>
+                    <div className='grid lg:grid-cols-2 grid-cols-3 sm:px-6 lg:px-0  items-center justify-between mt-6 lg:mt-2   w-full'>
                         <button onClick={() => { setFrontBackSelected("FRONT") }} className={` h-[28px] lg:h-[40px] lg:pt-[8px] lg:px-[50px] lg:pb-[10px] lg:text-[18px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
 
                         <button onClick={() => { setFrontBackSelected("BACK") }} className={` h-[28px] lg:h-[40px] lg:pt-[8px] lg:px-[50px] lg:pb-[10px] lg:text-[18px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
@@ -234,7 +234,7 @@ const Canvas = () => {
 
 
                         {/* Canvas playground */}
-                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit mt-4'>
+                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit mt-4 lg:mt-0'>
 
 
                             <img className='h-[406px] object-contain' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />

@@ -46,7 +46,8 @@ module.exports = {
         "sm": "500px",
         'md': '750px',
         'lg': "1000px",
-        'xl': "1250px"
+        'xl': "1250px",
+        '2xl': "1500px",
       },
       colors: {
         'github': '#24292F',
