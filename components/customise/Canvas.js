@@ -3,9 +3,9 @@ import { XCircleIcon } from '@heroicons/react/solid'
 import { HexColorPicker } from "react-colorful";
 import * as htmlToImage from 'html-to-image';
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
-import MerchContext from '../context/MerchContext';
-import ColorModal from './customise/ColorModal';
-
+import MerchContext from '../../context/MerchContext';
+import ColorModal from './ColorModal';
+import { tshirts } from '../../Data/tshirs';
 
 import Script from 'next/script';
 import dynamic from "next/dynamic";
@@ -39,7 +39,7 @@ const Canvas = () => {
     const [previewEditChanger, setpreviewEditChanger] = useState(false);
 
     const [selectedProduct, setselectedProduct] = useState("MEN T-SHIRT")
-    const [selectedColour, setselectedColour] = useState('Red');
+    const [selectedColourIndex, setselectedColourIndex] = useState(0); // 0 indicates the index position of the tshirts colour array
     const { modalVisible, setmodalVisible, colours } = useContext(MerchContext);
 
 
@@ -145,11 +145,15 @@ const Canvas = () => {
     }
 
     const slideRight = () => {
-
+        if (selectedColourIndex !== tshirts.length - 1) {
+            setselectedColourIndex(selectedColourIndex + 1)
+        }
     }
 
     const slideLeft = () => {
-
+        if (selectedColourIndex !== 0) {
+            setselectedColourIndex(selectedColourIndex - 1)
+        }
     }
 
 
@@ -210,7 +214,7 @@ const Canvas = () => {
 
                     <div className='grid lg:grid-cols-2 grid-cols-3 sm:px-6 lg:px-0  items-center justify-between mt-6 lg:mt-0   w-full'>
                         <button onClick={() => { setFrontBackSelected("FRONT") }} className={` h-[28px] lg:h-[40px] lg:pt-[8px] lg:px-[50px] lg:pb-[10px] lg:text-[18px] ${FrontBackSelected === 'FRONT' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter  rounded-[4px] cursor-pointer`}>FRONT</button>
-                    
+
                         <button onClick={() => { setFrontBackSelected("BACK") }} className={` h-[28px] lg:h-[40px] lg:pt-[8px] lg:px-[50px] lg:pb-[10px] lg:text-[18px] ${FrontBackSelected === 'BACK' ? "bg-[#54BAB9] text-[#FFFFFF]" : ""} text-[12px] font-inter rounded-[4px] cursor-pointer`}>BACK</button>
 
                         <label className='lg:hidden ml-1  h-[28px] text-center pt-1.5  bg-[#54BAB9] text-[12px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>UPLOAD</label>
@@ -220,15 +224,17 @@ const Canvas = () => {
 
 
 
-                    <div className='flex items-center justify-center relative w-full lg:scale-105 xl:scale-110 lg:m-8'>
+                    <div className='flex items-center justify-center relative w-full lg:scale-105 xl:scale-110 lg:m-8 '>
                         <div onClick={slideLeft} className='absolute left-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
-                            <ChevronLeftIcon className='h-[35px] text-black' />
+                            <ChevronLeftIcon className='h-[35px] text-black select-none' />
                         </div>
 
 
                         {/* Canvas playground */}
-                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit mt-2'>
-                            <img className='h-[406px] object-contain ' src={`./canvas/${FrontBackSelected === 'FRONT' ? "front" : "back"}.png`} />
+                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit mt-4'>
+
+
+                            <img className='h-[406px] object-contain ' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
                             <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
                                 <canvas
                                     ref={canvasRef}
@@ -238,10 +244,8 @@ const Canvas = () => {
                         </div>
 
 
-
-
                         <div onClick={slideRight} className='absolute right-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
-                            <ChevronRightIcon className='h-[35px] text-black' />
+                            <ChevronRightIcon className='h-[35px] text-black select-none' />
                         </div>
                     </div>
 
