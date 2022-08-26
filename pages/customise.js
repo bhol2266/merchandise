@@ -27,7 +27,7 @@ const Customise = () => {
             {/* Navbar  */}
             <div className='flex items justify-between mb-4  lg:mb-[20px]'>
                 <h1 className='text-[16px] lg:text-[18px] font-inter text-[#323232]'>ACCOUNT</h1>
-                <div className='flex items-center justify-between space-x-2 lg:space-x-6'>
+                <div className='flex items-center justify-between space-x-3 lg:space-x-6'>
                     <h2 onClick={() => { setcurrnetNavigation('PREVIEW') }} className={`hover:text-blue-700 cursor-pointer ${currnetNavigation === 'PREVIEW' ? "underline" : ""} text-[12px] lg:text-[14px] text-[#323232] font-inter`}>Preview & Edit</h2>
                     <h2 onClick={() => { setcurrnetNavigation('PUBLISH') }} className={`hover:text-blue-700 cursor-pointer ${currnetNavigation === 'PUBLISH' ? "underline" : ""} text-[12px] lg:text-[14px] text-[#323232] font-inter`}>Publish</h2>
                     <h2 onClick={() => { setcurrnetNavigation('PUBLISHED_PRODUCT') }} className={`hover:text-blue-700 cursor-pointer ${currnetNavigation === 'PUBLISHED_PRODUCT' ? "underline" : ""} text-[12px] lg:text-[14px] text-[#323232] font-inter`}>Published Products</h2>
@@ -35,10 +35,20 @@ const Customise = () => {
             </div>
 
 
+
+
             {currnetNavigation === 'PREVIEW' &&
                 <Preview_Edit />
             }
 
+
+            {currnetNavigation === 'PUBLISH' &&
+                <Publish />
+            }
+
+            {currnetNavigation === 'PUBLISHED_PRODUCT' &&
+                <publishedProducts />
+            }
 
 
 
