@@ -78,9 +78,9 @@ const Preview_Edit = () => {
         if (window.innerWidth >= 750) {
             setproducts(products.slice(0, 4))
         }
-        // if (window.innerWidth >= 1000) {
-        //     setproducts(products.slice(0, 5))
-        // }
+        if (window.innerWidth >= 1000) {
+            setproducts(products.slice(0, 5))
+        }
 
 
     }, [])
@@ -160,7 +160,7 @@ const Preview_Edit = () => {
                 <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Artist Description</h2>
                 <input className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-[#323232] placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='name' id='name' />
 
-                <button className='block ml-auto my-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>Confirm</button>
+                <button className='block ml-auto mt-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>Confirm</button>
 
             </div>
 
