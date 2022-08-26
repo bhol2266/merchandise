@@ -47,6 +47,15 @@ const items = [
         description: "The product will be an excellent pick for you. It ensures an easy maintenance.",
         img: "item3"
     },
+    {
+        id: '6',
+        title: "Jet Black Half Sleeve T-Shirt",
+        price: 499,
+        mrp: 799,
+        discount: 30,
+        description: "The product will be an excellent pick for you. It ensures an easy maintenance.",
+        img: "item3"
+    },
 
 ]
 
