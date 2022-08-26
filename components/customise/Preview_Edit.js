@@ -20,13 +20,7 @@ const Preview_Edit = () => {
     return (
         <div className=' lg:flex items-center lg:items-start justify-between'>
 
-
-
-
-
             <Canvas />
-
-
 
             {/* PRICE and NAME  */}
             <div className='mt-[40px] lg:mt-0 sm:w-4/5 md:w-3/5 lg:w-[280px] xl:w-[480px]  mx-auto lg:mx-0 '>
