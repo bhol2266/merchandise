@@ -147,12 +147,16 @@ const Canvas = () => {
     const slideRight = () => {
         if (selectedColourIndex !== tshirts.length - 1) {
             setselectedColourIndex(selectedColourIndex + 1)
+        } else {
+            setselectedColourIndex(0)
         }
     }
 
     const slideLeft = () => {
         if (selectedColourIndex !== 0) {
             setselectedColourIndex(selectedColourIndex - 1)
+        }else {
+            setselectedColourIndex(tshirts.length - 1)
         }
     }
 
@@ -225,7 +229,7 @@ const Canvas = () => {
 
 
                     <div className='flex items-center justify-center relative w-full lg:scale-105 xl:scale-110 lg:m-8 '>
-                        <div onClick={slideLeft} className='absolute left-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
+                        <div onClick={slideLeft} className='absolute left-0 lg:-left-5 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronLeftIcon className='h-[35px] text-black select-none' />
                         </div>
 
@@ -244,7 +248,7 @@ const Canvas = () => {
                         </div>
 
 
-                        <div onClick={slideRight} className='absolute right-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
+                        <div onClick={slideRight} className='absolute lg:-right-4 right-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronRightIcon className='h-[35px] text-black select-none' />
                         </div>
                     </div>
