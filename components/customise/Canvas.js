@@ -7,7 +7,6 @@ import MerchContext from '../../context/MerchContext';
 import ColorModal from './ColorModal';
 import { tshirts } from '../../Data/tshirs';
 
-import Script from 'next/script';
 import dynamic from "next/dynamic";
 
 const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
@@ -210,7 +209,7 @@ const Canvas = () => {
 
             {/* CANVAS  */}
             <div className='sm:w-4/5 md:w-3/5 lg:w-full  mx-auto lg:mx-0 '>
-                <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
+               
 
 
                 <div className='flex flex-col items-center justify-around lg:justify-start'>

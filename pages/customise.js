@@ -6,6 +6,8 @@ import { XCircleIcon } from '@heroicons/react/solid'
 import Preview_Edit from '../components/customise/Preview_Edit'
 import Publish from '../components/customise/Publish'
 import PublishedProducts from '../components/customise/publishedProducts'
+import Script from 'next/script';
+import dynamic from "next/dynamic";
 
 
 
@@ -22,7 +24,7 @@ const Customise = () => {
 
     return (
         <div className='mx-[14px] lg:mx-[50px] xl:mx-[100px] my-[15px] mb-16 '>
-
+            <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
 
             {/* Navbar  */}
             <div className='flex items justify-between mb-4  lg:mb-[20px]'>
