@@ -5,6 +5,7 @@ import { Menu, Transition } from '@headlessui/react'
 import Canvas from './Canvas'
 import ColorModal from './ColorModal'
 import MerchContext from '../../context/MerchContext';
+import * as htmlToImage from 'html-to-image';
 
 
 
@@ -12,6 +13,58 @@ import MerchContext from '../../context/MerchContext';
 
 const Publish = () => {
 
+    //Here colour is the collection of tshirts of different colours imported in globalStates from Data
+    const { canvas, PreviewMode, setPreviewMode, canvasDivRef, selectedColourIndex, colours, setselectedColourIndex } = useContext(MerchContext)
+
+    const preview = () => {
+        canvas.discardActiveObject();
+        canvas.renderAll();
+        setPreviewMode(!PreviewMode)
+    }
+    const publishClick = async (e) => {
+
+        e.preventDefault()
+        canvas.discardActiveObject();
+        canvas.renderAll();
+        setPreviewMode(true)
+
+        // if (canvas.getObjects().length === 0) {
+        //     alert('Design Empty!')
+        //     return
+        // }
+
+        setInterval(async () => {
+            var index = 0
+
+            if (index === colours.length - 1) {
+            }
+            if (index === 0) {
+                await downloadAllimages(index)
+            }
+            
+            await downloadAllimages(index)
+            index=index+1
+
+        }, 2000);
+
+
+        colours.forEach(async (element, index) => {
+        });
+
+
+    }
+
+    async function downloadAllimages(index) {
+        console.log(index);
+        setselectedColourIndex(index)
+        // const dataUrl = await htmlToImage.toPng(canvasDivRef.current);
+
+        // // download image
+        // const link = document.createElement('a');
+        // link.download = "html-to-img.png";
+        // link.href = dataUrl;
+        // link.click();
+    }
 
 
 
@@ -61,8 +114,8 @@ const Publish = () => {
                 </div>
 
                 <div className='grid grid-cols-2 gap-2 mt-[20px]'>
-                    <button className='text-[#323232] font-Mont font-medium text-[12px] lg:text-[14px]  rounded-[5px] border-[1px] border-[#54BAB9] py-[10px] px-[15px]'>Preview</button>
-                    <button className=' font-Mont font-medium text-[12px] lg:text-[14px]  rounded-[5px] border-[1px] border-[#54BAB9] py-[10px] px-[15px] bg-[#54BAB9] text-white'>Publish</button>
+                    <button onClick={preview} className='text-[#323232] font-Mont font-medium text-[12px] lg:text-[14px]  rounded-[5px] border-[1px] border-[#54BAB9] py-[10px] px-[15px]'>{PreviewMode ? "Edit" : "Preview"}</button>
+                    <button onClick={publishClick} className=' font-Mont font-medium text-[12px] lg:text-[14px]  rounded-[5px] border-[1px] border-[#54BAB9] py-[10px] px-[15px] bg-[#54BAB9] text-white'>Publish</button>
                 </div>
 
             </div>

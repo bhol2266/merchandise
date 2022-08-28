@@ -1,12 +1,10 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { XCircleIcon } from '@heroicons/react/solid'
 import { HexColorPicker } from "react-colorful";
-import * as htmlToImage from 'html-to-image';
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import MerchContext from '../../context/MerchContext';
 import ColorModal from './ColorModal';
 import { tshirts } from '../../Data/tshirs';
-
 import dynamic from "next/dynamic";
 
 const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
@@ -20,15 +18,12 @@ const FontPicker = dynamic(() => import("font-picker-react"), {
 
 const Canvas = () => {
 
-    const divToImageRef = useRef(null);
 
-
-
-    const [canvas, setcanvas] = useState(null);
-    const fontAPI = 'AIzaSyAZ0YPUkF0oXOhdK3J6EnfSqXZEDHOXQ_g'
     const inputFileRef = useRef(null)
     const canvasRef = useRef(null)
-    const contextRef = useRef(null)
+    const divToImageRef = useRef(null);
+
+    const fontAPI = 'AIzaSyAZ0YPUkF0oXOhdK3J6EnfSqXZEDHOXQ_g'
     const [FrontBackSelected, setFrontBackSelected] = useState('FRONT');
     const [imageUploadedinCanvas, setimageUploadedinCanvas] = useState(null);
     const [openAddtextModaal, setopenAddtextModaal] = useState(false);
@@ -38,8 +33,9 @@ const Canvas = () => {
     const [previewEditChanger, setpreviewEditChanger] = useState(false);
 
     const [selectedProduct, setselectedProduct] = useState("MEN T-SHIRT")
-    const [selectedColourIndex, setselectedColourIndex] = useState(0); // 0 indicates the index position of the tshirts colour array
-    const { modalVisible, setmodalVisible, colours } = useContext(MerchContext);
+   const { modalVisible, setmodalVisible, colours, PreviewMode, canvas, setcanvas, setcanvasDivRef ,selectedColourIndex, setselectedColourIndex} = useContext(MerchContext);
+
+
 
 
     //Fabric text color
@@ -54,6 +50,7 @@ const Canvas = () => {
         })
         canvas.renderAll()
         setcanvas(canvas)
+        setcanvasDivRef(divToImageRef)
     }, []);
 
     const uploadFile = (e) => {
@@ -80,30 +77,29 @@ const Canvas = () => {
             img.src = reader.result
         }
         reader.readAsDataURL(e.target.files[0])
-    }
-
-
-
-
-
-    const downloadCavasImage = async () => {
-        setCanvasBorder(false)
-        const dataUrl = await htmlToImage.toPng(divToImageRef.current);
-
-        // download image
-        const link = document.createElement('a');
-        link.download = "html-to-img.png";
-        link.href = dataUrl;
-        link.click();
-        setCanvasBorder(true)
-    }
-    const preview = async () => {
-        setpreviewEditChanger(!previewEditChanger)
-        setCanvasBorder(!CanvasBorder)
-        canvas.discardActiveObject();
-        canvas.renderAll();
 
     }
+
+
+
+
+
+    // const downloadCavasImage = async () => {
+    //     setCanvasBorder(false)
+    //     const dataUrl = await htmlToImage.toPng(divToImageRef.current);
+
+    //     // download image
+    //     const link = document.createElement('a');
+    //     link.download = "html-to-img.png";
+    //     link.href = dataUrl;
+    //     link.click();
+    //     setCanvasBorder(true)
+    // }
+    // const preview = async () => {
+    //     canvas.discardActiveObject();
+    //     canvas.renderAll();
+
+    // }
 
 
     const removeSelectedItem = () => {
@@ -115,8 +111,6 @@ const Canvas = () => {
             alert('Select any item to remove!')
         }
 
-
-        console.log(canvas.getActiveObject());
         canvas.remove(canvas.getActiveObject());
     }
 
@@ -154,7 +148,7 @@ const Canvas = () => {
     const slideLeft = () => {
         if (selectedColourIndex !== 0) {
             setselectedColourIndex(selectedColourIndex - 1)
-        }else {
+        } else {
             setselectedColourIndex(tshirts.length - 1)
         }
     }
@@ -209,7 +203,7 @@ const Canvas = () => {
 
             {/* CANVAS  */}
             <div className='sm:w-4/5 md:w-3/5 lg:w-full  mx-auto lg:mx-0 '>
-               
+
 
 
                 <div className='flex flex-col items-center justify-around lg:justify-start'>
@@ -234,11 +228,11 @@ const Canvas = () => {
 
 
                         {/* Canvas playground */}
-                        <div ref={divToImageRef} className=' mx-auto flex items-center justify-center  relative w-fit mt-4 lg:mt-0'>
+                        <div ref={divToImageRef} className={`select-none mx-auto flex items-center justify-center  relative w-fit mt-4 lg:mt-0 ${PreviewMode ? "pointer-events-none" : ""}`}>
 
 
                             <img className='h-[406px] object-contain' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
-                            <div className={` ${CanvasBorder ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
+                            <div className={` ${!PreviewMode ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
                                 <canvas
                                     ref={canvasRef}
                                     id="myCanvas"

@@ -21,10 +21,16 @@ const GlobalStates = (props) => {
     //customise page modal
     const [modalVisible, setmodalVisible] = useState(false);
     const [colours, setcolours] = useState(chooseColours);
+    const [PreviewMode, setPreviewMode] = useState(false)
+
+    const [canvas, setcanvas] = useState(null)
+    const [canvasDivRef, setcanvasDivRef] = useState(null)
+    const [selectedColourIndex, setselectedColourIndex] = useState(0); // 0 indicates the index position of the tshirts colour array
+
 
 
     return (
-        <MerchContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, youtuberLogo, setyoutuberLogo, modalVisible, setmodalVisible, colours, setcolours }}>
+        <MerchContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, youtuberLogo, setyoutuberLogo, modalVisible, setmodalVisible, colours, setcolours, PreviewMode, setPreviewMode, canvas, setcanvas, canvasDivRef, setcanvasDivRef,selectedColourIndex, setselectedColourIndex }}>
             {props.children}
         </MerchContext.Provider>
     )
