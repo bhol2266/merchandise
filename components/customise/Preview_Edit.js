@@ -176,7 +176,7 @@ const Preview_Edit = () => {
                     </div>
                 </div>
 
-                <img src={Banner} alt='/youtuber_assets/youtuber_banner.png' className='h-[135px] w-full px-2.5  lg:w-[600px] lg:h-[200px]'></img>
+                <img src={Banner} alt='/youtuber_assets/youtuber_banner.png' className='h-[135px] w-full px-2.5  lg:w-full lg:h-[200px] object-fill'></img>
 
                 <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[20px] pb-2'>
                     <MiniatureItemList items={products} />

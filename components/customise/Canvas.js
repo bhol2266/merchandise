@@ -222,14 +222,13 @@ const Canvas = () => {
 
 
                     <div className='flex items-center justify-center relative w-full lg:scale-105 xl:scale-110 lg:m-8 '>
-                        <div onClick={slideLeft} className='absolute left-0 lg:-left-5 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
+                        {/* <div onClick={slideLeft} className='absolute left-0 lg:-left-5 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronLeftIcon className='h-[35px] text-black select-none' />
-                        </div>
+                        </div> */}
 
 
                         {/* Canvas playground */}
-                        <div ref={divToImageRef} className={`select-none mx-auto flex items-center justify-center  relative w-fit mt-4 lg:mt-0 ${PreviewMode ? "pointer-events-none" : ""}`}>
-
+                        <div ref={divToImageRef} className={`bg-red-300 select-none mx-auto flex items-center justify-center  relative w-fit mt-4 lg:mt-0 ${PreviewMode ? "pointer-events-none" : ""}`}>
 
                             <img className='h-[406px] object-contain' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
                             <div className={` ${!PreviewMode ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
@@ -240,10 +239,10 @@ const Canvas = () => {
                             </div>
                         </div>
 
-
+{/* 
                         <div onClick={slideRight} className='absolute lg:-right-4 right-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronRightIcon className='h-[35px] text-black select-none' />
-                        </div>
+                        </div> */}
                     </div>
 
 

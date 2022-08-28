@@ -6,7 +6,7 @@ import Canvas from './Canvas'
 import ColorModal from './ColorModal'
 import MerchContext from '../../context/MerchContext';
 import * as htmlToImage from 'html-to-image';
-
+import { tshirts } from '../../Data/tshirs'
 
 
 
@@ -33,37 +33,36 @@ const Publish = () => {
         //     return
         // }
 
-        setInterval(async () => {
-            var index = 0
+        await downloadAllimages(0)
 
-            if (index === colours.length - 1) {
-            }
-            if (index === 0) {
-                await downloadAllimages(index)
-            }
-            
-            await downloadAllimages(index)
-            index=index+1
+        // var index = 0
+        // var intervalRef = setInterval(async () => {
 
-        }, 2000);
+        //     console.log(index,tshirts.length);
+        //     // last index
+        //     if (index === tshirts.length) {
+        //         clearInterval(intervalRef);
+        //         return
+        //     }
 
-
-        colours.forEach(async (element, index) => {
-        });
+        //     await downloadAllimages(index)
+        //     index = index + 1
 
 
+        // }, 1000);
     }
+
 
     async function downloadAllimages(index) {
         console.log(index);
         setselectedColourIndex(index)
-        // const dataUrl = await htmlToImage.toPng(canvasDivRef.current);
+        const dataUrl = await htmlToImage.toPng(canvasDivRef.current);
 
-        // // download image
-        // const link = document.createElement('a');
-        // link.download = "html-to-img.png";
-        // link.href = dataUrl;
-        // link.click();
+        // download image
+        const link = document.createElement('a');
+        link.download = "html-to-img.png";
+        link.href = dataUrl;
+        link.click();
     }
 
 
