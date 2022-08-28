@@ -2,6 +2,9 @@ import { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { Itemlist } from '../Itemlist'
 import { MiniatureItemList } from './MiniatureItemlist';
 
+import MerchContext from '../../context/MerchContext';
+
+
 const items = [
     {
         id: '1',
@@ -68,6 +71,19 @@ const Preview_Edit = () => {
 
     const [products, setproducts] = useState(items)
 
+    const [Banner, setBanner] = useState('/youtuber_assets/youtuber_banner.png')
+    const [Logo, setLogo] = useState('./logo.png')
+
+    const BannerImageProcess = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setBanner(URL.createObjectURL(event.target.files[0]));
+        }
+    }
+    const LogoImageProcess = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setLogo(URL.createObjectURL(event.target.files[0]));
+        }
+    }
     useEffect(() => {
 
         if (window.innerWidth >= 100) {
@@ -89,12 +105,13 @@ const Preview_Edit = () => {
 
     }, [])
 
-    const uploadLogo = () => {
-
+    const cofirmButtonClick = (e) => {
+        e.preventDefault()
+        if (Banner === '/youtuber_assets/youtuber_banner.png' || Logo === './logo.png') {
+            alert('Upload Banner and Logo both')
+        }
     }
-    const uploadBanner = () => {
 
-    }
 
 
 
@@ -104,38 +121,54 @@ const Preview_Edit = () => {
 
 
 
-            <div className='grid grid-cols-2 gap-4 lg:hidden'>
-                <div onClick={uploadLogo} className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
-                    <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+            <div className='my-4 grid grid-cols-2 gap-4 lg:hidden'>
 
-                    <div className='flex flex-col items-center justify-center'>
-                        <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Banner</h2>
+                <label htmlFor='banner'>
+                    <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
+                        <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
 
-                        <h2 className='text-[12px] text-[#323232]  lg:text-[14px] font-inter'>105*40</h2>
+                        <div className='flex flex-col items-center justify-center'>
+                            <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Banner</h2>
 
-                        <h2 className='text-[10px] text-[#323232]  lg:text-[12px] font-inter'>Should be Under 100kb</h2>
+                            <h2 className='text-[12px] text-[#323232]  lg:text-[14px] font-inter'>105*40</h2>
+
+                            <h2 className='text-[10px] text-[#323232]  lg:text-[12px] font-inter'>Should be Under 100kb</h2>
+                        </div>
                     </div>
-                </div>
-                <div onClick={uploadBanner} className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
-                    <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+                </label>
 
-                    <div className='flex flex-col items-center justify-center'>
-                        <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Logo</h2>
+                <input type='file' id='banner' className='hidden' onChange={BannerImageProcess} />
 
-                        <h2 className='text-[12px] text-[#323232]  lg:text-[14px] font-inter'>105*40</h2>
 
-                        <h2 className='text-[10px] text-[#323232]  lg:text-[12px] font-inter'>Should be Under 100kb</h2>
+
+
+                <label htmlFor='logo'>
+
+                    <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
+                        <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+
+                        <div className='flex flex-col items-center justify-center'>
+                            <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Logo</h2>
+
+                            <h2 className='text-[12px] text-[#323232]  lg:text-[14px] font-inter'>105*40</h2>
+
+                            <h2 className='text-[10px] text-[#323232]  lg:text-[12px] font-inter'>Should be Under 100kb</h2>
+                        </div>
                     </div>
-                </div>
+
+                </label>
+
+                <input type='file' id='logo' className='hidden' onChange={LogoImageProcess} />
+
             </div>
 
 
             {/* Preview  */}
             <div className='mt-4 border-2 lg:border-4 rounded border-[#54BAB9]  pointer-events-none lg:mr-8 xl:mr-16 2xl:mr-28'>
-                <div className='flex items-center justify-between shadow-md py-4 px-3 mb-4'>
-                    <img src='./logo.png' className='h-[20px]  object contain ' />
+                <div className='flex items-center justify-between shadow-md my-1  px-3 mb-4'>
+                    <img src={Logo} className='h-[20px] lg:h-[30px] object contain  max-w-[50px] lg:max-w-[100px] ' />
 
-                    <div className='flex items-center justify-between space-x-6'>
+                    <div className='flex items-center justify-between space-x-6 py-4'>
                         <img src='/homepageImages/search.png' className=' w-[15px] h-[15px]'></img>
                         <img src='/homepageImages/cloth.png' className=' w-[15px] h-[15px]'></img>
                         <img src='/homepageImages/account.png' className=' w-[15px] h-[15px] '></img>
@@ -143,7 +176,7 @@ const Preview_Edit = () => {
                     </div>
                 </div>
 
-                <img src='/youtuber_assets/youtuber_banner.png' className=' w-full px-2.5 lg:h-[200px]'></img>
+                <img src={Banner} alt='/youtuber_assets/youtuber_banner.png' className='h-[135px] w-full px-2.5  lg:w-[600px] lg:h-[200px]'></img>
 
                 <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[20px] pb-2'>
                     <MiniatureItemList items={products} />
@@ -163,42 +196,61 @@ const Preview_Edit = () => {
 
 
                 {/* For large Screen only  */}
-                <div className='hidden mt-6 mb-12 lg:grid grid-cols-2 gap-4 '>
-                    <div onClick={uploadLogo} className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
-                        <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+                <div className='grid grid-cols-2 gap-4 my-4 mb-10'>
 
-                        <div className='flex flex-col items-center justify-center'>
-                            <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Banner</h2>
+                    <label htmlFor='banner'>
+                        <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
+                            <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
 
-                            <h2 className='text-[12px] text-[#323232]  lg:text-[14px] font-inter'>105*40</h2>
+                            <div className='flex flex-col items-center justify-center'>
+                                <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Banner</h2>
 
-                            <h2 className='text-[10px] text-[#323232]  lg:text-[12px] font-inter'>Should be Under 100kb</h2>
+                                <h2 className='text-[12px] text-[#323232]  lg:text-[14px] font-inter'>105*40</h2>
+
+                                <h2 className='text-[10px] text-[#323232]  lg:text-[12px] font-inter'>Should be Under 100kb</h2>
+                            </div>
                         </div>
-                    </div>
-                    <div onClick={uploadBanner} className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
-                        <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+                    </label>
 
-                        <div className='flex flex-col items-center justify-center'>
-                            <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Logo</h2>
+                    <input type='file' id='banner' className='hidden' onChange={BannerImageProcess} />
 
-                            <h2 className='text-[12px] text-[#323232]  lg:text-[14px] font-inter'>105*40</h2>
 
-                            <h2 className='text-[10px] text-[#323232]  lg:text-[12px] font-inter'>Should be Under 100kb</h2>
+
+
+                    <label htmlFor='logo'>
+
+                        <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
+                            <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+
+                            <div className='flex flex-col items-center justify-center'>
+                                <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Logo</h2>
+
+                                <h2 className='text-[12px] text-[#323232]  lg:text-[14px] font-inter'>105*40</h2>
+
+                                <h2 className='text-[10px] text-[#323232]  lg:text-[12px] font-inter'>Should be Under 100kb</h2>
+                            </div>
                         </div>
-                    </div>
+
+                    </label>
+
+                    <input type='file' id='logo' className='hidden' onChange={LogoImageProcess} />
+
                 </div>
 
 
-                <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Name in Webpage</h2>
-                <input className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='name' id='name' />
+                <form>
 
-                <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Url</h2>
-                <input className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='e.g. closm.com/akash' name='name' id='name' />
+                    <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Name in Webpage</h2>
+                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='name' id='name' />
 
-                <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Artist Description</h2>
-                <input className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='name' id='name' />
+                    <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Url</h2>
+                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='e.g. closm.com/akash' name='name' id='name' />
 
-                <button className='block ml-auto mt-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>Confirm</button>
+                    <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Artist Description</h2>
+                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='name' id='name' />
+
+                    <button onClick={cofirmButtonClick} type='submit' className='block ml-auto mt-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>Confirm</button>
+                </form>
 
 
 
