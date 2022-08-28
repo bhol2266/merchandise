@@ -156,7 +156,7 @@ const Canvas = () => {
 
     return (
 
-        <div className='lg:flex items-center lg:items-start justify-between '>
+        <div className='lg:flex lg:justify-around items-start 2xl:items-start justify-between  2xl:justify-start   lg:pt-4 2xl:mt-0'>
 
 
             {/* This is for small screen only  */}
@@ -202,7 +202,7 @@ const Canvas = () => {
 
 
             {/* CANVAS  */}
-            <div className='sm:w-4/5 md:w-3/5 lg:w-full  mx-auto lg:mx-0 '>
+            <div className='sm:w-4/5 md:w-3/5 lg:w-fit   mx-auto  '>
 
 
 
@@ -221,14 +221,15 @@ const Canvas = () => {
 
 
 
-                    <div className='flex items-center justify-center relative w-full lg:scale-105 xl:scale-110 lg:m-8 '>
-                        {/* <div onClick={slideLeft} className='absolute left-0 lg:-left-5 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
+                    <div   className='flex items-center justify-center mt-4 lg:mt-6  bg-red-300 '>
+                        <div onClick={slideLeft} className=' my-auto cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronLeftIcon className='h-[35px] text-black select-none' />
-                        </div> */}
+                        </div>
 
 
                         {/* Canvas playground */}
-                        <div ref={divToImageRef} className={`bg-red-300 select-none mx-auto flex items-center justify-center  relative w-fit mt-4 lg:mt-0 ${PreviewMode ? "pointer-events-none" : ""}`}>
+                        <div ref={divToImageRef}  className={`select-none mx-auto flex items-center justify-center  relative w-fit  ${PreviewMode ? "pointer-events-none" : ""}`}>
+
 
                             <img className='h-[406px] object-contain' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
                             <div className={` ${!PreviewMode ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
@@ -239,10 +240,10 @@ const Canvas = () => {
                             </div>
                         </div>
 
-{/* 
-                        <div onClick={slideRight} className='absolute lg:-right-4 right-0 my-auto z-10 cursor-pointer rounded-xl h-[406px] flex items-center '>
+
+                        <div onClick={slideRight} className='my-auto cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronRightIcon className='h-[35px] text-black select-none' />
-                        </div> */}
+                        </div>
                     </div>
 
 
@@ -259,11 +260,11 @@ const Canvas = () => {
 
 
             {/* This is for large screen only */}
-            <div className='hidden xl:ml-[100px] lg:ml-[50px] lg:flex items-start justify-start flex-col w-full '>
+            <div className=' hidden 2xl:ml-[100px] lg:flex items-start justify-start flex-col lg:w-fit'>
 
 
                 {/* Upload Art  */}
-                <div className='w-full '>
+                <div className='w-full'>
                     <h2 className='text-[14px] font-inter mb-1'>Upload Art</h2>
                     <label className='px-[90px] py-1.5  h-[28px] text-center  bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] ' htmlFor='uploader'>UPLOAD</label>
                     <input id='uploader' ref={inputFileRef} onChange={uploadFile} type="file" className="hidden" />
