@@ -121,7 +121,7 @@ const Preview_Edit = () => {
 
 
 
-            <div className='my-4 grid grid-cols-2 gap-4 lg:hidden'>
+            <div className='my-6 grid grid-cols-2 gap-4 lg:hidden'>
 
                 <label htmlFor='banner'>
                     <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>

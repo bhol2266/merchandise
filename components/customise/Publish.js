@@ -33,29 +33,29 @@ const Publish = () => {
         //     return
         // }
 
-        await downloadAllimages(0)
+        setselectedColourIndex(0)
 
-        // var index = 0
-        // var intervalRef = setInterval(async () => {
+        var index = 0
+        var intervalRef = setInterval(async () => {
 
-        //     console.log(index,tshirts.length);
-        //     // last index
-        //     if (index === tshirts.length) {
-        //         clearInterval(intervalRef);
-        //         return
-        //     }
+            console.log(index, tshirts.length);
+            // last index
+            if (index === tshirts.length) {
+                clearInterval(intervalRef);
+                return
+            }
 
-        //     await downloadAllimages(index)
-        //     index = index + 1
+            await downloadAllimages(index)
+
+            index = index + 1
 
 
-        // }, 1000);
+        }, 2000);
     }
 
 
     async function downloadAllimages(index) {
         console.log(index);
-        setselectedColourIndex(index)
         const dataUrl = await htmlToImage.toPng(canvasDivRef.current);
 
         // download image
@@ -63,6 +63,11 @@ const Publish = () => {
         link.download = "html-to-img.png";
         link.href = dataUrl;
         link.click();
+
+        if (index != tshirts.length) {
+            setselectedColourIndex(index + 1)
+
+        }
     }
 
 
