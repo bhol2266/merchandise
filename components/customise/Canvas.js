@@ -156,7 +156,7 @@ const Canvas = () => {
 
     return (
 
-        <div className='lg:flex lg:justify-around items-start 2xl:items-start justify-between  2xl:justify-start   lg:pt-4 2xl:mt-0'>
+        <div className='lg:flex lg:justify-around  items-start 2xl:items-start 2xl:justify-start  lg:pt-4 2xl:mt-0'>
 
 
             {/* This is for small screen only  */}
@@ -260,7 +260,7 @@ const Canvas = () => {
 
 
             {/* This is for large screen only */}
-            <div className=' hidden 2xl:ml-[100px] lg:flex items-start justify-start flex-col lg:w-fit'>
+            <div className=' hidden 2xl:ml-[100px] lg:flex items-start justify-start flex-col lg:w-fit lg:mx-auto'>
 
 
                 {/* Upload Art  */}
