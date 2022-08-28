@@ -221,7 +221,7 @@ const Canvas = () => {
 
 
 
-                    <div   className='flex items-center justify-center mt-4 lg:mt-6  bg-red-300 '>
+                    <div   className='flex items-center justify-center mt-4 lg:mt-6 '>
                         <div onClick={slideLeft} className=' my-auto cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronLeftIcon className='h-[35px] text-black select-none' />
                         </div>
