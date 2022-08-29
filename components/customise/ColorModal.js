@@ -22,7 +22,7 @@ const ColorModal = () => {
 
     return (
 
-        <div className={`fixed  transition-transform duration-300 ease-out  z-20  w-[332px] lg:w-[370px] mx-auto lg:top-[100px]  left-0 right-0 ${modalVisible ? 'animate-colorModal' : 'translate-y-[1500px]'}`}>
+        <div className={`fixed  transition-transform duration-300 ease-out  z-20  w-[332px] lg:w-[370px] top-12 mx-auto left-0 right-0 ${modalVisible ? 'animate-colorModal' : 'translate-y-[1500px]'}`}>
 
             <div className={`bg-white w-full  p-[20px] rounded-xl shadow-md`}>
 
