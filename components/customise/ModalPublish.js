@@ -33,10 +33,17 @@ const ModalPublish = () => {
 
 
 
+                <div className='flex items-center justify-start '>
 
-                <button onClick={() => {
-                    setModalPublishVisible(!ModalPublishVisible); alert('Images uploaded to database')
-                }} className={` w-[232px] block mx-auto py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer mt-5`}>Confirm</button>
+                    <button onClick={() => {
+                        alert('Images uploaded to database')
+                    }} className={` w-[132px] lg:w-[232px] block mx-auto py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer mt-5`}>Confirm</button>
+
+                    <button onClick={() => {
+                        setModalPublishVisible(!ModalPublishVisible);
+                    }} className={` w-[132px] lg:w-[232px] block mx-auto py-1.5 bg-[#54BAB9] text-[14px] font-inter text-[#FFFFFF] rounded-[4px] cursor-pointer mt-5`}>Cancel</button>
+                </div>
+
 
             </div>
 

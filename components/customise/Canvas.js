@@ -37,7 +37,7 @@ const Canvas = () => {
 
 
 
-    const { modalVisible, setmodalVisible, colours, PreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, tshirtPriceDetails, settshirtPriceDetails } = useContext(MerchContext);
+    const { modalVisible, setmodalVisible, colours, PreviewMode,setPreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, tshirtPriceDetails, settshirtPriceDetails } = useContext(MerchContext);
 
 
     useEffect(() => {
@@ -90,6 +90,11 @@ const Canvas = () => {
 
     const uploadShowingTshirt = async () => {
         setupload_Spinner(true)
+
+        canvas.discardActiveObject();
+        canvas.renderAll();
+        setPreviewMode(true)
+
         const dataUrl = await htmlToImage.toPng(divToImageRef.current);
         let obj = { name: tshirts[selectedColourIndex].name, imageData: dataUrl }
         setselectedTshirtsForUpload([...selectedTshirtsForUpload, obj]);
