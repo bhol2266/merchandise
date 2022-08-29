@@ -6,6 +6,8 @@ import MerchContext from '../../context/MerchContext';
 import ColorModal from './ColorModal';
 import { tshirts } from '../../Data/tshirs';
 import dynamic from "next/dynamic";
+import * as htmlToImage from 'html-to-image';
+import { BeatLoader } from 'react-spinners';
 
 const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
 ]
@@ -24,23 +26,18 @@ const Canvas = () => {
     const divToImageRef = useRef(null);
 
     const fontAPI = 'AIzaSyAZ0YPUkF0oXOhdK3J6EnfSqXZEDHOXQ_g'
+
     const [FrontBackSelected, setFrontBackSelected] = useState('FRONT');
-    const [imageUploadedinCanvas, setimageUploadedinCanvas] = useState(null);
-    const [openAddtextModaal, setopenAddtextModaal] = useState(false);
-    const [activeFontFamily, setactiveFontFamily] = useState('Arimo');
-    const [fabricText, setfabricText] = useState(null);
-    const [CanvasBorder, setCanvasBorder] = useState(true);
-    const [previewEditChanger, setpreviewEditChanger] = useState(false);
-
     const [selectedProduct, setselectedProduct] = useState("MEN T-SHIRT")
-   const { modalVisible, setmodalVisible, colours, PreviewMode, canvas, setcanvas, setcanvasDivRef ,selectedColourIndex, setselectedColourIndex} = useContext(MerchContext);
+
+    // Check for current tshirt color which is showing is uploaded or not
+    const [checkUpload, setcheckUpload] = useState(false)
+
+    const [upload_Spinner, setupload_Spinner] = useState(false)
 
 
 
-
-    //Fabric text color
-    // const [color, setColor] = useState("#000000");
-
+    const { modalVisible, setmodalVisible, colours, PreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex,selectedTshirtsForUpload, setselectedTshirtsForUpload } = useContext(MerchContext);
 
 
     useEffect(() => {
@@ -52,6 +49,73 @@ const Canvas = () => {
         setcanvas(canvas)
         setcanvasDivRef(divToImageRef)
     }, []);
+
+
+
+
+    const slideRight = () => {
+        if (selectedColourIndex !== tshirts.length - 1) {
+            setselectedColourIndex(selectedColourIndex + 1)
+            checkUploaded(selectedColourIndex + 1)
+        } else {
+            setselectedColourIndex(0)
+            checkUploaded(0)
+        }
+    }
+
+    const slideLeft = () => {
+        if (selectedColourIndex !== 0) {
+            setselectedColourIndex(selectedColourIndex - 1)
+            checkUploaded(selectedColourIndex - 1)
+        } else {
+            setselectedColourIndex(tshirts.length - 1)
+            checkUploaded(tshirts.length - 1)
+        }
+    }
+
+    const checkUploaded = (pos) => {
+        let Matched = false
+        selectedTshirtsForUpload.filter(obj => {
+            if (obj.name === tshirts[pos].name) {
+                Matched = true
+            }
+        })
+        if (Matched) {
+            setcheckUpload(true)
+        } else {
+            setcheckUpload(false)
+        }
+
+    }
+
+    const uploadShowingTshirt = async () => {
+        setupload_Spinner(true)
+        const dataUrl = await htmlToImage.toPng(divToImageRef.current);
+        let obj = { name: tshirts[selectedColourIndex].name, imageData: dataUrl }
+        setselectedTshirtsForUpload([...selectedTshirtsForUpload, obj]);
+        setcheckUpload(true)
+        setupload_Spinner(false)
+
+    }
+    const removeUploadImage = async () => {
+        setupload_Spinner(true)
+        let Matched = false
+        let indexx = null
+        selectedTshirtsForUpload.filter((obj, i) => {
+            if (obj.name === tshirts[selectedColourIndex].name) {
+                Matched = true
+                indexx = i
+            }
+        })
+        if (Matched) {
+            selectedTshirtsForUpload.splice(indexx, 1);
+            setselectedTshirtsForUpload(selectedTshirtsForUpload);
+            setcheckUpload(false)
+        }
+        setupload_Spinner(false)
+    }
+
+    console.log(selectedTshirtsForUpload);
 
     const uploadFile = (e) => {
         const reader = new FileReader()
@@ -80,28 +144,6 @@ const Canvas = () => {
 
     }
 
-
-
-
-
-    // const downloadCavasImage = async () => {
-    //     setCanvasBorder(false)
-    //     const dataUrl = await htmlToImage.toPng(divToImageRef.current);
-
-    //     // download image
-    //     const link = document.createElement('a');
-    //     link.download = "html-to-img.png";
-    //     link.href = dataUrl;
-    //     link.click();
-    //     setCanvasBorder(true)
-    // }
-    // const preview = async () => {
-    //     canvas.discardActiveObject();
-    //     canvas.renderAll();
-
-    // }
-
-
     const removeSelectedItem = () => {
         if (typeof canvas.getActiveObject() === "undefined") {
             alert('Select any item to remove!')
@@ -120,38 +162,6 @@ const Canvas = () => {
         canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
     }
 
-    const addText = (e) => {
-        e.preventDefault()
-        if (fabricText === null) {
-            alert('enter text')
-            return
-        }
-        var text = new fabric.Text(fabricText, {
-            fill: color,
-            fontFamily: activeFontFamily,
-            fontWeight: 'normal',
-        });
-
-        canvas.add(text);
-        setopenAddtextModaal(false)
-
-    }
-
-    const slideRight = () => {
-        if (selectedColourIndex !== tshirts.length - 1) {
-            setselectedColourIndex(selectedColourIndex + 1)
-        } else {
-            setselectedColourIndex(0)
-        }
-    }
-
-    const slideLeft = () => {
-        if (selectedColourIndex !== 0) {
-            setselectedColourIndex(selectedColourIndex - 1)
-        } else {
-            setselectedColourIndex(tshirts.length - 1)
-        }
-    }
 
 
     return (
@@ -221,25 +231,39 @@ const Canvas = () => {
 
 
 
-                    <div   className='flex items-center justify-center mt-4 lg:mt-6 '>
+                    <div className='flex items-center justify-center mt-4 lg:mt-6 '>
                         <div onClick={slideLeft} className=' my-auto cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronLeftIcon className='h-[35px] text-black select-none' />
                         </div>
 
+                        <div>
+                            {/* Canvas playground */}
+                            <div ref={divToImageRef} className={`select-none mx-auto flex items-center justify-center  relative w-fit  ${PreviewMode ? "pointer-events-none" : ""}`}>
 
-                        {/* Canvas playground */}
-                        <div ref={divToImageRef}  className={`select-none mx-auto flex items-center justify-center  relative w-fit  ${PreviewMode ? "pointer-events-none" : ""}`}>
 
+                                <img className='h-[406px] object-contain' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
+                                <div className={` ${!PreviewMode ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
+                                    <canvas
+                                        ref={canvasRef}
+                                        id="myCanvas"
+                                    />
+                                </div>
+                            </div>
 
-                            <img className='h-[406px] object-contain' src={`./creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
-                            <div className={` ${!PreviewMode ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
-                                <canvas
-                                    ref={canvasRef}
-                                    id="myCanvas"
-                                />
+                            <div className='grid grid-cols-1 gap-4 my-1'>
+
+                                {upload_Spinner &&
+                                    <div className="flex justify-center mt-2 ">
+                                        <BeatLoader loading size={10} color={'green'} />
+                                    </div>
+                                }
+                                {!checkUpload &&
+                                    <button onClick={uploadShowingTshirt} className={`text-center bg-[#54BAB9] hover:bg-[#409695] text-white px-4 py-2 rounded font-inter text-[12px] ${upload_Spinner ? "hidden" : "even:"}`}>Upload this T-shirt</button>
+                                }
+                                {checkUpload &&
+                                    <button onClick={removeUploadImage} className={`text-center bg-[#54BAB9] hover:bg-[#409695] text-white px-4 py-2 rounded font-inter text-[12px] ${upload_Spinner ? "hidden" : "even:"}`}>Remove Uploaded</button>}
                             </div>
                         </div>
-
 
                         <div onClick={slideRight} className='my-auto cursor-pointer rounded-xl h-[406px] flex items-center '>
                             <ChevronRightIcon className='h-[35px] text-black select-none' />
@@ -249,6 +273,7 @@ const Canvas = () => {
 
                     <div className='grid grid-cols-2  gap-3 mt-6 sm:px-6 w-full lg:hidden '>
                         <button onClick={removeSelectedItem} className=' hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Remove Seleted</button>
+
                         <button onClick={resetCanvas} className=' hover:text-white hover:bg-[#54BAB9] text-[12px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Clear All</button>
                     </div>
 

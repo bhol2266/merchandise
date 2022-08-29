@@ -14,7 +14,7 @@ import { tshirts } from '../../Data/tshirs'
 const Publish = () => {
 
     //Here colour is the collection of tshirts of different colours imported in globalStates from Data
-    const { canvas, PreviewMode, setPreviewMode, canvasDivRef, selectedColourIndex, colours, setselectedColourIndex } = useContext(MerchContext)
+    const { canvas, PreviewMode, setPreviewMode, canvasDivRef, selectedColourIndex, colours, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload } = useContext(MerchContext)
 
     const preview = () => {
         canvas.discardActiveObject();
@@ -28,47 +28,20 @@ const Publish = () => {
         canvas.renderAll();
         setPreviewMode(true)
 
-        // if (canvas.getObjects().length === 0) {
-        //     alert('Design Empty!')
-        //     return
-        // }
-
-        setselectedColourIndex(0)
-
-        var index = 0
-        var intervalRef = setInterval(async () => {
-
-            console.log(index, tshirts.length);
-            // last index
-            if (index === tshirts.length) {
-                clearInterval(intervalRef);
-                return
-            }
-
-            await downloadAllimages(index)
-
-            index = index + 1
-
-
-        }, 2000);
-    }
-
-
-    async function downloadAllimages(index) {
-        console.log(index);
-        const dataUrl = await htmlToImage.toPng(canvasDivRef.current);
-
-        // download image
-        const link = document.createElement('a');
-        link.download = "html-to-img.png";
-        link.href = dataUrl;
-        link.click();
-
-        if (index != tshirts.length) {
-            setselectedColourIndex(index + 1)
-
+        if (canvas.getObjects().length === 0) {
+            alert('Design Empty!')
+            return
         }
+
+
+        if (selectedTshirtsForUpload.length === 0) {
+            alert('Please upload any tshirt to publish')
+        }
+
+        alert('Images uploaded to database')
     }
+
+
 
 
 

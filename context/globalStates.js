@@ -27,10 +27,13 @@ const GlobalStates = (props) => {
     const [canvasDivRef, setcanvasDivRef] = useState(null)
     const [selectedColourIndex, setselectedColourIndex] = useState(0); // 0 indicates the index position of the tshirts colour array
 
+    const [selectedTshirtsForUpload, setselectedTshirtsForUpload] = useState([])
+
+
 
 
     return (
-        <MerchContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, youtuberLogo, setyoutuberLogo, modalVisible, setmodalVisible, colours, setcolours, PreviewMode, setPreviewMode, canvas, setcanvas, canvasDivRef, setcanvasDivRef,selectedColourIndex, setselectedColourIndex }}>
+        <MerchContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, youtuberLogo, setyoutuberLogo, modalVisible, setmodalVisible, colours, setcolours, PreviewMode, setPreviewMode, canvas, setcanvas, canvasDivRef, setcanvasDivRef,selectedColourIndex, setselectedColourIndex,selectedTshirtsForUpload, setselectedTshirtsForUpload }}>
             {props.children}
         </MerchContext.Provider>
     )
