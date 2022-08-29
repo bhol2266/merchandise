@@ -25,7 +25,7 @@ const ModalPublish = () => {
                     {selectedTshirtsForUpload.map(obj => {
                         return (
                             <div key={obj.imageData} className=''>
-                                <img src={obj.imageData} className='h-[100px] sm:h-[120px] md:h-[150px] lg:h-[200px] object-contain' alt="" />
+                                <img src={obj.imageData} className='h-[100px] sm:h-[150px] md:h-[180px] 2xl:h-[220px] object-contain' alt="" />
                             </div>
                         )
                     })}
