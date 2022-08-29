@@ -29,11 +29,16 @@ const GlobalStates = (props) => {
 
     const [selectedTshirtsForUpload, setselectedTshirtsForUpload] = useState([])
 
+    const [tshirtPriceDetails, settshirtPriceDetails] = useState({
+        productName: '', discountedPrice: '', originalPrice: '', description: '',
+        termCondition: false
+    })
+
 
 
 
     return (
-        <MerchContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, youtuberLogo, setyoutuberLogo, modalVisible, setmodalVisible, colours, setcolours, PreviewMode, setPreviewMode, canvas, setcanvas, canvasDivRef, setcanvasDivRef,selectedColourIndex, setselectedColourIndex,selectedTshirtsForUpload, setselectedTshirtsForUpload }}>
+        <MerchContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, youtuberLogo, setyoutuberLogo, modalVisible, setmodalVisible, colours, setcolours, PreviewMode, setPreviewMode, canvas, setcanvas, canvasDivRef, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, tshirtPriceDetails, settshirtPriceDetails }}>
             {props.children}
         </MerchContext.Provider>
     )

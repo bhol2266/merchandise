@@ -14,7 +14,7 @@ import { tshirts } from '../../Data/tshirs'
 const Publish = () => {
 
     //Here colour is the collection of tshirts of different colours imported in globalStates from Data
-    const { canvas, PreviewMode, setPreviewMode, canvasDivRef, selectedColourIndex, colours, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload } = useContext(MerchContext)
+    const { canvas, PreviewMode, setPreviewMode, colours, setselectedColourIndex, selectedTshirtsForUpload, tshirtPriceDetails, settshirtPriceDetail } = useContext(MerchContext)
 
     const preview = () => {
         canvas.discardActiveObject();
@@ -23,20 +23,24 @@ const Publish = () => {
     }
     const publishClick = async (e) => {
 
-        e.preventDefault()
-        canvas.discardActiveObject();
-        canvas.renderAll();
-        setPreviewMode(true)
-
         if (canvas.getObjects().length === 0) {
             alert('Design Empty!')
             return
         }
 
+        e.preventDefault()
+        canvas.discardActiveObject();
+        canvas.renderAll();
+        setPreviewMode(true)
 
         if (selectedTshirtsForUpload.length === 0) {
             alert('Please upload any tshirt to publish')
+            return
         }
+
+
+
+
 
         alert('Images uploaded to database')
     }
@@ -58,7 +62,7 @@ const Publish = () => {
 
                 <div className='flex-fles-col space-y-1 mb-[15px]'>
                     <h3 className='text-[12px] lg:text-[14px] font-inter font-medium text-[#323232] '>Product Name</h3>
-                    <input className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Product Name" id="Product Name" placeholder='Kim Jong UN' />
+                    <input onChange={e=>{tshirtPriceDetails.}} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Product Name" id="Product Name" placeholder='Kim Jong UN' />
                 </div>
 
 

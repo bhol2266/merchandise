@@ -241,13 +241,14 @@ const Preview_Edit = () => {
                 <form>
 
                     <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Name in Webpage</h2>
-                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='name' id='name' />
+                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='Webpage' id='Webpage' />
 
                     <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Url</h2>
-                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='e.g. closm.com/akash' name='name' id='name' />
+                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='e.g. closm.com/akash' name='Url' id='Url' />
 
                     <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Artist Description</h2>
-                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='name' id='name' />
+                 
+                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='Description' id='Description' />
 
                     <button onClick={cofirmButtonClick} type='submit' className='block ml-auto mt-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>Confirm</button>
                 </form>

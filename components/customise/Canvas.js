@@ -37,7 +37,7 @@ const Canvas = () => {
 
 
 
-    const { modalVisible, setmodalVisible, colours, PreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex,selectedTshirtsForUpload, setselectedTshirtsForUpload } = useContext(MerchContext);
+    const { modalVisible, setmodalVisible, colours, PreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, tshirtPriceDetails, settshirtPriceDetails } = useContext(MerchContext);
 
 
     useEffect(() => {
