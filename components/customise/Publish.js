@@ -7,14 +7,29 @@ import ColorModal from './ColorModal'
 import MerchContext from '../../context/MerchContext';
 import * as htmlToImage from 'html-to-image';
 import { tshirts } from '../../Data/tshirs'
+import ModalPublish from './ModalPublish'
 
 
 
 
 const Publish = () => {
 
+
+    const [tshirtPriceDetails, settshirtPriceDetails] = useState({
+        productName: '', discountedPrice: '', originalPrice: '', description: '',
+        termCondition: false
+    })
+
+
     //Here colour is the collection of tshirts of different colours imported in globalStates from Data
-    const { canvas, PreviewMode, setPreviewMode, colours, setselectedColourIndex, selectedTshirtsForUpload, tshirtPriceDetails, settshirtPriceDetail } = useContext(MerchContext)
+    const { canvas, PreviewMode, setPreviewMode, colours, setselectedColourIndex, selectedTshirtsForUpload, ModalPublishVisible, setModalPublishVisible, } = useContext(MerchContext)
+
+    const [productName, setproductName] = useState('');
+    const [disPrice, setdisPrice] = useState('');
+    const [origPrice, setorigPrice] = useState('');
+    const [description, setdescription] = useState('');
+    const [termsCondition, settermsCondition] = useState(false);
+
 
     const preview = () => {
         canvas.discardActiveObject();
@@ -38,11 +53,22 @@ const Publish = () => {
             return
         }
 
+        if (productName.length === 0 || disPrice.length === 0 || origPrice.length === 0 || description.length === 0) {
+            alert('Fill all Products details')
+            return
+        }
+        if (!termsCondition) {
+            alert('Accept terms and conditions')
+            return
+        }
 
 
+        // Tshirst Details 
+        const obj = {
+            productName: productName, discountedPrice: disPrice, originalPrice: origPrice, description: description,
+        }
 
-
-        alert('Images uploaded to database')
+        setModalPublishVisible(true)
     }
 
 
@@ -57,12 +83,16 @@ const Publish = () => {
             <Canvas />
 
             {/* PRICE and NAME  */}
+
+
             <div className=' mt-[40px] 2xl:mt-6 sm:w-4/5 md:w-3/5  xl:w-[450px]   mx-auto 2xl:mx-0'>
                 <h2 className='text-[14px] lg:text-[16px] font-inter text-[#323232] mb-[21px] '>PRICE & NAME</h2>
 
                 <div className='flex-fles-col space-y-1 mb-[15px]'>
                     <h3 className='text-[12px] lg:text-[14px] font-inter font-medium text-[#323232] '>Product Name</h3>
-                    <input onChange={e=>{tshirtPriceDetails.}} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Product Name" id="Product Name" placeholder='Kim Jong UN' />
+                    <input required value={productName} onChange={e => {
+                        setproductName(e.target.value)
+                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Product" id="Product" placeholder='Kim Jong UN' />
                 </div>
 
 
@@ -70,21 +100,29 @@ const Publish = () => {
 
                 <div className='flex-fles-col space-y-1 mb-[15px]'>
                     <h3 className='text-[12px] lg:text-[14px]  font-inter font-medium text-[#323232] '>Discounted Price</h3>
-                    <input className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none line-through' type="text" name="Product Name" id="Product Name" placeholder='₹599' />
+                    <input required value={disPrice} onChange={e => {
+                        setdisPrice(e.target.value)
+                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none line-through' type="number" name="Discounted" id="Discounted" placeholder='₹599' />
                 </div>
 
                 <div className='flex-fles-col space-y-1 mb-[15px]'>
                     <h3 className='text-[12px] lg:text-[14px]  font-inter font-medium text-[#323232] '>Original Price</h3>
-                    <input className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Product Name" id="Product Name" placeholder='₹499' />
+                    <input required value={origPrice} onChange={e => {
+                        setorigPrice(e.target.value)
+                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="number" name="Original" id="Original" placeholder='₹499' />
                 </div>
 
                 <div className='flex-fles-col space-y-1 mb-[15px]'>
                     <h3 className='text-[12px] lg:text-[14px]  font-inter font-medium text-[#323232] '>Product Description</h3>
-                    <input className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Product Name" id="Product Name" placeholder='fghfgdshfgjh' />
+                    <input required value={description} onChange={e => {
+                        setdescription(e.target.value)
+                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Description" id="Description" placeholder='fghfgdshfgjh' />
                 </div>
 
                 <div className='flex items-center justify-between mx-2'>
-                    <input className='mr-2 lg:scale-125' type="checkbox" />
+                    <input required value={termsCondition} onChange={e => {
+                        settermsCondition(e.target.value)
+                    }} className='mr-2 lg:scale-125' type="checkbox" />
 
                     <div className='flex items-center flex-wrap space-x-1'>
                         <h2 className='text-[#323232] font-inter font-medium text-[12px] lg:text-[14px] '>By Continuing, You Agree to Closm’s</h2>
@@ -97,10 +135,16 @@ const Publish = () => {
                 <div className='grid grid-cols-2 gap-2 mt-[20px]'>
                     <button onClick={preview} className='text-[#323232] font-Mont font-medium text-[12px] lg:text-[14px]  rounded-[5px] border-[1px] border-[#54BAB9] py-[10px] px-[15px]'>{PreviewMode ? "Edit" : "Preview"}</button>
                     <button onClick={publishClick} className=' font-Mont font-medium text-[12px] lg:text-[14px]  rounded-[5px] border-[1px] border-[#54BAB9] py-[10px] px-[15px] bg-[#54BAB9] text-white'>Publish</button>
+
+                    {/* Make background darker */}
+                    <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${ModalPublishVisible ? "" : "hidden"} `} />
+
+
                 </div>
 
             </div>
 
+            <ModalPublish />
 
         </div>
     )

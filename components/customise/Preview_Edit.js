@@ -74,6 +74,10 @@ const Preview_Edit = () => {
     const [Banner, setBanner] = useState('/youtuber_assets/youtuber_banner.png')
     const [Logo, setLogo] = useState('./logo.png')
 
+    const [webPage, setwebPage] = useState('');
+    const [url, seturl] = useState('');
+    const [artistDescription, setartistDescription] = useState('');
+
     const BannerImageProcess = (event) => {
         if (event.target.files && event.target.files[0]) {
             setBanner(URL.createObjectURL(event.target.files[0]));
@@ -109,7 +113,15 @@ const Preview_Edit = () => {
         e.preventDefault()
         if (Banner === '/youtuber_assets/youtuber_banner.png' || Logo === './logo.png') {
             alert('Upload Banner and Logo both')
+            return
         }
+
+        if (webPage.length === 0 || url.length === 0 || artistDescription.length === 0) {
+            alert('Fill all details')
+            return
+        }
+
+        //Now upload to database
     }
 
 
@@ -241,14 +253,20 @@ const Preview_Edit = () => {
                 <form>
 
                     <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Name in Webpage</h2>
-                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='Webpage' id='Webpage' />
+                    <input value={webPage} onChange={e => {
+                        setwebPage(e.target.value)
+                    }} required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='Webpage' id='Webpage' />
 
                     <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Url</h2>
-                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='e.g. closm.com/akash' name='Url' id='Url' />
+                    <input value={url} onChange={e => {
+                        seturl(e.target.value)
+                    }} required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='e.g. closm.com/akash' name='Url' id='Url' />
 
                     <h2 className='font-inter font-medium text-[14px] lg:text-[16px] text-[#323232] ml-1 mb-2'>Add Artist Description</h2>
-                 
-                    <input required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='Description' id='Description' />
+
+                    <input value={artistDescription} onChange={e => {
+                        setartistDescription(e.target.value)
+                    }} required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='Description' id='Description' />
 
                     <button onClick={cofirmButtonClick} type='submit' className='block ml-auto mt-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>Confirm</button>
                 </form>
