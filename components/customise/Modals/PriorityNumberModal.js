@@ -29,18 +29,19 @@ const PriorityNumberModal = (props) => {
 
     const confirmClick = () => {
 
+        setPriorityNumberModalVisible(!PriorityNumberModalVisible);
+
         if (currentIndex === activeNumber) {
+            setactiveNumber(null);
             return
         }
 
-        setPriorityNumberModalVisible(!PriorityNumberModalVisible);
         setcurrentIndex(activeNumber)
 
         var element = creatorsProductList[currentIndex];
         creatorsProductList.splice(currentIndex, 1);
         creatorsProductList.splice(activeNumber, 0, element);
         setcreatorsProductList(creatorsProductList)
-        setactiveNumber(null);
     }
 
 
