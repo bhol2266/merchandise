@@ -35,7 +35,7 @@ export default function PublishedItem(props) {
                 <img className='w-[150px] lg:h-full lg:w-fit object-contain' src={`./homepageImages/${img}.png`} alt='publishedItemImage' />
 
                 <button onClick={() => { setcurrentIndex(currentIndex); setPriorityNumberModalVisible(!PriorityNumberModalVisible); }} className='lg:hidden w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#AAAAAA] px-3 py-2 mt-2 flex items-center text-[12px] lg:text-[15px] text-[#323232]'>
-                    Product Orders
+                    Priority Order
                     <ChevronRightIcon className='h-4 lg:h-6 text-black ml-3' />
                 </button>
             </div>
