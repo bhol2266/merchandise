@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { TrashIcon, ChevronRightIcon, EyeOffIcon } from '@heroicons/react/solid'
+import PriorityNumberModal from './Modals/PriorityNumberModal';
+import MerchContext from '../../context/MerchContext';
+
 export default function PublishedItem(props) {
 
 
+
+    const { PriorityNumberModalVisible, setPriorityNumberModalVisible, setcurrentIndex } = useContext(MerchContext);
+
     const { id, title, price, mrp, discount, description, img } = props.data;
+    const length = props.length;
+    const currentIndex = props.currentIndex;
+
+    console.log(currentIndex);
+
+
 
     const viewClick = () => {
 
@@ -20,7 +32,7 @@ export default function PublishedItem(props) {
 
                 <img className='w-[150px] lg:h-full lg:w-fit object-contain' src={`./homepageImages/${img}.png`} alt='publishedItemImage' />
 
-                <button className='lg:hidden w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#AAAAAA] px-3 py-2 mt-2 flex items-center text-[12px] lg:text-[15px] text-[#323232]'>
+                <button  onClick={() => { setcurrentIndex(currentIndex); setPriorityNumberModalVisible(!PriorityNumberModalVisible); }} className='lg:hidden w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#AAAAAA] px-3 py-2 mt-2 flex items-center text-[12px] lg:text-[15px] text-[#323232]'>
                     Product Orders
                     <ChevronRightIcon className='h-4 lg:h-6 text-black ml-3' />
                 </button>
@@ -70,9 +82,9 @@ export default function PublishedItem(props) {
 
 
 
-            <div className='hidden lg:w-fit pl-2 2xl:w-full 2xl:pl-0  lg:flex flex-col justify-between items-end h-full py-1 '>
+            <div className='hidden lg:w-fit pl-2 2xl:w-full 2xl:pl-0  lg:flex flex-col justify-between items-end h-full py-1 pt-[19px]'>
 
-                <button className=' w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#AAAAAA] px-3 py-2 mt-2 flex items-center justify-center text-[12px] lg:text-[15px] text-[#323232] '>
+                <button onClick={() => { setcurrentIndex(currentIndex); setPriorityNumberModalVisible(!PriorityNumberModalVisible); }} className=' w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#AAAAAA] px-3 py-2 mt-2 flex items-center justify-center text-[12px] lg:text-[15px] text-[#323232] '>
                     Product Orders
                     <ChevronRightIcon className='h-4 lg:h-6 text-black ml-3' />
                 </button>
@@ -80,18 +92,18 @@ export default function PublishedItem(props) {
                 <div>
 
                     <button className=' w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#54BAB9] px-3 py-2 mt-2 flex items-center text-[12px] lg:text-[15px] text-[#323232]'>
-                        <EyeOffIcon className='h-4 lg:h-6 text-black mr-1 2xl:ml-3' />
+                        <EyeOffIcon className='h-4 lg:h-6 text-black mr-1 2xl:mr-3' />
                         Unpublish Product
                     </button>
 
                     <button className=' w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#C25050] px-3 py-2 mt-2 flex  items-center text-[12px] lg:text-[15px] text-[#C25050]'>
-                        <TrashIcon className='h-4 lg:h-6 text-[#C25050] mr-1 2xl:ml-3' />
+                        <TrashIcon className='h-4 lg:h-6 text-[#C25050] mr-1 2xl:mr-3' />
                         Remove Product
                     </button>
                 </div>
             </div>
 
-
+            <PriorityNumberModal length={length} />
         </div>
     )
 }

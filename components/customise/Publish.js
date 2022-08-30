@@ -3,11 +3,11 @@ import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/r
 import { XCircleIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import { Menu, Transition } from '@headlessui/react'
 import Canvas from './Canvas'
-import ColorModal from './ColorModal'
+import ColorModal from './Modals/ColorModal'
 import MerchContext from '../../context/MerchContext';
 import * as htmlToImage from 'html-to-image';
 import { tshirts } from '../../Data/tshirs'
-import ModalPublish from './ModalPublish'
+import ModalPublish from './Modals/ModalPublish'
 
 
 

@@ -1,67 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PublishedItem from './PublishedItem';
+import MerchContext from '../../context/MerchContext';
 
 
-const items = [
-  {
-    id: '1',
-    title: "Jet Black Half Sleeve T-Shirt",
-    price: 499,
-    mrp: 799,
-    discount: 30,
-    description: "The product will be an excellent pick for you. It ensures an easy maintenance.",
-    img: "item1"
-  },
-  {
-    id: '2',
-    title: "Jet Black Half Sleeve T-Shirt",
-    price: 499,
-    mrp: 799,
-    discount: 30,
-    description: "The product will be an excellent pick for you. It ensures an easy maintenance.",
-    img: "item3"
-  },
-  {
-    id: '3',
-    title: "Jet Black Half Sleeve T-Shirt",
-    price: 499,
-    mrp: 799,
-    discount: 30,
-    description: "The product will be an excellent pick for you. It ensures an easy maintenance.",
-    img: "item2"
-  },
-  {
-    id: '4',
-    title: "Jet Black Half Sleeve T-Shirt",
-    price: 499,
-    mrp: 799,
-    discount: 30,
-    description: "The product will be an excellent pick for you. It ensures an easy maintenance.",
-    img: "item4"
-  },
-  {
-    id: '5',
-    title: "Jet Black Half Sleeve T-Shirt",
-    price: 499,
-    mrp: 799,
-    discount: 30,
-    description: "The product will be an excellent pick for you. It ensures an easy maintenance.",
-    img: "item3"
-  },
-  {
-    id: '6',
-    title: "Jet Black Half Sleeve T-Shirt",
-    price: 499,
-    mrp: 799,
-    discount: 30,
-    description: "The product will be an excellent pick for you. It ensures an easy maintenance.",
-    img: "item3"
-  },
-
-]
 
 const PublishedProducts = () => {
 
+  const { PriorityNumberModalVisible,creatorsProductList } = useContext(MerchContext);
   const [termsCondition, settermsCondition] = useState(false)
 
   const saveChangesBtnClick = () => {
@@ -70,10 +15,13 @@ const PublishedProducts = () => {
 
   return (
     <div>
+        {/* Make background darker */}
+        <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${PriorityNumberModalVisible ? "" : "hidden"} `} />
+
       <div className='flex justify-start  space-y-6 lg:space-y-12 flex-col '>
-        {items.map(obj => {
+        {creatorsProductList.map((obj,index) => {
           return (
-            <PublishedItem key={obj.id} data={obj} />
+            <PublishedItem key={obj.id} data={obj} length={creatorsProductList.length} currentIndex={index} />
           )
         })}
       </div>

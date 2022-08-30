@@ -1,6 +1,6 @@
 import { XCircleIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 import { useContext, useEffect, useState } from 'react';
-import MerchContext from '../../context/MerchContext';
+import MerchContext from '../../../context/MerchContext';
 
 
 

@@ -3,7 +3,7 @@ import { XCircleIcon } from '@heroicons/react/solid'
 import { HexColorPicker } from "react-colorful";
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import MerchContext from '../../context/MerchContext';
-import ColorModal from './ColorModal';
+import ColorModal from './Modals/ColorModal';
 import { tshirts } from '../../Data/tshirs';
 import dynamic from "next/dynamic";
 import * as htmlToImage from 'html-to-image';

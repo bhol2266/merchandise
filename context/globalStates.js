@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { chooseColours } from '../Data/chooseColours';
+import { creatorProducts } from '../Data/creatorProducts';
 import MerchContext from "./MerchContext";
 
 const GlobalStates = (props) => {
@@ -30,11 +31,48 @@ const GlobalStates = (props) => {
     const [selectedTshirtsForUpload, setselectedTshirtsForUpload] = useState([])
     const [ModalPublishVisible, setModalPublishVisible] = useState(false);
 
+    //Published Products
+    const [PriorityNumberModalVisible, setPriorityNumberModalVisible] = useState(false);
+    const [currentIndex, setcurrentIndex] = useState(0);
+    const [creatorsProductList, setcreatorsProductList] = useState(creatorProducts);
+
+
 
 
 
     return (
-        <MerchContext.Provider value={{ loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar, OTPemail, setOTPemail, youtuberLogo, setyoutuberLogo, modalVisible, setmodalVisible, colours, setcolours, PreviewMode, setPreviewMode, canvas, setcanvas, canvasDivRef, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload,ModalPublishVisible, setModalPublishVisible}}>
+        <MerchContext.Provider value={{
+            loginSidebar,
+            setloginSidebar,
+            singUpForm_Sidebar,
+            setsingUpForm_Sidebar,
+            signUpFormOTP_Sidebae,
+            setsignUpFormOTP_Sidebar,
+            OTPemail,
+            setOTPemail,
+            youtuberLogo,
+            setyoutuberLogo,
+            modalVisible,
+            setmodalVisible,
+            colours,
+            setcolours,
+            PreviewMode,
+            setPreviewMode,
+            canvas,
+            setcanvas,
+            canvasDivRef,
+            setcanvasDivRef,
+            selectedColourIndex,
+            setselectedColourIndex,
+            selectedTshirtsForUpload,
+            setselectedTshirtsForUpload,
+            ModalPublishVisible,
+            setModalPublishVisible,
+            PriorityNumberModalVisible,
+            setPriorityNumberModalVisible,
+            currentIndex, setcurrentIndex,
+            creatorsProductList, setcreatorsProductList
+        }}>
             {props.children}
         </MerchContext.Provider>
     )
