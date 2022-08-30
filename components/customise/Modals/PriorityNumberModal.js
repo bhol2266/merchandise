@@ -36,6 +36,7 @@ const PriorityNumberModal = (props) => {
         setPriorityNumberModalVisible(!PriorityNumberModalVisible);
         setcurrentIndex(activeNumber)
 
+        //Also we have to update this to database
         var element = creatorsProductList[currentIndex];
         creatorsProductList.splice(currentIndex, 1);
         creatorsProductList.splice(activeNumber, 0, element);

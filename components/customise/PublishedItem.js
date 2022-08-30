@@ -7,13 +7,12 @@ export default function PublishedItem(props) {
 
 
 
-    const { PriorityNumberModalVisible, setPriorityNumberModalVisible, setcurrentIndex } = useContext(MerchContext);
+    const { PriorityNumberModalVisible, setPriorityNumberModalVisible, setcurrentIndex, creatorsProductList, setcreatorsProductList } = useContext(MerchContext);
 
     const { id, title, price, mrp, discount, description, img } = props.data;
     const length = props.length;
     const currentIndex = props.currentIndex;
 
-    console.log(currentIndex);
 
 
 
@@ -22,7 +21,10 @@ export default function PublishedItem(props) {
     }
 
     const deleteClick = () => {
-
+        console.log('INSIDE');
+        creatorsProductList.splice(currentIndex, 1)
+        let array = [...creatorsProductList]
+        setcreatorsProductList(array)
     }
 
     return (
@@ -32,7 +34,7 @@ export default function PublishedItem(props) {
 
                 <img className='w-[150px] lg:h-full lg:w-fit object-contain' src={`./homepageImages/${img}.png`} alt='publishedItemImage' />
 
-                <button  onClick={() => { setcurrentIndex(currentIndex); setPriorityNumberModalVisible(!PriorityNumberModalVisible); }} className='lg:hidden w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#AAAAAA] px-3 py-2 mt-2 flex items-center text-[12px] lg:text-[15px] text-[#323232]'>
+                <button onClick={() => { setcurrentIndex(currentIndex); setPriorityNumberModalVisible(!PriorityNumberModalVisible); }} className='lg:hidden w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#AAAAAA] px-3 py-2 mt-2 flex items-center text-[12px] lg:text-[15px] text-[#323232]'>
                     Product Orders
                     <ChevronRightIcon className='h-4 lg:h-6 text-black ml-3' />
                 </button>
@@ -96,7 +98,7 @@ export default function PublishedItem(props) {
                         Unpublish Product
                     </button>
 
-                    <button className=' w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#C25050] px-3 py-2 mt-2 flex  items-center text-[12px] lg:text-[15px] text-[#C25050]'>
+                    <button onClick={deleteClick} className=' w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#C25050] px-3 py-2 mt-2 flex  items-center text-[12px] lg:text-[15px] text-[#C25050]'>
                         <TrashIcon className='h-4 lg:h-6 text-[#C25050] mr-1 2xl:mr-3' />
                         Remove Product
                     </button>
