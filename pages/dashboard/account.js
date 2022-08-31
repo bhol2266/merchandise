@@ -9,7 +9,7 @@ const Account = () => {
 
 
 
-
+    // Creators Info
 
     const [firstName, setfirstName] = useState('');
     const [lastName, setlastName] = useState('');
@@ -26,7 +26,12 @@ const Account = () => {
     const [otherLink, setotherLink] = useState('');
 
 
+    // Bank details
 
+    const [accountNumber, setaccountNumber] = useState();
+    const [IFSC, setIFSC] = useState();
+    const [accountName, setaccountName] = useState();
+    const [upiID, setupiID] = useState();
 
 
 
@@ -55,12 +60,14 @@ const Account = () => {
 
 
 
-            {MenuChanger === 'INFO' &&
 
-                <div className='flex  items-start justify-center mt-6 lg:justify-between '>
+            <div className='flex  items-start justify-center mt-6 lg:justify-between '>
 
 
-                    <img className=' hidden md:inline  w-1/2 xl:w-3/4 pt-[40px]  xl:mr-12 xl:pr-6 mr-8' src="/creator/poster2.png" alt="" />
+                <img className=' hidden md:inline  w-1/2 xl:w-3/4 pt-[40px]  xl:mr-12 xl:pr-6 mr-8' src="/creator/poster2.png" alt="" />
+
+
+                {MenuChanger === 'INFO' &&
 
                     <form className='w-full mx-auto  sm:w-4/5 md:w-full  2xl:w-2/5 xl:w-4/5'>
 
@@ -177,11 +184,48 @@ const Account = () => {
 
 
                     </form>
+                }
 
 
-                </div>
+                {MenuChanger === 'BANK' &&
 
-            }
+                    <form className='w-full mx-auto  sm:w-4/5 md:w-full  2xl:w-2/5 mb-[500px] '>
+
+
+                        <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Bank Account Number</label>
+                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={accountNumber} onChange={(e) => { setaccountNumber(e.target.value) }} id='accountNumber' name='accountNumber' placeholder='4456456456+956+56+564' type='text' />
+
+
+                        <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>IFSC Code</label>
+                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={IFSC} onChange={(e) => { setIFSC(e.target.value) }} id='IFSC Code' name='IFSC Code' placeholder='HDFC54878674' type='text' />
+
+                        <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Account Holder Name</label>
+                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={accountName} onChange={(e) => { setaccountName(e.target.value) }} id='Account Holder Name' name='Account Holder Name' placeholder='KimJONG' type='text' />
+
+                        
+                        <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>UPI Id</label>
+                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={upiID} onChange={(e) => { setupiID(e.target.value) }} id='Account Holder Name' name='Account Holder Name' placeholder='4456456456+956+56+564' type='text' />
+
+
+
+
+
+                        <div className='mt-6 flex item-center justify-end mx-1 lg:mx-2'>
+
+                            <button className='lg:mr-2 lg:scale-150  px-4 py-2 font-inter text-[10px] text-white rounded-[5px] bg-[#54BAB9]'>
+                                Confirm
+                            </button>
+                        </div>
+
+
+                    </form>
+
+                }
+
+
+
+            </div>
+
 
 
 
