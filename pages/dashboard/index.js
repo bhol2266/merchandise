@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Itemlist } from "../components/Itemlist";
+import { Itemlist } from "../../components/Itemlist";
 
 const Dashboard = () => {
 
