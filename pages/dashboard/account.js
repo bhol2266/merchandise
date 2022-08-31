@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { LogoutIcon } from '@heroicons/react/solid'
 import Link from 'next/link';
+import { statesOfINdia } from '../../Data/statesOfINdia';
 
 const Account = () => {
 
@@ -15,7 +16,7 @@ const Account = () => {
     const [lastName, setlastName] = useState('');
     const [artistName, setartistName] = useState('');
     const [phone, setphone] = useState('');
-    const [country, setcountry] = useState('');
+    const [country, setcountry] = useState('India');
     const [state, setstate] = useState('');
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
@@ -110,8 +111,22 @@ const Account = () => {
 
 
                             <div className='w-full '>
+
+
                                 <label className=' block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>State</label>
-                                <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={state} onChange={(e) => { setstate(e.target.value) }} id='state' name='state' placeholder='Delhi' type='text' />
+
+                                <select value={state} onChange={e => setstate(e.target.value)} className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full'>
+                                    <option value="none" selected disabled hidden>Select State</option>
+
+                                    {statesOfINdia.map(state => {
+                                        return (
+                                            <option key={state} value={state} >{state}</option>
+
+                                        )
+                                    })}
+
+                                </select>
+
                             </div>
 
                         </div>
@@ -202,7 +217,7 @@ const Account = () => {
                         <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Account Holder Name</label>
                         <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={accountName} onChange={(e) => { setaccountName(e.target.value) }} id='Account Holder Name' name='Account Holder Name' placeholder='KimJONG' type='text' />
 
-                        
+
                         <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>UPI Id</label>
                         <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={upiID} onChange={(e) => { setupiID(e.target.value) }} id='Account Holder Name' name='Account Holder Name' placeholder='4456456456+956+56+564' type='text' />
 
