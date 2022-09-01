@@ -87,7 +87,7 @@ const Earnings = () => {
 
             <h2 className=" font-inter  text-[14px] lg:text-[22px] text-[#323232] text-left mt-[1px] font-medium">ACCOUNT</h2>
 
-            <div className="lg:flex-row flex flex-col justify-center items-center lg:justify-around">
+            <div className="lg:flex-row flex flex-col justify-center items-start lg:items-center lg:justify-around">
 
                 <div className="p-[30px]  flex flex-col justify-between  h-[275px] lg:h-[350px] 2xl:h-[300px] sm:w-[470px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px]  items-start">
 
@@ -248,7 +248,7 @@ const Earnings = () => {
 
             {/* Table */}
 
-            <div className="mt-12 lg:mt-[80px] xl:mt-[100px] 2xl:mt-[150px] space-y-3">
+            <div className="mt-14 lg:mt-[80px] xl:mt-[100px] 2xl:mt-[150px] space-y-3">
 
                 <div className="grid gridClass pb-2  gap-2">
                     <h2 className=" font-inter  text-[10px] lg:text-[14px] text-[#323232] text-center mt-[1px] font-medium">No</h2>
