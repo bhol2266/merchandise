@@ -22,19 +22,20 @@ const Partner_with_us = () => {
 
 
     const loginFacebook = async () => {
-        
-        window.open(`${process.env.BACKEND_URL}api/v1/user/facebook`, "_self");
-        
+
+        // window.open(`http://localhost:5000/api/v1/user/facebook`, "_self");
+        window.open(`https://king-prawn-app-d3yfg.ondigitalocean.app/api/v1/user/google`, "_self");
+
+
     }
-    
-    
+
+
     const loginGoogle = async () => {
-
-        console.log(`${process.env.BACKEND_URL}user/google`);
-        window.open(`${process.env.BACKEND_URL}api/v1/user/google`, "_self");
+        console.log(`http://localhost:5000/api/v1/user/google`);
+        // window.open(`https://king-prawn-app-d3yfg.ondigitalocean.app/api/v1/user/google`, "_self");
+        window.open(`http://localhost:5000/api/v1/user/google`, "_self");
 
     }
-
 
     const [openLogin, setopenLogin] = useState(false);
 
