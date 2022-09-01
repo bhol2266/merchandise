@@ -248,7 +248,7 @@ const Earnings = () => {
 
             {/* Table */}
 
-            <div className="mt-4 lg:mt-[80px] xl:mt-[100px] 2xl:mt-[150px] space-y-3">
+            <div className="mt-12 lg:mt-[80px] xl:mt-[100px] 2xl:mt-[150px] space-y-3">
 
                 <div className="grid gridClass pb-2  gap-2">
                     <h2 className=" font-inter  text-[10px] lg:text-[14px] text-[#323232] text-center mt-[1px] font-medium">No</h2>
