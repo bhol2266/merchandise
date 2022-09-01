@@ -87,7 +87,7 @@ const Earnings = () => {
 
             <h2 className=" font-inter  text-[14px] lg:text-[22px] text-[#323232] text-left mt-[1px] font-medium">ACCOUNT</h2>
 
-            <div className="lg:flex-row flex flex-col justify-center items-start lg:items-center lg:justify-around">
+            <div className="lg:flex-row flex flex-col justify-center items-start sm:items-center lg:justify-around">
 
                 <div className="p-[30px]  flex flex-col justify-between  h-[275px] lg:h-[350px] 2xl:h-[300px] sm:w-[470px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px]  items-start">
 
