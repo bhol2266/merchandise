@@ -1,12 +1,69 @@
 import Link from "next/link";
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import { useState } from "react";
+import TableIRow from "../../components/customise/TableIRow";
 
 
 
 
+const rowData = [
+    {
+
+        No: '1',
+        Parameter: 'Bank AC :565656568998888',
+        Status: 'Processed',
+        Date: '12/03/2021',
+        amountRequested: '454556',
+        amountProcessed: '454556 ',
+    },
+    {
+
+        No: '1',
+        Parameter: 'Bank AC :565656568998888',
+        Status: 'Processed',
+        Date: '12/03/2021',
+        amountRequested: '454556',
+        amountProcessed: '454556 ',
+    },
+    {
+
+        No: '1',
+        Parameter: 'Bank AC :565656568998888',
+        Status: 'Processed',
+        Date: '12/03/2021',
+        amountRequested: '454556',
+        amountProcessed: '454556 ',
+    },
+    {
+
+        No: '1',
+        Parameter: 'Bank AC :565656568998888',
+        Status: 'Processed',
+        Date: '12/03/2021',
+        amountRequested: '454556',
+        amountProcessed: '454556 ',
+    },
+    {
+
+        No: '1',
+        Parameter: 'Bank AC :565656568998888',
+        Status: 'Processed',
+        Date: '12/03/2021',
+        amountRequested: '454556',
+        amountProcessed: '454556 ',
+    },
+    {
+
+        No: '1',
+        Parameter: 'Bank AC :565656568998888',
+        Status: 'Processed',
+        Date: '12/03/2021',
+        amountRequested: '454556',
+        amountProcessed: '454556 ',
+    },
 
 
+]
 
 
 
@@ -27,6 +84,8 @@ const Earnings = () => {
     return (
 
         <div className='mx-[14px] lg:mx-[30px] xl:mx-[50px] 2xl:mx-[80px] my-[15px] mb-16 '>
+
+            <h2 className=" font-inter  text-[14px] lg:text-[22px] text-[#323232] text-left mt-[1px] font-medium">ACCOUNT</h2>
 
             <div className="lg:flex-row flex flex-col justify-center items-center lg:justify-around">
 
@@ -49,21 +108,21 @@ const Earnings = () => {
 
                     <div className="">
 
-                        <h2 className="font-inter text-[10px] lg:text-[16px] text-[#323232] text-left mt-[20px]">Total Revenue</h2>
-                        <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[10px]">₹{totalBalance}</h2>
+                        <h2 className="font-inter text-[10px] lg:text-[14px] text-[#323232] text-left mt-[20px]">Total Revenue</h2>
+                        <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[5px]">₹{totalBalance}</h2>
                     </div>
 
                     <div className="">
 
-                        <h2 className="font-inter text-[10px] lg:text-[16px] text-[#323232] text-left mt-[20px]">Total Profit</h2>
-                        <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[10px]">₹{totalBalance}</h2>
+                        <h2 className="font-inter text-[10px] lg:text-[14px] text-[#323232] text-left mt-[20px]">Total Profit</h2>
+                        <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[5px]">₹{totalBalance}</h2>
                     </div>
 
 
                     <div className="">
 
-                        <h2 className="font-inter text-[10px] lg:text-[16px] text-[#323232] text-left mt-[20px]">Total Closm Charges</h2>
-                        <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[10px]">₹{totalBalance}</h2>
+                        <h2 className="font-inter text-[10px] lg:text-[14px] text-[#323232] text-left mt-[20px]">Total Closm Charges</h2>
+                        <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[5px]">₹{totalBalance}</h2>
                     </div>
 
 
@@ -91,20 +150,20 @@ const Earnings = () => {
                     <div className="flex items-center justify-start space-x-12">
                         <div className="">
 
-                            <h2 className="font-inter text-[10px] lg:text-[16px] text-[#323232] text-left mt-[20px]">Withdrawable Balance</h2>
+                            <h2 className="font-inter text-[10px] lg:text-[14px] text-[#323232] text-left mt-[20px]">Withdrawable Balance</h2>
                             <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[5px]">₹{totalBalance}</h2>
                         </div>
 
                         <div className="">
 
-                            <h2 className="font-inter text-[10px] lg:text-[16px] text-[#323232] text-left mt-[20px]">Pending Balance</h2>
+                            <h2 className="font-inter text-[10px] lg:text-[14px] text-[#323232] text-left mt-[20px]">Pending Balance</h2>
                             <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[5px]">₹{totalBalance}</h2>
                         </div>
                     </div>
 
                     <div className="">
 
-                        <h2 className="font-inter text-[10px] lg:text-[16px] text-[#323232] text-left mt-[20px]">Total Closm Charges</h2>
+                        <h2 className="font-inter text-[10px] lg:text-[14px] text-[#323232] text-left mt-[20px]">Total Closm Charges</h2>
                         <h2 className="font-inter text-[14px]  lg:text-[20px] text-[#323232] text-left mt-[5px]">₹{totalBalance}</h2>
                     </div>
 
@@ -173,7 +232,7 @@ const Earnings = () => {
 
                         </div>
 
-                        <h2 className="font-inter text-[10px]  lg:text-[16px] text-[#6C6C6C] text-left mt-[4px] lg:mt-3">Process may take 3 to 7 Business days</h2>
+                        <h2 className="font-inter text-[10px]  lg:text-[14px] text-[#6C6C6C] text-left mt-[4px] lg:mt-3">Process may take 3 to 7 Business days</h2>
                     </div>
 
 
@@ -182,6 +241,34 @@ const Earnings = () => {
 
 
 
+
+            </div>
+
+
+
+            {/* Table */}
+
+            <div className="mt-4 lg:mt-[80px] xl:mt-[100px] 2xl:mt-[150px] space-y-3">
+
+                <div className="grid gridClass pb-2  gap-2">
+                    <h2 className=" font-inter  text-[10px] lg:text-[14px] text-[#323232] text-center mt-[1px] font-medium">No</h2>
+
+                    <h2 className=" font-inter  text-[10px] lg:text-[14px] text-[#323232] text-center mt-[1px] font-medium">Parameter</h2>
+
+                    <h2 className=" font-inter  text-[10px] lg:text-[14px] text-[#323232] text-center mt-[1px] font-medium">Status</h2>
+
+                    <h2 className=" font-inter  text-[10px] lg:text-[14px] text-[#323232] text-center mt-[1px] font-medium">Date</h2>
+
+                    <h2 className=" font-inter  text-[10px] lg:text-[14px] text-[#323232] text-center mt-[1px] font-medium">Amount Requested</h2>
+
+                    <h2 className=" marker:font-inter  text-[10px] lg:text-[14px] text-[#323232] text-center mt-[1px] font-medium">Amount Processed</h2>
+                </div>
+
+                {rowData.map(data => {
+                    return (
+                        <TableIRow key={rowData.no} data={data} />
+                    )
+                })}
 
             </div>
 

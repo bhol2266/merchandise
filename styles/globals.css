@@ -144,6 +144,13 @@
       }
 
 
+      /* Grid */
+
+      .gridClass{
+        grid-template-columns:1fr 4fr 2fr 2fr 3fr 3fr
+      }
+
+
       
     
     
