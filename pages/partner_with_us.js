@@ -25,13 +25,11 @@ const Partner_with_us = () => {
 
         window.open(`https://king-prawn-app-d3yfg.ondigitalocean.app/api/v1/user/facebook`, "_self");
    
-
     }
 
 
     const loginGoogle = async () => {
         window.open(`https://king-prawn-app-d3yfg.ondigitalocean.app/api/v1/user/google`, "_self");
-
     }
 
     const [openLogin, setopenLogin] = useState(false);
