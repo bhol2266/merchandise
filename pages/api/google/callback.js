@@ -9,7 +9,7 @@ export default async function (req, res, next) {
             deleteCookie('role', { req, res });
 
             alert('Something went wrong')
-            return res.redirect("http://localhost:3000/partner_with_us");
+            return res.redirect("/partner_with_us");
         }
 
 
