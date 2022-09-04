@@ -48,7 +48,7 @@ const Account = () => {
 
         Cookies.remove('refreshToken')
         Cookies.remove('accessToken')
-        Cookies.remove('role')
+        Cookies.set('role','user')
         Cookies.remove('email')
         Cookies.remove('name')
 
