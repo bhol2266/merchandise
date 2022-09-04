@@ -23,7 +23,10 @@ const Partner_with_us = () => {
 
 
     const updateCookie = async () => {
-        setCookies('role', 'creator');
+        setCookies('role', "creator " + data.accessToken, {
+            req,
+            res, maxAge: 900000
+        });
     }
 
 

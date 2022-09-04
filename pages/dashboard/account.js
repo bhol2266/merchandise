@@ -52,10 +52,6 @@ const Account = () => {
         Cookies.remove('email')
         Cookies.remove('name')
 
-        // cookieCutter('refreshToken', '');
-        // cookieCutter('role', '');
-        // cookieCutter('email', '');
-        // cookieCutter('name', '');
 
         setNavbarUserORcreator('')
         route.push('/')
