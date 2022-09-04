@@ -38,6 +38,7 @@ export default async function (req, res, next) {
         });
 
 
-        // return res.redirect("http://localhost:3000/dashboard");
+        return res.redirect("/dashboard");
+        
     })(req, res, next);
 }
