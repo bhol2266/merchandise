@@ -38,6 +38,11 @@ const GlobalStates = (props) => {
 
 
 
+    //Navbar for user or creator 
+    const [NavbarUserORcreator, setNavbarUserORcreator] = useState('user');
+
+
+
 
 
     return (
@@ -71,7 +76,8 @@ const GlobalStates = (props) => {
             PriorityNumberModalVisible,
             setPriorityNumberModalVisible,
             currentIndex, setcurrentIndex,
-            creatorsProductList, setcreatorsProductList
+            creatorsProductList, setcreatorsProductList,
+            NavbarUserORcreator, setNavbarUserORcreator
         }}>
             {props.children}
         </MerchContext.Provider>

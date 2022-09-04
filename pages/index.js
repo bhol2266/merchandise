@@ -8,10 +8,24 @@ import { apiip } from '../lib/serverConfig';
 import { GetEmail, } from '../lib/CookieLib'
 import { checkCookies } from 'cookies-next';
 import MerchContext from '../context/MerchContext'
+import { setCookies, getCookie } from "cookies-next";
+import { useRouter } from 'next/router'
 
 
-export default function Home() {
- 
+export default function Home({ type }) {
+
+
+  const { NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
+
+
+  const router = useRouter()
+
+
+  useEffect(() => {
+    // setNavbarUserORcreator('user')
+  }, []);
+
+
 
   return (
     <div className='relative' >
@@ -27,36 +41,20 @@ export default function Home() {
     </div>
   )
 }
+export async function getServerSideProps({ req, res }) {
+
+  let cookieExists = getCookie("role", { req, res });
+
+  if (typeof cookieExists !== 'undefined' && cookieExists === 'creator') {
+    return { redirect: { destination: "/dashboard" } };
+
+  } else {
+
+    return {
+      props: {
+      }
+    };
+  }
 
 
-// export async function getServerSideProps() {
-
-//   QueryG(`query{
-//     products{
-//       edges{
-//       node{
-//         title
-//          image{
-//           imageName
-//           image
-//         }
-//         price
-//         mrp
-//         discount
-//       }
-//       }
-//     }
-//   }`)
-//     .then(res => {
-//       console.log(JSON.stringify(res.data));
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     })
-
-//   return {
-//     props: {
-//       products: res.data
-//     }, // will be passed to the page component as props
-//   }
-// }
+}

@@ -10,6 +10,10 @@ import { LoginForm } from '../components/LoginForm'
 import { SignUpForm } from '../components/SignUpForm'
 import { SignUpFormOTP } from '../components/SignUpFormOTP'
 import GlobalStates from '../context/globalStates'
+import MerchContext from '../context/MerchContext'
+import { useContext } from 'react'
+
+
 
 function MyApp({ Component, pageProps }) {
 
@@ -20,6 +24,9 @@ function MyApp({ Component, pageProps }) {
   Router.events.on("routeChangeComplete", (url) => {
     NProgress.done();
   })
+
+
+
 
 
 
@@ -40,7 +47,7 @@ function MyApp({ Component, pageProps }) {
       </Head> */}
 
       <GlobalStates>
-        <Navigation />
+        <Navigation   />
         <LoginForm />
         <SignUpForm />
         <SignUpFormOTP />

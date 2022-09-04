@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { setCookies, getCookie } from "cookies-next";
 
 
 
@@ -21,24 +22,12 @@ const Partner_with_us = () => {
     }, [])
 
 
-    const loginFacebook = async () => {
-
-        window.open(`https://king-prawn-app-d3yfg.ondigitalocean.app/api/v1/user/facebook`, "_self");
-        // window.open(`http://localhost:5000/api/v1/user/facebook`, "_self");
-
-
-
+    const updateCookie = async () => {
+        setCookies('role', 'creator');
     }
 
 
-    const loginGoogle = async () => {
 
-        window.open(`https://king-prawn-app-d3yfg.ondigitalocean.app/api/v1/user/google`, "_self");
-
-        // window.open(`http://localhost:5000/api/v1/user/google`, "_self");
-
-
-    }
 
     const [openLogin, setopenLogin] = useState(false);
 
@@ -70,8 +59,12 @@ const Partner_with_us = () => {
                 <div className={` w-fit mx-auto my-12 ${openLogin ? 'opacity-100 relative' : 'opacity-0'} transition-all duration-500 lg:scale-125`}>
                     <p className="mb-[18px] font-inter font-medium text-[#323232] text-[10px] block mx-auto w-fit">Continue With</p>
                     <div className="flex items-center space-x-3">
-                        <img onClick={loginGoogle} className="bg-white w-[50px] p-[10px] shadow-md rounded-2xl cursor-pointer mb-[15px]" src="./login/google.png" alt="" />
-                        <img onClick={loginFacebook} className="bg-white w-[50px] p-[10px] shadow-md rounded-2xl cursor-pointer mb-[15px] " src="./login/facebook.png" alt="" />
+                        <Link href='/api/google/'>
+                            <img onClick={updateCookie} className="bg-white w-[50px] p-[10px] shadow-md rounded-2xl cursor-pointer mb-[15px]" src="./login/google.png" alt="" />
+                        </Link>
+                        <Link href='/api/facebook/'>
+                            <img onClick={updateCookie} className="bg-white w-[50px] p-[10px] shadow-md rounded-2xl cursor-pointer mb-[15px] " src="./login/facebook.png" alt="" />
+                        </Link>
 
                     </div>
                 </div>
@@ -93,3 +86,20 @@ const Partner_with_us = () => {
     )
 };
 export default Partner_with_us;
+
+
+
+
+export async function getServerSideProps({ req, res }) {
+    try {
+        const cookieExists = getCookie("role", { req, res });
+
+        console.log(cookieExists);
+        if (cookieExists === 'creator') {
+            return { redirect: { destination: "/dashboard" } };
+        }
+        return { props: {} };
+    } catch (err) {
+        return { props: {} };
+    }
+}

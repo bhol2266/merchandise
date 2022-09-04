@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { LogoutIcon } from '@heroicons/react/solid'
 import Link from 'next/link';
 import { statesOfINdia } from '../../Data/statesOfINdia';
+import Cookies from 'js-cookie'
+
+import { useRouter } from 'next/router';
+import MerchContext from '../../context/MerchContext';
+
 
 const Account = () => {
+
+    const { NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
+
+    const route = useRouter()
 
     const [MenuChanger, setMenuChanger] = useState('INFO');
 
@@ -35,6 +44,23 @@ const Account = () => {
     const [upiID, setupiID] = useState();
 
 
+    const logout = () => {
+
+        Cookies.remove('refreshToken')
+        Cookies.remove('accessToken')
+        Cookies.remove('role')
+        Cookies.remove('email')
+        Cookies.remove('name')
+
+        // cookieCutter('refreshToken', '');
+        // cookieCutter('role', '');
+        // cookieCutter('email', '');
+        // cookieCutter('name', '');
+
+        setNavbarUserORcreator('')
+        route.push('/')
+    }
+
 
     return (
 
@@ -50,7 +76,7 @@ const Account = () => {
                 </div>
 
 
-                <button className='flex lg:scale-125 items-center justify-center px-4 py-2 font-inter text-[10px] text-white rounded-[5px] bg-[#54BAB9]'>
+                <button onClick={logout} className='flex lg:scale-125 items-center justify-center px-4 py-2 font-inter text-[10px] text-white rounded-[5px] bg-[#54BAB9]'>
                     <LogoutIcon className='h-4 text-white mr-1' />
                     Logout
                 </button>
@@ -115,8 +141,8 @@ const Account = () => {
 
                                 <label className=' block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>State</label>
 
-                                <select  className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full'>
-                                    <option value={state} selected onChange={e => setstate(e.target.value)}  disabled hidden>Select State</option>
+                                <select className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full'>
+                                    <option value={state} selected onChange={e => setstate(e.target.value)} disabled hidden>Select State</option>
 
                                     {statesOfINdia.map(state => {
                                         return (

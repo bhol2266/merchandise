@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { Itemlist } from "../../components/Itemlist";
+import MerchContext from "../../context/MerchContext";
+import Cookies from 'js-cookie'
+
+
+
 
 const Dashboard = () => {
 
-    const creatorName = 'HELLO KIMJONG'
+    const { NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
+    const [creatorName, setcreatorName] = useState('');
+
+    useEffect(() => {
+        setNavbarUserORcreator('creator')
+        setcreatorName('HELLO' + " " + Cookies.get('name').substring(0, Cookies.get('name').indexOf(" ")).toUpperCase())
+    }, []);
+
+
     const totalBalance = '75000'
     const totalItemsSold = '5842'
     const productlist = []
