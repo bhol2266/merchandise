@@ -9,7 +9,7 @@ export default async function (req, res, next) {
             deleteCookie('role', { req, res });
 
             alert('Something went wrong')
-            return res.redirect("/partner_with_us");
+            return res.redirect("https://www.closm.com//partner_with_us");
         }
 
 
@@ -39,6 +39,6 @@ export default async function (req, res, next) {
         });
 
 
-        return res.redirect("/dashboard");
+        return res.redirect("https://www.closm.com//dashboard");
     })(req, res, next);
 }
