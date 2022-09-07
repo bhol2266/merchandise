@@ -144,11 +144,10 @@ const Preview_Edit = () => {
         for (let index = 0; index < 2; index++) {
             let filename = ''
             if (index === 0) {
-                filename = 'LOGO'
+                filename = 'Logo'
             } else {
-                filename = 'banner'
+                filename = 'Banner'
             }
-
 
             try {
                 const response = await uploadSingleImage(imagesArray[index], filename)
@@ -159,13 +158,29 @@ const Preview_Edit = () => {
                 }
             } catch (error) {
                 alert(error)
+                setbeatLoader(false)
+                return
             }
         }
 
-        console.log(uploadImagesURL);
+
+        try {
+            const response = await saveYoutubersDetail(webPage, url, artistDescription, uploadImagesURL[0], uploadImagesURL[1])
+            if (response.sucess) {
+                console.log(response);
+            } else {
+                alert(response.message)
+            }
+        } catch (error) {
+            alert(error)
+            setbeatLoader(false)
+            return
+        }
+
         setbeatLoader(false)
         setImagesUploaded(true)
-
+        alert('Data Uploaded')
+       
         //Now upload to database
     }
 
@@ -312,9 +327,16 @@ const Preview_Edit = () => {
                     }} required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='Description' id='Description' />
 
 
-                    {!beatLoader &&
-                        <button onClick={cofirmButtonClick} type='submit' className='block ml-auto mt-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>{ImagesUploaded ? "Images Uploaded":"Confirm"}</button>
-                    }
+                    <div className='flex items-center justify-end space-x-2'>
+
+                        {!beatLoader &&
+                            <button  onClick={cofirmButtonClick} type='submit' className={`block ml-auto mt-3 px-6 py-3 lg:px-8 border-[#54BAB9] border-2 bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white ${ImagesUploaded ? "" : ""}`}>{ImagesUploaded ? "Confirm" : "Confirm"}</button>
+                        }
+
+                        {/* {ImagesUploaded &&
+                            <button onClick={cofirmButtonClick} type='submit' className={`block ml-auto mt-3 px-6 py-3 lg:px-8 border-[#54BAB9] border-2 bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white`}>Re-Upload</button>
+                        } */}
+                    </div>
 
                     {beatLoader &&
                         <div className="flex justify-end space-x-3 items-center mt-3 px-6 py-3 lg:px-8">
