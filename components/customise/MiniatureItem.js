@@ -6,7 +6,7 @@ export const MiniatureItem = ({ obj }) => {
     const { price, mrp, discount, title, description,id,img } = obj
 
  
-    const imageUrl = "./homepageImages/" + img+'.png'
+    const imageUrl = "/homepageImages/" + img+'.png'
 
 
 

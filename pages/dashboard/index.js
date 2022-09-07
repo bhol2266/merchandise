@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Itemlist } from "../../components/Itemlist";
 import MerchContext from "../../context/MerchContext";
 import Cookies from 'js-cookie'
+import { setCookies, getCookie } from "cookies-next";
 
 
 
@@ -53,7 +54,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex flex-col items-start justify-start space-y-2">
-                        <Link href='/'>
+                        <Link href='/dashboard/preview'>
                             <a className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
                                 Preview & Edit
                             </a>
@@ -177,3 +178,21 @@ const Dashboard = () => {
     )
 };
 export default Dashboard;
+
+
+export async function getServerSideProps({ req, res }) {
+    try {
+        const cookieExists = getCookie("role", { req, res });
+        const emailExists = getCookie("email", { req, res });
+
+        console.log(emailExists);
+        if (cookieExists === 'creator' && typeof emailExists !== 'undefined') {
+        
+        } else {
+            return { redirect: { destination: "/partner_with_us" } };
+        }
+        return { props: {} };
+    } catch (err) {
+        return { props: {} };
+    }
+}

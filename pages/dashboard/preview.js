@@ -2,19 +2,20 @@ import { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 
-//Three components of customise page
-import Preview_Edit from '../components/customise/Preview_Edit'
-import Publish from '../components/customise/Publish'
-import PublishedProducts from '../components/customise/publishedProducts'
+//Three components of Preview page
+import Preview_Edit from '../../components/customise/Preview_Edit'
+import Publish from '../../components/customise/Publish'
+import PublishedProducts from '../../components/customise/publishedProducts'
 import Script from 'next/script';
 import dynamic from "next/dynamic";
+import { setCookies, getCookie } from "cookies-next";
 
 
 
 
 
 
-const Customise = () => {
+const Preview = () => {
 
 
     const [currnetNavigation, setcurrnetNavigation] = useState('PREVIEW')
@@ -60,4 +61,21 @@ const Customise = () => {
 }
 
 
-export default Customise
+export default Preview
+
+export async function getServerSideProps({ req, res }) {
+    try {
+        const cookieExists = getCookie("role", { req, res });
+        const emailExists = getCookie("email", { req, res });
+
+        console.log(emailExists);
+        if (cookieExists === 'creator' && typeof emailExists !== 'undefined') {
+        
+        } else {
+            return { redirect: { destination: "/partner_with_us" } };
+        }
+        return { props: {} };
+    } catch (err) {
+        return { props: {} };
+    }
+}

@@ -1,9 +1,11 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { Itemlist } from '../Itemlist'
 import { MiniatureItemList } from './MiniatureItemlist';
+import { setCookies, getCookie } from "cookies-next";
+import { BeatLoader } from 'react-spinners';
 
 import MerchContext from '../../context/MerchContext';
-
+import { saveYoutubersDetail, uploadSingleImage } from '../../lib/serveraApiCalls';
 
 const items = [
     {
@@ -71,8 +73,17 @@ const Preview_Edit = () => {
 
     const [products, setproducts] = useState(items)
 
+    const [Logo, setLogo] = useState('/logo.png')
     const [Banner, setBanner] = useState('/youtuber_assets/youtuber_banner.png')
-    const [Logo, setLogo] = useState('./logo.png')
+
+
+    //This is becuase of URL.createObjectURL issue
+    const [LogoforUpload, setLogoforUpload] = useState('');
+    const [BannerForUpload, setBannerForUpload] = useState('');
+
+    const [beatLoader, setbeatLoader] = useState(false);
+    const [ImagesUploaded, setImagesUploaded] = useState(false);
+
 
     const [webPage, setwebPage] = useState('');
     const [url, seturl] = useState('');
@@ -81,13 +92,17 @@ const Preview_Edit = () => {
     const BannerImageProcess = (event) => {
         if (event.target.files && event.target.files[0]) {
             setBanner(URL.createObjectURL(event.target.files[0]));
+            setBannerForUpload(event.target.files[0]);
         }
     }
     const LogoImageProcess = (event) => {
         if (event.target.files && event.target.files[0]) {
             setLogo(URL.createObjectURL(event.target.files[0]));
+            setLogoforUpload(event.target.files[0]);
         }
     }
+
+
     useEffect(() => {
 
         if (window.innerWidth >= 100) {
@@ -109,9 +124,10 @@ const Preview_Edit = () => {
 
     }, [])
 
-    const cofirmButtonClick = (e) => {
+
+    const cofirmButtonClick = async (e) => {
         e.preventDefault()
-        if (Banner === '/youtuber_assets/youtuber_banner.png' || Logo === './logo.png') {
+        if (Banner === '/youtuber_assets/youtuber_banner.png' || Logo === '/logo.png') {
             alert('Upload Banner and Logo both')
             return
         }
@@ -120,11 +136,38 @@ const Preview_Edit = () => {
             alert('Fill all details')
             return
         }
+        setbeatLoader(true)
+
+        const imagesArray = [LogoforUpload, BannerForUpload]
+
+        let uploadImagesURL = []
+        for (let index = 0; index < 2; index++) {
+            let filename = ''
+            if (index === 0) {
+                filename = 'LOGO'
+            } else {
+                filename = 'banner'
+            }
+
+
+            try {
+                const response = await uploadSingleImage(imagesArray[index], filename)
+                if (response.sucess) {
+                    uploadImagesURL.push(response.data.imageURL)
+                } else {
+                    alert(response.message)
+                }
+            } catch (error) {
+                alert(error)
+            }
+        }
+
+        console.log(uploadImagesURL);
+        setbeatLoader(false)
+        setImagesUploaded(true)
 
         //Now upload to database
     }
-
-
 
 
 
@@ -137,7 +180,7 @@ const Preview_Edit = () => {
 
                 <label htmlFor='banner'>
                     <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
-                        <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+                        <img className='w-[24px] h-[24px]' src='./../creator/addDesign.png' />
 
                         <div className='flex flex-col items-center justify-center'>
                             <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Banner</h2>
@@ -157,7 +200,7 @@ const Preview_Edit = () => {
                 <label htmlFor='logo'>
 
                     <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
-                        <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+                        <img className='w-[24px] h-[24px]' src='./../creator/addDesign.png' />
 
                         <div className='flex flex-col items-center justify-center'>
                             <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Logo</h2>
@@ -208,11 +251,11 @@ const Preview_Edit = () => {
 
 
                 {/* For large Screen only  */}
-                <div className='grid grid-cols-2 gap-4 my-4 mb-10'>
+                <div className='hidden lg:grid grid-cols-2 gap-4 my-4 mb-10'>
 
                     <label htmlFor='banner'>
                         <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
-                            <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+                            <img className='w-[24px] h-[24px]' src='/creator/addDesign.png' />
 
                             <div className='flex flex-col items-center justify-center'>
                                 <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Banner</h2>
@@ -232,7 +275,7 @@ const Preview_Edit = () => {
                     <label htmlFor='logo'>
 
                         <div className='p-2 flex items-center justify-around rounded-[10px] shadow-md hover:bg-slate-200 cursor-pointer'>
-                            <img className='w-[24px] h-[24px]' src='./creator/addDesign.png' />
+                            <img className='w-[24px] h-[24px]' src='/creator/addDesign.png' />
 
                             <div className='flex flex-col items-center justify-center'>
                                 <h2 className='text-[12px] text-[#323232] font-medium lg:text-[14px] font-inter'>Upload Logo</h2>
@@ -268,7 +311,17 @@ const Preview_Edit = () => {
                         setartistDescription(e.target.value)
                     }} required className='outline-none text-[12px] lg:text-[14px] w-full mb-3 border-[1px] border-[#AAAAAA] rounded-[5px] px-[12px] py-[10px] placeholder-gray-400 placeholder:text-[10px] lg:placeholder:text-[12px]' type='text' placeholder='Kim Jong UN' name='Description' id='Description' />
 
-                    <button onClick={cofirmButtonClick} type='submit' className='block ml-auto mt-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>Confirm</button>
+
+                    {!beatLoader &&
+                        <button onClick={cofirmButtonClick} type='submit' className='block ml-auto mt-3 px-6 py-3 lg:px-8  bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white'>{ImagesUploaded ? "Images Uploaded":"Confirm"}</button>
+                    }
+
+                    {beatLoader &&
+                        <div className="flex justify-end space-x-3 items-center mt-3 px-6 py-3 lg:px-8">
+                            <h2 className='font-inter text-sm'>Images Uploading...</h2>
+                            <BeatLoader loading size={10} color={'#54BAB9'} />
+                        </div>
+                    }
                 </form>
 
 
@@ -282,4 +335,4 @@ const Preview_Edit = () => {
         </div>
     )
 };
-export default Preview_Edit;
+export default Preview_Edit

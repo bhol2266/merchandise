@@ -9,8 +9,8 @@ export default async function (req, res, next) {
 
             Cookies.remove('role');
 
-            alert('Something went wrong')
-            return res.redirect("https://www.closm.com//partner_with_us");
+            return res.redirect("/partner_with_us");
+            return res.redirect("https://www.closm.com/partner_with_us");
         }
 
 
@@ -29,7 +29,7 @@ export default async function (req, res, next) {
             res, maxAge: 900000
         });
 
-        setCookies('accessToken', "Bearer " + data.accessToken, {
+        setCookies('accessToken', data.accessToken, {
             req,
             res, maxAge: 900000
         });
@@ -40,6 +40,7 @@ export default async function (req, res, next) {
         });
 
 
-        return res.redirect("https://www.closm.com//dashboard");
+        return res.redirect("/dashboard");
+        return res.redirect("https://www.closm.com/dashboard");
     })(req, res, next);
 }

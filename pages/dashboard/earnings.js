@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import { useState } from "react";
 import TableIRow from "../../components/customise/TableIRow";
+import { setCookies, getCookie } from "cookies-next";
 
 
 
@@ -277,3 +278,20 @@ const Earnings = () => {
     )
 };
 export default Earnings;
+
+export async function getServerSideProps({ req, res }) {
+    try {
+        const cookieExists = getCookie("role", { req, res });
+        const emailExists = getCookie("email", { req, res });
+
+        console.log(emailExists);
+        if (cookieExists === 'creator' && typeof emailExists !== 'undefined') {
+        
+        } else {
+            return { redirect: { destination: "/partner_with_us" } };
+        }
+        return { props: {} };
+    } catch (err) {
+        return { props: {} };
+    }
+}

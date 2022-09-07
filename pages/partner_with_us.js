@@ -13,8 +13,6 @@ const Partner_with_us = () => {
 
     useEffect(() => {
 
-        console.log(window.innerWidth);
-
         if (window.innerWidth >= 750) {
             setBanner('./creator/launch2.png')
             setPoster('./creator/poster2.png')
@@ -93,9 +91,9 @@ export default Partner_with_us;
 export async function getServerSideProps({ req, res }) {
     try {
         const cookieExists = getCookie("role", { req, res });
+        const emailExists = getCookie("email", { req, res });
 
-        console.log(cookieExists);
-        if (cookieExists === 'creator') {
+        if (cookieExists === 'creator' && typeof emailExists !== 'undefined') {
             return { redirect: { destination: "/dashboard" } };
         }
         return { props: {} };

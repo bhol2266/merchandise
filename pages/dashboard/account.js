@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 
 import { useRouter } from 'next/router';
 import MerchContext from '../../context/MerchContext';
+import { setCookies, getCookie } from "cookies-next";
 
 
 const Account = () => {
@@ -271,3 +272,20 @@ const Account = () => {
     )
 };
 export default Account;
+
+export async function getServerSideProps({ req, res }) {
+    try {
+        const cookieExists = getCookie("role", { req, res });
+        const emailExists = getCookie("email", { req, res });
+
+        console.log(emailExists);
+        if (cookieExists === 'creator' && typeof emailExists !== 'undefined') {
+        
+        } else {
+            return { redirect: { destination: "/partner_with_us" } };
+        }
+        return { props: {} };
+    } catch (err) {
+        return { props: {} };
+    }
+}
