@@ -284,7 +284,7 @@ export async function getServerSideProps({ req, res }) {
         const cookieExists = getCookie("role", { req, res });
         const emailExists = getCookie("email", { req, res });
 
-        console.log(emailExists);
+        
         if (cookieExists === 'creator' && typeof emailExists !== 'undefined') {
         
         } else {
