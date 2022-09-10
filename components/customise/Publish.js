@@ -11,18 +11,11 @@ import ModalPublish from './Modals/ModalPublish'
 
 
 
-
 const Publish = () => {
 
-
-    const [tshirtPriceDetails, settshirtPriceDetails] = useState({
-        productName: '', discountedPrice: '', originalPrice: '', description: '',
-        termCondition: false
-    })
-
-
+ 
     //Here colour is the collection of tshirts of different colours imported in globalStates from Data
-    const { canvas, PreviewMode, setPreviewMode, colours, setselectedColourIndex, selectedTshirtsForUpload, ModalPublishVisible, setModalPublishVisible, } = useContext(MerchContext)
+    const { canvas, PreviewMode, setPreviewMode, colours, setselectedColourIndex, selectedTshirtsForUpload, ModalPublishVisible, setModalPublishVisible, uploadedArts, publishData, setpublishData } = useContext(MerchContext)
 
     const [productName, setproductName] = useState('');
     const [disPrice, setdisPrice] = useState('');
@@ -63,12 +56,14 @@ const Publish = () => {
         }
 
 
-        // Tshirst Details 
-        const obj = {
-            productName: productName, discountedPrice: disPrice, originalPrice: origPrice, description: description,
-        }
 
+
+        setpublishData({
+            productName: productName, discountPrice: disPrice, productDescription: description,mrp:origPrice,
+        })
+        //open publish modal to see and publish
         setModalPublishVisible(true)
+
     }
 
 

@@ -2,7 +2,7 @@ import { XCircleIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react
 import { useContext, useEffect, useState } from 'react';
 import MerchContext from '../../../context/MerchContext';
 
-
+import { setPublishedProductsPriority } from '../../../lib/Creator_API';
 
 const PriorityNumberModal = (props) => {
 
@@ -27,7 +27,7 @@ const PriorityNumberModal = (props) => {
     }
 
 
-    const confirmClick = () => {
+    const confirmClick = async () => {
 
         setPriorityNumberModalVisible(!PriorityNumberModalVisible);
 
@@ -42,6 +42,28 @@ const PriorityNumberModal = (props) => {
         creatorsProductList.splice(currentIndex, 1);
         creatorsProductList.splice(activeNumber, 0, element);
         setcreatorsProductList(creatorsProductList)
+      
+
+
+        let product_idArray = []
+        creatorsProductList.forEach(obj => {
+            product_idArray.push(obj.product_id)
+        })
+
+
+        try {
+            const response = await setPublishedProductsPriority({productArr:product_idArray})
+            console.log(response);
+            if (response.success) {
+
+
+            } else {
+                alert(response.message)
+            }
+        } catch (error) {
+            alert(error)
+            return
+        }
     }
 
 

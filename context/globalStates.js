@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import { chooseColours } from '../Data/chooseColours';
-import { creatorProducts } from '../Data/creatorProducts';
 import MerchContext from "./MerchContext";
 
 const GlobalStates = (props) => {
@@ -34,12 +33,26 @@ const GlobalStates = (props) => {
     //Published Products
     const [PriorityNumberModalVisible, setPriorityNumberModalVisible] = useState(false);
     const [currentIndex, setcurrentIndex] = useState(0);
-    const [creatorsProductList, setcreatorsProductList] = useState(creatorProducts);
+    const [creatorsProductList, setcreatorsProductList] = useState([]);
+
+    //This is to check for editing is done or not in  published items 
+    const [Edited, setEdited] = useState(false);
 
 
+
+    //Uploaded arts
+    const [uploadedArts, setuploadedArts] = useState([]);
+
+    //Customise page selector for preview , publish, published products
+    const [customisePageSelector, setcustomisePageSelector] = useState('PREVIEW');
 
     //Navbar for user or creator 
     const [NavbarUserORcreator, setNavbarUserORcreator] = useState('user');
+
+    //final Data for publishing tshirts in publishModal
+    const [publishData, setpublishData] = useState({});
+
+
 
 
 
@@ -77,7 +90,11 @@ const GlobalStates = (props) => {
             setPriorityNumberModalVisible,
             currentIndex, setcurrentIndex,
             creatorsProductList, setcreatorsProductList,
-            NavbarUserORcreator, setNavbarUserORcreator
+            uploadedArts, setuploadedArts,
+            customisePageSelector, setcustomisePageSelector,
+            publishData, setpublishData,
+            Edited, setEdited,
+            NavbarUserORcreator, setNavbarUserORcreator,
         }}>
             {props.children}
         </MerchContext.Provider>

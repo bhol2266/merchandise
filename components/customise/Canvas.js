@@ -32,12 +32,13 @@ const Canvas = () => {
 
     // Check for current tshirt color which is showing is uploaded or not
     const [checkUpload, setcheckUpload] = useState(false)
-
     const [upload_Spinner, setupload_Spinner] = useState(false)
 
 
+    uploadedArts, setuploadedArts
 
-    const { modalVisible, setmodalVisible, colours, PreviewMode,setPreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, tshirtPriceDetails, settshirtPriceDetails } = useContext(MerchContext);
+
+    const { modalVisible, setmodalVisible, colours, PreviewMode, setPreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, uploadedArts, setuploadedArts } = useContext(MerchContext);
 
 
     useEffect(() => {
@@ -120,9 +121,10 @@ const Canvas = () => {
         setupload_Spinner(false)
     }
 
-    console.log(selectedTshirtsForUpload);
 
     const uploadFile = (e) => {
+
+        setuploadedArts([...uploadedArts, e.target.files[0]])
         const reader = new FileReader()
         const img = new Image()
         reader.onload = () => {

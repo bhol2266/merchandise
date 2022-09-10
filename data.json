@@ -1,25 +1,26 @@
 {
-    "id": "UHJvZHVjdHNUeXBlOjg=",
-    "title": "Tshirt",
-    "price": 500,
-    "mrp": 500,
-    "discount": "10%",
-    "description": "100% Cotton",
-    "colors": [
+    "product_id": "631c5799a0d3a8f676b53a93",
+    "title": "3432",
+    "description": "dsfa",
+    "img": [
         {
-            "id": "19",
-            "color": "Blue",
-            "image": [
-                {
-                    "image": "/media/tee14_V2uBpkE.png"
-                },
-                {
-                    "image": "/media/tee4_IEdrW0S.png"
-                },
-                {
-                    "image": "/media/tee7_MTWHfqW.png"
-                }
+            "name": "Yellow",
+            "imageUrl": [
+                "https://closm.ap-south-1.linodeobjects.com/l7vp9p6t0fqrqv7yeo4.png"
             ]
         }
-    ]
+    ],
+    "mrp": "",
+    "price": 108,
+    "discount": "324",
+    "publishStatus": false,
+    "category": "T-Shirt",
+    "artUrl": "https://closm.ap-south-1.linodeobjects.com/l7vp9owaqk9c609giak.png",
+    "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+    ],
+    "discountPrice": ""
 }
