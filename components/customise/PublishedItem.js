@@ -13,7 +13,6 @@ export default function PublishedItem(props) {
 
 
 
-
     const { product_id, productName, price, mrp, discountPrice, productDescription, img, publishStatus } = props.data;
     const length = props.length;
     const currentIndex = props.currentIndex;
@@ -24,7 +23,6 @@ export default function PublishedItem(props) {
     const [discountState, setdiscountState] = useState(discountPrice);
     const [DescState, setDescState] = useState(productDescription);
     const [publishStatusState, setpublishStatus] = useState(publishStatus);
-
 
 
     const viewClick = async () => {
@@ -156,7 +154,7 @@ export default function PublishedItem(props) {
 
             <div className='lg:h-full  lg:min-w-[205px]'>
 
-                <img className='w-[150px] lg:h-full lg:w-fit object-contain' src={img[0].imageUrl} alt='publishedItemImage' />
+                <img className='w-[150px] lg:h-full lg:w-fit object-contain' src={img[0].imageUrl[0]} alt='publishedItemImage' />
 
                 <button onClick={() => { setcurrentIndex(currentIndex); setPriorityNumberModalVisible(!PriorityNumberModalVisible); }} className='lg:hidden w-[150px] lg:w-[180px] 2xl:w-[200px] rounded-[5px] border-[1px] border-[#AAAAAA] px-3 py-2 mt-2 flex items-center text-[12px] lg:text-[15px] text-[#323232]'>
                     Priority Order

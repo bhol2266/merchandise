@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { chooseColours } from '../Data/chooseColours';
+import { tshirts } from '../Data/tshirs';
 import MerchContext from "./MerchContext";
 
 const GlobalStates = (props) => {
@@ -21,7 +21,7 @@ const GlobalStates = (props) => {
     //customise page modal
     const [colorModalVisible, setcolorModalVisible] = useState(false);
     const [priorityColorModalVidible, setpriorityColorModalVidible] = useState(false);
-    const [colours, setcolours] = useState(chooseColours);
+    const [colours, setcolours] = useState(tshirts);
     const [PreviewMode, setPreviewMode] = useState(false)
 
     const [canvas, setcanvas] = useState(null)

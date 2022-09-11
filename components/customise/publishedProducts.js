@@ -10,6 +10,8 @@ const PublishedProducts = () => {
   const { PriorityNumberModalVisible, setcreatorsProductList, creatorsProductList, Edited, setEdited } = useContext(MerchContext);
   const [termsCondition, settermsCondition] = useState(false)
 
+  const [dataFetched, setdataFetched] = useState(false);
+
 
 
   const saveChangesBtnClick = async () => {
@@ -83,7 +85,7 @@ const PublishedProducts = () => {
         });
 
         setcreatorsProductList(array)
-
+        setdataFetched(true)
       } else {
         alert(response.message)
       }
@@ -92,6 +94,13 @@ const PublishedProducts = () => {
       return
     }
   }, []);
+
+  if (dataFetched && creatorsProductList.length === 0) {
+    return (
+      <h1 className='font-inter text-lg w-screen h-screen text-center mt-[200px]'>No products published...</h1>
+    )
+  }
+
 
   if (creatorsProductList.length > 0) {
     return (
@@ -150,5 +159,6 @@ const PublishedProducts = () => {
       </div>
     )
   }
+
 };
 export default PublishedProducts;

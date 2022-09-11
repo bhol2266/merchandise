@@ -8,7 +8,7 @@ import MerchContext from '../../context/MerchContext';
 import * as htmlToImage from 'html-to-image';
 import { tshirts } from '../../Data/tshirs'
 import ModalPublish from './Modals/ModalPublish'
-
+import Script from 'next/script'
 
 
 const Publish = () => {
@@ -76,6 +76,7 @@ const Publish = () => {
         <div className=' 2xl:flex items-center 2xl:items-start justify-between xl:px-4 2xl:px-12  2xl:space-x-4'>
 
             <Canvas />
+
 
             {/* PRICE and NAME  */}
 

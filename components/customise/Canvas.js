@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import * as htmlToImage from 'html-to-image';
 import { BeatLoader } from 'react-spinners';
 import PriorityColorModal from './Modals/PriorityColorModal';
+import Script from 'next/script';
 
 const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
 ]
@@ -97,7 +98,8 @@ const Canvas = () => {
         setPreviewMode(true)
 
         const dataUrl = await htmlToImage.toPng(divToImageRef.current);
-        let obj = { name: tshirts[selectedColourIndex].name, hexcode: tshirts[selectedColourIndex].hexcode, imageData: dataUrl }
+
+        let obj = { name: tshirts[selectedColourIndex].name, hexcode: tshirts[selectedColourIndex].hexcode, imageData: dataUrl, side: FrontBackSelected }
         setselectedTshirtsForUpload([...selectedTshirtsForUpload, obj]);
         setcheckUpload(true)
         setupload_Spinner(false)
@@ -122,6 +124,7 @@ const Canvas = () => {
     }
 
 
+    //Canvas
     const uploadFile = (e) => {
 
         setuploadedArts([...uploadedArts, e.target.files[0]])
@@ -174,6 +177,9 @@ const Canvas = () => {
     return (
 
         <div className='lg:flex lg:justify-around  items-start 2xl:items-start 2xl:justify-start  lg:pt-4 2xl:mt-0'>
+
+
+            <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
 
 
             {/* This is for small screen only  */}
@@ -349,7 +355,7 @@ const Canvas = () => {
                     <button onClick={resetCanvas} className='w-[240px] hover:text-white hover:bg-[#54BAB9] text-[12px] lg:text-[15px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Clear All</button>
                 </div>
 
-                {selectedTshirtsForUpload.length != 0 &&
+                {selectedTshirtsForUpload.length !== 0 &&
 
                     <div className=''>
                         <p className='text-[12px] font-inter  text-[#323232] w-[250px]'>A product colour that will be prioritised & will be showed in

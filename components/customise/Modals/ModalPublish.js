@@ -4,6 +4,8 @@ import MerchContext from '../../../context/MerchContext';
 import { publishTshirtsDesign, uploadSingleImage, uploadImageBase64 } from '../../../lib/Creator_API'
 import Cookies from 'js-cookie'
 import { BeatLoader } from 'react-spinners';
+import { tshirts } from '../../../Data/tshirs';
+
 
 
 
@@ -30,15 +32,30 @@ const ModalPublish = () => {
                 return
             }
 
-
             //Upload colors urls
             let colorsData = []
 
             for (let index = 0; index < selectedTshirtsForUpload.length; index++) {
 
+                let imageDataArray = [] //Front and back
+                const tshirtData = tshirts.filter(obj => {
+                    if (selectedTshirtsForUpload[index].name === obj.name) {
+                        return obj
+                    }
+                })
+                if (selectedTshirtsForUpload[index].side === 'FRONT') {
+                    imageDataArray.push(tshirtData[0].backURL)
+                } else {
+                    imageDataArray.push(tshirtData[0].frontURL)
+                }
+
+
+
                 const response = await uploadImageBase64(selectedTshirtsForUpload[index].imageData, selectedTshirtsForUpload[index].name)
                 if (response.sucess) {
-                    colorsData.push({ name: selectedTshirtsForUpload[index].name, imageUrl: [response.data.imageURL] })
+
+
+                    colorsData.push({ name: selectedTshirtsForUpload[index].name, imageUrl: [response.data.imageURL, ...imageDataArray] })
                 } else {
                     alert(response.message)
                     return
@@ -46,6 +63,7 @@ const ModalPublish = () => {
 
             }
 
+   
             const data = { productName: publishData.productName, discountPrice: publishData.discountPrice, mrp: publishData.mrp, productDescription: publishData.productDescription, category: 'T-Shirt', artUrl: art_url, size: ["S", "M", "L", "XL"], color: colorsData, creatorName: Cookies.get('name'), publishStatus: false }
 
 

@@ -1,6 +1,6 @@
 export const tshirts
-    =   [{ name: 'Light_Blue', hexcode: '#BEE4FF', selected: false },
-    { name: "Navy_Blue", hexcode: '#21313E', selected: false },
-    { name: 'Pink', hexcode: '#FDC9E0', selected: false },
-    { name: 'Yellow', hexcode: '#F2DAA2', selected: false },
-    { name: 'White', hexcode: '#F8F0E3 ', selected: false },]
+    = [{ name: 'Light_Blue', hexcode: '#BEE4FF', selected: false, frontURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmx6d79ld4nb91j5s.png', backURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmxjcd1z2i0z8rxfd.png' },
+    { name: "Navy_Blue", hexcode: '#21313E', selected: false, frontURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmxwdxkyc5esk1ur.png', backURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmyaij0w3j8pc24pvj.png' },
+    { name: 'Pink', hexcode: '#FDC9E0', selected: false, frontURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmymvr6262g3iqynj.png', backURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmyvbcj62u8iwodf.png' },
+    { name: 'Yellow', hexcode: '#F2DAA2', selected: false, frontURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmwcdgopl6wwucp3.png', backURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmwtivzjpctdozkrm.png' },
+    { name: 'White', hexcode: '#F8F0E3 ', selected: false, frontURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmz7jhlt67r42vz7j.png', backURL: 'https://closm.ap-south-1.linodeobjects.com/l7xmziv60xn5slsu9e3.png' },]

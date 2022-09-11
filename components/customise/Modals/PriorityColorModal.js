@@ -8,26 +8,19 @@ import MerchContext from '../../../context/MerchContext';
 const PriorityColorModal = () => {
 
 
-    const { priorityColorModalVidible, setpriorityColorModalVidible, colours, setcolours, selectedTshirtsForUpload } = useContext(MerchContext);
+    const { priorityColorModalVidible, setpriorityColorModalVidible, selectedTshirtsForUpload, setselectedTshirtsForUpload } = useContext(MerchContext);
 
-    console.log(selectedTshirtsForUpload);
-
-
-    const updateFieldChanged = index => {
-        let newArr = [...colours]; // copying the old datas array
-        if (newArr[index].selected) {
-            newArr[index].selected = false;
-        } else {
-            newArr[index].selected = true;
-        }
-        setcolours(newArr);
-    }
 
     const setPrioityOnclick = index => {
-        let newArr = [...colours]; // copying the old datas array
+        if (index === 0) {
+            alert('Already in priority')
+            return
+        }
+        let newArr = [...selectedTshirtsForUpload]; // copying the old datas array
         newArr.splice(index, 1)
-        newArr.unshift(colours[index]);
-        setcolours(newArr);
+        newArr.unshift(selectedTshirtsForUpload[index]);
+        setselectedTshirtsForUpload(newArr);
+
     }
 
     return (

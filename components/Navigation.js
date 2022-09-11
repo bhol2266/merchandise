@@ -12,13 +12,16 @@ export const Navigation = () => {
 
     const router = useRouter()
 
+    
+
 
     useEffect(() => {
 
-        console.log(NavbarUserORcreator);
-        // if (window.location.pathname === '/partner_with_us') {
-        //     setuser_creator_Mode('creator')
-        // }
+        if (window.location.pathname.includes('/dashboard')) {
+            setNavbarUserORcreator('creator')
+        } else {
+            setNavbarUserORcreator('user')
+        }
     }, [])
 
 
