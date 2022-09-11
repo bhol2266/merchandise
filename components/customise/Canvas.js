@@ -8,6 +8,7 @@ import { tshirts } from '../../Data/tshirs';
 import dynamic from "next/dynamic";
 import * as htmlToImage from 'html-to-image';
 import { BeatLoader } from 'react-spinners';
+import PriorityColorModal from './Modals/PriorityColorModal';
 
 const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
 ]
@@ -35,10 +36,9 @@ const Canvas = () => {
     const [upload_Spinner, setupload_Spinner] = useState(false)
 
 
-    uploadedArts, setuploadedArts
 
 
-    const { modalVisible, setmodalVisible, colours, PreviewMode, setPreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, uploadedArts, setuploadedArts } = useContext(MerchContext);
+    const { colorModalVisible, setcolorModalVisible, priorityColorModalVidible, setpriorityColorModalVidible, colours, PreviewMode, setPreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, uploadedArts, setuploadedArts } = useContext(MerchContext);
 
 
     useEffect(() => {
@@ -97,7 +97,7 @@ const Canvas = () => {
         setPreviewMode(true)
 
         const dataUrl = await htmlToImage.toPng(divToImageRef.current);
-        let obj = { name: tshirts[selectedColourIndex].name, imageData: dataUrl }
+        let obj = { name: tshirts[selectedColourIndex].name, hexcode: tshirts[selectedColourIndex].hexcode, imageData: dataUrl }
         setselectedTshirtsForUpload([...selectedTshirtsForUpload, obj]);
         setcheckUpload(true)
         setupload_Spinner(false)
@@ -200,16 +200,16 @@ const Canvas = () => {
 
 
 
-                    <div onClick={() => { setmodalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[8px] w-[170px] cursor-pointer'>
-                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[0].hexcode }}></span>
-                        <h2 className='font-inter text-[#323232] text-[10px]'>{colours[0].name}</h2>
+                    <div onClick={() => { setcolorModalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[8px] w-[170px] cursor-pointer'>
+                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[selectedColourIndex].hexcode }}></span>
+                        <h2 className='font-inter text-[#323232] text-[10px]'>{colours[selectedColourIndex].name.replace("_", " ")}</h2>
                         <ChevronRightIcon className='h-[18px] text-[#323232]' />
                     </div>
 
                     <h2 className='font-inter text-[10px] mt-[6px] text-[#323232]'>(16 Product Colour Selected)</h2>
 
                     {/* Make background darker */}
-                    <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${modalVisible ? "" : "hidden"} `} />
+                    <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${colorModalVisible ? "" : "hidden"} `} />
                     <ColorModal />
 
                 </div>
@@ -328,16 +328,16 @@ const Canvas = () => {
 
 
 
-                    <div onClick={() => { setmodalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[4px] cursor-pointer scale-110 ml-2 w-[222px]'>
-                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[0].hexcode }}></span>
-                        <h2 className='font-inter text-[#323232] text-[12px]'>{colours[0].name}</h2>
+                    <div onClick={() => { setcolorModalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[4px] cursor-pointer scale-110 ml-2 w-[222px]'>
+                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[selectedColourIndex].hexcode }}></span>
+                        <h2 className='font-inter text-[#323232] text-[12px]'>{colours[selectedColourIndex].name.replace("_", " ")}</h2>
                         <ChevronRightIcon className='h-[18px] text-[#323232]' />
                     </div>
 
                     <h2 className='font-inter text-[12px] mt-[6px] text-[#323232]'>(16 Product Colour Selected)</h2>
 
                     {/* Make background darker */}
-                    <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${modalVisible ? "" : "hidden"} `} />
+                    <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${colorModalVisible ? "" : "hidden"} `} />
                     <ColorModal />
 
                 </div>
@@ -349,35 +349,58 @@ const Canvas = () => {
                     <button onClick={resetCanvas} className='w-[240px] hover:text-white hover:bg-[#54BAB9] text-[12px] lg:text-[15px] font-inter border-[1px] border-[#54BAB9] rounded-[5px] py-[7px] px-[10px]'>Clear All</button>
                 </div>
 
-                <div className=''>
-                    <p className='text-[12px] font-inter  text-[#323232] w-[250px]'>A product colour that will be prioritised & will be showed in
-                        front page.</p>
+                {selectedTshirtsForUpload.length != 0 &&
 
-                    <h2 className='mt-2 text-[16px] font-inter font-medium text-[#323232] ml-1 '>Priority Colour</h2>
-                    <div onClick={() => { setmodalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[4px] w-[222px] cursor-pointer scale-110 ml-2'>
-                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[0].hexcode }}></span>
-                        <h2 className='font-inter text-[#323232] text-[12px]'>{colours[0].name}</h2>
+                    <div className=''>
+                        <p className='text-[12px] font-inter  text-[#323232] w-[250px]'>A product colour that will be prioritised & will be showed in
+                            front page.</p>
+
+                        <h2 className='mt-2 text-[16px] font-inter font-medium text-[#323232] ml-1 '>Priority Colour</h2>
+                        <div onClick={() => {
+                            if (selectedTshirtsForUpload.length === 0) {
+                                alert('Upload alteast two colors to set the priority'); return
+                            }
+                            setpriorityColorModalVidible(true)
+                        }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[4px] w-[222px] cursor-pointer scale-110 ml-2'>
+                            <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: selectedTshirtsForUpload[0].hexcode }}></span>
+                            <h2 className='font-inter text-[#323232] text-[12px]'>{selectedTshirtsForUpload[0].name}</h2>
+                            <ChevronRightIcon className='h-[18px] text-[#323232]' />
+                        </div>
+
+                        {/* Make background darker */}
+                        <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${priorityColorModalVidible ? "" : "hidden"} `} />
+                        <PriorityColorModal />
+
+                    </div>
+                }
+            </div>
+
+
+
+            {/* This is just for small screens  Proirity Modal*/}
+            {selectedTshirtsForUpload.length != 0 &&
+
+                <div className={` mt-[20px] lg:hidden sm:w-4/5 md:w-3/5 mx-auto`}>
+                    <p className='text-[10px] font-inter  text-[#323232] '>A product colour that will be prioritised & will be showed in
+                        front page.</p>
+                    <h2 className='my-[8px] text-[12px] font-inter font-medium text-[#323232] ml-1'>Priority Colour</h2>
+
+                    <div onClick={() => {
+                        if (selectedTshirtsForUpload.length === 0) {
+                            alert('Upload alteast two colors to set the priority'); return
+                        }
+                        setpriorityColorModalVidible(true)
+                    }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[8px] w-[170px] cursor-pointer'>
+                        <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: selectedTshirtsForUpload[0].hexcode }}></span>
+                        <h2 className='font-inter text-[#323232] text-[10px]'>{selectedTshirtsForUpload[0].name}</h2>
                         <ChevronRightIcon className='h-[18px] text-[#323232]' />
                     </div>
+                    {/* Make background darker */}
+                    <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${priorityColorModalVidible ? "" : "hidden"} `} />
+                    <PriorityColorModal />
 
                 </div>
-
-            </div>
-
-
-
-            {/* This is just for small screens */}
-            <div className='mt-[20px] lg:hidden sm:w-4/5 md:w-3/5 mx-auto'>
-                <p className='text-[10px] font-inter  text-[#323232] '>A product colour that will be prioritised & will be showed in
-                    front page.</p>
-                <h2 className='my-[8px] text-[12px] font-inter font-medium text-[#323232] ml-1'>Priority Colour</h2>
-                <div onClick={() => { setmodalVisible(true) }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[8px] w-[170px] cursor-pointer'>
-                    <span className='w-[24px] h-[24px] rounded-full' style={{ backgroundColor: colours[0].hexcode }}></span>
-                    <h2 className='font-inter text-[#323232] text-[10px]'>{colours[0].name}</h2>
-                    <ChevronRightIcon className='h-[18px] text-[#323232]' />
-                </div>
-
-            </div>
+            }
         </div>
 
     )

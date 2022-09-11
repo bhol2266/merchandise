@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { setCookies, getCookie } from "cookies-next";
+import Cookies from 'js-cookie'
 
 
 
@@ -21,7 +22,7 @@ const Partner_with_us = () => {
 
 
     const updateCookie = async () => {
-        setCookies('role', "creator")
+        Cookies.set('role', 'creator', { expires: 7 })
     }
 
 

@@ -19,7 +19,8 @@ const GlobalStates = (props) => {
 
 
     //customise page modal
-    const [modalVisible, setmodalVisible] = useState(false);
+    const [colorModalVisible, setcolorModalVisible] = useState(false);
+    const [priorityColorModalVidible, setpriorityColorModalVidible] = useState(false);
     const [colours, setcolours] = useState(chooseColours);
     const [PreviewMode, setPreviewMode] = useState(false)
 
@@ -70,8 +71,10 @@ const GlobalStates = (props) => {
             setOTPemail,
             youtuberLogo,
             setyoutuberLogo,
-            modalVisible,
-            setmodalVisible,
+            colorModalVisible,
+            setcolorModalVisible,
+            priorityColorModalVidible,
+            setpriorityColorModalVidible,
             colours,
             setcolours,
             PreviewMode,

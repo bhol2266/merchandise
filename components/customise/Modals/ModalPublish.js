@@ -72,7 +72,6 @@ const ModalPublish = () => {
     }
 
     return (
-
         <div className={`fixed flex justify-center items-center inset-0 z-30 ${ModalPublishVisible ? "" : "hidden"} `}>
 
             <div className={`bg-white w-4/5 lg:w-2/4 p-[20px] rounded-xl shadow-md `}>
