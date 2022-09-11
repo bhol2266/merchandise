@@ -46,7 +46,11 @@ export async function getServerSideProps({ req, res }) {
   let cookieExists = getCookie("role", { req, res });
 
   if (typeof cookieExists !== 'undefined' && cookieExists === 'creator') {
-    return { redirect: { destination: "/dashboard" } };
+    // return { redirect: { destination: "/dashboard" } };
+    return {
+      props: {
+      }
+    };
 
   } else {
 

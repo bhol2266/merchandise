@@ -1,0 +1,46 @@
+{
+    "sucess": true,
+    "data": {
+        "_id": "631b9a57b6b8292f4a92744b",
+        "creatorName": "kundan",
+        "creatorUrl": "closmkundna",
+        "creatorLogo": "ap-south-1.linodeobjects.com/closm/l7vldc2h5y5gbgpze48.jpg",
+        "creatorBanner": "ap-south-1.linodeobjects.com/closm/l7vlde8bts1irl5co9.jpg",
+        "creatorDescription": "Description",
+        "user": "631b9a31b6b8292f4a927440",
+        "products": [
+            {
+                "_id": "631e2d35ddcfa70ab46f5f8a",
+                "productName": "dsfg",
+                "artUrl": "https://closm.ap-south-1.linodeobjects.com/l7xouf39xs63n1enc1a.png",
+                "mrp": "433",
+                "discountPrice": "435435",
+                "category": "T-Shirt",
+                "publishStatus": false,
+                "size": [
+                    "S",
+                    "M",
+                    "L",
+                    "XL"
+                ],
+                "creator": "631b9a57b6b8292f4a92744b",
+                "color": [
+                    {
+                        "name": "Pink",
+                        "imageUrl": [
+                            "https://closm.ap-south-1.linodeobjects.com/l7xouffygn2rjyktdo.png",
+                            "https://closm.ap-south-1.linodeobjects.com/l7xmyvbcj62u8iwodf.png"
+                        ]
+                    }
+                ],
+                "productDescription": "dfsgdfs",
+                "createdAt": "2022-09-11T18:47:17.298Z",
+                "updatedAt": "2022-09-11T18:47:17.298Z",
+                "__v": 0
+            }
+        ],
+        "createdAt": "2022-09-09T19:56:07.947Z",
+        "updatedAt": "2022-09-11T18:47:17.356Z",
+        "__v": 0
+    }
+}
