@@ -9,7 +9,7 @@ export default async function (req, res, next) {
 
             Cookies.remove('role');
 
-            return res.redirect(`${process.env.FRONTEND_URL}partner_with_us`);
+            return res.redirect(`https://www.closm.com/partner_with_us`);
         }
 
 
@@ -39,6 +39,6 @@ export default async function (req, res, next) {
         });
 
 
-        return res.redirect(`${process.env.FRONTEND_URL}dashboard`);
+        return res.redirect(`https://www.closm.com/dashboard`);
     })(req, res, next);
 }
