@@ -33,33 +33,7 @@ const featuredCreators = [
 
 export const Homepage = () => {
 
-    useEffect(() => {
-        QueryG(`query{
-            products{
-              edges{
-              node{
-                title
-                 image{
-                  imageName
-                  image
-                } 
-                price
-                mrp
-                discount
-              }
-              }
-            }
-          }`)
-            .then(res => {
-                setitems(res.data.data.products.edges)
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, [])
-
-    const [items, setitems] = useState([])
-
+ 
 
     return (
         <div className='relative'>

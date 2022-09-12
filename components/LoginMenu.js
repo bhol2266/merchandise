@@ -30,11 +30,9 @@ function LoginMenu() {
     removeCookies('refreshToken');
     removeCookies('firstName');
     removeCookies('token');
-    removeCookies('sessionid');
+    removeCookies('accessToken');
     removeCookies('email');
-    removeCookies('lastName');
-    removeCookies('csrftoken');
-    removeCookies('sessionid');
+    removeCookies('name');
     router.push('/')
   }
 

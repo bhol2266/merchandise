@@ -61,6 +61,7 @@ const PublishedProducts = () => {
   }
 
   useEffect(async () => {
+
     try {
       const response = await getPublishedProducts()
 
@@ -87,7 +88,8 @@ const PublishedProducts = () => {
         setcreatorsProductList(array)
         setdataFetched(true)
       } else {
-        alert(response.message)
+        setdataFetched(true)
+        console.log(response)
       }
     } catch (error) {
       alert(error)

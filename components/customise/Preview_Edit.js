@@ -83,7 +83,8 @@ const Preview_Edit = () => {
     const [LogoforUpload, setLogoforUpload] = useState(null);
     const [BannerForUpload, setBannerForUpload] = useState(null);
 
-    const [beatLoader, setbeatLoader] = useState(false);
+    const [beatLoader, setbeatLoader] = useState(true);
+    const [beatLoader2, setbeatLoader2] = useState(false);
     const [ImagesUploaded, setImagesUploaded] = useState(false);
 
 
@@ -99,6 +100,10 @@ const Preview_Edit = () => {
             const response = await getYoutubersDetail()
             if (response.success) {
                 const data = response.data
+                if (!data) {
+                    setbeatLoader(false)
+                    return
+                }
 
                 if (!data.creatorLogo.includes('https://')) {
                     setLogo('https://' + data.creatorLogo)
@@ -114,12 +119,15 @@ const Preview_Edit = () => {
                 seturl(data.creatorUrl)
                 setwebPage(data.creatorName)
                 setartistDescription(data.creatorDescription)
+                setbeatLoader(false)
+
             } else {
                 alert(response.message)
+                setbeatLoader(false)
             }
         } catch (error) {
             alert(error)
-            // setbeatLoader(false)
+            setbeatLoader(false)
             return
         }
 
@@ -171,7 +179,7 @@ const Preview_Edit = () => {
             alert('Fill all details')
             return
         }
-        setbeatLoader(true)
+        setbeatLoader2(true)
 
         const imagesArray = [LogoforUpload, BannerForUpload]
 
@@ -193,7 +201,7 @@ const Preview_Edit = () => {
                 }
             } catch (error) {
                 // alert(error)
-                setbeatLoader(false)
+                setbeatLoader2(false)
                 return
             }
         }
@@ -208,10 +216,10 @@ const Preview_Edit = () => {
             }
         } catch (error) {
             alert(error)
-            setbeatLoader(false)
+            setbeatLoader2(false)
             return
         }
-        setbeatLoader(false)
+        setbeatLoader2(false)
         setImagesUploaded(true)
         setBannerForUpload(null)
         setLogoforUpload(null)
@@ -232,7 +240,7 @@ const Preview_Edit = () => {
     }
 
 
-    if (Logo !== '/logo.png') {
+    if (!beatLoader) {
 
         return (
             <div className='w-full sm:w-4/5 mx-auto lg:w-full lg:flex items-center lg:items-start justify-between'>
@@ -377,7 +385,7 @@ const Preview_Edit = () => {
 
                         <div className='flex items-center justify-end space-x-2'>
 
-                            {!beatLoader &&
+                            {!beatLoader2 &&
                                 <button onClick={cofirmButtonClick} type='submit' className={`block ml-auto mt-3 px-6 py-3 lg:px-8 border-[#54BAB9] border-2 bg-[#54BAB9] font-Mont rounded text-[12px] lg:text-[14px] text-white ${ImagesUploaded ? "" : ""}`}>{ImagesUploaded ? "Confirm" : "Confirm"}</button>
                             }
 
@@ -386,7 +394,7 @@ const Preview_Edit = () => {
                         } */}
                         </div>
 
-                        {beatLoader &&
+                        {beatLoader2 &&
                             <div className="flex justify-end space-x-3 items-center mt-3 px-6 py-3 lg:px-8">
                                 <h2 className='font-inter text-sm'>Images Uploading...</h2>
                                 <BeatLoader loading size={10} color={'#54BAB9'} />

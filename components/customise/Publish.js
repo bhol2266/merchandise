@@ -9,11 +9,12 @@ import * as htmlToImage from 'html-to-image';
 import { tshirts } from '../../Data/tshirs'
 import ModalPublish from './Modals/ModalPublish'
 import Script from 'next/script'
+import { getYoutubersDetail } from '../../lib/Creator_API'
 
 
 const Publish = () => {
 
- 
+
     //Here colour is the collection of tshirts of different colours imported in globalStates from Data
     const { canvas, PreviewMode, setPreviewMode, colours, setselectedColourIndex, selectedTshirtsForUpload, ModalPublishVisible, setModalPublishVisible, uploadedArts, publishData, setpublishData } = useContext(MerchContext)
 
@@ -55,14 +56,27 @@ const Publish = () => {
             return
         }
 
+        //Check whether the creator deatils is updated or not in Preview and Edit page
+        try {
+            const response = await getYoutubersDetail()
+            console.log(response);
+            if (!response.data) {
+                alert('First fill creator details in Preview and Edit page before publishing');
+            } else {
+
+                setpublishData({
+                    productName: productName, discountPrice: disPrice, productDescription: description, mrp: origPrice,
+                })
+                //open publish modal to see and publish
+                setModalPublishVisible(true)
+
+            }
+        } catch (error) {
+            console.log(error)
+            return
+        }
 
 
-
-        setpublishData({
-            productName: productName, discountPrice: disPrice, productDescription: description,mrp:origPrice,
-        })
-        //open publish modal to see and publish
-        setModalPublishVisible(true)
 
     }
 

@@ -1,12 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { useContext, useEffect } from 'react'
 import { Footer } from '../components/footer'
 import { Homepage } from '../components/Homepage'
-import { QueryG } from '../lib/serverConfig'
-import { apiip } from '../lib/serverConfig';
-import { GetEmail, } from '../lib/CookieLib'
-import { checkCookies } from 'cookies-next';
 import MerchContext from '../context/MerchContext'
 import { setCookies, getCookie } from "cookies-next";
 import { useRouter } from 'next/router'
