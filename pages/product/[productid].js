@@ -28,7 +28,13 @@ const Product = ({ productdetails }) => {
         _id
     } = productdetails;
 
-    console.log(color);
+    const dicountPriceInteger = parseInt(discountPrice);
+    const mrpInteger = parseInt(mrp);
+
+    const discountPercent = 100 - ((dicountPriceInteger * 100) / mrpInteger)
+
+
+
 
     const scrollbarRef = useRef(null)
     const [itemQuantity, setitemQuantity] = useState(1)
@@ -101,7 +107,7 @@ const Product = ({ productdetails }) => {
 
     }
     return (
-        <div className='px-[15px] lg:px-[45px] my-[15px]'>
+        <div className='px-[15px] lg:px-[45px] my-[15px] '>
 
 
             <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-8 md:h-[410px] md:flex md:space-x-4 lg:justify-between xl:justify-start md:justify-around  items-center sm:justify-between mt-[20px] lg:mt-[35px] xl:space-x-36'>
@@ -110,9 +116,9 @@ const Product = ({ productdetails }) => {
                 {/* Product Image and subcolours */}
 
 
-                <div className=' h-[316px] lg:w-[950px] md:h-full justify-around flex items-center  space-x-3'>
+                <div className=' h-[316px] lg:w-[950px] md:h-full justify-around flex items-center  space-x-3 select-none'>
 
-                    <div className='flex flex-col h-full  justify-start lg:hidden space-y-4'>
+                    <div className='flex flex-col h-full  justify-start lg:hidden space-y-4 overflow-scroll scrollbar-hide'>
                         {slideImages.map((image, index) => {
                             return (
                                 <img onClick={() => { setcurrentImageShowing(image); setcurrentColorShowing(color[index].name) }} key={image} src={image} className='h-[95px] ' />
@@ -146,11 +152,11 @@ const Product = ({ productdetails }) => {
                     <div className=' pb-[15px] border-b-[0.5px] border-[#CCCCCC] '>
                         <div className='w-full flex lg:flex-col lg:items-start lg:space-y-2 items-center justify-between'>
                             <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>{productName}</h2>
-                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPrice} OFF</h3>
+                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPercent.toString().substring(0, 2).replace('.','')}% OFF</h3>
                         </div>
 
                         <div className='flex items-center space-x-1 justify-start '>
-                            <h2 className='font-inter  text-[15px] lg:text-[24px] font-semibold text-[#19191D]'>₹{price}</h2>
+                            <h2 className='font-inter  text-[15px] lg:text-[24px] font-semibold text-[#19191D]'>₹{discountPrice}</h2>
                             <h3 className='font-inter text-[10px] lg:text-[13px] text-[#787885] line-through '>₹{mrp}</h3>
                         </div>
                     </div>
@@ -158,7 +164,7 @@ const Product = ({ productdetails }) => {
                     <div className='mt-[15px]'>
                         <div className='flex items-center space-x-[10px]'>
                             <h1 className='text-[11px] lg:text-[13px] text-[#444444]'>Choose Colour</h1>
-                            <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({currentColorShowing})</h1>
+                            <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({currentColorShowing.replace('_',' ')})</h1>
                         </div>
                         {/* <div className='mt-[15px] flex items-center space-x-[12px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
                             {colorsAvailable && colorsAvailable.map((obj, index) => {
@@ -244,7 +250,7 @@ const Product = ({ productdetails }) => {
 
             <div className='mt-[20px] px-2'>
                 <div className='flex items-center space-x-[25px]'>
-                    <h2 className='text-[13px] lg:text-[18px] text-[#787885] font-inter'>productDescription</h2>
+                    <h2 className='text-[13px] lg:text-[18px] text-[#787885] font-inter'>Product Description</h2>
                     <h2 className='cursor-pointer font-inter text-[#54BAB9] text-[13px] lg:text-[18px] border-b-[1.5px] border-[#54BAB9]'>Return Policy</h2>
                 </div>
 
