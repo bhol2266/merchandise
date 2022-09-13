@@ -1,31 +1,38 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
-import { HeartIcon } from '@heroicons/react/outline'
-import { Itemlist } from '../../components/Itemlist'
-import { QueryG } from '../../lib/serverConfig'
-import { CheckIcon } from '@heroicons/react/solid'
-import { XIcon } from '@heroicons/react/solid'
+import { getProductbyID } from '../../lib/Product_API'
 import MerchContext from '../../context/MerchContext'
 import { Addtobag } from '../../lib/serverConfig'
 import { GetEmail } from '../../lib/CookieLib'
 
 
 const Product = ({ productdetails }) => {
+
+    if (!productdetails) {
+        return (
+            <div className='mb-[400px] mt-[100px]  text-center'>
+                Product not found
+            </div>
+        )
+    }
+
     const {
-        title,
+        productName,
         price,
         mrp,
-        discount,
-        description,
-        sizeArray,
-        colors,
-        productid
+        discountPrice,
+        productDescription,
+        size,
+        color,
+        _id
     } = productdetails;
+
+    console.log(color);
 
     const scrollbarRef = useRef(null)
     const [itemQuantity, setitemQuantity] = useState(1)
-    const [colorsAvailable, setcolorsAvailable] = useState(colors)
+    const [colorsAvailable, setcolorsAvailable] = useState(color)
     const [currentImageShowing, setcurrentImageShowing] = useState('')
     const [currentColorShowing, setcurrentColorShowing] = useState('')
     const [slideImages, setslideImages] = useState([])
@@ -35,17 +42,17 @@ const Product = ({ productdetails }) => {
     const [pincodeVerified, setpincodeVerified] = useState(false)
 
     useEffect(() => {
-        setcurrentImageShowing(colors[0].image[0].image);
-        setcurrentColorShowing(colors[0].color);
+        setcurrentImageShowing(color[0].imageUrl[0]);
+        setcurrentColorShowing(color[0].name);
         setcurrentColorIndexPos(0)
         var array = []
-        colors[0].image.map(item => {
-            array.push(item.image)
+        color.map(item => {
+            array.push(item.imageUrl[0])
         })
         setslideImages(array)
     }, [])
 
-    const { setloginSidebar } = useContext(videosContext)
+    const { setloginSidebar } = useContext(MerchContext)
 
 
 
@@ -66,7 +73,7 @@ const Product = ({ productdetails }) => {
         setcurrentColorShowing(color)
         setcurrentColorIndexPos(index)
         var array = []
-        colors[index].image.map(item => {
+        color[index].image.map(item => {
             array.push(item.image)
         })
         setslideImages(array)
@@ -84,7 +91,7 @@ const Product = ({ productdetails }) => {
             return
         }
 
-        await Addtobag(productid, colors[currentColorIndexPos].id, itemQuantity, currentSize).then(res => {
+        await Addtobag(_id, color[currentColorIndexPos].id, itemQuantity, currentSize).then(res => {
             console.log(res.data);
             alert("added to bag")
         }).catch(err => {
@@ -106,9 +113,9 @@ const Product = ({ productdetails }) => {
                 <div className=' h-[316px] lg:w-[950px] md:h-full justify-around flex items-center  space-x-3'>
 
                     <div className='flex flex-col h-full  justify-start lg:hidden space-y-4'>
-                        {slideImages.map(image => {
+                        {slideImages.map((image, index) => {
                             return (
-                                <img onClick={() => { setcurrentImageShowing(image) }} key={image} src={"https://closm.com/" + image} className='h-[95px] ' />
+                                <img onClick={() => { setcurrentImageShowing(image); setcurrentColorShowing(color[index].name) }} key={image} src={image} className='h-[95px] ' />
                             )
                         })}
                     </div>
@@ -118,7 +125,7 @@ const Product = ({ productdetails }) => {
 
                             {slideImages.map(image => {
                                 return (
-                                    <img onClick={() => { setcurrentImageShowing(image) }} key={image} src={"https://closm.com/" + image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
+                                    <img onClick={() => { setcurrentImageShowing(image); setcurrentColorShowing(color[index].name) }} key={image} src={image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
                                 )
                             })}
 
@@ -127,7 +134,7 @@ const Product = ({ productdetails }) => {
                         <img onClick={() => scroll(482)} src='./../product/right.png' className='h-[20px] text-[#54BAB9] text-center font-semibold my-auto ml-[30px] cursor-pointer' />
                     </div>
 
-                    <img src={"https://closm.com/" + currentImageShowing} className=' h-full object-fill  lg:hidden' />
+                    <img src={currentImageShowing} className=' h-full object-fill  lg:hidden' />
 
                 </div>
 
@@ -138,8 +145,8 @@ const Product = ({ productdetails }) => {
                 <div className='flex flex-col justify-between md:w-[290px]  h-[410px] lg:h-[520px] lg:w-[400px] lg:mr-[59px]  pt-[15px] lg:pt-[15px] '>
                     <div className=' pb-[15px] border-b-[0.5px] border-[#CCCCCC] '>
                         <div className='w-full flex lg:flex-col lg:items-start lg:space-y-2 items-center justify-between'>
-                            <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>{title}</h2>
-                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discount} OFF</h3>
+                            <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>{productName}</h2>
+                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPrice} OFF</h3>
                         </div>
 
                         <div className='flex items-center space-x-1 justify-start '>
@@ -153,14 +160,14 @@ const Product = ({ productdetails }) => {
                             <h1 className='text-[11px] lg:text-[13px] text-[#444444]'>Choose Colour</h1>
                             <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({currentColorShowing})</h1>
                         </div>
-                        <div className='mt-[15px] flex items-center space-x-[12px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
+                        {/* <div className='mt-[15px] flex items-center space-x-[12px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
                             {colorsAvailable && colorsAvailable.map((obj, index) => {
                                 return (
-                                    <img onClick={() => selectColorClick(obj.image[0].image, obj.color, index)} key={obj.id} src={"https://closm.com/" + obj.image[0].image} className={`h-[50px] lg:h-[70px]  border-[#54BAB9] rounded-lg ${currentColorIndexPos === index ? "border-[2px]" : ""}`} />
+                                    <img onClick={() => selectColorClick(obj.image[0].image, obj.color, index)} key={obj.id} src={ obj.image[0].image} className={`h-[50px] lg:h-[70px]  border-[#54BAB9] rounded-lg ${currentColorIndexPos === index ? "border-[2px]" : ""}`} />
 
                                 )
                             })}
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -174,10 +181,10 @@ const Product = ({ productdetails }) => {
                         </div>
 
                         <div className='mt-[15px] flex items-center space-x-[17px]'>
-                            {sizeArray.map(size => {
+                            {size.map(size => {
                                 return (
-                                    <div onClick={() => { setcurrentSize(size.size) }} key={size.name} className={`${size.size === currentSize ? "border-[2px] border-[#54BAB9]" : "border-[1px] lg:border-[2px] border-[#E5E5E5] cursor-pointer"} h-[35px] w-[35px] lg:h-[40px] lg:w-[40px] rounded-lg  flex items-center justify-center`}>
-                                        <h1 className='text-[11px] lg:text-[16px] font-poppins font-light text-[#313131] text-center'>{size.size}</h1>
+                                    <div onClick={() => { setcurrentSize(size) }} key={size} className={`${size === currentSize ? "border-[2px] border-[#54BAB9]" : "border-[1px] lg:border-[2px] border-[#E5E5E5] cursor-pointer"} h-[35px] w-[35px] lg:h-[40px] lg:w-[40px] rounded-lg  flex items-center justify-center`}>
+                                        <h1 className='text-[11px] lg:text-[16px] font-poppins font-light text-[#313131] text-center'>{size}</h1>
                                     </div>
                                 )
                             })}
@@ -233,11 +240,11 @@ const Product = ({ productdetails }) => {
 
 
 
-            {/* Description, Return Policy */}
+            {/* productDescription, Return Policy */}
 
             <div className='mt-[20px] px-2'>
                 <div className='flex items-center space-x-[25px]'>
-                    <h2 className='text-[13px] lg:text-[18px] text-[#787885] font-inter'>Description</h2>
+                    <h2 className='text-[13px] lg:text-[18px] text-[#787885] font-inter'>productDescription</h2>
                     <h2 className='cursor-pointer font-inter text-[#54BAB9] text-[13px] lg:text-[18px] border-b-[1.5px] border-[#54BAB9]'>Return Policy</h2>
                 </div>
 
@@ -283,54 +290,21 @@ export default Product
 export async function getServerSideProps(context) {
 
     const { productid } = context.query;
-    var productdetails = {}
-    var sizeArray = []
-    await QueryG(`query{
-        products(id:"${productid}"){
-        edges{
-          node{
-            id
-              title
-              price
-              mrp
-              discount
-              description
-              size{
-                id
-                size
-              }
-              colors{
-                id
-                color
-                image{
-                  image
-                }
-          }
+
+    const response = await getProductbyID({ productId: productid })
+    if (response.sucess) {
+        return {
+            props: {
+                productdetails: response.data
+            }, // will be passed to the page component as props
         }
-      }
-    }
-}`).then(res => {
-        var obj = res.data.data.products.edges[0].node;
-        productdetails = {
-            title: obj.title,
-            price: obj.price,
-            mrp: obj.mrp,
-            discount: obj.discount,
-            description: obj.description,
-            colors: obj.colors,
-            sizeArray: obj.size,
-            productid: productid
+    } else {
+        return {
+            props: {
+                productdetails: {}
+            },
         }
-
-
-
-    })
-        .catch(err => {
-            console.log(err);
-        })
-    return {
-        props: {
-            productdetails: productdetails
-        }, // will be passed to the page component as props
     }
+
+
 }
