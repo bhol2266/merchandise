@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { XCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import { SignInUser } from '../lib/serverConfig'
 import MerchContext from '../context/MerchContext'
-import { SetToken, SetRefreshToken, SetFirstName, SetLastName, SetEmail } from '../lib/CookieLib'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 
 
@@ -13,125 +12,69 @@ export const LoginForm = () => {
 
     const router = useRouter()
 
-    const { loginSidebar, setloginSidebar, singUpForm_Sidebar, setsingUpForm_Sidebar, signUpFormOTP_Sidebae, setsignUpFormOTP_Sidebar } = useContext(MerchContext)
+    const { loginSidebar, setloginSidebar } = useContext(MerchContext)
 
-
-
-
-
-    const [Email, setEmail] = useState('')
-    const [password, setpassword] = useState('')
-    const [sidebarclose, setsidebarclose] = useState(true)
-
-
-    const validateEmail = (email) => {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-            return (true)
-        }
-        return (false)
-    };
 
 
     const closeSidebar = () => {
         setloginSidebar(false)
-        setsingUpForm_Sidebar(false)
-        setsignUpFormOTP_Sidebar(false)
 
     }
 
-    const ClickHereHandler = () => {
-        setloginSidebar(false)
-        setsingUpForm_Sidebar(true)
-    }
-    
-    const SignIn = async (e) => {
-        e.preventDefault()
-        if (!Email || !password) {
-            alert("Enter credentials correctly")
-            return
-        }
-        if (!validateEmail(Email)) {
-            alert("Enter Email correctly")
-            return
-        }
-        const jsonMessage = await SignInUser(Email, password)
-        console.log(JSON.stringify(jsonMessage));
-        if (jsonMessage.success === true) {
-            SetToken(jsonMessage.token)
-            SetRefreshToken(jsonMessage.refreshToken)
-            SetEmail(Email)
-            closeSidebar()
-            window.location.reload();
-            return
-        }
-        if (jsonMessage.success === false) {
-            alert(jsonMessage.errors.nonFieldErrors[0].message)
-            return
-        }
+
+
+    const SignIn = async (route) => {
+        Cookies.set('role', 'user', { expires: 7 })
+        router.push(`/api/${route}`)
+
     }
 
 
 
     return (
-        <div className={` overflow-hidden flex shadow-lg fixed top-0 right-0  z-10 bg-white ${loginSidebar ? "w-[330px]" : "w-0"} transition-all duration-300 `}>
-            <img src='/signUpFormBar.png' className='min-w-[54px] h-screen'></img>
+        <div className={` overflow-hidden flex flex-col justify-between shadow-lg fixed top-0 right-0  z-10 bg-loginLayout_bg ${loginSidebar ? "w-[330px] xl:w-[400px]" : "w-0"} transition-all duration-300 h-screen bg-no-repeat bg-cover	`}>
 
-            <div className='ml-[28px]'>
+            <div className='px-[28px]  w-full'>
                 <div className='flex items-center  mt-[32px]  justify-between '>
-                    <h1 className='text-[24px] text-[#BE8024] font-delius cursor-pointer lg:text-[30px] '>Clossum</h1>
-                    <XCircleIcon onClick={closeSidebar} className='h-[36px] text-[#8e8e8e] cursor-pointer' />
+                    <h1 className='text-[24px] text-[#54BAB9] font-delius cursor-pointer lg:text-[30px] '>Closm</h1>
+                    <XCircleIcon onClick={closeSidebar} className='text-[#54BAB9] h-[30px]  cursor-pointer' />
                 </div>
 
 
 
                 <h2 className='mt-[50px] font-inter text-[18px] text-[#323232]'>
-                    LOGIN
+                    SIGN UP / SIGN IN
                 </h2>
-                <form>
-                    <input required onChange={(e) => { setEmail(e.target.value); console.log() }} className='text-[#323232] pb-1  outline-none border-[#323232] border-b-[1px] w-[220px] mt-[31px]' type='text' placeholder='E-Mail/Phone' />
 
 
-                    <input required onChange={e => setpassword(e.target.value)} className='text-[#323232] w-[220px] pb-1 border-[#323232] border-b-[1px] outline-none mt-[23px]' type='password' placeholder='Password' />
+                <div className='mt-[86px] w-fit mx-auto  flex flex-col items-start space-y-12'>
 
-
-
-                    {/* Bottom */}
-
-                    <button type='submit' onClick={SignIn} className='font-normal text-[14px] text-center w-[154px] h-[30px] mt-[20px] mx-auto text-white hover:bg-[#519d9b] bg-[#54BAB9] rounded-[5px]  ml-[30px]'>Login</button>
-                </form>
-                <div className='flex items-center mt-[35px] space-x-[10px] ml-[15px]'>
-                    <h2 className='text-center  font-inter text-[#313131] text-[13px] '>Forgot Password ?</h2>
-
-                    <h2 className='text-center  font-inter text-[#313131] text-[13px] cursor-pointer hover:text-red-500'>Click Here</h2>
-                </div>
-
-                <div className='w-[73px] h-[51px] mx-auto mt-[41px] ml-[60px]'>
-                    <h2 className='text-center  font-inter text-[#323232] text-[11px]'>Continue with</h2>
-                    <div className='mt-[26px] flex justify-between'>
-                        <Link href='/'>
-                            <img src='/login/google.png' className='h-[25px] w-[25px] cursor-pointer'></img>
-                        </Link>
-
-
-                        <Link href='/'>
-                            <img src='/login/facebook.png' className='h-[25px] w-[25px] cursor-pointer'></img>
-                        </Link>
-
+                    <div onClick={() => SignIn('user/google')}
+                        className='flex items-center space-x-4 cursor-pointer'>
+                        <img src='/login/google.png' className='lg:h-[38px] lg:w-[38px] h-[28px] w-[28px] cursor-pointer'></img>
+                        <h2 className='font-medium font-inter text-[#323232] text-[11px] lg:text-[16px]'>Continue with Google</h2>
                     </div>
 
-                </div>
 
-                <div className='flex items-center mt-[150px] space-x-[10px] ml-[15px]'>
-                    <h2 className='text-center  font-inter text-[#313131] text-[13px]'>New user ?</h2>
+                    <div onClick={() => SignIn('user/facebook')}
+                        className='flex items-center space-x-4 cursor-pointer'>
+                        <img src='/login/facebook.png' className='lg:h-[38px] lg:w-[38px] h-[28px] w-[28px] cursor-pointer'></img>
+                        <h2 className='font-medium font-inter text-[#323232] text-[11px] lg:text-[16px]'>Continue with Facebook</h2>
+                    </div>
 
-                    <button onClick={ClickHereHandler} className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-[#54BAB9] rounded-[5px] hover:bg-[#519d9b] hover:text-white '>Sign Up</button>
+
+
+
+
                 </div>
 
             </div>
 
-            <div>
 
-            </div>
+
+
+            <img src='/creator/poster1.png' className='px-[28px] mb-[200px] w-full cursor-pointer'></img>
+
 
 
         </div>

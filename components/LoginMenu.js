@@ -39,7 +39,7 @@ function LoginMenu() {
 
 
   return (
-    <Menu as="div" className="relative inline-block text-left z-20">
+    <Menu as="div" className="relative inline-block text-left ">
       <div>
         <Menu.Button className=" ">
           <img src='/homepageImages/account.png' className='cursor-pointer w-[20px] h-[20px] mt-1'></img>

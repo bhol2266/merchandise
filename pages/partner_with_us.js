@@ -58,10 +58,10 @@ const Partner_with_us = () => {
                 <div className={` w-fit mx-auto my-12 ${openLogin ? 'opacity-100 relative' : 'opacity-0'} transition-all duration-500 lg:scale-125`}>
                     <p className="mb-[18px] font-inter font-medium text-[#323232] text-[10px] block mx-auto w-fit">Continue With</p>
                     <div className="flex items-center space-x-3">
-                        <Link href='/api/google/'>
+                        <Link href='/api/creator/google/'>
                             <img onClick={updateCookie} className="bg-white w-[50px] p-[10px] shadow-md rounded-2xl cursor-pointer mb-[15px]" src="./login/google.png" alt="" />
                         </Link>
-                        <Link href='/api/facebook/'>
+                        <Link href='/api/creator/facebook/'>
                             <img onClick={updateCookie} className="bg-white w-[50px] p-[10px] shadow-md rounded-2xl cursor-pointer mb-[15px] " src="./login/facebook.png" alt="" />
                         </Link>
 

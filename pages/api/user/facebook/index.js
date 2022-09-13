@@ -1,5 +1,5 @@
 import passport from "passport";
-import "../../../lib/passport";
+import "../../../../lib/passportUser";
 
 export default async function (req, res, next) {
    
