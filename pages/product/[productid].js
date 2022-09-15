@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { MinusIcon } from '@heroicons/react/solid'
+import { MinusIcon, HeartIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { getProductbyID } from '../../lib/Product_API'
 import MerchContext from '../../context/MerchContext'
 import { Addtobag } from '../../lib/serverConfig'
 import { GetEmail } from '../../lib/CookieLib'
+import { addProductWishlist, deleteProductWishlist, addProductCart } from '../../lib/Product_API'
+import { setCookies, getCookie } from 'cookies-next'
 
 
 const Product = ({ productdetails }) => {
@@ -19,7 +21,7 @@ const Product = ({ productdetails }) => {
 
     const {
         productName,
-        price,
+        creator,
         mrp,
         discountPrice,
         productDescription,
@@ -38,7 +40,6 @@ const Product = ({ productdetails }) => {
 
     const scrollbarRef = useRef(null)
     const [itemQuantity, setitemQuantity] = useState(1)
-    const [colorsAvailable, setcolorsAvailable] = useState(color)
     const [currentImageShowing, setcurrentImageShowing] = useState('')
     const [currentColorShowing, setcurrentColorShowing] = useState('')
     const [slideImages, setslideImages] = useState([])
@@ -46,8 +47,9 @@ const Product = ({ productdetails }) => {
     const [currentSize, setcurrentSize] = useState("M")
     const [pincode, setpincode] = useState('')
     const [pincodeVerified, setpincodeVerified] = useState(false)
+    const [checkWishlist, setcheckWishlist] = useState(false);
 
-    useEffect(() => {
+    useEffect(async () => {
         setcurrentImageShowing(color[0].imageUrl[0]);
         setcurrentColorShowing(color[0].name);
         setcurrentColorIndexPos(0)
@@ -56,6 +58,25 @@ const Product = ({ productdetails }) => {
             array.push(item.imageUrl[0])
         })
         setslideImages(array)
+
+        if (typeof getCookie('email') === 'undefined' || typeof getCookie('accessToken') === 'undefined') {
+
+            alert('Please Login to continue')
+            setloginSidebar(true)
+            return
+        }
+
+
+        try {
+            const response = await addProductWishlist({ productId: _id })
+            if (response.message === "Already Exist") {
+                setcheckWishlist(true)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+
     }, [])
 
     const { setloginSidebar } = useContext(MerchContext)
@@ -74,15 +95,37 @@ const Product = ({ productdetails }) => {
 
     }
 
-    const selectColorClick = (url, color, index) => {
-        setcurrentImageShowing(url)
-        setcurrentColorShowing(color)
-        setcurrentColorIndexPos(index)
-        var array = []
-        color[index].image.map(item => {
-            array.push(item.image)
-        })
-        setslideImages(array)
+    const removeFromWishlist = async () => {
+
+
+
+        try {
+            const response = await deleteProductWishlist({ productId: _id })
+
+            if (response.sucess) {
+                alert('Removed from wishlist')
+                setcheckWishlist(false)
+            } else {
+                console.log(response.message)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+    const addtoWishlist = async () => {
+
+        try {
+            const response = await addProductWishlist({ productId: _id })
+            if (response.sucess) {
+                alert("Added to wishlist")
+                setcheckWishlist(true)
+            } else {
+                console.log(response.message)
+            }
+        } catch (error) {
+            console.log(error)
+        }
 
     }
 
@@ -92,17 +135,36 @@ const Product = ({ productdetails }) => {
 
 
     const addtoBagClick = async () => {
-        if (!GetEmail()) {
+        if (typeof getCookie('email') === 'undefined') {
             setloginSidebar(true)
             return
         }
 
-        await Addtobag(_id, color[currentColorIndexPos].id, itemQuantity, currentSize).then(res => {
-            console.log(res.data);
-            alert("added to bag")
-        }).catch(err => {
-            console.log(err);
-        })
+
+        const data = {
+            productId: _id,
+            quantity: itemQuantity.toString(),
+            productName: productName,
+            mrp: mrp,
+            discountPrice: discountPrice,
+            size: currentSize,
+            color: currentColorShowing,
+            creator: creator
+        }
+
+        
+
+        try {
+            const response = await addProductCart(data)
+
+            console.log(response);
+            if (response.sucess) {
+                alert('Added to bag')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
 
 
     }
@@ -152,7 +214,7 @@ const Product = ({ productdetails }) => {
                     <div className=' pb-[15px] border-b-[0.5px] border-[#CCCCCC] '>
                         <div className='w-full flex lg:flex-col lg:items-start lg:space-y-2 items-center justify-between'>
                             <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>{productName}</h2>
-                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPercent.toString().substring(0, 2).replace('.','')}% OFF</h3>
+                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPercent.toString().substring(0, discountPercent.toString().indexOf('.')).replace('.', '')}% OFF</h3>
                         </div>
 
                         <div className='flex items-center space-x-1 justify-start '>
@@ -164,7 +226,7 @@ const Product = ({ productdetails }) => {
                     <div className='mt-[15px]'>
                         <div className='flex items-center space-x-[10px]'>
                             <h1 className='text-[11px] lg:text-[13px] text-[#444444]'>Choose Colour</h1>
-                            <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({currentColorShowing.replace('_',' ')})</h1>
+                            <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({currentColorShowing.replace('_', ' ')})</h1>
                         </div>
                         {/* <div className='mt-[15px] flex items-center space-x-[12px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
                             {colorsAvailable && colorsAvailable.map((obj, index) => {
@@ -236,8 +298,15 @@ const Product = ({ productdetails }) => {
 
                     <div className='flex items-center mt-2'>
                         {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]'/> */}
-                        <img onClick={addtoBagClick} src='./../homepageImages/heart.png' className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
-                        <button onClick={addtoBagClick} className=' lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
+
+                        {!checkWishlist &&
+                            <img onClick={addtoWishlist} src='./../homepageImages/heart.png' className='cursor-pointer   mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
+                        }
+
+                        {checkWishlist &&
+                            <img onClick={removeFromWishlist} src='./../homepageImages/heart2.png' className='cursor-pointer mr-[9px] w-[40px] p-[1px] rounded border-[1px] border-[#CACACA]' />
+                        }
+                        <button onClick={addtoBagClick} className='lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
                             ADD TO BAG
                         </button>
                     </div>

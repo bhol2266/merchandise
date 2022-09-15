@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { loadGetInitialProps } from 'next/dist/shared/lib/utils'
+import { deleteProductWishlist } from '../../lib/Product_API'
 
 
 export const Item = ({ obj }) => {
@@ -13,6 +13,19 @@ export const Item = ({ obj }) => {
     const discountPercent = 100 - ((dicountPriceInteger * 100) / mrpInteger)
 
 
+    const removeItemFromWishlist = async () => {
+        try {
+            const response = await deleteProductWishlist({ productId: _id })
+            console.log(response);
+            if (response.sucess) {
+                window.location.reload();
+            } else {
+                console.log(response.message)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className='select-none'>
@@ -33,9 +46,10 @@ export const Item = ({ obj }) => {
                         </div>
 
                     </div>
-                    
+
                 </a>
             </Link>
+            <button onClick={removeItemFromWishlist} className='lg:py-2 lg:text-lg py-1 border-[1px] rounded-lg my-3  font-inter border-theme w-full'>Remove Item</button>
         </div>
     )
 }

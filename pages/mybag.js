@@ -4,7 +4,14 @@ import { BagItem } from '../components/bagItem'
 import { GetbagItems, applyCoupon } from '../lib/serverConfig';
 import Head from 'next/head';
 import Script from 'next/script';
+import { getProductCart, deleteProductCart } from '../lib/Product_API'
+import { BeatLoader } from 'react-spinners';
+
+
 const Mybag = () => {
+
+
+
 
     const router = useRouter()
     const [bagitems, setbagitems] = useState([])
@@ -16,38 +23,19 @@ const Mybag = () => {
     const [deliveryCharge, setdeliveryCharge] = useState();
     const [COUPONCODE, setCOUPONCODE] = useState('');
     const [CouponBtn, setCouponBtn] = useState("APPLY COUPON");
+    const [beatloader, setbeatloader] = useState(true);
 
     useEffect(async () => {
-        await GetbagItems().then(res => {
-            console.log(res);
-
-            settotalDiscountAmount(res.cart[0].discountPrice)
-            settotalMRP(res.cart[0].itemBill)
-            settotalAmount(res.cart[0].totalBill)
-
-            try {
-                setcouponDiscount(res.cart[0].discountCoupen.discount)
-                setCOUPONCODE(res.cart[0].discountCoupen.copenCode)
-                setCouponBtn("REMOVE COUPON")
-
-            } catch (error) {
-
+        try {
+            const response = await getProductCart()
+            if (response.sucess) {
+                setbagitems(response.data.products)
+                setbeatloader(false)
             }
-
-
-            var array = []
-            var cartitemIdArray = []
-            res.cart[0].items.map(obj => {
-                array.push(obj)
-            })
-            res.cart.map(item => {
-                cartitemIdArray.push(item.id)
-            })
-            setcartItemId(cartitemIdArray)
-            setbagitems(array)
-        }).catch(err => {
-            console.log(err);
-        })
+        } catch (error) {
+            setbeatloader(false)
+            console.log(error)
+        }
 
     }, [])
 
@@ -87,8 +75,17 @@ const Mybag = () => {
         }
     }
 
+
+    if (beatloader) {
+        return (
+            <div className="flex justify-center items-center w-full h-[500px] mt-3 ">
+                <BeatLoader loading size={20} color={'#54BAB9'} />
+            </div>
+        )
+    }
+
     return (
-        <div className='px-[13px] lg:px-[45px]  mx-auto'>
+        <div className='px-[13px] lg:px-[45px]  mx-auto select-none'>
 
             <div className='flex items-center justify-between lg:text-[22px] lg:px-[10px] '>
                 <h1 className='text-[#323232] lg:text-[22px] text-[18px] font-inter'>MY BAG</h1>

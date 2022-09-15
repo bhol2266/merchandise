@@ -20,6 +20,7 @@ function Youtuber({ youtuberName, banner, logo, productlist, youtuberNotFound })
 
     return (
         <div>
+            
             {!youtuberNotFound && <div>
                 <img src={banner} className='cursor-pointer w-full h-48  px-[12px] lg:px-[50px] rounded   md:hidden mt-[15px]'></img>
                 <img src={banner} alt={'https://' + banner} className='cursor-pointer w-full h-[330px] px-[12px]  lg:px-[50px]   rounded hidden md:flex mt-[25px]'></img>

@@ -4,6 +4,7 @@ import MerchContext from '../context/MerchContext'
 import { GetToken, GetEmail } from '../lib/CookieLib'
 import { removeCookies } from 'cookies-next';
 import Router, { useRouter } from 'next/router';
+import Link from 'next/link';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -19,8 +20,8 @@ function LoginMenu() {
       setloggedIn(true)
     }
   }, [])
-  
- 
+
+
   const openLoginForm = () => {
     setloginSidebar(true)
   }
@@ -88,13 +89,17 @@ function LoginMenu() {
             <Menu.Item as='div' className=''>
               <div className='w-full  flex items-center space-x-5 '>
                 <img src='./homepageImages/buy.png' className='w-[12px] h-[12px] '></img>
-                <h1 onClick={()=>{router.push('/order')}} className='font-Opensans text-[#323232] text-[11px] hover:text-red-500 cursor-pointer'>Orders</h1>
+                <h1 onClick={() => { router.push('/order') }} className='font-Opensans text-[#323232] text-[11px] hover:text-red-500 cursor-pointer'>Orders</h1>
               </div>
             </Menu.Item>
             <Menu.Item as='div'>
               <div className='w-full  flex items-center space-x-5 '>
                 <img src='./homepageImages/heart.png' className='w-[12px] h-[12px] '></img>
-                <h1 className='font-Opensans text-[#323232] text-[11px] hover:text-red-500 cursor-pointer'>Wishlist</h1>
+                <Link href='/wishlist'>
+                  <a>
+                    <h1 className='font-Opensans text-[#323232] text-[11px] hover:text-red-500 cursor-pointer'>Wishlist</h1>
+                  </a>
+                </Link>
               </div>
             </Menu.Item>
             <Menu.Item as='div'>
