@@ -28,6 +28,7 @@ const Mybag = () => {
     useEffect(async () => {
         try {
             const response = await getProductCart()
+            console.log(response);
             if (response.sucess) {
                 setbagitems(response.data.products)
                 setbeatloader(false)

@@ -41,7 +41,6 @@ export const BagItem = ({ productdetails }) => {
 
     }, []);
 
-    console.log(itemQuantity);
 
     const updateDastabse = async (quantityy) => {
         if (itemQuantity === 1 && quantityy === '-1' ) {
