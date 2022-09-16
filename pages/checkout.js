@@ -339,7 +339,7 @@ const CheckOut = () => {
 
 
     return (
-        <div className='p-[13px] lg:px-[45px] lg:py-[20px] '>
+        <div className='p-[13px] lg:px-[45px] lg:py-[20px] mb-[250px]'>
             <Head>
                 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
 
@@ -352,7 +352,7 @@ const CheckOut = () => {
             <button onClick={() => { setopenSavedAddress(!openSavedAddress) }} className='text-[12px] font-inter underline text-theme'>View Saved Address</button>
 
 
-            <div className='flex flex-col lg:flex-row items-center lg:items-start  justify-around  lg:space-x-6 xl:justify-around'>
+            <div className='flex flex-col lg:flex-row items-center lg:items-start  justify-around  lg:space-x-6 xl:justify-between xl:px-[110px]'>
 
 
                 {openSavedAddress &&
