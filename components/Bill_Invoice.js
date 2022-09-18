@@ -177,7 +177,7 @@ const Bill_Invoice = () => {
         }
     };
 
-   
+
 
     const afterPaymentisDone = async (razorpay_order_id, razorpay_payment_id) => {
         await addPaymentDetails(cartId, totalAmount, razorpay_payment_id, razorpay_order_id, shippingId).then(res => {
@@ -195,9 +195,9 @@ const Bill_Invoice = () => {
 
 
 
-        <div className='lg:w-[450px] xl:w-[400px] lg:h-[400px] h-[320px] sm:w-[400px] w-full  rounded-[10px] border-[1px] border-[#BBBBBB]  mt-[10px] md:mt-[0px] py-[40px] mx-auto lg:mx-0 sticky top-10'>
+        <div className={`${checkoutRoute === '/mybag' ? " lg:w-[350px]" : " lg:w-[450px]"} xl:w-[400px] lg:h-[400px] h-[320px] sm:w-[400px] w-full  rounded-[10px] border-[1px] border-[#BBBBBB]  mt-[10px] md:mt-[0px] py-[40px] mx-auto lg:mx-0 sticky top-10`}>
 
-            
+
             <h1 className='px-[20px] font-inter font-semibold text-[12px] lg:text-[18px] text-[#323232]'>TOTAL PRICE</h1>
 
             <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>

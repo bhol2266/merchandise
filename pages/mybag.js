@@ -17,7 +17,7 @@ const Mybag = () => {
     const router = useRouter()
     const [bagitems, setbagitems] = useState([])
     const [cartItemId, setcartItemId] = useState([]);
-   
+
     const [beatloader, setbeatloader] = useState(true);
 
     useEffect(async () => {
@@ -38,7 +38,7 @@ const Mybag = () => {
 
 
 
-  
+
 
 
     if (beatloader) {
@@ -50,7 +50,7 @@ const Mybag = () => {
     }
 
     return (
-        <div className='px-[13px] lg:px-[45px]  mx-auto select-none'>
+        <div className='px-[13px] lg:px-[45px]  mx-auto select-none mb-[200px]'>
 
             <div className='flex items-center justify-between lg:text-[22px] lg:px-[10px] '>
                 <h1 className='text-[#323232] lg:text-[22px] text-[18px] font-inter'>MY BAG</h1>
@@ -65,10 +65,10 @@ const Mybag = () => {
                 </div>
             </div>
 
-            <div className=' mx-auto  md:flex  lg:justify-between md:space-x-4 lg:space-x-4 xl:space-x-56  '>
+            <div className=' mx-auto  md:flex md:space-x-12 lg:space-x-12  lg:justify-between xl:justify-around  xl:space-x-56  '>
 
                 {/* Item  */}
-                <div className='items-center  flex flex-col md:grow'>
+                <div className='items-center  flex flex-col md:grow xl:grow-0 xl:w-1/2'>
 
                     {bagitems && bagitems.map((item, index) => {
                         return (
@@ -81,7 +81,9 @@ const Mybag = () => {
 
                 </div>
 
-                <Bill_Invoice/>
+                
+                <Bill_Invoice />
+
 
 
             </div>
