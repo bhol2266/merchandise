@@ -1,46 +1,71 @@
 {
     "sucess": true,
     "data": {
-        "_id": "631b9a57b6b8292f4a92744b",
-        "creatorName": "kundan",
-        "creatorUrl": "closmkundna",
-        "creatorLogo": "ap-south-1.linodeobjects.com/closm/l7vldc2h5y5gbgpze48.jpg",
-        "creatorBanner": "ap-south-1.linodeobjects.com/closm/l7vlde8bts1irl5co9.jpg",
-        "creatorDescription": "Description",
-        "user": "631b9a31b6b8292f4a927440",
-        "products": [
+        "_id": "631b9a31b6b8292f4a927440",
+        "address": [
             {
-                "_id": "631e2d35ddcfa70ab46f5f8a",
-                "productName": "dsfg",
-                "artUrl": "https://closm.ap-south-1.linodeobjects.com/l7xouf39xs63n1enc1a.png",
-                "mrp": "433",
-                "discountPrice": "435435",
-                "category": "T-Shirt",
-                "publishStatus": false,
-                "size": [
-                    "S",
-                    "M",
-                    "L",
-                    "XL"
-                ],
-                "creator": "631b9a57b6b8292f4a92744b",
-                "color": [
-                    {
-                        "name": "Pink",
-                        "imageUrl": [
-                            "https://closm.ap-south-1.linodeobjects.com/l7xouffygn2rjyktdo.png",
-                            "https://closm.ap-south-1.linodeobjects.com/l7xmyvbcj62u8iwodf.png"
-                        ]
-                    }
-                ],
-                "productDescription": "dfsgdfs",
-                "createdAt": "2022-09-11T18:47:17.298Z",
-                "updatedAt": "2022-09-11T18:47:17.298Z",
+                "_id": "6326c0daac34c5d17493dd01",
+                "shippingAddress": {
+                    "firstName": "Ashutosh",
+                    "lastName": "Gupta",
+                    "mobileNumber": "4353454353",
+                    "alter_MobileNumber": "4353455555",
+                    "state": "Nagaland",
+                    "pincode": "560090",
+                    "city": "Bangalore",
+                    "landmark": "Chikkabanavara",
+                    "fullAddress": "Chikkabanavara",
+                    "country": "India"
+                },
+                "billingAddress": {
+                    "firstName": "Ashutosh",
+                    "lastName": "Gupta",
+                    "mobileNumber": "4353454353",
+                    "alter_MobileNumber": "4353455555",
+                    "state": "Nagaland",
+                    "pincode": "560090",
+                    "city": "Bangalore",
+                    "landmark": "Chikkabanavara",
+                    "fullAddress": "Chikkabanavara",
+                    "country": "India"
+                },
+                "user": "631b9a31b6b8292f4a927440",
+                "createdAt": "2022-09-18T06:55:22.121Z",
+                "updatedAt": "2022-09-18T06:55:22.121Z",
+                "__v": 0
+            },
+            {
+                "_id": "6326369ee9016cecc97780f6",
+                "shippingAddress": {
+                    "firstName": "Ashutosh",
+                    "lastName": "Gupta",
+                    "mobileNumber": "9108825914",
+                    "alter_MobileNumber": "7984563122",
+                    "state": "Karnataka",
+                    "pincode": "560090",
+                    "city": "Bangalore",
+                    "landmark": "RR COLLEGE",
+                    "fullAddress": "Chikkavanavara",
+                    "country": "India"
+                },
+                "billingAddress": {
+                    "firstName": "Ashutosh",
+                    "lastName": "Gupta",
+                    "mobileNumber": "9108825914",
+                    "alter_MobileNumber": "7984563122",
+                    "state": "",
+                    "pincode": "560090",
+                    "city": "Bangalore",
+                    "landmark": "RR COLLEGE",
+                    "fullAddress": "Chikkavanavara",
+                    "country": "India"
+                },
+                "user": "631b9a31b6b8292f4a927440",
+                "createdAt": "2022-09-17T21:05:34.887Z",
+                "updatedAt": "2022-09-17T21:13:06.388Z",
                 "__v": 0
             }
-        ],
-        "createdAt": "2022-09-09T19:56:07.947Z",
-        "updatedAt": "2022-09-11T18:47:17.356Z",
-        "__v": 0
-    }
+        ]
+    },
+    "message": "All Address details"
 }

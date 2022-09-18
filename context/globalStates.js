@@ -54,6 +54,11 @@ const GlobalStates = (props) => {
     const [publishData, setpublishData] = useState({});
 
 
+    //Address/Checkout page
+    const [editAddress, seteditAddress] = useState(false);
+    const [editAddressArrayIndex, seteditAddressArrayIndex] = useState(null);
+    const [AddressForCheckoutIndex, setAddressForCheckout] = useState(0);
+    const [addressArray, setaddressArray] = useState([]);
 
 
 
@@ -97,7 +102,12 @@ const GlobalStates = (props) => {
             customisePageSelector, setcustomisePageSelector,
             publishData, setpublishData,
             Edited, setEdited,
+            editAddress, seteditAddress,
+            editAddressArrayIndex, seteditAddressArrayIndex,
+            AddressForCheckoutIndex, setAddressForCheckout,
+            addressArray, setaddressArray,
             NavbarUserORcreator, setNavbarUserORcreator,
+
         }}>
             {props.children}
         </MerchContext.Provider>

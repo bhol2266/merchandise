@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { getProductCart, deleteProductCart } from '../lib/Product_API'
 import { BeatLoader } from 'react-spinners';
+import Bill_Invoice from '../components/Bill_Invoice';
 
 
 const Mybag = () => {
@@ -16,22 +17,17 @@ const Mybag = () => {
     const router = useRouter()
     const [bagitems, setbagitems] = useState([])
     const [cartItemId, setcartItemId] = useState([]);
-    const [totalAmount, settotalAmount] = useState();
-    const [totalDiscountAmount, settotalDiscountAmount] = useState();
-    const [totalMRP, settotalMRP] = useState();
-    const [couponDiscount, setcouponDiscount] = useState(0);
-    const [deliveryCharge, setdeliveryCharge] = useState();
-    const [COUPONCODE, setCOUPONCODE] = useState('');
-    const [CouponBtn, setCouponBtn] = useState("APPLY COUPON");
+   
     const [beatloader, setbeatloader] = useState(true);
 
     useEffect(async () => {
         try {
             const response = await getProductCart()
             console.log(response);
+
             if (response.sucess) {
-                setbagitems(response.data.products)
                 setbeatloader(false)
+                setbagitems(response.data.cartData.products)
             }
         } catch (error) {
             setbeatloader(false)
@@ -42,39 +38,7 @@ const Mybag = () => {
 
 
 
-    const applyCouponfunc = async () => {
-
-        if (COUPONCODE.length < 3) {
-            alert("Error Coupon Code")
-            return
-        }
-
-        await applyCoupon(COUPONCODE).then(res => {
-            if (CouponBtn === 'APPLY COUPON') {
-                settotalDiscountAmount(res.applyCoupen.discountPrice)
-                settotalAmount(res.applyCoupen.totalBill)
-                setcouponDiscount(res.applyCoupen.coupenDiscount)
-                setCouponBtn("REMOVE COUPON")
-            } else {
-                settotalDiscountAmount(res.applyCoupen.discountPrice)
-                settotalAmount(res.applyCoupen.totalBill + couponDiscount)
-                setcouponDiscount(0)
-                setCouponBtn("APPLY COUPON")
-                setCOUPONCODE('')
-            }
-
-
-        }).catch(err => {
-            console.log(err);
-        })
-
-
-    }
-    const checkout = () => {
-        if (bagitems) {
-            router.push('/checkout')
-        }
-    }
+  
 
 
     if (beatloader) {
@@ -117,48 +81,7 @@ const Mybag = () => {
 
                 </div>
 
-                <div className=' lg:h-[500px] h-[420px] md:w-[300px]  mb-4 lg:w-[400px] rounded-[10px] border-[1px] border-[#BBBBBB]  mt-[10px] md:mt-[0px] py-[20px] mx-auto lg:mx-0 sticky top-10'>
-                    <h1 className='px-[20px] font-inter font-semibold text-[12px] lg:text-[18px] text-[#323232]'>TOTAL PRICE</h1>
-
-                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>ITEMS ({bagitems.length})</h1>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{totalMRP} INR</h1>
-                    </div>
-                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>DISCOUNT</h1>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{totalDiscountAmount} INR</h1>
-                    </div>
-                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>DELIVERY CHARGES</h1>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{deliveryCharge}</h1>
-                    </div>
-
-                    <div className='mt-[12px] lg:mt-[16px] flex items-start justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>APPLY COUPON</h1>
-                        <div className='flex flex-col items-end'>
-                            <input type='text' value={COUPONCODE} onChange={e => (setCOUPONCODE(e.target.value.toUpperCase()))} placeholder='Enter Promocode' className='text-center w-[115px] lg:w-[171px] lg:h-[30px]  h-[20px] border-[1px] border-[#323232] rounded-[5px] text-[11px] lg:text-[16px] text-[#323232] font-inter' />
-                            <h1 onClick={applyCouponfunc} className='mt-[7px] text-[10px] lg:text-[12px]  font-inter cursor-pointer hover:text-red-500 underline text-red-700 '>{CouponBtn}</h1>
-
-                        </div>
-
-                    </div>
-
-                    <div className='mt-[12px] lg:mt-[16px] flex items-center justify-between px-[20px] pb-[14px] border-b-[0.5px] border-[#E5E5E5]'>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>COUPON DISCOUNT</h1>
-                        <h1 className=' text-[11px] lg:text-[14px] text-[#323232] font-inter'>{couponDiscount} INR</h1>
-                    </div>
-                    <div className='mt-[14px] flex items-center justify-between px-[20px] pb-[14px]  border-[#E5E5E5]'>
-                        <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>TOTAL AMOUNT</h1>
-                        <h1 className=' text-[12px] lg:text-[16px] text-[#323232] font-inter'>{totalAmount} INR</h1>
-                    </div>
-
-                    <div className='px-8 lg:px-16'>
-                        <button onClick={checkout} className='w-full  lg:text-[16px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center my-4 font-inter font-semibold'>
-                            PROCEED TO CHECKOUT
-                        </button>
-                    </div>
-                </div>
-
+                <Bill_Invoice/>
 
 
             </div>
