@@ -57,10 +57,10 @@ const CheckOut = () => {
 
 
             <h2 className='font-semibold text-[14px] lg:text-[22px] text-[#323232] font-inter mb-4'>ADDRESS</h2>
-            {/* <button onClick={() => { setopenSavedAddress(!openSavedAddress) }} className='text-[12px] font-inter underline text-theme'>View Saved Address</button> */}
+     
 
 
-            <div className='flex flex-col lg:flex-row items-center lg:items-start  justify-between  lg:space-x-6 xl:justify-between xl:px-[70px]  2xl:px-[110px]'>
+            <div className='flex flex-col lg:flex-row items-center lg:items-start  justify-between  lg:space-x-6 xl:space-x-14 xl:justify-between   2xl:px-[110px]'>
 
                 {editAddress &&
                     <AddressForm data={addressArray[editAddressArrayIndex]} />

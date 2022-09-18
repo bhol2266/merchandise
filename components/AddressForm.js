@@ -213,22 +213,24 @@ const AddressForm = (props) => {
 
     return (
 
-        <div className="mb-6  sm:w-[400px] lg:w-3/5 xl:w-[950px]">
-            <div className='flex flex-col lg:flex-row items-start  lg:space-x-8 xl:space-x-24  justify-around lg:justify-between'>
+        <div className="mb-6 w-full  sm:w-[400px] lg:w-fit ">
+            <div className='flex flex-col lg:flex-row items-start   xl:space-x-12  justify-around lg:justify-start lg:space-x-8 xl:justify-start '>
 
 
                 {/* SHIPPING ADDRESS  */}
 
-                <div className=' flex flex-col space-y-4  mb-4 w-full' >
+                <div className=' flex flex-col space-y-4  mb-4 w-full lg:w-fit' >
 
                     <h2 className='text-[12px] lg:text-[16px] text-[#323232] font-inter  mb-2 lg:mb-6'>SHIPPING ADDRESS</h2>
 
-                    <input value={firstname} onChange={e => setfirstname(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='First Name' />
-                    <input value={lastname} onChange={e => setlastname(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Last Name' />
-                    <input value={mobilenumber} onChange={e => { if (e.target.value.length <= 10) { setmobilenumber(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Mobile Number' />
+                    <input value={firstname} onChange={e => setfirstname(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='First Name' />
+
+                    <input value={lastname} onChange={e => setlastname(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Last Name' />
+                    
+                    <input value={mobilenumber} onChange={e => { if (e.target.value.length <= 10) { setmobilenumber(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Mobile Number' />
 
 
-                    <div className='flex space-x-4   overflow-hidden'>
+                    <div className='flex space-x-4   overflow-hidden lg:w-[260px] xl:w-full'>
                         <select value={state} onChange={e => setstate(e.target.value)} className='w-[145px] text-[14px] outline-none border-b-[1px] border-[#323232] pb-1 '>
                             <option selected disabled hidden>Select State</option>
 
@@ -249,23 +251,23 @@ const AddressForm = (props) => {
                             if (e.target.value.length === 6) {
                                 searchPincode(e.target.value)
                             }
-                        }} className='text-[13px] lg:text-[14px] xl:text-[16px] outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Pincode' />
+                        }} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Pincode' />
 
                     </div>
 
 
 
 
-                    <div className='w-full flex space-x-4'>
-                        <input value={town} onChange={e => settown(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Town/City' />
+                    <div className='w-full flex space-x-4 lg:w-[260px] xl:w-full'>
+                        <input value={town} onChange={e => settown(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]   w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Town/City' />
 
                         <input value={landmark} onChange={e => setlandmark(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Landmark/Street' />
 
                     </div>
 
-                    <input value={address} onChange={e => setaddress(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Address' />
-                    <input value={alternatePhonenumber} onChange={e => { if (e.target.value.length <= 10) { setalternatePhonenumber(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Alternate Phone Number' />
-                    <input className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='India' value='India' />
+                    <input value={address} onChange={e => setaddress(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Address' />
+                    <input value={alternatePhonenumber} onChange={e => { if (e.target.value.length <= 10) { setalternatePhonenumber(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Alternate Phone Number' />
+                    <input className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='India' value='India' />
 
                 </div>
 
@@ -273,26 +275,27 @@ const AddressForm = (props) => {
                 {/* BILLING ADDRESS  */}
 
 
-                <div className={`w-full flex flex-col space-y-4  mb-6 ${sameAsShippingAddress ? "pointer-events-none  text-gray-400 " : ""}`} >
+                <div className={` w-full lg:w-fit flex flex-col space-y-4  mb-6 ${sameAsShippingAddress ? "pointer-events-none  text-gray-400 " : ""}`} >
 
-                    <div className='flex items-start justify-between space-x-2 mb-[11.5px]'>
-                        <h2 className='text-[12px] lg:text-[16px] text-[#323232] font-inter mt-[20px]  lg:mt-[0px]  w-full'>BILLING ADDRESS</h2>
+                    <div className='flex items-center lg:items-start justify-between space-x-2 mb-[11.5px] mt-[20px]  lg:mt-[0px] lg:mb-[22px] 2xl:mb-[22px]'>
 
-                        <div onClick={setBillingSame_Shipping} className='flex w-[150px] space-x-3 items-start pointer-events-auto'>
+                        <h2 className='text-[12px] lg:text-[16px] text-[#323232] font-inter  lg:mt-[0px]  w-full'>BILLING ADDRESS</h2>
+
+                        <div onClick={setBillingSame_Shipping} className='flex w-full lg:w-fit space-x-3 items-center pointer-events-auto '>
                             <label className="switch  ">
                                 <input onChange={e => setsameAsShippingAddress(e.target.checked)} checked={sameAsShippingAddress} type="checkbox" className='' />
                                 <span className="slider round"></span>
                             </label>
-                            <label className='text-[12px]  w-32 text-black'>Same as Billing Address</label>
+                            <label className='lg:hidden xl:inline text-[12px]  w-32 text-black'>Same as Billing Address</label>
                         </div>
                     </div>
 
-                    <input value={firstname_billing} onChange={e => setfirstname_billing(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='First Name' />
-                    <input value={lastname_billing} onChange={e => setlastname_billing(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Last Name' />
-                    <input value={mobilenumber_billing} onChange={e => { if (e.target.value.length <= 10) { setmobilenumber_billing(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Mobile Number' />
+                    <input value={firstname_billing} onChange={e => setfirstname_billing(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='First Name' />
+                    <input value={lastname_billing} onChange={e => setlastname_billing(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Last Name' />
+                    <input value={mobilenumber_billing} onChange={e => { if (e.target.value.length <= 10) { setmobilenumber_billing(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Mobile Number' />
 
 
-                    <div className='flex space-x-4  overflow-hidden'>
+                    <div className='flex space-x-4  overflow-hidden lg:w-[260px] xl:w-full'>
                         <select value={state_billing} onChange={e => setstate_billing(e.target.value)} className='w-[145px] text-[14px] outline-none border-b-[1px] border-[#323232] pb-1 '>
                             <option selected disabled hidden>Select State</option>
 
@@ -311,23 +314,23 @@ const AddressForm = (props) => {
                             if (e.target.value.length === 6) {
                                 searchPincode(e.target.value)
                             }
-                        }} className='text-[13px] lg:text-[14px] xl:text-[16px] outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Pincode' />
+                        }} className='text-[13px] lg:text-[14px] xl:text-[16px]  outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Pincode' />
 
                     </div>
 
 
 
 
-                    <div className='w-full flex space-x-4'>
+                    <div className='w-full flex space-x-4 lg:w-[260px] xl:w-full'>
                         <input value={town_billing} onChange={e => settown_billing(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Town/City' />
 
                         <input value={landmark_billing} onChange={e => setlandmark_billing(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] w-full  outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Landmark/Street' />
 
                     </div>
 
-                    <input value={address_billing} onChange={e => setaddress_billing(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Address' />
-                    <input value={alternatePhonenumber_billing} onChange={e => { if (e.target.value.length <= 10) { setalternatePhonenumber_billing(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Alternate Phone Number' />
-                    <input value={Country_billing} className='text-[13px] lg:text-[14px] xl:text-[16px]  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='India' />
+                    <input value={address_billing} onChange={e => setaddress_billing(e.target.value)} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='Address' />
+                    <input value={alternatePhonenumber_billing} onChange={e => { if (e.target.value.length <= 10) { setalternatePhonenumber_billing(e.target.value) } }} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="number" placeholder='Alternate Phone Number' />
+                    <input value={Country_billing} className='text-[13px] lg:text-[14px] xl:text-[16px] lg:w-[260px] xl:w-full  w-full outline-none border-b-[1px] border-[#323232] pb-1' type="text" placeholder='India' />
 
                 </div>
 
@@ -337,7 +340,7 @@ const AddressForm = (props) => {
 
 
 
-            <div className="grid grid-cols-2 gap-3 lg:w-[250px] lg:ml-auto">
+            <div className="grid grid-cols-2 gap-3 lg:w-[260px] lg:ml-auto">
 
                 <button onClick={updateAddress} className="bg-theme rounded text-white mx-auto w-full  block  py-1 font-inter text-[12px] lg:text-[14px]">Save</button>
 

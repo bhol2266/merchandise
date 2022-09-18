@@ -80,7 +80,7 @@ const SavedAddress = (props) => {
     return (
 
 
-        <div onClick={setBorderOnclick} className={`font-inter my-6 lg:my-0 ${indexPositon === AddressForCheckoutIndex ? "border-[2px] border-theme" : ""} p-4 rounded-md  cursor-pointer`}>
+        <div onClick={setBorderOnclick} className={`select-none font-inter my-6 lg:my-0 ${indexPositon === AddressForCheckoutIndex ? "border-[2px] border-theme" : ""} p-4 rounded-md  cursor-pointer`}>
 
             <div className="flex items-start justify-between  text-[14px] xl:text-[16px] mb-3">
                 <h1 className=" text-theme">Address {indexPositon + 1}</h1>
