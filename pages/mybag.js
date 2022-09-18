@@ -16,9 +16,8 @@ const Mybag = () => {
 
     const router = useRouter()
     const [bagitems, setbagitems] = useState([])
-    const [cartItemId, setcartItemId] = useState([]);
-
     const [beatloader, setbeatloader] = useState(true);
+    const [bagEmpty, setbagEmpty] = useState(false);
 
     useEffect(async () => {
         try {
@@ -28,6 +27,10 @@ const Mybag = () => {
             if (response.sucess) {
                 setbeatloader(false)
                 setbagitems(response.data.cartData.products)
+            }
+            if (!response.sucess) {
+                setbeatloader(false)
+                setbagEmpty(true)
             }
         } catch (error) {
             setbeatloader(false)
@@ -43,8 +46,15 @@ const Mybag = () => {
 
     if (beatloader) {
         return (
-            <div className="flex justify-center items-center w-full h-[500px] mt-3 ">
+            <div className="flex justify-center items-center w-full h-[500px] mt-3  mb-[300px]">
                 <BeatLoader loading size={20} color={'#54BAB9'} />
+            </div>
+        )
+    }
+    if (bagEmpty) {
+        return (
+            <div className="flex justify-center items-center w-full h-[500px] mt-3  mb-[300px]">
+                <h2>No Items Added...</h2>
             </div>
         )
     }
@@ -72,7 +82,7 @@ const Mybag = () => {
 
                     {bagitems && bagitems.map((item, index) => {
                         return (
-                            <BagItem key={item.cartItemid} cartID={cartItemId[index]} productdetails={item} />
+                            <BagItem key={item._id}  productdetails={item} />
 
                         )
                     })

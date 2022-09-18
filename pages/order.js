@@ -3,6 +3,7 @@ import { OrderItem } from '../components/OrderItem'
 import { ArrowDownIcon } from '@heroicons/react/outline'
 import { FilterIcon } from '@heroicons/react/outline'
 import { getOrderedItems, } from '../lib/serverConfig'
+import { orderGet_API } from '../lib/Order_API'
 
 
 
@@ -12,27 +13,16 @@ const Order = () => {
 
 
     useEffect(async () => {
-        await getOrderedItems().then(res => {
-            var array = []
-            res.transactionLogtype.map(obj => {
-                var shippingid = obj.shippingAddress.id
-                var shippingDate = obj.shippingDate
-                var orderId = obj.orderId
-                obj.cart.items.map(obj => {
-                    obj['shippingid'] = shippingid
-                    obj['shippingDate'] = shippingDate
-                    obj['orderId'] = orderId
-                    array.push(obj)
-                })
-            })
-
-            setOrderItems(array)
-        }).catch(err => {
-            console.log(err);
-        })
 
 
-
+        try {
+            const response = await orderGet_API()
+            if (response.sucess) {
+                setOrderItems(response.data.orders)
+            }
+        } catch (error) {
+            console.log(error)
+        }
 
     }, [])
 
@@ -55,7 +45,7 @@ const Order = () => {
 
                 {OrderItems.map(obj => {
                     return (
-                        <OrderItem key={obj.product.id} orderDetails={obj} />
+                        <OrderItem key={obj._id} orderDetails={obj} />
                     )
                 })}
 

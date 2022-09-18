@@ -31,7 +31,7 @@ export const Item = ({ obj }) => {
         <div className='select-none'>
             <Link href={`/product/${_id}`}>
                 <a className='rounded flex flex-col '>
-                    <img src={color[0].imageUrl[0]} className='cursor-pointer aspect-[item] '></img>
+                    <img src={color[0].imageUrl[0]} className='cursor-pointer h-[300px] object-contain'></img>
 
                     <div className='ml-[7px]'>
                         <h1 className='font-inter text-[11px] lg:text-[16px] text-[#19191D]  py-1'>{productName}

@@ -2,92 +2,54 @@ import React, { useEffect, useState } from 'react'
 import { MinusIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { ArrowDownIcon } from '@heroicons/react/outline'
-import { QueryG, getAddress, getShippingDetails } from '../lib/serverConfig'
+import { getProductbyID } from '../lib/Product_API'
+
+
+
 
 export const OrderItem = ({ orderDetails }) => {
 
-    console.log(orderDetails);
+
+    const { productName, size, img, discountPrice, mrp, deliveryMessage, discount, productId
+        , color, quantity
+    } = orderDetails.products[0];
+    const { firstName, lastName, mobileNumber, alter_MobileNumber, state, pincode, city, landmark, fullAddress, country } = orderDetails.shippingAddress
+    const billingAdress = orderDetails.billingAddress
+
+    const orderDate = orderDetails.updatedAt.substring(0, 10);
+    const orderId = orderDetails._id
+
+    const dicountPriceInteger = parseInt(discountPrice);
+    const mrpInteger = parseInt(mrp);
+    const discountPercent = 100 - ((dicountPriceInteger * 100) / mrpInteger)
 
 
-    const { title, img, price, mrp, deliveryMessage, discount, id } = orderDetails.product;
-    const { quantity } = orderDetails;
-    const colour = orderDetails.color.color;
-    const size = orderDetails.size.id
-    const colorId = orderDetails.color.id
-    const [shippingAddress, setshippingAddress] = useState('')
-    const [billingAdress, setbillingAdress] = useState('')
-    const orderDate = orderDetails.shippingDate;
-    const orderId = orderDetails.orderId;
 
-
-    const [sizeName, setsizeName] = useState('');
     const [imageURL, setimageURL] = useState("");
+
+
+
+
+
 
 
     useEffect(async () => {
 
-        if (size == 1) {
-            setsizeName('S')
-        }
-        if (size == 2) {
-            setsizeName('M')
-        }
-        if (size == 3) {
-            setsizeName('L')
-        }
-        if (size == 4) {
-            setsizeName('XL')
-        }
-        if (size == 5) {
-            setsizeName('2XL')
-        }
 
-        await QueryG(`query{
-            products(id:"${id}"){
-            edges{
-              node{
-                id
-                  title
-                  price
-                  mrp
-                  discount
-                  description
-                  colors{
-                    id
-                    color
-                    image{
-                      image
+        try {
+            const response = await getProductbyID({
+                productId: productId
+            })
+            if (response.sucess) {
+                response.data.color.forEach(obj => {
+                    if (obj.name === color) {
+                        setimageURL(obj.imageUrl[0])
                     }
-              }
+                })
             }
-          }
+        } catch (error) {
+            console.log(error)
         }
-    }`).then(res => {
-
-            var obj = res.data.data.products.edges[0].node;
-            obj.colors.map(item => {
-                if (colorId === item.id) {
-                    setimageURL(item.image[0].image)
-                }
-            })
-
-        })
-            .catch(err => {
-                console.log(err);
-            })
-
-
-        await getAddress().then(res => {
-            res.shippingDetails.map(obj => {
-                if (obj.id === orderDetails.shippingid) {
-                    setshippingAddress(obj.firstName + " " + obj.lastName + ", " + obj.shippingAddress + ", " + obj.city + ", " + obj.state + ", Pincode: " + obj.pincode + ", Mobile Number: " + obj.phoneNum + ", Alternate Mobile: " + obj.altPhoneNum)
-                    setbillingAdress(obj.firstName + " " + obj.lastName + ", " + obj.shippingAddress + ", " + obj.city + ", " + obj.state + ", Pincode: " + obj.pincode + ", Mobile Number: " + obj.phoneNum + ", Alternate Mobile: " + obj.altPhoneNum)
-
-                }
-            })
-        }).catch(error => {
-            console.log(error);
-        })
 
     }, []);
 
@@ -100,21 +62,21 @@ export const OrderItem = ({ orderDetails }) => {
 
             <div onClick={() => { if (window.innerWidth <= 1000) { setopenTracking(!openTracking) } }} className='flex  h-[122px] xl:h-[220px] md:h-[150px]'>
 
-                <img src={"https://closm.com" + imageURL} className='cursor-pointer h-[122px] w-[100px] xl:w-[181px]  xl:h-[220px] md:h-[150px] md:w-[130px] mb-2'></img>
+                <img src={imageURL} className='cursor-pointer h-[122px] xl:w-[181px]  xl:h-[220px] md:h-[150px]  mb-2  object-contain'></img>
 
-                {/* Name and Price,Size, Colour, Quantity   */}
-                <div className='flex flex-col justify-between ml-[7px] lg:ml-6'>
+                {/* Name and discountPrice,Size, Colour, Quantity   */}
+                <div className='flex flex-col justify-between ml-[7px] lg:ml-6  pb-2 lg:pb-3'>
                     <div>
-                        <h1 className='font-inter text-[12px] md:text-[13px] xl:text-[16px] text-[#19191D]  py-1'>{title} </h1>
+                        <h1 className='font-inter text-[12px] md:text-[13px] xl:text-[16px] text-[#19191D]  py-1'>{productName} </h1>
 
                         <div className='flex items-center lg:mt-1 space-x-1 justify-start '>
-                            <h2 className='font-inter  text-[13px] md:text-[16px] xl:text-[24px] text-[#19191D]'>₹{price}</h2>
+                            <h2 className='font-inter  text-[13px] md:text-[16px] xl:text-[24px] text-[#19191D]'>₹{discountPrice}</h2>
                             <h3 className='font-inter text-[9px] md:text-[10px] xl:text-[13px] text-[#787885] line-through '>₹{mrp}</h3>
-                            <h3 className='text-[#C25050] font-inter text-[9px] md:text-[11px] xl:text-[13px] ml-12px'>{discount} OFF</h3>
+                            <h3 className='text-[#C25050] font-inter text-[9px] md:text-[11px] xl:text-[13px] ml-12px'>{discountPercent.toString().substring(0, discountPercent.toString().indexOf('.')).replace('.', '')}% OFF</h3>
                         </div>
 
-                        <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium mt-2'>Size: {sizeName}</h2>
-                        <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium'>Colour: {colour}</h2>
+                        <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium mt-2'>Size: {size}</h2>
+                        <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium'>Colour: {color.replace("_", " ")}</h2>
 
                         <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium'>Quantity : {quantity}</h2>
                     </div>
@@ -170,13 +132,16 @@ export const OrderItem = ({ orderDetails }) => {
                     <div className='mt-[40px] '>
                         <div >
                             <h2 className='text-[13px] lg:text-[13px] text-[#323232] font-inter'>Shipping Address</h2>
-                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>{shippingAddress}</h2>
+                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] '>{firstName} {lastName}</h2>
+                            <p className='text-[10px] lg:text-[10px] text-[#323232] font-inter  w-[272px]'>{landmark}, {fullAddress}, {city}, {pincode}, {state}, {country}, {mobileNumber}</p>
 
                         </div>
 
                         <div className='mt-[20px] '>
                             <h2 className='text-[13px] lg:text-[13px] text-[#323232] font-inter'>Billing Address</h2>
-                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] w-[272px]'>{billingAdress}</h2>
+                            <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] '>{billingAdress.firstName} {billingAdress.lastName}</h2>
+                            <p className='text-[10px] lg:text-[10px] text-[#323232] font-inter  w-[272px]'>{billingAdress.landmark}, {billingAdress.fullAddress}, {billingAdress.city}, {billingAdress.pincode}, {billingAdress.state}, {billingAdress.country}, {billingAdress.mobileNumber}</p>
+
 
                         </div>
                     </div>
@@ -196,7 +161,7 @@ export const OrderItem = ({ orderDetails }) => {
 
             {/*  For medium screen to xtra large screen size  */}
 
-            <div className='hidden md:flex flex-col justify-between items-center  xl:h-[220px] h-[150px] xl:mr-[200px] '>
+            <div className='hidden md:flex flex-col justify-between items-center  xl:h-[220px] h-[150px] xl:mr-[200px] pb-2'>
                 {/* tracking diagram  */}
                 <div className='flex items-center mr-5'>
 
@@ -220,13 +185,20 @@ export const OrderItem = ({ orderDetails }) => {
                 <div className='xl:w-[272px] w-[200px]'>
                     <div >
                         <h2 className='xl:text-[16px] text-[13px]  text-[#323232] font-inter'>Shipping Address</h2>
-                        <h2 className='xl:text-[12px] text-[10px]  text-[#323232] font-inter mt-[6px] '>{shippingAddress}</h2>
+                        <h2 className='xl:text-[12px] text-[10px] text-[#323232] font-inter mt-[6px] '>{firstName} {lastName}</h2>
+                        <p className='xl:text-[12px] text-[10px] text-[#323232] font-inter  w-[272px]'>{landmark}, {fullAddress}, {city}, {pincode}, {state}, {country}, {mobileNumber}</p>
+
+                    </div>
+
+                    <div >
 
                     </div>
 
                     <div className='mt-[20px] hidden xl:flex xl:flex-col '>
                         <h2 className='xl:text-[16px] text-[13px]  text-[#323232] font-inter'>Billing Address</h2>
-                        <h2 className='xl:text-[12px] text-[10px]  text-[#323232] font-inter mt-[6px] '>{billingAdress}</h2>
+                        <h2 className='text-[10px] lg:text-[10px] text-[#323232] font-inter mt-[6px] '>{billingAdress.firstName} {billingAdress.lastName}</h2>
+                        <p className='text-[10px] lg:text-[10px] text-[#323232] font-inter  w-[272px]'>{billingAdress.landmark}, {billingAdress.fullAddress}, {billingAdress.city}, {billingAdress.pincode}, {billingAdress.state}, {billingAdress.country}, {billingAdress.mobileNumber}</p>
+
 
                     </div>
                 </div>

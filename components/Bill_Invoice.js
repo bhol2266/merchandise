@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { getProductCart } from "../lib/Product_API";
 import MerchContext from "../context/MerchContext";
 import { setCookies, getCookie } from "cookies-next";
-
+import { orderComplete_API } from "../lib/Order_API";
+import axios from "axios";
 
 
 
@@ -27,6 +28,8 @@ const Bill_Invoice = () => {
 
     const [checkoutRoute, setcheckoutRoute] = useState('');
 
+    const [cartId, setcartId] = useState('');
+
 
     useEffect(async () => {
         if (window.location.pathname === '/mybag') {
@@ -36,6 +39,8 @@ const Bill_Invoice = () => {
         try {
             const response = await getProductCart()
             if (response.sucess) {
+
+                setcartId(response.data.cartData._id)
                 const billdetails = response.data.cartTotal
                 settotalAmount(billdetails.totalBill)
                 settotalMRP(billdetails.totalMrp)
@@ -48,6 +53,7 @@ const Bill_Invoice = () => {
         }
 
     }, [])
+
 
 
 
@@ -80,18 +86,44 @@ const Bill_Invoice = () => {
 
     }
 
+    const afterPaymentisDone = async (razorpay_order_id, razorpay_payment_id) => {
+
+        const data = {
+            cartId: cartId,
+            addressId: addressArray[AddressForCheckoutIndex]._id,
+            paymentId: razorpay_payment_id,
+            amount: totalAmount
+        }
+
+
+        try {
+            const response = await orderComplete_API(data)
+            console.log(response);
+            if (response.sucess) {
+                router.push('/paymentsuccessfull')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
 
     const checkout = () => {
         if (checkoutRoute === '/mybag') {
             router.push('/checkout')
         } else {
 
+
+            if (totalAmount.length === 0) {
+                alert('No products')
+                return
+            }
+
             if (addressArray.length === 0) {
                 alert('Add address')
                 return
             }
-
-
 
             handlePayment();
 
@@ -179,15 +211,7 @@ const Bill_Invoice = () => {
 
 
 
-    const afterPaymentisDone = async (razorpay_order_id, razorpay_payment_id) => {
-        await addPaymentDetails(cartId, totalAmount, razorpay_payment_id, razorpay_order_id, shippingId).then(res => {
-            router.push('/paymentsuccessfull')
-        }).catch(error => {
-            console.log(error);
-        })
 
-
-    }
 
 
 

@@ -13,14 +13,14 @@ function Youtuber({ youtuberName, banner, logo, productlist, youtuberNotFound })
     const pages = ['1', '2', '3', '4', '5', '6', '7']
     const { setyoutuberLogo } = useContext(MerchContext);
 
-   
+
     useEffect(() => {
         setyoutuberLogo(logo)
     }, [])
 
     return (
         <div>
-            
+
             {!youtuberNotFound && <div>
                 <img src={banner} className='cursor-pointer w-full h-48  px-[12px] lg:px-[50px] rounded   md:hidden mt-[15px]'></img>
                 <img src={banner} alt={'https://' + banner} className='cursor-pointer w-full h-[330px] px-[12px]  lg:px-[50px]   rounded hidden md:flex mt-[25px]'></img>
@@ -71,6 +71,10 @@ export async function getServerSideProps(context) {
     try {
         const response = await getYoutubersProductsList(youtuber) //closmkundna
         if (response.sucess) {
+            if (response.data === null) {
+                youtuberNotFound=true
+            }
+
             banner = response.data.creatorBanner
             logo = response.data.creatorLogo
             if (!banner.includes('https://')) {

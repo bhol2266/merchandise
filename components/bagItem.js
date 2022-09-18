@@ -7,18 +7,20 @@ import { addProductCart, getProductbyID, getProductCart, deleteProductCart } fro
 
 export const BagItem = ({ productdetails }) => {
 
-    const [imageURL, setimageURL] = useState("");
+ 
     const { quantity } = productdetails
     const { productName, mrp, discountPrice, productId, _id, size } = productdetails
     const colorName = productdetails.color;
 
-    const [itemQuantity, setitemQuantity] = useState(parseInt(productdetails.quantity))
-    const [creator, setcreator] = useState('');
 
     const dicountPriceInteger = parseInt(discountPrice);
     const mrpInteger = parseInt(mrp);
-
     const discountPercent = 100 - ((dicountPriceInteger * 100) / mrpInteger)
+
+    const [imageURL, setimageURL] = useState("");
+    const [creator, setcreator] = useState('');
+    const [itemQuantity, setitemQuantity] = useState(parseInt(productdetails.quantity))
+
 
 
     useEffect(async () => {

@@ -191,7 +191,7 @@ const Product = ({ productdetails }) => {
                         <img onClick={() => scroll(-482)} src='./../product/left.png' className='h-[20px] text-[#54BAB9] text-center  font-semibold my-auto mr-[30px] cursor-pointer ' />
                         <div ref={scrollbarRef} className=' flex items-center scrollbar-hide overflow-x-auto h-full space-x-[15px]'>
 
-                            {slideImages.map(image => {
+                            {slideImages.map((image,index) => {
                                 return (
                                     <img onClick={() => { setcurrentImageShowing(image); setcurrentColorShowing(color[index].name) }} key={image} src={image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
                                 )
