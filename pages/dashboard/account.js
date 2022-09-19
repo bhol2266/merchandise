@@ -49,13 +49,13 @@ const Account = () => {
 
         Cookies.remove('refreshToken')
         Cookies.remove('accessToken')
-        Cookies.set('role','user')
+        Cookies.set('role', 'user')
         Cookies.remove('email')
         Cookies.remove('name')
 
 
         setNavbarUserORcreator('')
-        route.push('/')
+        window.open(process.env.FRONTEND_URL, "_self");
     }
 
 
@@ -278,9 +278,9 @@ export async function getServerSideProps({ req, res }) {
         const cookieExists = getCookie("role", { req, res });
         const emailExists = getCookie("email", { req, res });
 
-        
+
         if (cookieExists === 'creator' && typeof emailExists !== 'undefined') {
-        
+
         } else {
             return { redirect: { destination: "/partner_with_us" } };
         }
