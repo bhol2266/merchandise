@@ -1,71 +1,53 @@
 {
-    "sucess": true,
+    "success": true,
     "data": {
-        "_id": "631b9a31b6b8292f4a927440",
-        "address": [
+        "_id": "631b9a57b6b8292f4a92744b",
+        "trackUnits": [
             {
-                "_id": "6326c0daac34c5d17493dd01",
-                "shippingAddress": {
-                    "firstName": "Ashutosh",
-                    "lastName": "Gupta",
-                    "mobileNumber": "4353454353",
-                    "alter_MobileNumber": "4353455555",
-                    "state": "Nagaland",
-                    "pincode": "560090",
-                    "city": "Bangalore",
-                    "landmark": "Chikkabanavara",
-                    "fullAddress": "Chikkabanavara",
-                    "country": "India"
-                },
-                "billingAddress": {
-                    "firstName": "Ashutosh",
-                    "lastName": "Gupta",
-                    "mobileNumber": "4353454353",
-                    "alter_MobileNumber": "4353455555",
-                    "state": "Nagaland",
-                    "pincode": "560090",
-                    "city": "Bangalore",
-                    "landmark": "Chikkabanavara",
-                    "fullAddress": "Chikkabanavara",
-                    "country": "India"
-                },
-                "user": "631b9a31b6b8292f4a927440",
-                "createdAt": "2022-09-18T06:55:22.121Z",
-                "updatedAt": "2022-09-18T06:55:22.121Z",
-                "__v": 0
+                "productId": "632770646c55bb46a1b32f2c",
+                "productName": "sdafsgasdf",
+                "mrp": "3425",
+                "discountPrice": "3245",
+                "category": "T-Shirt",
+                "color": [
+                    {
+                        "name": "Light_Blue",
+                        "imageUrl": [
+                            "https://closm.ap-south-1.linodeobjects.com/l87q91mm8sqcwc11xah.png",
+                            "https://closm.ap-south-1.linodeobjects.com/l7xmxjcd1z2i0z8rxfd.png"
+                        ]
+                    }
+                ],
+                "soldUnits": "0",
+                "inProgrssUnits": "0",
+                "cancelledUnits": "0",
+                "closmCharges": "0",
+                "totalProfit": "0",
+                "_id": "632770646c55bb46a1b32f2e"
             },
             {
-                "_id": "6326369ee9016cecc97780f6",
-                "shippingAddress": {
-                    "firstName": "Ashutosh",
-                    "lastName": "Gupta",
-                    "mobileNumber": "9108825914",
-                    "alter_MobileNumber": "7984563122",
-                    "state": "Karnataka",
-                    "pincode": "560090",
-                    "city": "Bangalore",
-                    "landmark": "RR COLLEGE",
-                    "fullAddress": "Chikkavanavara",
-                    "country": "India"
-                },
-                "billingAddress": {
-                    "firstName": "Ashutosh",
-                    "lastName": "Gupta",
-                    "mobileNumber": "9108825914",
-                    "alter_MobileNumber": "7984563122",
-                    "state": "",
-                    "pincode": "560090",
-                    "city": "Bangalore",
-                    "landmark": "RR COLLEGE",
-                    "fullAddress": "Chikkavanavara",
-                    "country": "India"
-                },
-                "user": "631b9a31b6b8292f4a927440",
-                "createdAt": "2022-09-17T21:05:34.887Z",
-                "updatedAt": "2022-09-17T21:13:06.388Z",
-                "__v": 0
+                "productId": "632770b96c55bb46a1b32f60",
+                "productName": "sdafsdaf",
+                "mrp": "324",
+                "discountPrice": "342",
+                "category": "T-Shirt",
+                "color": [
+                    {
+                        "name": "Navy_Blue",
+                        "imageUrl": [
+                            "https://closm.ap-south-1.linodeobjects.com/l87qaumm96svishoyp7.png",
+                            "https://closm.ap-south-1.linodeobjects.com/l7xmyaij0w3j8pc24pvj.png"
+                        ]
+                    }
+                ],
+                "soldUnits": "0",
+                "inProgrssUnits": "0",
+                "cancelledUnits": "0",
+                "closmCharges": "0",
+                "totalProfit": "0",
+                "_id": "632770b96c55bb46a1b32f62"
             }
         ]
     },
-    "message": "All Address details"
+    "message": "Tracking Products"
 }

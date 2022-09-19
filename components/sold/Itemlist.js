@@ -8,10 +8,10 @@ export const Itemlist = ({ items }) => {
     return (
         <div className=''>
 
-            < div className='gap-4 lg:gap-8  grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5' >                {
+            < div className='gap-8 lg:gap-10 2xl:gap-12  grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5' >                {
                 items.map(obj => {
                     return (
-                        <Item key={obj.title} obj={obj} />
+                        <Item key={obj.title} obj={obj}  />
                     )
                 })
             }

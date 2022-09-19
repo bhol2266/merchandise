@@ -4,26 +4,49 @@ import { Itemlist } from "../../components/Itemlist";
 import MerchContext from "../../context/MerchContext";
 import Cookies from 'js-cookie'
 import { setCookies, getCookie } from "cookies-next";
-
+import { getUnitTraking } from "../../lib/Creator_API";
+import { getPublishedProducts } from "../../lib/Creator_API";
 
 
 
 const Dashboard = () => {
 
 
-
-    const { setcustomisePageSelector, setNavbarUserORcreator } = useContext(MerchContext)
+    const [productlist, setproductlist] = useState([]);
+    const { setcustomisePageSelector, setNavbarUserORcreator, soldPageSelector, setsoldPageSelector } = useContext(MerchContext)
     const [creatorName, setcreatorName] = useState('');
 
-    useEffect(() => {
+    useEffect(async () => {
         setNavbarUserORcreator('creator')
         setcreatorName('HELLO' + " " + Cookies.get('name').substring(0, Cookies.get('name').indexOf(" ")).toUpperCase())
+
+        try {
+            const response = await getUnitTraking()
+            if (response.sucess) {
+
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+
+        try {
+            const response = await getPublishedProducts()
+            if (response.success) {
+                setproductlist(response.data.products)
+            }
+
+
+        } catch (error) {
+            console.log(error)
+        }
+
+
     }, []);
 
 
     const totalBalance = '75000'
     const totalItemsSold = '5842'
-    const productlist = []
     const productid = ''
 
 
@@ -58,17 +81,17 @@ const Dashboard = () => {
 
                     <div className="flex flex-col items-start justify-start space-y-2">
                         <Link href='/dashboard/preview'>
-                            <a onClick={()=>{setcustomisePageSelector('PREVIEW')}} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
+                            <a onClick={() => { setcustomisePageSelector('PREVIEW') }} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
                                 Preview & Edit
                             </a>
                         </Link>
                         <Link href='/dashboard/preview'>
-                            <a onClick={()=>{setcustomisePageSelector('PUBLISH')}} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
+                            <a onClick={() => { setcustomisePageSelector('PUBLISH') }} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
                                 Publish Products
                             </a>
                         </Link>
                         <Link href='/dashboard/preview'>
-                            <a onClick={()=>{setcustomisePageSelector('PUBLISHED_PRODUCT')}} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
+                            <a onClick={() => { setcustomisePageSelector('PUBLISHED_PRODUCT') }} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
                                 Published Products
                             </a>
                         </Link>
@@ -136,18 +159,18 @@ const Dashboard = () => {
 
 
                     <div className="mt-6 flex flex-col items-start justify-start space-y-2">
-                        <Link href='/'>
-                            <a className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
+                        <Link href='/sold'>
+                            <a onClick={() => { setsoldPageSelector('sold_units') }} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
                                 Sold Units
                             </a>
                         </Link>
-                        <Link href='/'>
-                            <a className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
+                        <Link href='/sold'>
+                            <a onClick={() => { setsoldPageSelector('inprogress_units') }} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
                                 Inprogress Units
                             </a>
                         </Link>
-                        <Link href='/'>
-                            <a className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
+                        <Link href='/sold'>
+                            <a onClick={() => { setsoldPageSelector('cancelled_units') }} className="font-inter text-[10px] lg:text-[14px] text-[#323232]  underline">
                                 Cancelled Units
                             </a>
                         </Link>
@@ -170,8 +193,9 @@ const Dashboard = () => {
 ] lg:text-[14px] text-[#323232] text-left mt-[1px] ml-[1px] mb-3">Published Products
                 </h2>
 
-
-                <Itemlist items={productlist} productid={productid} />
+                {productlist.length > 0 &&
+                    <Itemlist items={productlist} />
+                }
 
             </div>
 

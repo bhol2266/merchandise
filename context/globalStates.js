@@ -61,6 +61,10 @@ const GlobalStates = (props) => {
     const [addressArray, setaddressArray] = useState([]);
 
 
+    //Sold Units Page
+    const [soldPageSelector, setsoldPageSelector] = useState('sold_units');
+
+
 
 
 
@@ -106,6 +110,7 @@ const GlobalStates = (props) => {
             editAddressArrayIndex, seteditAddressArrayIndex,
             AddressForCheckoutIndex, setAddressForCheckout,
             addressArray, setaddressArray,
+            soldPageSelector, setsoldPageSelector,
             NavbarUserORcreator, setNavbarUserORcreator,
 
         }}>

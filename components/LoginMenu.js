@@ -2,6 +2,8 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useContext, useEffect, useState } from 'react'
 import MerchContext from '../context/MerchContext'
 import { GetToken, GetEmail } from '../lib/CookieLib'
+import { setCookies, getCookie } from "cookies-next";
+
 import { removeCookies } from 'cookies-next';
 import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -16,7 +18,7 @@ function LoginMenu() {
   const [loggedIn, setloggedIn] = useState(false)
 
   useEffect(() => {
-    if (GetEmail()) {
+    if (typeof getCookie('accessToken') !== 'undefined' && getCookie('accessToken').length > 20) {
       setloggedIn(true)
     }
   }, [])

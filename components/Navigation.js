@@ -3,6 +3,7 @@ import Link from 'next/link'
 import LoginMenu from './LoginMenu'
 import MerchContext from '../context/MerchContext'
 import { useRouter } from 'next/router'
+import { ShoppingBagIcon } from '@heroicons/react/outline'
 
 export const Navigation = () => {
     const { youtuberLogo, NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
@@ -12,12 +13,12 @@ export const Navigation = () => {
 
     const router = useRouter()
 
-    
+
 
 
     useEffect(() => {
 
-        if (window.location.pathname.includes('/dashboard')) {
+        if (window.location.pathname.includes('/dashboard') || window.location.pathname.includes('/sold') || window.location.pathname.includes('/dashboard')) {
             setNavbarUserORcreator('creator')
         } else {
             setNavbarUserORcreator('user')
@@ -44,17 +45,19 @@ export const Navigation = () => {
 
                 {NavbarUserORcreator === 'user' &&
                     < div className={` flex space-x-[30px] sm:space-x-[30px] lg:space-x-[50px] items-center justify-center`}>
-                        <Link href="/">
+                        {/* <Link href="/">
                             <img src='/homepageImages/search.png' className='cursor-pointer w-[20px] h-[20px]'></img>
                         </Link>
                         <Link href="/product">
                             <img src='/homepageImages/cloth.png' className='cursor-pointer w-[20px] h-[20px]'></img>
-                        </Link>
+                        </Link> */}
 
                         <LoginMenu />
 
                         <Link href="/mybag">
                             <img src='/homepageImages/cart.png' className='cursor-pointer w-[20px] h-[20px]'></img>
+
+                            {/* <ShoppingBagIcon className='cursor-pointer w-[20px] h-[20px] text-black'/> */}
                         </Link>
 
                     </div>

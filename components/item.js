@@ -9,8 +9,9 @@ export const Item = ({ obj }) => {
 
     const dicountPriceInteger = parseInt(discountPrice);
     const mrpInteger = parseInt(mrp);
-
+    
     const discountPercent = 100 - ((dicountPriceInteger * 100) / mrpInteger)
+
 
 
 
@@ -28,7 +29,7 @@ export const Item = ({ obj }) => {
                             <h3 className='font-inter text-[9px] lg:text-[13px] text-[#787885] line-through '>₹{mrp}</h3>
                         </div>
                         <div className='flex justify-between items-start'>
-                            <h2 className='font-inter  text-[13px] lg:text-[16px] text-[#C25050] py-1'>{discountPercent.toString().substring(0, discountPercent.toString().indexOf('.')).replace('.', '')}% OFF</h2>
+                            <h2 className='font-inter  text-[13px] lg:text-[16px] text-[#C25050] py-1'>{discountPercent.toString().substring(0,2)}% OFF</h2>
 
                         </div>
 
