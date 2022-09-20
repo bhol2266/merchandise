@@ -73,7 +73,7 @@ export const LoginForm = () => {
 
 
 
-            <img src='/creator/poster1.png' className='px-[28px]  cursor-pointer absolute bottom-[70px] right-0 left-0 '></img>
+            <img src='/creator/poster2.png' className='px-[28px]  cursor-pointer absolute bottom-[70px] right-0 left-0 '></img>
 
 
 
