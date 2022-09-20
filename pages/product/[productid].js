@@ -214,7 +214,7 @@ const Product = ({ productdetails }) => {
                     <div className=' pb-[15px] border-b-[0.5px] border-[#CCCCCC] '>
                         <div className='w-full flex lg:flex-col lg:items-start lg:space-y-2 items-center justify-between'>
                             <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>{productName}</h2>
-                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPercent.toString().substring(0, discountPercent.toString().indexOf('.')).replace('.', '')}% OFF</h3>
+                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPercent.toString().substring(0,2)}% OFF</h3>
                         </div>
 
                         <div className='flex items-center space-x-1 justify-start '>
@@ -297,14 +297,14 @@ const Product = ({ productdetails }) => {
 
 
                     <div className='flex items-center mt-2'>
-                        {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]'/> */}
+                        {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded '/> */}
 
                         {!checkWishlist &&
-                            <img onClick={addtoWishlist} src='./../homepageImages/heart.png' className='cursor-pointer   mr-[9px] w-[40px] p-[4px] rounded border-[1px] border-[#CACACA]' />
+                            <img onClick={addtoWishlist} src='./../homepageImages/heart2.png' className='cursor-pointer   mr-[9px] w-[40px] p-[4px] rounded ' />
                         }
 
                         {checkWishlist &&
-                            <img onClick={removeFromWishlist} src='./../homepageImages/heart2.png' className='cursor-pointer mr-[9px] w-[40px] p-[1px] rounded border-[1px] border-[#CACACA]' />
+                            <img onClick={removeFromWishlist} src='./../homepageImages/heart.png' className='cursor-pointer mr-[9px] w-[40px] p-[1px] rounded ' />
                         }
                         <button onClick={addtoBagClick} className='lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
                             ADD TO BAG

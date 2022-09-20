@@ -12,6 +12,7 @@ import { SignUpFormOTP } from '../components/SignUpFormOTP'
 import GlobalStates from '../context/globalStates'
 import MerchContext from '../context/MerchContext'
 import { useContext } from 'react'
+import Script from 'next/script'
 
 
 
@@ -45,6 +46,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="hilltopads-site-verification" content="28c33bbf5c61164c74b2bdfcc2ff1d44bc9c45b5" />
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
+        <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
 
       <GlobalStates>
         <Navigation   />

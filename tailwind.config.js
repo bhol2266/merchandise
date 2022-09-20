@@ -35,6 +35,7 @@ module.exports = {
         'creator_bg': "url('/creator/creator_bg.png')",
         'footer-texture': "url('/img/footer-texture.png')",
         'loginLayout_bg': "url('/creator/creator_bg.png')",
+        'partner_with_us': "url('/creator/posterbg.png')",
       },
       aspectRatio: {
         'item': '61 / 50',

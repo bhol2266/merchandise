@@ -65,7 +65,8 @@ const Wishlist = ({ logInCheck }) => {
 
     return (
 
-        <div className='mx-[14px] lg:mx-[30px] xl:mx-[50px] 2xl:mx-[80px] my-[15px] mb-16 '>
+        <div className='px-[14px] lg:px-[50px] py-[15px]'>
+
             <h1 className="font-inter text-[22px] text-[#323232] px-[26px] my-[36px]">WISHLIST</h1>
 
             {productlist &&
@@ -86,7 +87,8 @@ export async function getServerSideProps({ req, res }) {
 
 
     const cookieExists = getCookie("role", { req, res });
-    const accessToken = getCookie("email", { req, res });
+    const accessToken = getCookie("accessToken", { req, res });
+
 
     if (cookieExists === 'user' && typeof accessToken !== 'undefined' && accessToken.length > 20) {
         logInCheck = true

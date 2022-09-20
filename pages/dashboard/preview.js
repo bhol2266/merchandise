@@ -26,7 +26,7 @@ const Preview = () => {
 
     return (
         <div className='mx-[14px] lg:mx-[30px] xl:mx-[50px] 2xl:mx-[80px] my-[15px] mb-16 '>
-            <Script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
+          
 
             {/* Navbar  */}
             <div className='flex items justify-between mb-4  lg:mb-[10px]'>

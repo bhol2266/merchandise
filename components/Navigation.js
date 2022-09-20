@@ -39,7 +39,7 @@ export const Navigation = () => {
 
             <div className='flex justify-between px-[20px] lg:px-[55px] h-[65px] items-center '>
                 <Link href="/">
-                    <img src={router.pathname === "/" ? "/logo.png" : '/logo.png'} className='cursor-pointer  h-[25px] md:h-[25px]'></img>
+                    <img src={router.pathname === "/" ? "/login/logo.png" : '/login/logo.png'} className='cursor-pointer  h-[40px] md:h-[40px]'></img>
                 </Link>
 
 
@@ -55,7 +55,7 @@ export const Navigation = () => {
                         <LoginMenu />
 
                         <Link href="/mybag">
-                            <img src='/homepageImages/cart.png' className='cursor-pointer w-[20px] h-[20px]'></img>
+                            <img src='/homepageImages/cart.png' className='cursor-pointer w-[23px] h-[22px] lg:w-[28px] lg:h-[26px]'></img>
 
                             {/* <ShoppingBagIcon className='cursor-pointer w-[20px] h-[20px] text-black'/> */}
                         </Link>

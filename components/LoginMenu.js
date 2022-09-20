@@ -45,7 +45,7 @@ function LoginMenu() {
     <Menu as="div" className="relative inline-block text-left ">
       <div>
         <Menu.Button className=" ">
-          <img src='/homepageImages/account.png' className='cursor-pointer w-[20px] h-[20px] mt-1'></img>
+          <img src='/homepageImages/account.png' className='cursor-pointer w-[20px] h-[20px] mt-1 lg:w-[26px] lg:h-[25px]'></img>
         </Menu.Button>
       </div>
 
@@ -58,7 +58,7 @@ function LoginMenu() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="flex flex-col justify-start origin-top-right absolute -right-[50px] lg:-right-[125px] mt-3  w-[220px] h-[270px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+        <Menu.Items className="flex flex-col justify-start origin-top-right absolute -right-[50px] lg:-right-[125px] mt-3  w-[220px] h-[255px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
 
 
 
@@ -87,27 +87,32 @@ function LoginMenu() {
             <h2 className='cursor-pointer hover:text-red-500 text-[11px] font-DMsans text-[#001857] w-fit mx-auto mb-28px mt-[14px]'>Need Help ?</h2>
           </Menu.Item>
 
-          <div className='flex flex-col justify-between ml-6 w-[74px] h-[113px] mt-[35px]'>
-            <Menu.Item as='div' className=''>
-              <div className='w-full  flex items-center space-x-5 '>
-                <img src='./homepageImages/buy.png' className='w-[12px] h-[12px] '></img>
-                <h1 onClick={() => { router.push('/order') }} className='font-Opensans text-[#323232] text-[11px] hover:text-red-500 cursor-pointer'>Orders</h1>
-              </div>
+          <div className=' flex flex-col justify-between  w-[220px] h-[113px] mt-[25px]'>
+            <Menu.Item as='div' className='w-full '>
+              <Link href='/order'>
+                <a>
+                  <div className=' w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>
+                    <img src='./homepageImages/buy.png' className='w-[12px] h-[12px] lg:w-[16px] lg:h-[16px] '></img>
+                    <h1 className='font-Opensans text-[#323232] text-[11px] lg:text-[15px] cursor-pointer'>Orders</h1>
+                  </div>
+                </a>
+              </Link>
+            </Menu.Item>
+
+            <Menu.Item as='div'>
+              <Link href='/wishlist'>
+                <a>
+                  <div className='w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>
+                    <img src='./homepageImages/heart.png' className='w-[12px] h-[12px] lg:w-[16px] lg:h-[16px] '></img>
+                    <h1 className='font-Opensans text-[#323232] text-[11px] lg:text-[15px] cursor-pointer'>Wishlist</h1>
+                  </div>
+                </a>
+              </Link>
             </Menu.Item>
             <Menu.Item as='div'>
-              <div className='w-full  flex items-center space-x-5 '>
-                <img src='./homepageImages/heart.png' className='w-[12px] h-[12px] '></img>
-                <Link href='/wishlist'>
-                  <a>
-                    <h1 className='font-Opensans text-[#323232] text-[11px] hover:text-red-500 cursor-pointer'>Wishlist</h1>
-                  </a>
-                </Link>
-              </div>
-            </Menu.Item>
-            <Menu.Item as='div'>
-              <div className='w-full  flex items-center space-x-5 '>
-                <img src='./homepageImages/logout.png' className='w-[12px] h-[12px] '></img>
-                <h1 className='font-Opensans text-[#323232] text-[11px] hover:text-red-500 cursor-pointer'>Log Out</h1>
+              <div className='w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>
+                <img src='./homepageImages/logout.png' className='w-[12px] h-[12px] lg:w-[16px] lg:h-[16px] '></img>
+                <h1 className='font-Opensans text-[#323232] text-[11px] lg:text-[15px] cursor-pointer'>Log Out</h1>
               </div>
             </Menu.Item>
           </div>

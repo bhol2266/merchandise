@@ -5,7 +5,7 @@ import { Homepage } from '../components/Homepage'
 import MerchContext from '../context/MerchContext'
 import { setCookies, getCookie } from "cookies-next";
 import { useRouter } from 'next/router'
-
+import Script from 'next/script'
 
 export default function Home({ type }) {
 
@@ -30,7 +30,9 @@ export default function Home({ type }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+   
 
+    
       <Homepage />
 
     </div>

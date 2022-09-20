@@ -6,8 +6,8 @@ import Cookies from 'js-cookie'
 import { setCookies, getCookie } from "cookies-next";
 import { getUnitTraking } from "../../lib/Creator_API";
 import { getPublishedProducts } from "../../lib/Creator_API";
-
-
+import Script from "next/script";
+import Head from "next/head";
 
 const Dashboard = () => {
 
@@ -53,6 +53,7 @@ const Dashboard = () => {
 
     return (
         <div className='mx-[14px] lg:mx-[30px] xl:mx-[50px] 2xl:mx-[80px] my-[15px] mb-16 '>
+
 
             <div className="my-6">
                 <h1 className="font-inter font-medium text-[16px] lg:text-[18px] text-[#323232] text-left">{creatorName}</h1>

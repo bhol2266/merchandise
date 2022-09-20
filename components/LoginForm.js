@@ -50,14 +50,14 @@ export const LoginForm = () => {
                 <div className='mt-[86px] w-fit mx-auto  flex flex-col items-start space-y-12'>
 
                     <div onClick={() => SignIn('user/google')}
-                        className='flex items-center space-x-4 cursor-pointer'>
+                        className='flex items-center space-x-4 cursor-pointer py-2 px-3 rounded-md bg-white'>
                         <img src='/login/google.png' className='lg:h-[38px] lg:w-[38px] h-[28px] w-[28px] cursor-pointer'></img>
                         <h2 className='font-medium font-inter text-[#323232] text-[11px] lg:text-[16px]'>Continue with Google</h2>
                     </div>
 
 
                     <div onClick={() => SignIn('user/facebook')}
-                        className='flex items-center space-x-4 cursor-pointer'>
+                        className='flex items-center space-x-4 cursor-pointer py-2 px-3 rounded-md bg-white'>
                         <img src='/login/facebook.png' className='lg:h-[38px] lg:w-[38px] h-[28px] w-[28px] cursor-pointer'></img>
                         <h2 className='font-medium font-inter text-[#323232] text-[11px] lg:text-[16px]'>Continue with Facebook</h2>
                     </div>
@@ -73,7 +73,7 @@ export const LoginForm = () => {
 
 
 
-            <img src='/creator/poster1.png' className='px-[28px] mb-[200px] w-full cursor-pointer'></img>
+            <img src='/creator/poster1.png' className='px-[28px]  cursor-pointer absolute bottom-[70px] right-0 left-0 '></img>
 
 
 
