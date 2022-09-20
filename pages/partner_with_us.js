@@ -34,7 +34,7 @@ const Partner_with_us = () => {
     const [Poster, setPoster] = useState('./creator/poster1.png')
 
     return (
-        <div className="bg-partner_with_us px-[22px] pt-[40px] bg-no-repeat bg-cover ">
+        <div className="bg-partner_with_us px-[22px] pt-[40px] bg-no-repeat bg-cover overflow-hidden">
 
             <div className="sm:flex sm:flex-col items-center">
 
@@ -79,7 +79,7 @@ const Partner_with_us = () => {
                 }
 
             </div>
-            <img className="w-full lg:w-[737px] sm:w-3/4 mt-[50px] pb-16 block mx-auto" src={Poster} alt="" />
+            <img className="w-full lg:w-[737px] sm:w-3/4 mt-[50px] pb-16 block mx-auto mb-[100px]" src={Poster} alt="" />
 
 
         </div>
