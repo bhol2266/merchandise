@@ -1,5 +1,5 @@
 import { Router, useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BagItem } from '../components/bagItem'
 import { GetbagItems, applyCoupon } from '../lib/serverConfig';
 import Head from 'next/head';
@@ -7,11 +7,15 @@ import Script from 'next/script';
 import { getProductCart, deleteProductCart } from '../lib/Product_API'
 import { BeatLoader } from 'react-spinners';
 import Bill_Invoice from '../components/Bill_Invoice';
+import { setCookies, getCookie } from "cookies-next";
+
+import MerchContext from '../context/MerchContext';
 
 
-const Mybag = () => {
+const Mybag = ({ logInCheck }) => {
 
 
+    const { setloginSidebar } = useContext(MerchContext)
 
 
     const router = useRouter()
@@ -40,7 +44,17 @@ const Mybag = () => {
     }, [])
 
 
+    if (!logInCheck) {
+        return (
+            <div className='flex flex-col items-center justify-center mb-[500px]'>
+                <h1 className="font-inter text-[22px] text-[#323232] w-full text-center mt-[200px] mb-4 ">Please Login First to see cart items</h1>
 
+                <button onClick={() => {
+                    setloginSidebar(true)
+                }} className='font-inter text-[16px] font-medium px-6 py-2 bg-[#54BAB9] text-white rounded cursor-pointer'>Login</button>
+            </div>
+        )
+    }
 
 
 
@@ -82,7 +96,7 @@ const Mybag = () => {
 
                     {bagitems && bagitems.map((item, index) => {
                         return (
-                            <BagItem key={item._id}  productdetails={item} />
+                            <BagItem key={item._id} productdetails={item} />
 
                         )
                     })
@@ -91,7 +105,7 @@ const Mybag = () => {
 
                 </div>
 
-                
+
                 <Bill_Invoice />
 
 
@@ -102,5 +116,31 @@ const Mybag = () => {
     )
 }
 export default Mybag
+
+
+export async function getServerSideProps({ req, res }) {
+
+    let logInCheck = false
+
+
+    const cookieExists = getCookie("role", { req, res });
+    const accessToken = getCookie("accessToken", { req, res });
+
+
+    if (cookieExists === 'user' && typeof accessToken !== 'undefined' && accessToken.length > 20) {
+        logInCheck = true
+    }
+
+    return {
+        props: {
+            logInCheck: logInCheck
+
+        },
+    }
+
+
+
+}
+
 
 

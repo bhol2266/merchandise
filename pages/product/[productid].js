@@ -6,7 +6,7 @@ import MerchContext from '../../context/MerchContext'
 import { Addtobag } from '../../lib/serverConfig'
 import { GetEmail } from '../../lib/CookieLib'
 import { addProductWishlist, deleteProductWishlist, addProductCart } from '../../lib/Product_API'
-import { setCookies, getCookie } from 'cookies-next'
+import { setCookies, getCookie } from "cookies-next";
 
 
 const Product = ({ productdetails }) => {
@@ -49,7 +49,24 @@ const Product = ({ productdetails }) => {
     const [pincodeVerified, setpincodeVerified] = useState(false)
     const [checkWishlist, setcheckWishlist] = useState(false);
 
+    const [logInCheck, setlogInCheck] = useState(false);
+
     useEffect(async () => {
+
+        let logInCheck = false
+
+
+        const cookieExists = getCookie("role");
+        const accessToken = getCookie("accessToken");
+    
+
+        if (cookieExists === 'user' && typeof accessToken !== 'undefined' && accessToken.length > 20) {
+            setlogInCheck(true)
+        }
+    
+
+
+
         setcurrentImageShowing(color[0].imageUrl[0]);
         setcurrentColorShowing(color[0].name);
         setcurrentColorIndexPos(0)
@@ -59,12 +76,7 @@ const Product = ({ productdetails }) => {
         })
         setslideImages(array)
 
-        if (typeof getCookie('email') === 'undefined' || typeof getCookie('accessToken') === 'undefined') {
 
-            alert('Please Login to continue')
-            setloginSidebar(true)
-            return
-        }
 
 
         try {
@@ -135,6 +147,11 @@ const Product = ({ productdetails }) => {
 
 
     const addtoBagClick = async () => {
+        if (!logInCheck) {
+            alert('Please Login to add to cart')
+        }
+
+
         if (typeof getCookie('email') === 'undefined') {
             setloginSidebar(true)
             return
@@ -152,7 +169,7 @@ const Product = ({ productdetails }) => {
             creator: creator
         }
 
-        
+
 
         try {
             const response = await addProductCart(data)
@@ -191,7 +208,7 @@ const Product = ({ productdetails }) => {
                         <img onClick={() => scroll(-482)} src='./../product/left.png' className='h-[20px] text-[#54BAB9] text-center  font-semibold my-auto mr-[30px] cursor-pointer ' />
                         <div ref={scrollbarRef} className=' flex items-center scrollbar-hide overflow-x-auto h-full space-x-[15px]'>
 
-                            {slideImages.map((image,index) => {
+                            {slideImages.map((image, index) => {
                                 return (
                                     <img onClick={() => { setcurrentImageShowing(image); setcurrentColorShowing(color[index].name) }} key={image} src={image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
                                 )
@@ -214,7 +231,7 @@ const Product = ({ productdetails }) => {
                     <div className=' pb-[15px] border-b-[0.5px] border-[#CCCCCC] '>
                         <div className='w-full flex lg:flex-col lg:items-start lg:space-y-2 items-center justify-between'>
                             <h2 className='font-inter text-[#19191D] text-[14px] lg:text-[18px]'>{productName}</h2>
-                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPercent.toString().substring(0,2)}% OFF</h3>
+                            <h3 className='text-[#C25050] font-inter text-[14px] lg:text-[16px] ml-12px'>{discountPercent.toString().substring(0, 2)}% OFF</h3>
                         </div>
 
                         <div className='flex items-center space-x-1 justify-start '>
@@ -365,18 +382,19 @@ export default Product
 export async function getServerSideProps(context) {
 
     const { productid } = context.query;
+   
 
     const response = await getProductbyID({ productId: productid })
     if (response.sucess) {
         return {
             props: {
-                productdetails: response.data
+                productdetails: response.data,
             }, // will be passed to the page component as props
         }
     } else {
         return {
             props: {
-                productdetails: {}
+                productdetails: {},
             },
         }
     }
