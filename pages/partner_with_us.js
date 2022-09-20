@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { setCookies, getCookie } from "cookies-next";
 import Cookies from 'js-cookie'
+import Image from "next/image";
 
 
 
@@ -16,7 +17,7 @@ const Partner_with_us = () => {
 
         if (window.innerWidth >= 750) {
             setBanner('./creator/launch2.png')
-            setPoster('./creator/poster1.png')
+            setPoster('./creator/poster_high.png')
         }
     }, [])
 
@@ -31,7 +32,7 @@ const Partner_with_us = () => {
     const [openLogin, setopenLogin] = useState(false);
 
     const [Banner, setBanner] = useState('./creator/launch1.png')
-    const [Poster, setPoster] = useState('./creator/poster1.png')
+    const [Poster, setPoster] = useState('./creator/poster_low.png')
 
     return (
         <div className="bg-partner_with_us px-[22px] pt-[40px] bg-no-repeat bg-cover overflow-hidden">
@@ -80,7 +81,6 @@ const Partner_with_us = () => {
 
             </div>
             <img className="w-full lg:w-[737px] sm:w-3/4 mt-[50px] pb-16 block mx-auto mb-[100px]" src={Poster} alt="" />
-
 
         </div>
     )

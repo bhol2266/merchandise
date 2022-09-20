@@ -88,7 +88,7 @@ const Account = () => {
             <div className='flex  items-start justify-center mt-6 lg:justify-between '>
 
 
-                <img className=' hidden md:inline  w-1/2 xl:w-3/4 pt-[40px]  xl:mr-12 xl:pr-6 mr-8' src="/creator/poster2.png" alt="" />
+                <img className=' hidden md:inline  w-1/2 xl:w-3/4 pt-[40px]  xl:mr-12 xl:pr-6 mr-8' src="/creator/poster_high.png" alt="" />
 
 
                 {MenuChanger === 'INFO' &&
