@@ -3,7 +3,7 @@ import { Fragment, useContext, useEffect, useState } from 'react'
 import MerchContext from '../context/MerchContext'
 import { GetToken, GetEmail } from '../lib/CookieLib'
 import { setCookies, getCookie } from "cookies-next";
-import { HeartIcon } from '@heroicons/react/outline'
+import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/outline'
 
 
 import { removeCookies } from 'cookies-next';
@@ -86,7 +86,7 @@ function LoginMenu() {
           }
 
           <Menu.Item>
-            <h2 className='cursor-pointer hover:text-red-500 text-[11px] font-DMsans text-[#001857] w-fit mx-auto mb-28px mt-[14px]'>Need Help ?</h2>
+            <h2 className='cursor-pointer text-[11px] font-DMsans text-[#001857] w-fit mx-auto mb-28px mt-[14px]'>Need Help ?</h2>
           </Menu.Item>
 
           <div className=' flex flex-col justify-between  w-[220px]  mt-[25px]'>
@@ -94,7 +94,7 @@ function LoginMenu() {
               <Link href='/order'>
                 <a>
                   <div className=' w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>
-                    <img src='./homepageImages/buy.png' className='w-[12px] h-[12px] lg:w-[16px] lg:h-[16px] '></img>
+                    <ShoppingCartIcon className='w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] text-gray-400' />
                     <h1 className='font-Opensans text-[#323232] text-[11px] lg:text-[15px] cursor-pointer'>Orders</h1>
                   </div>
                 </a>

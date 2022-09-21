@@ -82,7 +82,7 @@ export const OrderItem = ({ orderDetails }) => {
                     </div>
 
 
-                    <h2 className={`brightness-150 text-start   text-[#323232] font-inter text-[9px] xl:text-[14px] md:text-[12px] ${deliveryMessage === "Cancelled" ? "text-red-500" : ""} `}>{orderDate}</h2>
+                    <h2 className={`brightness-150 text-start   text-[#323232] font-inter text-[9px] xl:text-[14px] md:text-[12px] ${deliveryMessage === "Cancelled" ? "text-red-500" : ""} `}>Delivery by: {orderDate}</h2>
 
 
                 </div>

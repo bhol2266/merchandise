@@ -26,8 +26,6 @@ const Mybag = ({ logInCheck }) => {
     useEffect(async () => {
         try {
             const response = await getProductCart()
-            console.log(response);
-
             if (response.sucess) {
                 setbeatloader(false)
                 setbagitems(response.data.cartData.products)

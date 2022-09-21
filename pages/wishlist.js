@@ -19,7 +19,7 @@ const Wishlist = ({ logInCheck }) => {
     useEffect(async () => {
         try {
             const response = await getProductWishlist()
-            console.log(response);
+            console.log(response.data.wishlists);
             if (response.sucess) {
                 setproductlist(response.data.wishlists)
                 setbeatloader(false)
@@ -67,7 +67,7 @@ const Wishlist = ({ logInCheck }) => {
 
         <div className='px-[14px] lg:px-[50px] py-[15px]'>
 
-            <h1 className="font-inter text-[22px] text-[#323232] px-[26px] my-[36px]">WISHLIST</h1>
+            <h1 className="font-inter font-medium text-[22px] lg:text-[26px] text-[#323232] px-[16px] my-[16px]">WISHLIST</h1>
 
             {productlist &&
 

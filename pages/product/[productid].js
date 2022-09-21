@@ -5,8 +5,11 @@ import { getProductbyID } from '../../lib/Product_API'
 import MerchContext from '../../context/MerchContext'
 import { Addtobag } from '../../lib/serverConfig'
 import { GetEmail } from '../../lib/CookieLib'
-import { addProductWishlist, deleteProductWishlist, addProductCart } from '../../lib/Product_API'
+import { addProductWishlist, deleteProductWishlist, addProductCart, getProductWishlist } from '../../lib/Product_API'
 import { setCookies, getCookie } from "cookies-next";
+import { tshirts } from '../../Data/tshirs'
+import { Itemlist } from '../../components/Itemlist'
+import { getYoutubersProductsList } from '../../lib/Creator_API'
 
 
 const Product = ({ productdetails }) => {
@@ -42,51 +45,56 @@ const Product = ({ productdetails }) => {
     const [itemQuantity, setitemQuantity] = useState(1)
     const [currentImageShowing, setcurrentImageShowing] = useState('')
     const [currentColorShowing, setcurrentColorShowing] = useState('')
+    const [colorIndex, setcolorIndex] = useState(0);
     const [slideImages, setslideImages] = useState([])
-    const [currentColorIndexPos, setcurrentColorIndexPos] = useState('')
     const [currentSize, setcurrentSize] = useState("M")
     const [pincode, setpincode] = useState('')
     const [pincodeVerified, setpincodeVerified] = useState(false)
     const [checkWishlist, setcheckWishlist] = useState(false);
 
+    const [productlist, setproductlist] = useState([]);
+
     const [logInCheck, setlogInCheck] = useState(false);
 
     useEffect(async () => {
 
-        let logInCheck = false
 
 
         const cookieExists = getCookie("role");
         const accessToken = getCookie("accessToken");
-    
 
         if (cookieExists === 'user' && typeof accessToken !== 'undefined' && accessToken.length > 20) {
             setlogInCheck(true)
         }
-    
-
-
 
         setcurrentImageShowing(color[0].imageUrl[0]);
         setcurrentColorShowing(color[0].name);
-        setcurrentColorIndexPos(0)
         var array = []
         color.map(item => {
             array.push(item.imageUrl[0])
         })
         setslideImages(array)
 
-
-
-
         try {
-            const response = await addProductWishlist({ productId: _id })
-            if (response.message === "Already Exist") {
-                setcheckWishlist(true)
+            const response = await getProductWishlist()
+            response.data.wishlists.forEach(obj => {
+                if (_id === obj._id) {
+                    setcheckWishlist(true)
+                }
+            })
+
+
+            const response2 = await getYoutubersProductsList('kundan') //closmkundna
+
+            if (response2.sucess) {
+                setproductlist(response2.data.products)
+            } else {
+                console.log(response2.message)
             }
         } catch (error) {
             console.log(error)
         }
+
 
 
     }, [])
@@ -115,7 +123,6 @@ const Product = ({ productdetails }) => {
             const response = await deleteProductWishlist({ productId: _id })
 
             if (response.sucess) {
-                alert('Removed from wishlist')
                 setcheckWishlist(false)
             } else {
                 console.log(response.message)
@@ -127,10 +134,14 @@ const Product = ({ productdetails }) => {
     }
     const addtoWishlist = async () => {
 
+        if (!logInCheck) {
+            setloginSidebar(true)
+            return
+        }
+
         try {
             const response = await addProductWishlist({ productId: _id })
             if (response.sucess) {
-                alert("Added to wishlist")
                 setcheckWishlist(true)
             } else {
                 console.log(response.message)
@@ -148,11 +159,6 @@ const Product = ({ productdetails }) => {
 
     const addtoBagClick = async () => {
         if (!logInCheck) {
-            alert('Please Login to add to cart')
-        }
-
-
-        if (typeof getCookie('email') === 'undefined') {
             setloginSidebar(true)
             return
         }
@@ -165,7 +171,7 @@ const Product = ({ productdetails }) => {
             mrp: mrp,
             discountPrice: discountPrice,
             size: currentSize,
-            color: currentColorShowing,
+            color: color[colorIndex].name,
             creator: creator
         }
 
@@ -185,11 +191,12 @@ const Product = ({ productdetails }) => {
 
 
     }
+
     return (
         <div className='px-[15px] lg:px-[45px] my-[15px] '>
 
 
-            <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-8 md:h-[410px] md:flex md:space-x-4 lg:justify-between xl:justify-start md:justify-around  items-center sm:justify-between mt-[20px] lg:mt-[35px] xl:space-x-36'>
+            <div className='lg:h-[520px] lg:pr-[60px] lg:space-x-8 md:h-[410px] md:flex md:space-x-4 lg:justify-between xl:justify-start md:justify-around  items-center sm:justify-between mt-[20px] lg:mt-[35px] xl:space-x-[220px]'>
 
 
                 {/* Product Image and subcolours */}
@@ -245,14 +252,19 @@ const Product = ({ productdetails }) => {
                             <h1 className='text-[11px] lg:text-[13px] text-[#444444]'>Choose Colour</h1>
                             <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({currentColorShowing.replace('_', ' ')})</h1>
                         </div>
-                        {/* <div className='mt-[15px] flex items-center space-x-[12px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
-                            {colorsAvailable && colorsAvailable.map((obj, index) => {
+
+
+                        <div className='mt-[15px] flex items-center space-x-[12px] pb-[15px] border-b-[0.5px] border-[#CCCCCC]'>
+                            {slideImages.map((obj, index) => {
                                 return (
-                                    <img onClick={() => selectColorClick(obj.image[0].image, obj.color, index)} key={obj.id} src={ obj.image[0].image} className={`h-[50px] lg:h-[70px]  border-[#54BAB9] rounded-lg ${currentColorIndexPos === index ? "border-[2px]" : ""}`} />
+                                    <img onClick={() => {
+                                        setcurrentImageShowing(obj);
+                                        setcolorIndex(index)
+                                    }} key={obj} src={obj} className={`h-[50px] lg:h-[70px]  border-[#54BAB9] rounded-lg ${currentImageShowing === obj ? "border-[2px]" : ""}`} />
 
                                 )
                             })}
-                        </div> */}
+                        </div>
 
                     </div>
 
@@ -317,11 +329,11 @@ const Product = ({ productdetails }) => {
                         {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded '/> */}
 
                         {!checkWishlist &&
-                            <img onClick={addtoWishlist} src='./../homepageImages/heart2.png' className='cursor-pointer   mr-[9px] w-[40px] p-[4px] rounded ' />
+                            <img onClick={addtoWishlist} src='./../homepageImages/heart2.png' className='cursor-pointer   mr-[9px] w-[40px] p-[1px] rounded border-[1.5px] border-gray-300 ' />
                         }
 
                         {checkWishlist &&
-                            <img onClick={removeFromWishlist} src='./../homepageImages/heart.png' className='cursor-pointer mr-[9px] w-[40px] p-[1px] rounded ' />
+                            <img onClick={removeFromWishlist} src='./../homepageImages/heart.png' className='cursor-pointer mr-[9px] w-[40px] p-[1px] rounded-md border-[1.5px] border-gray-300 ' />
                         }
                         <button onClick={addtoBagClick} className='lg:text-[16px] mx-auto w-[300px] lg:mx-0 lg:w-[225px]   text-white h-[40px] bg-[#54BAB9] hover:bg-[#458b8a]  rounded-[5px] text-center  font-inter font-semibold'>
                             ADD TO BAG
@@ -367,11 +379,10 @@ const Product = ({ productdetails }) => {
             </div>
 
 
-            {/* Featured Products */}
+            {productlist.length !== 0 &&
+                <Itemlist items={productlist} />
 
-            {/* <div className='sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
-                <Itemlist />
-            </div> */}
+            }
         </div>
     )
 }
@@ -382,7 +393,7 @@ export default Product
 export async function getServerSideProps(context) {
 
     const { productid } = context.query;
-   
+
 
     const response = await getProductbyID({ productId: productid })
     if (response.sucess) {

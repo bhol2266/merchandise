@@ -10,9 +10,8 @@ export const Item = ({ obj }) => {
     const dicountPriceInteger = parseInt(discountPrice);
     const mrpInteger = parseInt(mrp);
 
-    const discountPercent = 100 - ((dicountPriceInteger * 100) / mrpInteger)
+    const discountPercent = Math.round(100 - ((dicountPriceInteger * 100) / mrpInteger))
 
-    console.log(discountPercent);
 
 
     const removeItemFromWishlist = async () => {
@@ -33,7 +32,7 @@ export const Item = ({ obj }) => {
         <div className='select-none'>
             <Link href={`/product/${_id}`}>
                 <a className='rounded flex flex-col '>
-                    <img src={color[0].imageUrl[0]} className='cursor-pointer h-[300px] object-contain'></img>
+                    <img src={color[0].imageUrl[0]} className='cursor-pointer  object-contain '></img>
 
                     <div className='ml-[7px]'>
                         <h1 className='font-inter text-[11px] lg:text-[16px] text-[#19191D]  py-1'>{productName}
@@ -43,7 +42,7 @@ export const Item = ({ obj }) => {
                             <h3 className='font-inter text-[9px] lg:text-[13px] text-[#787885] line-through '>₹{mrp}</h3>
                         </div>
                         <div className='flex justify-between items-start'>
-                            <h2 className='font-inter  text-[13px] lg:text-[16px] text-[#C25050] py-1'>{discountPercent.toString().substring(0,2) }% OFF</h2>
+                            <h2 className='font-inter  text-[13px] lg:text-[16px] text-[#C25050] py-1'>{discountPercent}% OFF</h2>
 
                         </div>
 

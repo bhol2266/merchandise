@@ -30,7 +30,7 @@ export const Navigation = () => {
 
 
     return (
-        <div className='shadow-lg'>
+        <div className='shadow-lg select-none'>
             <h1 className='font-manrope text-[9px] lg:text-[14px] text-center text-white bg-[#54BAB9] py-2'>
                 USE COUPON  “  GHSGDHSSAHGAH9678  “  TO GET EXTRA 20% DISCOUNT
             </h1>

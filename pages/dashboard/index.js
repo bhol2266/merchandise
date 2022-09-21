@@ -62,12 +62,12 @@ const Dashboard = () => {
 
 
 
-            <div className=" flex flex-col lg:flex-row items-center lg:items-start justify-start lg:justify-between ">
+            <div className="space-y-4 lg:space-y-0 lg:space-x-4 flex flex-col lg:flex-row items-center lg:items-start justify-start lg:justify-between ">
 
 
 
 
-                <div className="p-[30px]  flex flex-col justify-between  items-start h-[275px] lg:h-[350px] 2xl:h-[300px] sm:w-[470px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px] ">
+                <div className="p-[30px]  flex flex-col justify-between  items-start h-[275px] lg:h-[350px] 2xl:h-[300px] sm:w-[470px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px]  border-[1px] border-gray-300 rounded-lg shadow-lg">
 
                     <div className="flex items-center justify-between">
 
@@ -103,7 +103,7 @@ const Dashboard = () => {
 
 
 
-                <div className="p-[30px]  flex flex-col justify-between  h-[275px] lg:h-[350px] 2xl:h-[300px] sm:w-[470px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px]  items-start">
+                <div className="p-[30px]  flex flex-col justify-between  h-[275px] lg:h-[350px] 2xl:h-[300px] sm:w-[470px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px]  items-start border-[1px] border-gray-300 rounded-lg shadow-lg">
 
                     <div className="flex items-center justify-between">
 
@@ -138,7 +138,7 @@ const Dashboard = () => {
 
 
 
-                <div className="p-[30px]  flex flex-col justify-between  items-start h-[275px] lg:h-[350px] 2xl:h-[300px] sm:w-[470px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px] ">
+                <div className="p-[30px]  flex flex-col justify-between  items-start h-[275px] lg:h-[350px] 2xl:h-[300px] sm:w-[470px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px]  border-[1px] border-gray-300 rounded-lg shadow-lg">
                     <div className="flex items-center justify-between">
 
                         <div>
