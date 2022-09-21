@@ -329,7 +329,7 @@ const Product = ({ productdetails }) => {
                         {/* <HeartIcon className='mr-[9px] w-[40px] p-[4px] rounded '/> */}
 
                         {!checkWishlist &&
-                            <img onClick={addtoWishlist} src='./../homepageImages/heart2.png' className='cursor-pointer   mr-[9px] w-[40px] p-[1px] rounded border-[1.5px] border-gray-300 ' />
+                            <img onClick={addtoWishlist} src='./../homepageImages/heart_outline.png' className='cursor-pointer   mr-[9px] w-[40px] p-[1px] rounded border-[1.5px] border-gray-300 ' />
                         }
 
                         {checkWishlist &&

@@ -185,7 +185,7 @@ export const BagItem = ({ productdetails }) => {
                 <XIcon onClick={deleteItem} className='w-[20px] mt-[3px] lg:w-[30px] text-[#454545] cursor-pointer' />
 
                 {!checkWishlist &&
-                    <img onClick={addtoWishlist} src='./../homepageImages/heart2.png' className='cursor-pointer lg:w-[40px]   w-[30px] p-[1px] rounded' />
+                    <img onClick={addtoWishlist} src='./../homepageImages/heart_outline.png' className='cursor-pointer lg:w-[40px]   w-[30px] p-[1px] rounded' />
                 }
 
                 {checkWishlist &&
