@@ -21,7 +21,7 @@ export const OrderItem = ({ orderDetails }) => {
 
     const dicountPriceInteger = parseInt(discountPrice);
     const mrpInteger = parseInt(mrp);
-    const discountPercent = 100 - ((dicountPriceInteger * 100) / mrpInteger)
+    const discountPercent = Math.round(100 - ((dicountPriceInteger * 100) / mrpInteger))
 
 
 
@@ -72,7 +72,7 @@ export const OrderItem = ({ orderDetails }) => {
                         <div className='flex items-center lg:mt-1 space-x-1 justify-start '>
                             <h2 className='font-inter  text-[13px] md:text-[16px] xl:text-[24px] text-[#19191D]'>₹{discountPrice}</h2>
                             <h3 className='font-inter text-[9px] md:text-[10px] xl:text-[13px] text-[#787885] line-through '>₹{mrp}</h3>
-                            <h3 className='text-[#C25050] font-inter text-[9px] md:text-[11px] xl:text-[13px] ml-12px'>{discountPercent.toString().substring(0, discountPercent.toString().indexOf('.')).replace('.', '')}% OFF</h3>
+                            <h3 className='text-[#C25050] font-inter text-[9px] md:text-[11px] xl:text-[13px] ml-12px'>{discountPercent}% OFF</h3>
                         </div>
 
                         <h2 className='font-inter text-[#19191D] md:text-[12px] xl:text-[14px] text-[8px] font-medium mt-2'>Size: {size}</h2>
