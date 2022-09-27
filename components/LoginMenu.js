@@ -38,7 +38,15 @@ function LoginMenu() {
     removeCookies('accessToken');
     removeCookies('email');
     removeCookies('name');
-    router.push('/')
+
+    window.location.reload()
+    return
+
+    if (window.location.href.includes('product')) {
+
+    } else {
+      router.push('/')
+    }
   }
 
 

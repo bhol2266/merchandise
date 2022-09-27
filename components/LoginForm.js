@@ -22,12 +22,13 @@ export const LoginForm = () => {
     }
 
 
-
     const SignIn = async (route) => {
         Cookies.set('role', 'user', { expires: 7 })
+        Cookies.set('lastRoute', window.location.href, { expires: 7 })
         router.push(`/api/${route}`)
 
     }
+
 
 
 
@@ -47,17 +48,17 @@ export const LoginForm = () => {
                 </h2>
 
 
-                <div className='mt-[86px]  mx-auto  flex flex-col items-start space-y-12'>
+                <div className=' w-[220px] lg:w-[270px]  mt-[86px]  mx-auto  flex flex-col items-start  space-y-12 '>
 
                     <div onClick={() => SignIn('user/google')}
-                        className=' w-full xl:w-4/5  flex items-center space-x-4 cursor-pointer py-2 px-3 rounded-md bg-white'>
+                        className='w-full rounded-xl shadow-lg flex items-center space-x-4 cursor-pointer py-2 px-3  bg-white'>
                         <img src='/login/google.png' className='lg:h-[38px] lg:w-[38px] h-[28px] w-[28px] cursor-pointer'></img>
                         <h2 className='font-medium font-inter text-[#323232] text-[11px] lg:text-[16px]'>Continue with Google</h2>
                     </div>
 
 
                     <div onClick={() => SignIn('user/facebook')}
-                        className='w-full xl:w-4/5 flex items-center space-x-4 cursor-pointer py-2 px-3 rounded-md bg-white'>
+                        className='w-full shadow-lg flex items-center space-x-4 cursor-pointer py-2 px-3 rounded-xl bg-white'>
                         <img src='/login/facebook.png' className='lg:h-[38px] lg:w-[38px] h-[28px] w-[28px] cursor-pointer'></img>
                         <h2 className='font-medium font-inter text-[#323232] text-[11px] lg:text-[16px]'>Continue with Facebook</h2>
                     </div>

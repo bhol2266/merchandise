@@ -3,8 +3,10 @@ import { useContext, useEffect } from 'react'
 import { Footer } from '../components/footer'
 import { Homepage } from '../components/Homepage'
 import MerchContext from '../context/MerchContext'
-import { setCookies, getCookie } from "cookies-next";
+import { setCookies, getCookie, deleteCookie } from "cookies-next";
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
+
 import Script from 'next/script'
 
 export default function Home({ type }) {
@@ -18,6 +20,12 @@ export default function Home({ type }) {
 
   useEffect(() => {
     // setNavbarUserORcreator('user')
+    let lastRoute = getCookie("lastRoute");
+    if (typeof lastRoute !== 'undefined') {
+      Cookies.remove('lastRoute')
+      router.push(lastRoute)
+    }
+
   }, []);
 
 
@@ -30,9 +38,9 @@ export default function Home({ type }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-   
 
-    
+
+
       <Homepage />
 
     </div>
@@ -40,9 +48,9 @@ export default function Home({ type }) {
 }
 export async function getServerSideProps({ req, res }) {
 
-  let cookieExists = getCookie("role", { req, res });
+  let role = getCookie("role", { req, res });
 
-  if (typeof cookieExists !== 'undefined' && cookieExists === 'creator') {
+  if (typeof role !== 'undefined' && role === 'creator') {
     // return { redirect: { destination: "/dashboard" } };
     return {
       props: {
@@ -50,7 +58,6 @@ export async function getServerSideProps({ req, res }) {
     };
 
   } else {
-
     return {
       props: {
       }
