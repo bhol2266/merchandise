@@ -13,6 +13,7 @@ import GlobalStates from '../context/globalStates'
 import MerchContext from '../context/MerchContext'
 import { useContext } from 'react'
 import Script from 'next/script'
+import { CreatorNavbar } from '../components/CreatorNavBar'
 
 
 
@@ -50,6 +51,7 @@ function MyApp({ Component, pageProps }) {
 
       <GlobalStates>
         <Navigation   />
+        <CreatorNavbar/>
         <LoginForm />
         <SignUpForm />
         <SignUpFormOTP />

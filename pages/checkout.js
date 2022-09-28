@@ -14,12 +14,15 @@ import AddressModal from '../components/customise/Modals/AdressModal'
 import MerchContext from '../context/MerchContext'
 import AddressForm from '../components/AddressForm'
 import Bill_Invoice from '../components/Bill_Invoice'
+import { BeatLoader } from 'react-spinners';
 
 
-const CheckOut = () => {
+const CheckOut = ({ logInCheck }) => {
 
-    const router = useRouter()
+    const router = useRouter({ logInCheck })
     const { editAddress, seteditAddress, editAddressArrayIndex, addressArray, setaddressArray } = useContext(MerchContext);
+    const [beatloader, setbeatloader] = useState(true);
+    const { setloginSidebar } = useContext(MerchContext)
 
 
 
@@ -28,9 +31,13 @@ const CheckOut = () => {
             const response = await getAddress()
             if (response.data !== 'error') {
                 setaddressArray(response.data.address)
+                setbeatloader(false)
+
             }
         } catch (error) {
             console.log(error)
+            setbeatloader(false)
+
         }
         return
 
@@ -46,8 +53,29 @@ const CheckOut = () => {
         seteditAddress(true)
     }
 
+    if (beatloader) {
+        return (
+            <div className="flex justify-center items-center w-full h-[500px] mt-3 ">
+                <BeatLoader loading size={20} color={'#54BAB9'} />
+            </div>
+        )
+    }
+
+    if (!logInCheck) {
+        return (
+            <div className='flex flex-col items-center justify-center mb-[500px]'>
+                <h1 className="font-inter text-[22px] text-[#323232] w-full text-center mt-[200px] mb-4 ">Please Login First to see Address</h1>
+
+                <button onClick={() => {
+                    setloginSidebar(true)
+                }} className='font-inter text-[16px] font-medium px-6 py-2 bg-[#54BAB9] text-white rounded cursor-pointer'>Login</button>
+            </div>
+        )
+    }
+
 
     return (
+
         <div className='p-[13px] lg:px-[45px] lg:py-[20px] mb-[250px]'>
             <Head>
                 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
@@ -56,7 +84,7 @@ const CheckOut = () => {
 
 
 
-            <h2 className='font-semibold text-[14px] lg:text-[22px] text-[#323232] font-inter mb-4'>ADDRESS</h2>
+            <h2 className='text-[14px] lg:text-[22px] text-[#323232] font-inter mb-4'>ADDRESS</h2>
      
 
 
@@ -97,4 +125,30 @@ const CheckOut = () => {
     )
 }
 export default CheckOut
+
+
+export async function getServerSideProps({ req, res }) {
+
+    let logInCheck = false
+
+
+    const cookieExists = getCookie("role", { req, res });
+    const accessToken = getCookie("accessToken", { req, res });
+
+
+    if (cookieExists === 'user' && typeof accessToken !== 'undefined' && accessToken.length > 20) {
+        logInCheck = true
+    }
+
+    return {
+        props: {
+            logInCheck: logInCheck
+
+        },
+    }
+
+
+
+}
+
 

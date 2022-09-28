@@ -60,7 +60,7 @@ const Order = ({ logInCheck }) => {
         <div className='px-[14px] lg:px-[50px] py-[15px]'>
 
             <div className='flex items-center space-x-[19px] item-center justify-between w-full  mb-[16px]'>
-                <h2 className='text-[14px] lg:text-[22px] text-[#323232] font-inter font-semibold'>ORDERS</h2>
+                <h2 className='text-[18px] lg:text-[22px] text-[#323232] font-inter '>ORDERS</h2>
                 <div className='flex items-center space-x-[6px] cursor-pointer'>
                     <FilterIcon className='h-[20px] lg:h-[24px]' />
                     <h2 className='text-[14px] lg:text-[18px] text-[#323232] font-inter'>FILTER</h2>

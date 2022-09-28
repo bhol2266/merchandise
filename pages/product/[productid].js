@@ -217,7 +217,7 @@ const Product = ({ productdetails }) => {
 
                             {slideImages.map((image, index) => {
                                 return (
-                                    <img onClick={() => { setcurrentImageShowing(image); setcurrentColorShowing(color[index].name) }} key={image} src={image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] ' />
+                                    <img onClick={() => { setcurrentImageShowing(image); setcurrentColorShowing(color[index].name) }} key={image} src={image} className='h-full w-[259px] lg:w-[482px] lg:h-[515px] object-contain' />
                                 )
                             })}
 
@@ -250,7 +250,7 @@ const Product = ({ productdetails }) => {
                     <div className='mt-[15px]'>
                         <div className='flex items-center space-x-[10px]'>
                             <h1 className='text-[11px] lg:text-[13px] text-[#444444]'>Choose Colour</h1>
-                            <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({currentColorShowing.replace('_', ' ')})</h1>
+                            <h1 className='font-inter font-semibold text-[11px] lg:text-[13px] text-[#07002F]'>({color[colorIndex].name.replace('_', ' ')})</h1>
                         </div>
 
 
@@ -394,7 +394,7 @@ export async function getServerSideProps(context) {
 
     const { productid } = context.query;
 
-
+    
     const response = await getProductbyID({ productId: productid })
     if (response.sucess) {
         return {

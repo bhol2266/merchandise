@@ -53,6 +53,7 @@ const Wishlist = ({ logInCheck }) => {
             </div>
         )
     }
+    
     if (productlist.length === 0) {
         return (
             <div className='flex flex-col items-center justify-center mb-[500px]'>
@@ -67,7 +68,7 @@ const Wishlist = ({ logInCheck }) => {
 
         <div className='px-[14px] lg:px-[50px] py-[15px]'>
 
-            <h1 className="font-inter font-medium text-[22px] lg:text-[26px] text-[#323232] px-[16px] my-[16px]">WISHLIST</h1>
+            <h1 className="font-inter  text-[18px] lg:text-[22px] text-[#323232] px-[16px] my-[16px]">WISHLIST</h1>
 
             {productlist &&
 

@@ -19,12 +19,7 @@ export default function Home({ type }) {
 
 
   useEffect(() => {
-    // setNavbarUserORcreator('user')
-    let lastRoute = getCookie("lastRoute");
-    if (typeof lastRoute !== 'undefined') {
-      Cookies.remove('lastRoute')
-      router.push(lastRoute)
-    }
+    setNavbarUserORcreator('user')
 
   }, []);
 
@@ -49,6 +44,7 @@ export default function Home({ type }) {
 export async function getServerSideProps({ req, res }) {
 
   let role = getCookie("role", { req, res });
+  let lastRoute = getCookie("lastRoute", { req, res });
 
   if (typeof role !== 'undefined' && role === 'creator') {
     // return { redirect: { destination: "/dashboard" } };
@@ -58,6 +54,15 @@ export async function getServerSideProps({ req, res }) {
     };
 
   } else {
+    res.setHeader(
+      "Set-Cookie", [
+      `lastRoute=deleted; Max-Age=0`,]
+    );
+    if (typeof lastRoute !== 'undefined') {
+      return { redirect: { destination: lastRoute } };
+
+    }
+
     return {
       props: {
       }
