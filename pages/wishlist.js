@@ -17,6 +17,9 @@ const Wishlist = ({ logInCheck }) => {
     const [productlist, setproductlist] = useState([]);
 
     useEffect(async () => {
+        if(!logInCheck){
+            return
+        }
         try {
             const response = await getProductWishlist()
             console.log(response.data.wishlists);

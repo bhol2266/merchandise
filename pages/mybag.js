@@ -24,6 +24,10 @@ const Mybag = ({ logInCheck }) => {
     const [bagEmpty, setbagEmpty] = useState(false);
 
     useEffect(async () => {
+
+        if (!logInCheck) {
+            return
+        }
         try {
             const response = await getProductCart()
             if (response.sucess) {

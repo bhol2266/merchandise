@@ -29,6 +29,9 @@ const Order = ({ logInCheck }) => {
         array.push(parseInt(year))
         setlastFourYearArray(array)
 
+        if(!logInCheck){
+            return
+        }
         try {
             const response = await orderGet_API()
             if (response.sucess) {
