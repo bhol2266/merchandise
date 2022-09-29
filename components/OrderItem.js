@@ -9,6 +9,19 @@ import { getProductbyID } from '../lib/Product_API'
 
 export const OrderItem = ({ orderDetails }) => {
 
+    const [DeleiveryTime, setDeleiveryTime] = useState(null);
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseOver = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+                    setIsHovering(false);
+
+    };
+
+
 
     const { productName, size, img, discountPrice, mrp, deliveryMessage, discount, productId
         , color, quantity
@@ -16,7 +29,6 @@ export const OrderItem = ({ orderDetails }) => {
     const { firstName, lastName, mobileNumber, alter_MobileNumber, state, pincode, city, landmark, fullAddress, country } = orderDetails.shippingAddress
     const billingAdress = orderDetails.billingAddress
 
-    const orderDate = orderDetails.updatedAt.substring(0, 10);
     const orderId = orderDetails._id
 
     const dicountPriceInteger = parseInt(discountPrice);
@@ -30,11 +42,28 @@ export const OrderItem = ({ orderDetails }) => {
 
 
 
+    function deliveryTime() {
+
+        const orderDate = orderDetails.updatedAt.substring(0, 10);
+        const timeStamp = orderDate.toString().replaceAll('-', '.')
+        const unixTimeStamp = Math.floor(new Date(timeStamp).getTime() / 1000)
+        var deleiveryDateTimeStamp = (unixTimeStamp * 1000) + (86400 * 1000 * 15)
+
+        //Convert Timestamp to human readable date
+        var a = new Date(deleiveryDateTimeStamp);
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+
+        setDeleiveryTime(date + " " + month + " " + year);
 
 
+    }
 
     useEffect(async () => {
 
+        deliveryTime()
 
         try {
             const response = await getProductbyID({
@@ -82,7 +111,7 @@ export const OrderItem = ({ orderDetails }) => {
                     </div>
 
 
-                    <h2 className={`brightness-150 text-start   text-[#323232] font-inter text-[9px] xl:text-[14px] md:text-[12px] ${deliveryMessage === "Cancelled" ? "text-red-500" : ""} `}>Delivery by: {orderDate}</h2>
+                    <h2 className={`brightness-150 text-start   text-[#323232] font-inter text-[9px] xl:text-[14px] md:text-[12px] ${deliveryMessage === "Cancelled" ? "text-red-500" : ""} `}>Delivery by: {DeleiveryTime}</h2>
 
 
                 </div>
@@ -101,16 +130,16 @@ export const OrderItem = ({ orderDetails }) => {
                     <div className='flex items-center w-[180px] h-[140px]  mt-[40px] '>
 
                         <div className='flex flex-col items-center '>
-                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
-                            <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+                            <p className='  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
+                            <span className=' h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
 
-                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
-                            <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+                            <p className='  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
+                            <span className=' h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
 
-                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
-                            <span className='lg:h-[53px] h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+                            <p className='  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
+                            <span className=' h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
 
-                            <p className='lg:h-[12px] lg:w-[12px]  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
+                            <p className='  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
 
 
                         </div>
@@ -119,7 +148,7 @@ export const OrderItem = ({ orderDetails }) => {
                             <h2 className='text-[10px] text-[#323232] font-inter ml-[30px]'>Seller is processing your order</h2>
                             <div className='ml-[30px] mt-3'>
                                 <h2 className='text-[10px] text-[#323232] font-inter'>Order dispatched</h2>
-                                <h2 className='text-[9px] text-[#323232] font-inter ml-2'>Delivery by 20 oct</h2>
+                                <h2 className='text-[9px] text-[#323232] font-inter ml-2'>Delivery by {DeleiveryTime}</h2>
                             </div>
                             <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-3'>Order recived at your</h2>
                             <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-6'>Out for delivery</h2>
@@ -163,9 +192,9 @@ export const OrderItem = ({ orderDetails }) => {
 
             <div className='hidden md:flex flex-col justify-between items-center  xl:h-[220px] h-[150px] xl:mr-[200px] pb-2'>
                 {/* tracking diagram  */}
-                <div className='flex items-center mr-5'>
+                <div className='flex items-center mr-5 relative'>
 
-                    <div className='flex items-center '>
+                    <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className='flex items-center '>
                         <p className='xl:w-[12px] xl:h-[12px] w-[10px] h-[10px] rounded-full border-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
                         <span className='w-[40px] xl:w-[53px] border-b-[2px] border-[#54BAB9]'></span>
 
@@ -178,6 +207,39 @@ export const OrderItem = ({ orderDetails }) => {
 
                         <p className='xl:w-[12px] xl:h-[12px] w-[10px] h-[10px] rounded-full border-[2px] border-[#54BAB9] bg-[#]'></p>
                     </div>
+
+                    {isHovering &&
+
+                        <div   className='flex items-center w-[185px] h-fit  mt-[40px] absolute z-10 bg-white -top-[20px] -left-[10px] xl:left-3 border-[1px] border-gray-300 p-4 rounded-lg xl:scale-125 xl:top-0'>
+
+                            <div className='flex flex-col items-center '>
+                                <p className='  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
+                                <span className=' h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+
+                                <p className='  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
+                                <span className=' h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+
+                                <p className='  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
+                                <span className=' h-[29px] border-r-[1px] lg:border-r-[2px] border-[#54BAB9]'></span>
+
+                                <p className='  w-[10px] h-[10px] rounded-full border-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#]'></p>
+
+
+                            </div>
+
+                            <div className=' flex flex-col  h-full '>
+                                <h2 className='text-[10px] text-[#323232] font-inter ml-[30px]'>Seller is processing your order</h2>
+                                <div className='ml-[30px] mt-3'>
+                                    <h2 className='text-[10px] text-[#323232] font-inter'>Order dispatched</h2>
+                                    <h2 className='text-[9px] text-[#323232] font-inter ml-2'>Delivery by {DeleiveryTime}</h2>
+                                </div>
+                                <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-3'>Order recived at your</h2>
+                                <h2 className='text-[10px] text-[#323232] font-inter ml-[30px] mt-6'>Out for delivery</h2>
+
+                            </div>
+
+                        </div>
+                    }
 
                 </div>
 
