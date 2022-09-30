@@ -30,7 +30,7 @@ export default async function (req, res, next) {
 
         setCookies('accessToken', data.accessToken, {
             req,
-            res, maxAge: 600
+            res, maxAge: 900000
         });
 
         setCookies('refreshToken', data.refreshToken, {
