@@ -48,7 +48,7 @@ const Policy = () => {
 
             {/* Privacy Policy */}
             <div ref={privacyRef}>
-                <h1 className="text-[18px] font-medium">Privacy Policy</h1>
+                <h1 className="text-[18px] font-medium pt-6">Privacy Policy</h1>
                 <p className="text-[12px] my-2">Customer commitment to data protection and privacy -
                     Protecting personal data and your privacy is of greatest concern for Closm. In this Privacy Notice we want to give a clear, concise, and transparent communication on the collection, use, processing, storing etc. of personal data relating to customers of Closm.
                 </p>
