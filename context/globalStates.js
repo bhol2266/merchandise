@@ -65,12 +65,7 @@ const GlobalStates = (props) => {
     const [soldPageSelector, setsoldPageSelector] = useState('sold_units');
 
 
-    //Policy Page layout changer
-    const [currentView, setcurrentView] = useState('privacy');
-
-
-
-
+  
 
     return (
         <MerchContext.Provider value={{
@@ -115,7 +110,6 @@ const GlobalStates = (props) => {
             AddressForCheckoutIndex, setAddressForCheckout,
             addressArray, setaddressArray,
             soldPageSelector, setsoldPageSelector,
-            currentView, setcurrentView,
             NavbarUserORcreator, setNavbarUserORcreator,
 
         }}>

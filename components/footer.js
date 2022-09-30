@@ -3,16 +3,21 @@ import Link from 'next/link'
 import MerchContext from '../context/MerchContext'
 import { useRouter } from 'next/router'
 MerchContext
+import Cookies from 'js-cookie'
+import { setCookies, deleteCookie } from "cookies-next";
 
 
 export const Footer = () => {
 
-  const { currentView, setcurrentView } = useContext(MerchContext)
   const router = useRouter()
 
+
   const openPolicypage = (text) => {
-    setcurrentView(text)
-    router.push('/policy')
+
+    setCookies('policy', text, {
+      maxAge: 200
+    });
+    window.location.assign(`${process.env.FRONTEND_URL}policy`);
 
   }
 
