@@ -42,7 +42,7 @@ export const Footer = () => {
       </div>
 
 
-      <div className='w-[200px] lg:w-[300px] mx-auto text-white font-DMsans text-[12px]  lg:text-[15px]'>
+      <div className='w-[200px] lg:w-[300px] mx-auto text-white font-DMsans text-[12px]  lg:text-[15px] select-none'>
         <div className='flex items-center justify-around mb-3 mt-8  '>
           <h1 onClick={() => { openPolicypage('refund') }} className='hover:text-red-500 cursor-pointer '>Refund Policy</h1>
           <h1 onClick={() => { openPolicypage('support') }} className='hover:text-red-500 cursor-pointer '>Support</h1>

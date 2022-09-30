@@ -34,6 +34,12 @@
 @layer components {
 
 
+  body {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+-webkit-tap-highlight-color: transparent;
+  }
+
+
     .icon {
         @apply h-6 w-6 mr-1 hover:scale-125 transform transition duration-200
     }
