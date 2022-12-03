@@ -14,11 +14,7 @@ export const CreatorNavbar = () => {
 
     const router = useRouter()
 
-
-
-
-    useEffect(async () => {
-
+    async function fetchData() {
         try {
             const response = await getYoutubersProductsList('kundan')
             if (response.sucess) {
@@ -38,6 +34,12 @@ export const CreatorNavbar = () => {
         }
 
 
+    }
+
+
+    useEffect( () => {
+
+        fetchData()
 
     }, [])
 
@@ -61,15 +63,15 @@ export const CreatorNavbar = () => {
 
                 <div className={` flex space-x-[30px] sm:space-x-[30px] lg:space-x-[50px] items-center justify-center`}>
                     <Link href='/dashboard'>
-                        <a className='font-inter text-[12px] lg:text-[16px]  text-[##323232]'>
+                        <div className='font-inter text-[12px] lg:text-[16px]  text-[##323232]'>
                             Dashboard
-                        </a>
+                        </div>
                     </Link>
 
                     <Link href='/dashboard/account'>
-                        <a className='font-inter text-[12px] lg:text-[16px]  text-[##323232]'>
+                        <div className='font-inter text-[12px] lg:text-[16px]  text-[##323232]'>
                             Account
-                        </a>
+                        </div>
                     </Link>
 
                 </div>

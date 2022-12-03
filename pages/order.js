@@ -19,19 +19,7 @@ const Order = ({ logInCheck }) => {
     const [openFilter, setopenFilter] = useState(false);
     const [filterSelected, setfilterSelected] = useState('');
 
-
-    useEffect(async () => {
-        var year = new Date().getFullYear()
-        let array = []
-        array.push(parseInt(year) - 3)
-        array.push(parseInt(year) - 2)
-        array.push(parseInt(year) - 1)
-        array.push(parseInt(year))
-        setlastFourYearArray(array)
-
-        if(!logInCheck){
-            return
-        }
+    async function fetchData() {
         try {
             const response = await orderGet_API()
             if (response.sucess) {
@@ -43,6 +31,23 @@ const Order = ({ logInCheck }) => {
             console.log(error)
         }
 
+      }
+
+    useEffect( () => {
+        var year = new Date().getFullYear()
+        let array = []
+        array.push(parseInt(year) - 3)
+        array.push(parseInt(year) - 2)
+        array.push(parseInt(year) - 1)
+        array.push(parseInt(year))
+        setlastFourYearArray(array)
+
+        fetchData()
+        
+        if(!logInCheck){
+            return
+        }
+      
     }, [])
 
     const saveFilter = () => {

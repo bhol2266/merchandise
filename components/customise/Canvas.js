@@ -43,12 +43,13 @@ const Canvas = () => {
 
 
     useEffect(() => {
-        canvas = new fabric.Canvas('myCanvas', {
+
+        let canvasss = new fabric.Canvas('myCanvas', {
             width: 150,
             height: 230,
         })
-        canvas.renderAll()
-        setcanvas(canvas)
+        canvasss.renderAll()
+        setcanvas(canvasss)
         setcanvasDivRef(divToImageRef)
     }, []);
 

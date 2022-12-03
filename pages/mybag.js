@@ -23,11 +23,7 @@ const Mybag = ({ logInCheck }) => {
     const [beatloader, setbeatloader] = useState(true);
     const [bagEmpty, setbagEmpty] = useState(false);
 
-    useEffect(async () => {
-
-        if (!logInCheck) {
-            return
-        }
+    async function fetchData() {
         try {
             const response = await getProductCart()
             if (response.sucess) {
@@ -42,6 +38,14 @@ const Mybag = ({ logInCheck }) => {
             setbeatloader(false)
             console.log(error)
         }
+      }
+
+    useEffect( () => {
+
+        if (!logInCheck) {
+            return
+        }
+        fetchData()
 
     }, [])
 

@@ -209,8 +209,8 @@ const Account = () => {
                             <div className='flex items-center justify-center space-x-2'>
                                 <h2 className='font-inter font-medium text-[#323232] text-[14px] lg:text-[16px]'>Forgot Password ?</h2>
 
-                                <Link href='/'>
-                                    <a className='font-inter font-medium text-[#323232] text-[14px] lg:text-[16px] underline'>Click Here</a>
+                                <Link href='/' className='font-inter font-medium text-[#323232] text-[14px] lg:text-[16px] underline'>
+                                    Click Here
                                 </Link>
 
                             </div>

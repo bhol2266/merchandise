@@ -30,12 +30,7 @@ const Bill_Invoice = () => {
 
     const [cartId, setcartId] = useState('');
 
-
-    useEffect(async () => {
-        if (window.location.pathname === '/mybag') {
-            setcheckoutRoute('/mybag')
-        }
-
+    async function fetchData() {
         try {
             const response = await getProductCart()
             if (response.sucess) {
@@ -51,6 +46,15 @@ const Bill_Invoice = () => {
         } catch (error) {
             console.log(error)
         }
+    }
+
+
+    useEffect(() => {
+        if (window.location.pathname === '/mybag') {
+            setcheckoutRoute('/mybag')
+        }
+
+        fetchData()
 
     }, [])
 

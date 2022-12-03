@@ -60,8 +60,7 @@ const PublishedProducts = () => {
     }
   }
 
-  useEffect(async () => {
-
+  async function fetchData() {
     try {
       const response = await getPublishedProducts()
 
@@ -95,6 +94,12 @@ const PublishedProducts = () => {
       alert(error)
       return
     }
+  }
+
+
+  useEffect( () => {
+
+    fetchData()
   }, []);
 
   if (dataFetched && creatorsProductList.length === 0) {

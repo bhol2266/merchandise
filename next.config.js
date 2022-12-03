@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    BACKEND_URL: 'https://king-prawn-app-d3yfg.ondigitalocean.app/', 
+    BACKEND_URL: 'https://king-prawn-app-vcb72.ondigitalocean.app/', 
     // BACKEND_URL: 'http://localhost:5000/',
     // FRONTEND_URL: 'http://localhost:3000/',
     FRONTEND_URL: 'https://www.closm.com/',

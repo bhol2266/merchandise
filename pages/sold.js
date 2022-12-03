@@ -17,7 +17,7 @@ const Sold = ({ logInCheck }) => {
 
     const [productlist, setproductlist] = useState([]);
 
-    useEffect(async () => {
+    async function fetchData() {
         try {
             const response = await getUnitTraking()
             if (response.success) {
@@ -28,6 +28,11 @@ const Sold = ({ logInCheck }) => {
             setbeatloader(false)
             console.log(error)
         }
+
+      }
+
+    useEffect( () => {
+        fetchData()
     }, []);
 
 

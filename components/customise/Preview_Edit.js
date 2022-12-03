@@ -92,10 +92,7 @@ const Preview_Edit = () => {
     const [url, seturl] = useState('');
     const [artistDescription, setartistDescription] = useState('');
 
-
-    useEffect(async () => {
-
-
+    async function fetchData() {
         try {
             const response = await getYoutubersDetail()
             if (response.success) {
@@ -130,6 +127,14 @@ const Preview_Edit = () => {
             setbeatLoader(false)
             return
         }
+    }
+
+    useEffect(() => {
+
+        fetchData()
+
+
+      
 
         if (window.innerWidth >= 100) {
             setproducts(products.slice(0, 2))

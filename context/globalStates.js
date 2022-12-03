@@ -64,6 +64,9 @@ const GlobalStates = (props) => {
     //Sold Units Page
     const [soldPageSelector, setsoldPageSelector] = useState('sold_units');
 
+    //Size Chart modal
+    const [SizeChartModalVisible, setSizeChartModalVisible] = useState(false);
+
 
   
 
@@ -111,6 +114,7 @@ const GlobalStates = (props) => {
             addressArray, setaddressArray,
             soldPageSelector, setsoldPageSelector,
             NavbarUserORcreator, setNavbarUserORcreator,
+            SizeChartModalVisible, setSizeChartModalVisible
 
         }}>
             {props.children}

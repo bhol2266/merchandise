@@ -17,7 +17,7 @@ export const OrderItem = ({ orderDetails }) => {
     };
 
     const handleMouseOut = () => {
-                    setIsHovering(false);
+        setIsHovering(false);
 
     };
 
@@ -61,10 +61,7 @@ export const OrderItem = ({ orderDetails }) => {
 
     }
 
-    useEffect(async () => {
-
-        deliveryTime()
-
+    async function fetchData() {
         try {
             const response = await getProductbyID({
                 productId: productId
@@ -79,6 +76,15 @@ export const OrderItem = ({ orderDetails }) => {
         } catch (error) {
             console.log(error)
         }
+
+
+    }
+
+    useEffect(() => {
+
+        deliveryTime()
+        fetchData()
+
 
     }, []);
 
@@ -210,7 +216,7 @@ export const OrderItem = ({ orderDetails }) => {
 
                     {isHovering &&
 
-                        <div   className='flex items-center w-[185px] h-fit  mt-[40px] absolute z-10 bg-white -top-[20px] -left-[10px] xl:left-3 border-[1px] border-gray-300 p-4 rounded-lg xl:scale-125 xl:top-0'>
+                        <div className='flex items-center w-[185px] h-fit  mt-[40px] absolute z-10 bg-white -top-[20px] -left-[10px] xl:left-3 border-[1px] border-gray-300 p-4 rounded-lg xl:scale-125 xl:top-0'>
 
                             <div className='flex flex-col items-center '>
                                 <p className='  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>

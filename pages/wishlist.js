@@ -16,10 +16,7 @@ const Wishlist = ({ logInCheck }) => {
 
     const [productlist, setproductlist] = useState([]);
 
-    useEffect(async () => {
-        if(!logInCheck){
-            return
-        }
+    async function fetchData() {
         try {
             const response = await getProductWishlist()
             console.log(response.data.wishlists);
@@ -34,6 +31,13 @@ const Wishlist = ({ logInCheck }) => {
             console.log(error)
             setbeatloader(false)
         }
+    }
+
+    useEffect( () => {
+        if (!logInCheck) {
+            return
+        }
+        fetchData()
     }, []);
 
 
@@ -56,7 +60,7 @@ const Wishlist = ({ logInCheck }) => {
             </div>
         )
     }
-    
+
     if (productlist.length === 0) {
         return (
             <div className='flex flex-col items-center justify-center mb-[500px]'>

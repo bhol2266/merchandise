@@ -25,10 +25,7 @@ export const BagItem = ({ productdetails }) => {
     const [itemQuantity, setitemQuantity] = useState(parseInt(productdetails.quantity))
     const [checkWishlist, setcheckWishlist] = useState(false);
 
-
-
-    useEffect(async () => {
-
+    async function fetchData() {
         try {
             const response = await getProductbyID({ productId: productId })
             if (response.sucess) {
@@ -56,8 +53,12 @@ export const BagItem = ({ productdetails }) => {
             console.log(error)
         }
 
+    }
 
 
+    useEffect(() => {
+
+        fetchData()
 
     }, []);
 

@@ -17,7 +17,7 @@ export const Item = ({ obj }) => {
 
     return (
         <div className='select-none'>
-                <a href={`/product/${_id}`} className='rounded flex flex-col '>
+                <Link href={`/product/${_id}`} className='rounded flex flex-col '>
                     <img src={color[0].imageUrl[0]} className='cursor-pointer aspect-[item] '></img>
 
                     <div className='ml-[7px]'>
@@ -34,7 +34,7 @@ export const Item = ({ obj }) => {
 
                     </div>
                     
-                </a>
+                </Link>
         </div>
     )
 }

@@ -24,9 +24,7 @@ const CheckOut = ({ logInCheck }) => {
     const [beatloader, setbeatloader] = useState(true);
     const { setloginSidebar } = useContext(MerchContext)
 
-
-
-    useEffect(async () => {
+    async function fetchData() {
         try {
             const response = await getAddress()
             if (response.data !== 'error') {
@@ -40,6 +38,10 @@ const CheckOut = ({ logInCheck }) => {
 
         }
         return
+      }
+
+    useEffect( () => {
+        fetchData()
 
     }, [])
 

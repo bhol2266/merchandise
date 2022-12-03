@@ -10,9 +10,13 @@ import { setCookies, getCookie } from "cookies-next";
 import { tshirts } from '../../Data/tshirs'
 import { Itemlist } from '../../components/Itemlist'
 import { getYoutubersProductsList } from '../../lib/Creator_API'
+import { useRouter } from 'next/router'
+import SizeChart from '../../components/sizechartModal'
 
 
 const Product = ({ productdetails }) => {
+
+    const router = useRouter();
 
     if (!productdetails) {
         return (
@@ -55,8 +59,31 @@ const Product = ({ productdetails }) => {
     const [productlist, setproductlist] = useState([]);
 
     const [logInCheck, setlogInCheck] = useState(false);
+    const [toggleDescript_ReturnPolicy, settoggleDescript_ReturnPolicy] = useState(false);
 
-    useEffect(async () => {
+    async function fetchData() {
+        try {
+            const response = await getProductWishlist()
+            response.data.wishlists.forEach(obj => {
+                if (_id === obj._id) {
+                    setcheckWishlist(true)
+                }
+            })
+
+            const response2 = await getYoutubersProductsList('kundan') //closmkundna
+
+            if (response2.sucess) {
+                setproductlist(response2.data.products)
+            } else {
+                console.log(response2.message)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    useEffect(() => {
 
 
 
@@ -75,31 +102,11 @@ const Product = ({ productdetails }) => {
         })
         setslideImages(array)
 
-        try {
-            const response = await getProductWishlist()
-            response.data.wishlists.forEach(obj => {
-                if (_id === obj._id) {
-                    setcheckWishlist(true)
-                }
-            })
-
-
-            const response2 = await getYoutubersProductsList('kundan') //closmkundna
-
-            if (response2.sucess) {
-                setproductlist(response2.data.products)
-            } else {
-                console.log(response2.message)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-
-
+        fetchData()
 
     }, [])
 
-    const { setloginSidebar } = useContext(MerchContext)
+    const { setloginSidebar, SizeChartModalVisible, setSizeChartModalVisible } = useContext(MerchContext)
 
 
 
@@ -273,9 +280,13 @@ const Product = ({ productdetails }) => {
                             <h1 className='text-[11px] lg:text-[13px] text-[#5A5A5A] font-inter'>Choose Size</h1>
                             <div className='flex items-center space-x-1'>
                                 <img className='lg:h-[18px]' src='./../product/size_chart.svg' />
-                                <h1 className='cursor-pointer text-[10px] lg:text-[14px] text-[#54BAB9] font-inter'>Size Chart</h1>
+                                <h1 onClick={() => { setSizeChartModalVisible(true) }} className='cursor-pointer text-[10px] lg:text-[14px] text-[#54BAB9] font-inter'>Size Chart</h1>
+                                {/* Make background darker */}
+                                <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${SizeChartModalVisible ? "" : "hidden"} `} />
+                                <SizeChart />
                             </div>
                         </div>
+
 
                         <div className='mt-[15px] flex items-center space-x-[17px]'>
                             {size.map(size => {
@@ -348,34 +359,71 @@ const Product = ({ productdetails }) => {
 
             <div className='mt-[20px] px-2'>
                 <div className='flex items-center space-x-[25px]'>
-                    <h2 className='text-[13px] lg:text-[18px] text-[#787885] font-inter'>Product Description</h2>
-                    <h2 className='cursor-pointer font-inter text-[#54BAB9] text-[13px] lg:text-[18px] border-b-[1.5px] border-[#54BAB9]'>Return Policy</h2>
+                    <h2 onClick={() => { settoggleDescript_ReturnPolicy(false) }} className={`cursor-pointer text-[13px] lg:text-[18px]  ${!toggleDescript_ReturnPolicy ? " text-theme border-b-[1.5px] border-[#54BAB9]" : "text-[#787885]"} font-inter`}>Product Description</h2>
+                    <h2 onClick={() => { settoggleDescript_ReturnPolicy(true) }} className={`cursor-pointer font-inter  ${toggleDescript_ReturnPolicy ? " text-theme border-b-[1.5px] border-[#54BAB9]" : "text-[#787885]"} text-[13px] lg:text-[18px] `}>Return Policy</h2>
                 </div>
 
-                <h2 className='text-[12px] lg:text-[24px] font-DMsans mt-[13px] lg:mt-[20px] text-[#313131]'>Return Policy</h2>
-                <div className='space-x-2 flex items-center pl-2 mt-[6px]'>
-                    <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
-                    <p className='text-[10px] lg:text-[18px]'>100% Cotton</p>
-                </div>
-                <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
-                    <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
-                    <p className='text-[10px] lg:text-[18px]'>Made In India</p>
-                </div>
+                {/* Product Description */}
 
-                <h1 className='text-[10px] lg:text-[16px] font-inter text-[#313131] mt-[8px] lg:mt-[20px] leading-[20px]'>
-                    Amp your style with this YUMM Men&apos;s Round Neck Varsity Half Sleeve T-Shirt.
-                    Style this t-shirt with a pair of jeans andsliders for a get-together with friends.
-                    Country of Origin : India
 
-                    REGULAR FIT
+                {!toggleDescript_ReturnPolicy &&
+                    <div >
+                        <h1 className='text-[11px] lg:text-[16px] font-inter text-[#313131] mt-[8px] lg:mt-[20px] leading-[20px]'>
+                            {productDescription}
+                        </h1>
+                    </div>
+                }
 
-                    Fitted at Chest and Straight on Waist Down
 
-                    180 GSM SJ COTTON, COTTON LYCRA
 
-                    Classic, lightweight jersey fabric comprising 100% cotton.
-                </h1>
+                {/* Return Policy */}
+                {toggleDescript_ReturnPolicy &&
 
+                    <div>
+                        <h2 className='text-[12px] lg:text-[24px] font-DMsans mt-[13px] lg:mt-[20px] text-[#313131]'>Return Policy</h2>
+                        <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
+                            <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
+                            <p className='text-[10px] lg:text-[18px]'>Printing issues</p>
+                        </div>
+                        <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
+                            <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
+                            <p className='text-[10px] lg:text-[18px]'>Received different product
+                            </p>
+                        </div>
+
+                        <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
+                            <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
+                            <p className='text-[10px] lg:text-[18px]'>Product missing
+                            </p>
+                        </div>
+
+                        <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
+                            <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
+                            <p className='text-[10px] lg:text-[18px]'>Transit damage
+                            </p>
+                        </div>
+
+                        <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
+                            <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
+                            <p className='text-[10px] lg:text-[18px]'>Different size received
+                            </p>
+                        </div>
+
+                        <div className='space-x-2 flex items-center pl-2 mt-[4px]'>
+                            <span className='w-1 h-1 mt-[3px] rounded-full bg-black text-[10px]'></span>
+                            <p className='text-[10px] lg:text-[18px]'>Other related issues
+                            </p>
+                        </div>
+
+
+                        <h1 className='text-[11px] lg:text-[16px] font-inter text-[#313131] mt-[8px] lg:mt-[20px] leading-[20px]'>
+                            If you encounter any of these issues then write to us on support@closm.com or call us on +91 8460561318 (10:00 AM to 21:00 PM) for a replacement of the product or full money back within 15 days of purchase.
+                        </h1>
+
+
+
+                    </div>
+                }
             </div>
 
 
@@ -394,7 +442,7 @@ export async function getServerSideProps(context) {
 
     const { productid } = context.query;
 
-    
+
     const response = await getProductbyID({ productId: productid })
     if (response.sucess) {
         return {
