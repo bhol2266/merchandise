@@ -21,6 +21,7 @@ export const OrderItem = ({ orderDetails }) => {
 
     };
 
+    console.log(orderDetails);
 
 
     const { productName, size, img, discountPrice, mrp, deliveryMessage, discount, productId
@@ -133,7 +134,7 @@ export const OrderItem = ({ orderDetails }) => {
 
                     {/* tracking diagram  */}
 
-                    <div className='flex items-center w-[180px] h-[140px]  mt-[40px] '>
+                    <div className='hidden flex items-center w-[180px] h-[140px]  mt-[40px] '>
 
                         <div className='flex flex-col items-center '>
                             <p className='  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
@@ -182,11 +183,11 @@ export const OrderItem = ({ orderDetails }) => {
                     </div>
 
                     <div className='mt-[30px] flex items-center justify-between mb-6'>
-                        <div className='flex flex-col items-center justify-center space-x-[2px] '>
+                        <div className='hidden flex flex-col items-center justify-center space-x-[2px] '>
                             <button className='text-[9px] text-center font-inter text-[#323232] w-[46px]'>Download Invoice</button>
                             <ArrowDownIcon className='h-[10px] text-[#323232]' />
                         </div>
-                        <button className='text-[10px]  font-inter text-[#323232] w-[212px] h-[30px] text-center border-[1px] border-[#323232] rounded-[5px]'>request Cancellation</button>
+                        <button className='text-[10px]  font-inter text-[#323232] w-[212px] h-[30px] text-center border-[1px] border-[#323232] rounded-[5px]'>request Return</button>
 
                     </div>
 
@@ -216,7 +217,7 @@ export const OrderItem = ({ orderDetails }) => {
 
                     {isHovering &&
 
-                        <div className='flex items-center w-[185px] h-fit  mt-[40px] absolute z-10 bg-white -top-[20px] -left-[10px] xl:left-3 border-[1px] border-gray-300 p-4 rounded-lg xl:scale-125 xl:top-0'>
+                        <div className='hidden flex items-center w-[185px] h-fit  mt-[40px] absolute z-10 bg-white -top-[20px] -left-[10px] xl:left-3 border-[1px] border-gray-300 p-4 rounded-lg xl:scale-125 xl:top-0'>
 
                             <div className='flex flex-col items-center '>
                                 <p className='  w-[10px] h-[10px] rounded-full border-r-[1.5px] lg:border-r-[2px] border-[#54BAB9] bg-[#54BAB9]'></p>
@@ -283,11 +284,11 @@ export const OrderItem = ({ orderDetails }) => {
                 </div>
 
                 <div className='xl:w-[212px] w-[150px] ml-auto'>
-                    <div className='flex  items-center justify-center space-x-[8px] border-[1px] border-[#323232] rounded-[5px] xl:h-[30px] md:h-[25px]'>
-                        <button className='xl:text-[14px] text-[11px] text-center font-inter text-[#323232] '>Download Invoice</button>
+                    <div className='hidden flex  items-center justify-center space-x-[8px] border-[1px] border-[#323232] rounded-[5px] xl:h-[30px] md:h-[25px]'>
+                        <button className=' xl:text-[14px] text-[11px] text-center font-inter text-[#323232] '>Download Invoice</button>
                         <ArrowDownIcon className='h-[10px] text-[#323232]' />
                     </div>
-                    <button className='w-full mt-2 xl:text-[14px] text-[11px]  font-inter text-[#323232]  xl:h-[30px] md:h-[25px] text-center border-[1px] border-[#323232] rounded-[5px]'>request Cancellation</button>
+                    <button className='w-full mt-2 xl:text-[14px] text-[11px]  font-inter text-[#323232]  xl:h-[30px] md:h-[25px] text-center border-[1px] border-[#323232] rounded-[5px]'>request Return</button>
 
                 </div>
             </div>

@@ -35,13 +35,14 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <Script id='faasdfsdabric' src="/fabric.js" strategy="beforeInteractive" />
 
 
-        <Script id='sadfasdf' src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" />
+      {/* <Script id='sadfasdf' src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js" strategy="beforeInteractive" /> */}
 
       <GlobalStates>
-        <Navigation   />
-        <CreatorNavbar/>
+        <Navigation />
+        <CreatorNavbar />
         <LoginForm />
         <SignUpForm />
         <SignUpFormOTP />

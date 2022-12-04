@@ -8,14 +8,47 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/router';
 import MerchContext from '../../context/MerchContext';
 import { setCookies, getCookie } from "cookies-next";
+import { postUserinfo, getUserinfo, postAccountInfo, getAccountInfo } from "../../lib/Creator_API";
+
 
 
 const Account = () => {
 
+
+    async function fetchData() {
+        try {
+            const response = await getUserinfo()
+            console.log(response);
+            if (response.success) {
+              console.log(response);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+        try {
+            const response = await getAccountInfo()
+            console.log(response);
+            if (response.success) {
+                console.log(response);
+
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+
+    }
+
+    useEffect(() => {
+      
+        fetchData()
+
+
+    }, []);
+
     const { NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
-
     const route = useRouter()
-
     const [MenuChanger, setMenuChanger] = useState('INFO');
 
 

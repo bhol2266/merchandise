@@ -179,6 +179,7 @@ const Canvas = () => {
 
         <div className='lg:flex lg:justify-around  items-start 2xl:items-start 2xl:justify-start  lg:pt-4 2xl:mt-0'>
 
+           
 
             {/* This is for small screen only  */}
             <div className='lg:hidden sm:w-4/5 md:w-3/5  xl:w-[480px]  mx-auto flex items-start justify-between '>

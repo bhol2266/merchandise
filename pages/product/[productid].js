@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { MinusIcon, HeartIcon } from '@heroicons/react/solid'
+import { MinusIcon, CheckIcon, XIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { getProductbyID } from '../../lib/Product_API'
 import MerchContext from '../../context/MerchContext'
@@ -116,7 +116,8 @@ const Product = ({ productdetails }) => {
         const message = await response.json()
         console.log(message[0].Status);
         if (message[0].Status === "Error") {
-            alert("Pincode Error")
+        } else {
+            setpincodeVerified(true)
         }
 
 
@@ -312,8 +313,8 @@ const Product = ({ productdetails }) => {
                         <div>
                             <h1 className='font-inter text-[9px] lg:text-[11px] text-[#1B1B1B] w-[171px] lg:w-[200px] pr-4'>Enter PIN code to check delivery time &
                                 Pay on Delivery Availability</h1>
-                            <div className='mt-[10px] flex items-center justify-between  border-b-[0.5px] border-[#969696]'>
-                                <input className='outline-none text-[11px] lg:text-[14px] text-[#5A5A5A]' onChange={e => {
+                            <div className='mt-[10px] flex items-center justify-start border-b-[0.5px] border-[#969696]'>
+                                <input className='outline-none w-[70px] text-[11px] lg:text-[14px] text-[#5A5A5A]' onChange={e => {
                                     if (e.target.value.length <= 6) {
                                         setpincode(e.target.value)
                                     }
@@ -323,12 +324,21 @@ const Product = ({ productdetails }) => {
                                     if (e.target.value.length <= 6) {
                                         setpincodeVerified(false)
                                     }
-                                }} type='number' value={pincode} placeholder='Enter Pincode' />
+                                }} type='number' value={pincode} placeholder='Pincode' />
                                 <h1 className='font-inter text-[11px] lg:text-[16px] text-[#323232] cursor-pointer hidden' onClick={checkPincode}>Check</h1>
 
-                                {/* {pincodeVerified && <CheckIcon className='h-6 text-green-500' />}
 
-                                {!pincodeVerified && pincode.length === 6 && <XIcon className='h-6 text-red-500' />} */}
+                                  {pincode.length === 6 &&
+                                    <h1 className='mx-1 font-inter text-[10px] lg:text-[13px] text-[#323232]'>{pincodeVerified ? "Available" : "Not Available"}</h1>
+
+                                }
+
+                                {!pincodeVerified && pincode.length === 6 && <XIcon className='h-[16px] lg:h-[18px] p-0 text-red-500' />}
+                              
+
+                                {pincodeVerified && <CheckIcon className='h-[16px] lg:h-[18px] p-0 text-green-500' />}
+
+
 
                             </div>
 

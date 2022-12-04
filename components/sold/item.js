@@ -20,7 +20,7 @@ export const Item = ({ obj }) => {
     return (
         <div className='select-none'>
             <Link href={`/product/${_id}`}>
-                <a className='rounded flex flex-col '>
+                <div className='rounded flex flex-col '>
                     <img src={color[0].imageUrl[0]} className='cursor-pointer object-contain'></img>
 
                     <div className=''>
@@ -37,7 +37,7 @@ export const Item = ({ obj }) => {
 
                     </div>
 
-                </a>
+                </div>
             </Link>
             {/* <button onClick={removeItemFromWishlist} className='lg:py-1 text-sm lg:text-md py-[2px] border-[1px] rounded-md my-1  font-inter border-theme w-full'>Remove Item</button> */}
 

@@ -5,7 +5,6 @@ import Cookies from 'js-cookie'
 import { setCookies, getCookie } from "cookies-next";
 import { Itemlist } from '../components/sold/Itemlist'
 import { BeatLoader } from 'react-spinners';
-import Link from 'next/link';
 import { getUnitTraking } from '../lib/Creator_API';
 
 

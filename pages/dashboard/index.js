@@ -15,12 +15,18 @@ const Dashboard = () => {
     const [productlist, setproductlist] = useState([]);
     const { setcustomisePageSelector, setNavbarUserORcreator, soldPageSelector, setsoldPageSelector } = useContext(MerchContext)
     const [creatorName, setcreatorName] = useState('');
+    const [totalBalance, settotalBalance] = useState('0');
+    const [totalItemsSold, settotalItemsSold] = useState('0');
 
     async function fetchData() {
         try {
             const response = await getUnitTraking()
-            if (response.sucess) {
-
+            if (response.success) {
+                let itemCount = 0
+                response.data.trackUnits.map(product => {
+                    itemCount = itemCount + parseInt(product.soldUnits);
+                })
+                settotalItemsSold(itemCount)
             }
         } catch (error) {
             console.log(error)
@@ -39,7 +45,7 @@ const Dashboard = () => {
         }
     }
 
-    useEffect( () => {
+    useEffect(() => {
         setNavbarUserORcreator('creator')
         setcreatorName('HELLO' + " " + Cookies.get('name').substring(0, Cookies.get('name').indexOf(" ")).toUpperCase())
 
@@ -49,9 +55,6 @@ const Dashboard = () => {
     }, []);
 
 
-    const totalBalance = '75000'
-    const totalItemsSold = '5842'
-    const productid = ''
 
 
 
@@ -133,7 +136,7 @@ const Dashboard = () => {
 
 
                     <Link className="font-inter text-[10px] lg:text-[14px] text-[#323232] text-left  underline" href='/' >
-                      Withdraw Amount
+                        Withdraw Amount
                     </Link>
 
 
@@ -194,9 +197,9 @@ const Dashboard = () => {
 
 
             <div className="mt-6">
-                <h2 className="font-inter font-semibold text-[12px
+                {/* <h2 className="font-inter font-semibold text-[12px
 ] lg:text-[14px] text-[#323232] text-left mt-[1px] ml-[1px] mb-3">Published Products
-                </h2>
+                </h2> */}
 
                 {productlist.length > 0 &&
                     <Itemlist items={productlist} />

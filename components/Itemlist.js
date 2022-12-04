@@ -3,7 +3,6 @@ import { Item } from './item'
 import { ArrowDownIcon } from '@heroicons/react/outline'
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useContext, useEffect, useState } from 'react'
-import Link from 'next/link'
 
 const itemss = [
     {
@@ -67,8 +66,16 @@ const itemss = [
 
 export const Itemlist = ({ items }) => {
 
+    useEffect(() => {
+        if (window.location.href.includes("product/") ) {
+            setproductPage(true)
+        }
+    }, []);
+
 
     const [products, setproducts] = useState(items);
+    const [productPage, setproductPage] = useState(false);
+
 
     const lowTohigh = () => {
         let array = products
@@ -97,53 +104,54 @@ export const Itemlist = ({ items }) => {
     return (
         <div className=''>
             <div className='flex items-center justify-between my-[20px]  lg:my-[50px] '>
-                <h1 className='font-inter text-[13px] lg:text-[22px]'>FEATURED PRODUCTS</h1>
+                <h1 className='font-inter text-[13px] lg:text-[22px]'>{productPage ? "Recommended Products" : "Featured Products"}</h1>
 
+                {!productPage &&
+                    <Menu as="div" className="relative inline-block text-left ">
+                        <div>
+                            <Menu.Button className=" ">
+                                <button className='flex items-center font-inter text-[13px] lg:text-[22px] cursor-pointer rounded-md lg:py-[1px]'>
+                                    SORT BY
+                                    <ArrowDownIcon className='h-4 xl:h-5 ml-2' />
+                                </button>
+                            </Menu.Button>
+                        </div>
 
-                <Menu as="div" className="relative inline-block text-left ">
-                    <div>
-                        <Menu.Button className=" ">
-                            <button className='flex items-center font-inter text-[13px] lg:text-[22px] cursor-pointer rounded-md lg:py-[1px]'>
-                                SORT BY
-                                <ArrowDownIcon className='h-4 xl:h-5 ml-2' />
-                            </button>
-                        </Menu.Button>
-                    </div>
-
-                    <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                    >
-                        <Menu.Items className="flex flex-col justify-start items-start absolute w-[130px] xl:w-[200px]  right-0 mt-1 lg:mt-3 px-[10px] py-3   shadow-lg bg-[#ffffff] ring-1 ring-black ring-opacity-5 focus:outline-none z-10  space-y-[7px] border-2">
-
-
-
-                            <Menu.Item onClick={lowTohigh}>
-                                <h2 className='cursor-pointer  text-[11px] xl:text-[16px] font-DMsans  mx-auto text-left w-full'>Price - Low to High</h2>
-                            </Menu.Item>
-
-                            <Menu.Item onClick={highTolow}>
-                                <h2 className='cursor-pointer  text-[11px] xl:text-[16px] font-DMsans  mx-auto text-left w-full'>Price - High to Low</h2>
-                            </Menu.Item>
-
-                            <Menu.Item onClick={newArrivals} >
-                                <h2 className='cursor-pointer text-[11px] xl:text-[16px] font-DMsans  mx-auto text-left w-full'>New Arrivals</h2>
-                            </Menu.Item>
+                        <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                        >
+                            <Menu.Items className="flex flex-col justify-start items-start absolute w-[130px] xl:w-[200px]  right-0 mt-1 lg:mt-3 px-[10px] py-3   shadow-lg bg-[#ffffff] ring-1 ring-black ring-opacity-5 focus:outline-none z-10  space-y-[7px] border-2">
 
 
 
+                                <Menu.Item onClick={lowTohigh}>
+                                    <h2 className='cursor-pointer  text-[11px] xl:text-[16px] font-DMsans  mx-auto text-left w-full'>Price - Low to High</h2>
+                                </Menu.Item>
+
+                                <Menu.Item onClick={highTolow}>
+                                    <h2 className='cursor-pointer  text-[11px] xl:text-[16px] font-DMsans  mx-auto text-left w-full'>Price - High to Low</h2>
+                                </Menu.Item>
+
+                                <Menu.Item onClick={newArrivals} >
+                                    <h2 className='cursor-pointer text-[11px] xl:text-[16px] font-DMsans  mx-auto text-left w-full'>New Arrivals</h2>
+                                </Menu.Item>
 
 
 
 
-                        </Menu.Items>
-                    </Transition>
-                </Menu>
+
+
+
+                            </Menu.Items>
+                        </Transition>
+                    </Menu>
+                }
 
 
 
