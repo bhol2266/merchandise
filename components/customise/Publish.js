@@ -6,22 +6,24 @@ import Canvas from './Canvas'
 import ColorModal from './Modals/ColorModal'
 import MerchContext from '../../context/MerchContext';
 import * as htmlToImage from 'html-to-image';
-import { tshirts } from '../../Data/tshirs'
 import ModalPublish from './Modals/ModalPublish'
 import Script from 'next/script'
 import { getYoutubersDetail } from '../../lib/Creator_API'
+import { originalPrice__tshirtBlended } from '../../Data/tshirtsblendedcotton'
+import { originalPrice_hoodies } from '../../Data/hoodies'
+import { originalPrice_tshirtCotton } from '../../Data/tshirtcotton'
+
 
 
 const Publish = () => {
 
 
     //Here colour is the collection of tshirts of different colours imported in globalStates from Data
-    const { canvas, PreviewMode, setPreviewMode, colours, setselectedColourIndex, selectedTshirtsForUpload, ModalPublishVisible, setModalPublishVisible, uploadedArts, publishData, setpublishData } = useContext(MerchContext)
+    const { canvas, PreviewMode, setPreviewMode, colours, setselectedColourIndex, selectedTshirtsForUpload, ModalPublishVisible, setModalPublishVisible, uploadedArts, publishData, setpublishData, productDescription, setproductDescription, categorySelected } = useContext(MerchContext)
 
     const [productName, setproductName] = useState('');
     const [disPrice, setdisPrice] = useState('');
     const [origPrice, setorigPrice] = useState('');
-    const [description, setdescription] = useState('');
     const [termsCondition, settermsCondition] = useState(false);
 
 
@@ -31,7 +33,28 @@ const Publish = () => {
         setPreviewMode(!PreviewMode)
     }
     const publishClick = async (e) => {
+        let minPrice = 0 // set price by kundan
+        //check discounted price less than original price and minimum price from local json file
+        if (categorySelected === "T-SHIRT (Cotton)") {
+            minPrice = originalPrice_tshirtCotton
+        }
+        if (categorySelected === "T-SHIRT (Blended)") {
+            minPrice = originalPrice__tshirtBlended
 
+        }
+        if (categorySelected === "HOODIE") {
+            minPrice = originalPrice_hoodies
+        }
+     
+        if (parseInt(disPrice) < minPrice) {
+            alert(`Price should be greater than ${minPrice}`)
+            return
+        }
+        if (parseInt(origPrice) < disPrice) {
+            alert(`Original Price should be greater than Discounted Price`)
+            return
+        }
+        
         if (canvas.getObjects().length === 0) {
             alert('Design Empty!')
             return
@@ -47,7 +70,7 @@ const Publish = () => {
             return
         }
 
-        if (productName.length === 0 || disPrice.length === 0 || origPrice.length === 0 || description.length === 0) {
+        if (productName.length === 0 || disPrice.length === 0 || origPrice.length === 0) {
             alert('Fill all Products details')
             return
         }
@@ -56,7 +79,7 @@ const Publish = () => {
             return
         }
 
-        //Check whether the creator deatils is updated or not in Preview and Edit page
+        //Check whether the creator deatils is updated or not in Preview and Edit page for one time (first time)
         try {
             const response = await getYoutubersDetail()
             console.log(response);
@@ -64,8 +87,10 @@ const Publish = () => {
                 alert('First fill creator details in Preview and Edit page before publishing');
             } else {
 
+
+
                 setpublishData({
-                    productName: productName, discountPrice: disPrice, productDescription: description, mrp: origPrice,
+                    productName: productName, discountPrice: disPrice, productDescription: productDescription, mrp: origPrice,
                 })
                 //open publish modal to see and publish
                 setModalPublishVisible(true)
@@ -112,21 +137,26 @@ const Publish = () => {
                     <h3 className='text-[12px] lg:text-[14px]  font-inter font-medium text-[#323232] '>Discounted Price</h3>
                     <input required value={disPrice} onChange={e => {
                         setdisPrice(e.target.value)
-                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none line-through' type="number" name="Discounted" id="Discounted" placeholder='₹599' />
+                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none ' type="number" name="Discounted" id="Discounted" placeholder='₹499' />
                 </div>
 
                 <div className='flex-fles-col space-y-1 mb-[15px]'>
-                    <h3 className='text-[12px] lg:text-[14px]  font-inter font-medium text-[#323232] '>Original Price</h3>
+                    <h3 className='text-[12px] lg:text-[14px]   font-inter font-medium text-[#323232] '>Original Price</h3>
                     <input required value={origPrice} onChange={e => {
                         setorigPrice(e.target.value)
-                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="number" name="Original" id="Original" placeholder='₹499' />
+                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232] line-through font-inter outline-none' type="number" name="Original" id="Original" placeholder='₹599' />
                 </div>
 
                 <div className='flex-fles-col space-y-1 mb-[15px]'>
                     <h3 className='text-[12px] lg:text-[14px]  font-inter font-medium text-[#323232] '>Product Description</h3>
-                    <input required value={description} onChange={e => {
-                        setdescription(e.target.value)
-                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Description" id="Description" placeholder='fghfgdshfgjh' />
+                    {/* <input required value={productDescription} onChange={e => {
+                        setproductDescription(e.target.value)
+                    }} className='w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' type="text" name="Description" id="Description" placeholder='fghfgdshfgjh' /> */}
+
+                    <textarea value={productDescription} onChange={e => {
+                        setproductDescription(e.target.value)
+                    }} id="message" rows="4" className='scrollbar-hide w-full border-[1px] border-[#AAAAAA] rounded-[5px] px-[10px] py-[12px] text-[11px] lg:text-[13px]  text-[#323232]  font-inter outline-none' placeholder="Product Description..."></textarea>
+
                 </div>
 
                 <div className='flex items-center justify-between mx-2'>

@@ -7,8 +7,9 @@ import MerchContext from '../../../context/MerchContext';
 
 const ColorModal = () => {
 
-
+    
     const {colorModalVisible, setcolorModalVisible, colours, setcolours } = useContext(MerchContext);
+    
 
     const updateFieldChanged = index => {
         let newArr = [...colours]; // copying the old datas array

@@ -7,7 +7,6 @@ import { Addtobag } from '../../lib/serverConfig'
 import { GetEmail } from '../../lib/CookieLib'
 import { addProductWishlist, deleteProductWishlist, addProductCart, getProductWishlist } from '../../lib/Product_API'
 import { setCookies, getCookie } from "cookies-next";
-import { tshirts } from '../../Data/tshirs'
 import { Itemlist } from '../../components/Itemlist'
 import { getYoutubersProductsList } from '../../lib/Creator_API'
 import { useRouter } from 'next/router'
@@ -15,6 +14,8 @@ import SizeChart from '../../components/sizechartModal'
 
 
 const Product = ({ productdetails }) => {
+
+    console.log(productdetails);
 
     const router = useRouter();
 

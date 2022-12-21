@@ -9,6 +9,7 @@ import { getYoutubersProductsList } from '../lib/Creator_API'
 export const CreatorNavbar = () => {
     const { youtuberLogo, setyoutuberLogo, NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
 
+    const [youtuberName , setyoutuberName ] = useState('');
 
 
 
@@ -24,8 +25,8 @@ export const CreatorNavbar = () => {
                     logo = 'https://' + logo
                 }
                 setyoutuberLogo(logo)
-                youtuberName = response.data.creatorName
-                productlist = response.data.products
+                setyoutuberName(response.data.creatorName)
+                // productlist = response.data.products
             } else {
                 console.log(response.message)
             }

@@ -27,12 +27,12 @@ function Youtuber({ youtuberName, banner, logo, productlist, youtuberNotFound })
 
 
                 {productlist &&
-                    <div className=' sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]'>
+                    <div className=' sm:px-[12px] xs:px-[20px] px-[10px] lg:px-[50px]  mb-16'>
                         <Itemlist items={productlist} />
                     </div>
                 }
 
-                <div className='flex space-x-3 my-16 items-center justify-around w-3/4 lg:w-1/2 mx-auto'>
+                {/* <div className='flex space-x-3 my-16 items-center justify-around w-3/4 lg:w-1/2 mx-auto'>
                     {pages.map(page => {
                         return (
                             <>
@@ -40,7 +40,7 @@ function Youtuber({ youtuberName, banner, logo, productlist, youtuberNotFound })
                             </>
                         )
                     })}
-                </div>
+                </div> */}
 
 
             </div>

@@ -20,7 +20,17 @@ const Account = () => {
             const response = await getUserinfo()
             console.log(response);
             if (response.success) {
-              console.log(response);
+                console.log(response);
+                setfirstName(response.data.firstName)
+                setlastName(response.data.lastName)
+                setphone(response.data.mobileNumber)
+                setcountry(response.data.country)
+                setyoutubeLink(response.data.socialMedia.youtubeLink)
+                setfbLink(response.data.socialMedia.fbLink)
+                setinstaLink(response.data.socialMedia.instagram)
+                setotherLink(response.data.socialMedia.other)
+
+               
             }
         } catch (error) {
             console.log(error)
@@ -31,7 +41,10 @@ const Account = () => {
             console.log(response);
             if (response.success) {
                 console.log(response);
-
+                setaccountNumber(response.data.bankAccountNumber)
+                setIFSC(response.data.bankIfscCode)
+                setaccountName(response.data.accountHolderName)
+                setupiID(response.data.upiId)
             }
         } catch (error) {
             console.log(error)
@@ -41,10 +54,7 @@ const Account = () => {
     }
 
     useEffect(() => {
-      
         fetchData()
-
-
     }, []);
 
     const { NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
@@ -69,6 +79,8 @@ const Account = () => {
     const [instaLink, setinstaLink] = useState('');
     const [otherLink, setotherLink] = useState('');
 
+    console.log(state);
+
 
     // Bank details
 
@@ -90,6 +102,101 @@ const Account = () => {
         setNavbarUserORcreator('')
         window.open(process.env.FRONTEND_URL, "_self");
     }
+
+    const submitFormAccountDetails = async () => {
+
+        if (firstName === '') {
+            alert("Enter firstName")
+            return
+        }
+
+        if (lastName === '') {
+            alert("Enter lastName")
+            return
+        }
+        if (phone === '') {
+            alert("Enter phone")
+            return
+        }
+        if (state === '') {
+            alert("Select State")
+            return
+        }
+
+
+
+        let data = {
+            firstName: firstName,
+            lastName: lastName,
+            mobileNumber: phone,
+            country: country,
+            state: state,
+            socialMedia: {
+                youtube: youtubeLink,
+                instagram: instaLink,
+                facebook: fbLink,
+                other: otherLink
+            }
+        }
+
+
+
+        try {
+            const response = await postUserinfo(data)
+            console.log(response);
+            if (response.success) {
+                console.log(response);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+
+    }
+
+    const submitFormABankDetails = async () => {
+
+        if (IFSC === '') {
+            alert("Enter IFSC")
+            return
+        }
+        if (accountName === '') {
+            alert("Enter accountName")
+            return
+        }
+        if (accountNumber === '') {
+            alert("Enter accountNumber")
+            return
+        }
+        if (upiID === '') {
+            alert("Enter upiID")
+            return
+        }
+
+        let data = {
+            bankAccountNumber: accountNumber,
+            bankIfscCode: IFSC,
+            accountHolderName: accountName,
+            upiId: upiID,
+
+        }
+
+
+
+        try {
+            const response = await postAccountInfo(data)
+            console.log(response);
+            if (response.success) {
+                console.log(response);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+
+
+    }
+
 
 
     return (
@@ -126,20 +233,20 @@ const Account = () => {
 
                 {MenuChanger === 'INFO' &&
 
-                    <form className='w-full mx-auto  sm:w-4/5 md:w-full  2xl:w-2/5 xl:w-4/5'>
+                    <div className='w-full mx-auto  sm:w-4/5 md:w-full  2xl:w-2/5 xl:w-4/5'>
 
                         <div className='flex items-center justify-between space-x-4 mt-4'>
 
                             <div className='w-full '>
                                 <label className='block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>First Name</label>
-                                <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={firstName} onChange={(e) => { setfirstName(e.target.value) }} id='First Name' name='First Name' placeholder='Kim Jong UN' type='text' />
+                                <input className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={firstName} onChange={(e) => { setfirstName(e.target.value) }} id='First Name' name='First Name' placeholder='Kim Jong UN' type='text' />
 
                             </div>
 
                             <div className='w-full '>
 
                                 <label className='block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Last Name</label>
-                                <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={lastName} onChange={(e) => { setlastName(e.target.value) }} id='Last Name' name='Last Name' placeholder='Kim Jong UN' type='text' />
+                                <input className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={lastName} onChange={(e) => { setlastName(e.target.value) }} id='Last Name' name='Last Name' placeholder='Kim Jong UN' type='text' />
 
                             </div>
 
@@ -148,8 +255,8 @@ const Account = () => {
 
 
 
-                        <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Artist Name</label>
-                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={artistName} onChange={(e) => { setartistName(e.target.value) }} id='Artist Name' name='Artist Name' placeholder='Kim Jong UN' type='text' />
+                        {/* <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Artist Name</label>
+                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={artistName} onChange={(e) => { setartistName(e.target.value) }} id='Artist Name' name='Artist Name' placeholder='Kim Jong UN' type='text' /> */}
 
 
 
@@ -171,12 +278,12 @@ const Account = () => {
 
                                 <label className=' block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>State</label>
 
-                                <select className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full'>
-                                    <option value={state} selected onChange={e => setstate(e.target.value)} disabled hidden>Select State</option>
+                                <select value={state} onChange={e => setstate(e.target.value)} className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full'>
+                                    <option selected disabled hidden>Select State</option>
 
-                                    {statesOfINdia.map(state => {
+                                    {statesOfINdia.map(item => {
                                         return (
-                                            <option key={state} value={state} >{state}</option>
+                                            <option key={item} >{item}</option>
 
                                         )
                                     })}
@@ -188,12 +295,12 @@ const Account = () => {
                         </div>
 
 
-                        <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>E-Mail</label>
+                        {/* <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>E-Mail</label>
                         <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={email} onChange={(e) => { setemail(e.target.value) }} id='email' name='email' placeholder='abcd@gmail.com' type='email' />
+ */}
 
 
-
-                        <div className='flex items-center justify-between space-x-4 mt-4'>
+                        {/* <div className='flex items-center justify-between space-x-4 mt-4'>
 
                             <div className='w-full '>
                                 <label className='block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Password</label>
@@ -209,7 +316,7 @@ const Account = () => {
 
                             </div>
 
-                        </div>
+                        </div> */}
 
 
 
@@ -219,48 +326,48 @@ const Account = () => {
 
 
                         <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Youtube Channel Link</label>
-                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={youtubeLink} onChange={(e) => { setyoutubeLink(e.target.value) }} id='youtubeLink' name='youtubeLink' placeholder='https://www.youtube.com/c/kundan' type='text' />
+                        <input className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={youtubeLink} onChange={(e) => { setyoutubeLink(e.target.value) }} id='youtubeLink' name='youtubeLink' placeholder='https://www.youtube.com/c/kundan' type='text' />
 
 
 
                         <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Facebook Channel Link</label>
-                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={fbLink} onChange={(e) => { setfbLink(e.target.value) }} id='fbLink' name='fbLink' placeholder='https://www.facebook.com/kundan' type='text' />
+                        <input className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={fbLink} onChange={(e) => { setfbLink(e.target.value) }} id='fbLink' name='fbLink' placeholder='https://www.facebook.com/kundan' type='text' />
 
 
 
                         <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Instagram Channel Link</label>
-                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={instaLink} onChange={(e) => { setinstaLink(e.target.value) }} id='instaLink' name='instaLink' placeholder='https://www.instagram.com/kundan' type='text' />
+                        <input className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={instaLink} onChange={(e) => { setinstaLink(e.target.value) }} id='instaLink' name='instaLink' placeholder='https://www.instagram.com/kundan' type='text' />
 
 
 
                         <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Other Link</label>
-                        <input required className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={otherLink} onChange={(e) => { setotherLink(e.target.value) }} id='otherLink' name='otherLink' placeholder='https://' type='text' />
+                        <input className='border-[1px] py-[10px] px-[10px] font-inter text-[10px] lg:text-[15px] lg:p-[12px] placeholder:text-gray-400 border-[#AAAAAA] outline-none  rounded w-full' value={otherLink} onChange={(e) => { setotherLink(e.target.value) }} id='otherLink' name='otherLink' placeholder='https://' type='text' />
 
 
 
-                        <div className='mt-6 flex item-center justify-between mx-1 lg:mx-2'>
-                            <div className='flex items-center justify-center space-x-2'>
+                        <div className='mt-6 flex item-center justify-end mx-1 lg:mx-2'>
+                            {/* <div className='flex items-center justify-center space-x-2'>
                                 <h2 className='font-inter font-medium text-[#323232] text-[14px] lg:text-[16px]'>Forgot Password ?</h2>
 
                                 <Link href='/' className='font-inter font-medium text-[#323232] text-[14px] lg:text-[16px] underline'>
                                     Click Here
                                 </Link>
 
-                            </div>
+                            </div> */}
 
-                            <button className='lg:mr-2 lg:scale-150  px-4 py-2 font-inter text-[10px] text-white rounded-[5px] bg-[#54BAB9]'>
+                            <button onClick={submitFormAccountDetails} className='lg:mr-2 lg:scale-150  px-4 py-2 font-inter text-[10px] text-white rounded-[5px] bg-[#54BAB9]'>
                                 Confirm
                             </button>
                         </div>
 
 
-                    </form>
+                    </div>
                 }
 
 
                 {MenuChanger === 'BANK' &&
 
-                    <form className='w-full mx-auto  sm:w-4/5 md:w-full  2xl:w-2/5 mb-[500px] '>
+                    <div className='w-full mx-auto  sm:w-4/5 md:w-full  2xl:w-2/5 mb-[500px] '>
 
 
                         <label className='mt-4 block font-inter text-[#323232] text-[12px] lg:text-[15px] font-medium mb-[5px] ml-1'>Bank Account Number</label>
@@ -283,13 +390,13 @@ const Account = () => {
 
                         <div className='mt-6 flex item-center justify-end mx-1 lg:mx-2'>
 
-                            <button className='lg:mr-2 lg:scale-150  px-4 py-2 font-inter text-[10px] text-white rounded-[5px] bg-[#54BAB9]'>
+                            <button onClick={submitFormABankDetails} className='lg:mr-2 lg:scale-150  px-4 py-2 font-inter text-[10px] text-white rounded-[5px] bg-[#54BAB9]'>
                                 Confirm
                             </button>
                         </div>
 
 
-                    </form>
+                    </div>
 
                 }
 

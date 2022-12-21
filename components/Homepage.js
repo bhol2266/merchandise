@@ -46,7 +46,7 @@ export const Homepage = () => {
                         <button className='content-center font-black rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897] lg:w-[200px] lg:h-[60px] lg:text-[24px]'>PRINT</button>
                     </div>
 
-                    <h2 className='text-[12px] text-[#f5f5f5] font-SFuiDisplay text-center lg:text-[20px]  mx-auto'>A simple solution for creating and selling products that engage
+                    <h2 className='text-[12px] text-[#f5f5f5] font-inter text-center lg:text-[20px]  mx-auto'>A simple solution for creating and selling products that engage
                         your fans and help you monetize your content.
                         No cost, no hassle, no risk.</h2>
                 </div>
@@ -56,10 +56,10 @@ export const Homepage = () => {
                 <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full lg:h-[450px] lg:w-[800px] '></img>
 
                 <div className='lg:w-[338px] lg:h-[450px] flex flex-col  lg:justify-between lg:pt-4'>
-                    <h1 className='mt-[20px]   font-bold text-[12px] w-[145px] text-center mx-auto font-SFuiDisplay lg:w-[217px] h-[52px] lg:text-[18px]'>JOIN US & SELL YOUR
+                    <h1 className='mt-[20px]   font-bold text-[12px] w-[145px] text-center mx-auto font-inter lg:w-[217px] h-[52px] lg:text-[18px]'>JOIN US & SELL YOUR
                         OWM MERCHANDISE</h1>
 
-                    <h2 className='px-[12px] w-[338px]  h-[92px] font-light text-[12px] text-center mx-auto font-SFuiDisplay lg:w-[260px] lg:h-[180px] lg:text-[18px] lg:px-[30px] lg:mb-14  mb-2'>Now you can join us & sell your own merchandise
+                    <h2 className='px-[12px] w-[338px]  h-[92px] font-light text-[12px] text-center mx-auto font-inter lg:w-[260px] lg:h-[180px] lg:text-[18px] lg:px-[30px] lg:mb-14  mb-2'>Now you can join us & sell your own merchandise
                         completely free without any hidden charges. Create your
                         own Brand & Monetize. Join us today & become
                         a part of our evergrowing
@@ -81,12 +81,12 @@ export const Homepage = () => {
             <div className='h-[525px] sm:h-[400px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10 '>
 
                 <div className='ml-[20px]'>
-                    <h1 className='font-SFuiDisplay text-[12px] lg:text-[18px] font-bold  mt-[20px] w-[168] h-[38px] lg:mb-8 '>
+                    <h1 className='font-inter text-[12px] lg:text-[18px] font-bold  mt-[20px] w-[168] h-[38px] lg:mb-8 '>
                         WANT TO PLACE BULK
                         ORDERS ?
                     </h1>
 
-                    <h2 className='w-[251px] h-[139px] font-SFuiDisplay font-light text-[12px] lg:text-[15px] lg:mb-12'>In publishing and graphic
+                    <h2 className='w-[251px] h-[139px] font-inter font-light text-[12px] lg:text-[15px] lg:mb-12'>In publishing and graphic
                         design, Lorem ipsum is a placeholder
                         text commonly used to demonstrate
                         the visual form of a document or a

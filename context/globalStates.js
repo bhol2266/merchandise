@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
-import { tshirts } from '../Data/tshirs';
 import MerchContext from "./MerchContext";
+import { tshirtscotton } from '../Data/tshirtcotton';
+import { description_tshirtCotton } from '../Data/tshirtcotton'
 
 const GlobalStates = (props) => {
 
@@ -21,7 +22,7 @@ const GlobalStates = (props) => {
     //customise page modal
     const [colorModalVisible, setcolorModalVisible] = useState(false);
     const [priorityColorModalVidible, setpriorityColorModalVidible] = useState(false);
-    const [colours, setcolours] = useState(tshirts);
+    const [colours, setcolours] = useState(tshirtscotton);
     const [PreviewMode, setPreviewMode] = useState(false)
 
     const [canvas, setcanvas] = useState(null)
@@ -68,7 +69,14 @@ const GlobalStates = (props) => {
     const [SizeChartModalVisible, setSizeChartModalVisible] = useState(false);
 
 
-  
+    //final Data for publishing tshirts in publishModal
+    const [categorySelected, setcategorySelected] = useState("T-SHIRT (Cotton)");  //"T-SHIRT (Blended)", "HOODIE"
+
+
+    //This is the decription of customised product which is imported from local json of products
+    const [productDescription, setproductDescription] = useState(description_tshirtCotton);
+
+
 
     return (
         <MerchContext.Provider value={{
@@ -114,7 +122,9 @@ const GlobalStates = (props) => {
             addressArray, setaddressArray,
             soldPageSelector, setsoldPageSelector,
             NavbarUserORcreator, setNavbarUserORcreator,
-            SizeChartModalVisible, setSizeChartModalVisible
+            SizeChartModalVisible, setSizeChartModalVisible,
+            categorySelected, setcategorySelected,
+            productDescription, setproductDescription
 
         }}>
             {props.children}

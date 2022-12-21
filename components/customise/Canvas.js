@@ -4,14 +4,22 @@ import { HexColorPicker } from "react-colorful";
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import MerchContext from '../../context/MerchContext';
 import ColorModal from './Modals/ColorModal';
-import { tshirts } from '../../Data/tshirs';
 import dynamic from "next/dynamic";
 import * as htmlToImage from 'html-to-image';
 import { BeatLoader } from 'react-spinners';
 import PriorityColorModal from './Modals/PriorityColorModal';
 import Script from 'next/script';
+import { tshirtsblendedcotton } from '../../Data/tshirtsblendedcotton';
+import { tshirtscotton } from '../../Data/tshirtcotton';
+import { hoodies } from '../../Data/hoodies';
+import { description_hoodies } from '../../Data/hoodies'
+import { description_tshirtBlended } from '../../Data/tshirtsblendedcotton'
+import { description_tshirtCotton } from '../../Data/tshirtcotton'
 
-const chooseProducts = ["MEN T-SHIRT", "MEN SHIRT", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
+
+// const chooseProducts = ["MEN T-SHIRT (100% COTTON)", "MEN T-SHIRT (BLENDED COTTON)", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
+// ]
+const chooseProducts = ["T-SHIRT (Cotton)", "T-SHIRT (Blended)", "HOODIE",
 ]
 
 const FontPicker = dynamic(() => import("font-picker-react"), {
@@ -26,11 +34,8 @@ const Canvas = () => {
     const inputFileRef = useRef(null)
     const canvasRef = useRef(null)
     const divToImageRef = useRef(null);
-
     const fontAPI = 'AIzaSyAZ0YPUkF0oXOhdK3J6EnfSqXZEDHOXQ_g'
-
     const [FrontBackSelected, setFrontBackSelected] = useState('FRONT');
-    const [selectedProduct, setselectedProduct] = useState("MEN T-SHIRT")
 
     // Check for current tshirt color which is showing is uploaded or not
     const [checkUpload, setcheckUpload] = useState(false)
@@ -39,25 +44,30 @@ const Canvas = () => {
 
 
 
-    const { colorModalVisible, setcolorModalVisible, priorityColorModalVidible, setpriorityColorModalVidible, colours, PreviewMode, setPreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, uploadedArts, setuploadedArts } = useContext(MerchContext);
+
+    const { colorModalVisible, setcolorModalVisible, priorityColorModalVidible, setpriorityColorModalVidible, PreviewMode, setPreviewMode, canvas, setcanvas, setcanvasDivRef, selectedColourIndex, setselectedColourIndex, selectedTshirtsForUpload, setselectedTshirtsForUpload, uploadedArts, setuploadedArts, setcategorySelected, categorySelected, setcolours, colours, setproductDescription } = useContext(MerchContext);
 
 
     useEffect(() => {
 
         let canvasss = new fabric.Canvas('myCanvas', {
-            width: 150,
-            height: 230,
+            width: 333,
+            height: 406,
         })
         canvasss.renderAll()
         setcanvas(canvasss)
         setcanvasDivRef(divToImageRef)
+        return () => canvasss.dispose();
+
+
     }, []);
 
 
 
 
     const slideRight = () => {
-        if (selectedColourIndex !== tshirts.length - 1) {
+
+        if (selectedColourIndex !== colours.length - 1) {
             setselectedColourIndex(selectedColourIndex + 1)
             checkUploaded(selectedColourIndex + 1)
         } else {
@@ -71,15 +81,15 @@ const Canvas = () => {
             setselectedColourIndex(selectedColourIndex - 1)
             checkUploaded(selectedColourIndex - 1)
         } else {
-            setselectedColourIndex(tshirts.length - 1)
-            checkUploaded(tshirts.length - 1)
+            setselectedColourIndex(colours.length - 1)
+            checkUploaded(colours.length - 1)
         }
     }
 
     const checkUploaded = (pos) => {
         let Matched = false
         selectedTshirtsForUpload.filter(obj => {
-            if (obj.name === tshirts[pos].name) {
+            if (obj.name === colours[pos].name) {
                 Matched = true
             }
         })
@@ -100,7 +110,7 @@ const Canvas = () => {
 
         const dataUrl = await htmlToImage.toPng(divToImageRef.current);
 
-        let obj = { name: tshirts[selectedColourIndex].name, hexcode: tshirts[selectedColourIndex].hexcode, imageData: dataUrl, side: FrontBackSelected }
+        let obj = { name: colours[selectedColourIndex].name, hexcode: colours[selectedColourIndex].hexcode, imageData: dataUrl, side: FrontBackSelected }
         setselectedTshirtsForUpload([...selectedTshirtsForUpload, obj]);
         setcheckUpload(true)
         setupload_Spinner(false)
@@ -111,7 +121,7 @@ const Canvas = () => {
         let Matched = false
         let indexx = null
         selectedTshirtsForUpload.filter((obj, i) => {
-            if (obj.name === tshirts[selectedColourIndex].name) {
+            if (obj.name === colours[selectedColourIndex].name) {
                 Matched = true
                 indexx = i
             }
@@ -140,7 +150,6 @@ const Canvas = () => {
                 let aspect = nw / nh
                 let h = w / aspect
                 fabric.Image.fromURL(reader.result, img => {
-
                     img.scaleToWidth(w)
                     img.scaleToHeight(h)
                     canvas.centerObject(img);
@@ -151,6 +160,8 @@ const Canvas = () => {
             }
             img.src = reader.result
         }
+
+        console.log(e.target.files[0]);
         reader.readAsDataURL(e.target.files[0])
 
     }
@@ -173,23 +184,38 @@ const Canvas = () => {
         canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
     }
 
+    const changeProductCategory = (e) => {
+
+        setcategorySelected(e.target.value)
+        setselectedColourIndex(0)
+
+        if (e.target.value === "T-SHIRT (Cotton)") {
+            setcolours(tshirtscotton)
+            setproductDescription(description_tshirtCotton)
+        }
+        if (e.target.value === "T-SHIRT (Blended)") {
+            setcolours(tshirtsblendedcotton)
+            setproductDescription(description_tshirtBlended)
+        }
+        if (e.target.value === "HOODIE") {
+            setcolours(hoodies)
+            setproductDescription(description_hoodies)
+        }
+    }
 
 
     return (
 
         <div className='lg:flex lg:justify-around  items-start 2xl:items-start 2xl:justify-start  lg:pt-4 2xl:mt-0'>
 
-           
+
 
             {/* This is for small screen only  */}
             <div className='lg:hidden sm:w-4/5 md:w-3/5  xl:w-[480px]  mx-auto flex items-start justify-between '>
                 <div>
                     <h2 className='text-[12px] font-inter text-[#323232]'>Choose Product</h2>
 
-                    <select className='mt-[8px] w-[170px] min-h-[30px] text-[10px] font-inter rounded-xl text-[#323232] border-[1px] border-[#E5E5E5] p-2  outline-none' value={selectedProduct} onChange={e => setselectedProduct(e.target.value)}>
-
-
-
+                    <select className='mt-[8px] w-[170px] min-h-[30px] text-[10px] font-inter rounded-xl text-[#323232] border-[1px] border-[#E5E5E5] p-2  outline-none' value={categorySelected} onChange={changeProductCategory}>
                         {chooseProducts.map(item => {
                             return (
                                 <option className='font-inter text-[#323232] text-[10px] my-4' key={item} value={item} >{item}</option>
@@ -253,7 +279,9 @@ const Canvas = () => {
                             <div ref={divToImageRef} className={`select-none mx-auto flex items-center justify-center  relative w-fit  ${PreviewMode ? "pointer-events-none" : ""}`}>
 
 
-                                <img className='h-[406px] object-contain' src={`./../creator/tshirts/${FrontBackSelected === 'FRONT' ? `Front_${tshirts[selectedColourIndex].name}` : `Back_${tshirts[selectedColourIndex].name}`}.png`} />
+                                <img className='h-[406px] w-[333px] object-contain' src={`./../creator/${categorySelected.includes("T-SHIRT") ? "tshirts" : "hoodies"}/${FrontBackSelected === 'FRONT' ? colours[selectedColourIndex].frontURL : colours[selectedColourIndex].backURL}.png`} />
+
+
                                 <div className={` ${!PreviewMode ? "border-[1px] border-gray-400" : ""} rounded-lg  z-10 absolute `}>
                                     <canvas
                                         ref={canvasRef}
@@ -313,7 +341,7 @@ const Canvas = () => {
                     <h2 className='text-[15px] font-inter text-[#323232] ml-1'>Choose Product</h2>
 
                     <select className='mt-[4px] w-[240px] 
-                     text-[10px] lg:text-[13px] font-inter rounded-xl text-[#323232] border-[1px] border-[#E5E5E5] p-2  outline-none' value={selectedProduct} onChange={e => setselectedProduct(e.target.value)}>
+                     text-[10px] lg:text-[13px] font-inter rounded-xl text-[#323232] border-[1px] border-[#E5E5E5] p-2  outline-none' value={categorySelected} onChange={changeProductCategory}>
 
 
 
