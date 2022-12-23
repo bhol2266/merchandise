@@ -3,6 +3,7 @@ import { Itemlist } from '../Itemlist'
 import { MiniatureItemList } from './MiniatureItemlist';
 import { setCookies, getCookie } from "cookies-next";
 import { BeatLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
 
 import MerchContext from '../../context/MerchContext';
 import { saveYoutubersDetail, uploadSingleImage, getYoutubersDetail } from '../../lib/Creator_API';
@@ -119,11 +120,11 @@ const Preview_Edit = () => {
                 setbeatLoader(false)
 
             } else {
-                alert(response.message)
+                toast.info(response.message)
                 setbeatLoader(false)
             }
         } catch (error) {
-            alert(error)
+            toast.info(error)
             setbeatLoader(false)
             return
         }
@@ -176,12 +177,12 @@ const Preview_Edit = () => {
     const cofirmButtonClick = async (e) => {
         e.preventDefault()
         if (BannerForUpload === null || LogoforUpload === null) {
-            alert('Upload Banner and Logo both')
+            toast.info('Upload Banner and Logo both')
             return
         }
 
         if (webPage.length === 0 || url.length === 0 || artistDescription.length === 0) {
-            alert('Fill all details')
+            toast.info('Fill all details')
             return
         }
         setbeatLoader2(true)
@@ -202,10 +203,10 @@ const Preview_Edit = () => {
                 if (response.sucess) {
                     uploadImagesURL.push(response.data.imageURL)
                 } else {
-                    // alert(response.message)
+                    // toast.info(response.message)
                 }
             } catch (error) {
-                // alert(error)
+                // toast.info(error)
                 setbeatLoader2(false)
                 return
             }
@@ -217,10 +218,10 @@ const Preview_Edit = () => {
             if (response.sucess) {
                 console.log(response);
             } else {
-                alert(response.message)
+                toast.info(response.message)
             }
         } catch (error) {
-            alert(error)
+            toast.info(error)
             setbeatLoader2(false)
             return
         }
@@ -228,7 +229,7 @@ const Preview_Edit = () => {
         setImagesUploaded(true)
         setBannerForUpload(null)
         setLogoforUpload(null)
-        alert('Data Uploaded')
+        toast.info('Data Uploaded')
 
         // if (!uploadImagesURL[0].includes('https://')) {
         //     setLogo('https://' + uploadImagesURL[0])

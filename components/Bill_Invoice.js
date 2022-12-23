@@ -5,6 +5,7 @@ import MerchContext from "../context/MerchContext";
 import { setCookies, getCookie } from "cookies-next";
 import { orderComplete_API } from "../lib/Order_API";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -64,7 +65,7 @@ const Bill_Invoice = () => {
     const applyCouponfunc = async () => {
 
         if (COUPONCODE.length < 3) {
-            alert("Error Coupon Code")
+            toast.error("Error Coupon Code")
             return
         }
 
@@ -120,12 +121,12 @@ const Bill_Invoice = () => {
 
 
             if (totalAmount.length === 0) {
-                alert('No products')
+                toast.error('No products')
                 return
             }
 
             if (addressArray.length === 0) {
-                alert('Add address')
+                toast.error('Add address')
                 return
             }
 
@@ -191,7 +192,7 @@ const Bill_Invoice = () => {
         const res = await initializeRazorpay();
 
         if (!res) {
-            alert("Razorpay SDK Failed to load");
+            toast.error("Razorpay SDK Failed to load");
             return;
         }
         try {

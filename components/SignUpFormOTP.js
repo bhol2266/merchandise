@@ -6,6 +6,8 @@ import MerchContext from '../context/MerchContext'
 import { VerifyOTP } from '../lib/serverConfig'
 import { GetToken } from '../lib/CookieLib'
 import Router, { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export const SignUpFormOTP = () => {
     const router = useRouter();
@@ -36,7 +38,7 @@ export const SignUpFormOTP = () => {
             return
         }
         if (jsonMessage.error === true) {
-            alert(jsonMessage.message)
+            toast.error(jsonMessage.message)
         }
     }
 

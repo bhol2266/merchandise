@@ -76,6 +76,11 @@ const GlobalStates = (props) => {
     //This is the decription of customised product which is imported from local json of products
     const [productDescription, setproductDescription] = useState(description_tshirtCotton);
 
+    //Alert Bar
+    const [AlertcloseTimer, setAlertcloseTimer] = useState(false);
+    const [Alert_Message, setAlert_Message] = useState("Google Search Console Tools");
+    const [Alert_Type, setAlert_Type] = useState(true);
+
 
 
     return (
@@ -124,7 +129,11 @@ const GlobalStates = (props) => {
             NavbarUserORcreator, setNavbarUserORcreator,
             SizeChartModalVisible, setSizeChartModalVisible,
             categorySelected, setcategorySelected,
-            productDescription, setproductDescription
+            productDescription, setproductDescription,
+            Alert_Message, setAlert_Message,
+            Alert_Type, setAlert_Type,
+            AlertcloseTimer, setAlertcloseTimer
+
 
         }}>
             {props.children}

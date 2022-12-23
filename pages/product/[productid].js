@@ -11,6 +11,7 @@ import { Itemlist } from '../../components/Itemlist'
 import { getYoutubersProductsList } from '../../lib/Creator_API'
 import { useRouter } from 'next/router'
 import SizeChart from '../../components/sizechartModal'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const Product = ({ productdetails }) => {
@@ -191,7 +192,7 @@ const Product = ({ productdetails }) => {
 
             console.log(response);
             if (response.sucess) {
-                alert('Added to bag')
+                toast.info('Added to bag')
             }
         } catch (error) {
             console.log(error)

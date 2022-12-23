@@ -15,6 +15,7 @@ import { hoodies } from '../../Data/hoodies';
 import { description_hoodies } from '../../Data/hoodies'
 import { description_tshirtBlended } from '../../Data/tshirtsblendedcotton'
 import { description_tshirtCotton } from '../../Data/tshirtcotton'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 // const chooseProducts = ["MEN T-SHIRT (100% COTTON)", "MEN T-SHIRT (BLENDED COTTON)", "MEN HOODIE", "MEN LONG SLEEVE TSHIRT", "WOMEN T-SHIRT", "WOMEN SHIRT", "BOTTLE", "KIDS", "MUGS"
@@ -168,11 +169,11 @@ const Canvas = () => {
 
     const removeSelectedItem = () => {
         if (typeof canvas.getActiveObject() === "undefined") {
-            alert('Select any item to remove!')
+            toast.error('Select any item to remove!')
         }
 
         if (canvas.getActiveObject() === null) {
-            alert('Select any item to remove!')
+            toast.error('Select any item to remove!')
         }
 
         canvas.remove(canvas.getActiveObject());
@@ -391,7 +392,7 @@ const Canvas = () => {
                         <h2 className='mt-2 text-[16px] font-inter font-medium text-[#323232] ml-1 '>Priority Colour</h2>
                         <div onClick={() => {
                             if (selectedTshirtsForUpload.length === 0) {
-                                alert('Upload alteast two colors to set the priority'); return
+                                toast.error('Upload alteast two colors to set the priority'); return
                             }
                             setpriorityColorModalVidible(true)
                         }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[4px] w-[222px] cursor-pointer scale-110 ml-2'>
@@ -420,7 +421,7 @@ const Canvas = () => {
 
                     <div onClick={() => {
                         if (selectedTshirtsForUpload.length === 0) {
-                            alert('Upload alteast two colors to set the priority'); return
+                            toast.error('Upload alteast two colors to set the priority'); return
                         }
                         setpriorityColorModalVidible(true)
                     }} className='border-[1px] border-[#E5E5E5]  rounded-xl px-2 py-[3px]  flex items-center justify-between mt-[8px] w-[170px] cursor-pointer'>

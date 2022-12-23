@@ -3,6 +3,8 @@ import PublishedItem from './PublishedItem';
 import MerchContext from '../../context/MerchContext';
 import { getPublishedProducts, putPublishedProducts, deletePublishedProducts } from '../../lib/Creator_API';
 import { BeatLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 const PublishedProducts = () => {
@@ -18,14 +20,14 @@ const PublishedProducts = () => {
     //if there is any changes to the creators productList we have to update to database 
 
     if (!Edited) {
-      alert('No changes made')
+      toast.info('No changes made')
       return
     }
 
     if (Edited) {
 
       if (!termsCondition) {
-        alert('Please Accept Terms and Conditions')
+        toast.info('Please Accept Terms and Conditions')
         return
       }
       try {
@@ -46,15 +48,15 @@ const PublishedProducts = () => {
           if (response.success) {
             console.log(response, index);
           } else {
-            alert(response.message)
+            toast.info(response.message)
           }
 
         }
-        alert("Data Updated")
+        toast.info("Data Updated")
         setEdited(false)
 
       } catch (error) {
-        alert(error)
+        toast.info(error)
         return
       }
     }
@@ -91,7 +93,7 @@ const PublishedProducts = () => {
         console.log(response)
       }
     } catch (error) {
-      alert(error)
+      toast.info(error)
       return
     }
   }

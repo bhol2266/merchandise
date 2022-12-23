@@ -12,6 +12,7 @@ import { getYoutubersDetail } from '../../lib/Creator_API'
 import { originalPrice__tshirtBlended } from '../../Data/tshirtsblendedcotton'
 import { originalPrice_hoodies } from '../../Data/hoodies'
 import { originalPrice_tshirtCotton } from '../../Data/tshirtcotton'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -47,16 +48,16 @@ const Publish = () => {
         }
      
         if (parseInt(disPrice) < minPrice) {
-            alert(`Price should be greater than ${minPrice}`)
+            toast.info(`Price should be greater than ${minPrice}`)
             return
         }
         if (parseInt(origPrice) < disPrice) {
-            alert(`Original Price should be greater than Discounted Price`)
+            toast.info(`Original Price should be greater than Discounted Price`)
             return
         }
         
         if (canvas.getObjects().length === 0) {
-            alert('Design Empty!')
+            toast.info('Design Empty!')
             return
         }
 
@@ -66,16 +67,16 @@ const Publish = () => {
         setPreviewMode(true)
 
         if (selectedTshirtsForUpload.length === 0) {
-            alert('Please upload any tshirt to publish')
+            toast.info('Please upload any tshirt to publish')
             return
         }
 
         if (productName.length === 0 || disPrice.length === 0 || origPrice.length === 0) {
-            alert('Fill all Products details')
+            toast.info('Fill all Products details')
             return
         }
         if (!termsCondition) {
-            alert('Accept terms and conditions')
+            toast.info('Accept terms and conditions')
             return
         }
 
@@ -84,7 +85,7 @@ const Publish = () => {
             const response = await getYoutubersDetail()
             console.log(response);
             if (!response.data) {
-                alert('First fill creator details in Preview and Edit page before publishing');
+                toast.info('First fill creator details in Preview and Edit page before publishing');
             } else {
 
 

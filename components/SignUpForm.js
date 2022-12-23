@@ -7,6 +7,8 @@ import { QueryG } from '../lib/serverConfig'
 import { SignUpUser, SendOTP } from '../lib/serverConfig'
 import { BeatLoader } from 'react-spinners'
 import { SetToken, SetRefreshToken, SetFirstName, SetLastName, SetEmail } from '../lib/CookieLib'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export const SignUpForm = () => {
 
@@ -45,32 +47,32 @@ export const SignUpForm = () => {
     const continueButton = async (e) => {
         e.preventDefault();
         if (Email.length > 10 && !validateEmail(Email)) {
-            alert("Please Enter Email correctly")
+            toast.error("Please Enter Email correctly")
             return
         }
         if (phone.length < 10) {
-            alert("Enter 10 digit Mobile number")
+            toast.error("Enter 10 digit Mobile number")
             return
         }
         if (firstName.length < 2) {
-            alert("Enter First name")
+            toast.error("Enter First name")
             return
         }
         if (lastName.length < 2) {
-            alert("Enter Last name")
+            toast.error("Enter Last name")
             return
         }
         if (password.length < 2) {
-            alert("Enter Passowrd ")
+            toast.error("Enter Passowrd ")
             return
         }
         if (confirmPassword.length < 2) {
-            alert("Enter Confirm Password ")
+            toast.error("Enter Confirm Password ")
             return
         }
 
         if (!(password === confirmPassword)) {
-            alert("Confirm Password did not match")
+            toast.error("Confirm Password did not match")
             return
         }
 
@@ -100,20 +102,20 @@ export const SignUpForm = () => {
 
         try {
             if (jsonMessage.errors.username[0].message) {
-                alert(jsonMessage.errors.username[0].message)
+                toast.error(jsonMessage.errors.username[0].message)
             }
         } catch (error) {
 
             try {
                 if (jsonMessage.errors.email[0].message) {
-                    alert(jsonMessage.errors.email[0].message)
+                    toast.error(jsonMessage.errors.email[0].message)
                 }
             } catch (error) {
                 var message = ''
                 jsonMessage.errors.password2.map(obj => {
                     message = message + " " + obj.message
                 })
-                alert(message)
+                toast.error(message)
             }
 
         }

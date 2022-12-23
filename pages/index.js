@@ -8,11 +8,13 @@ import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 
 import Script from 'next/script'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export default function Home({ type }) {
 
 
-  const { NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
+  const { setAlertcloseTimer, Alert_Message, Alert_Type, setNavbarUserORcreator } = useContext(MerchContext)
 
 
   const router = useRouter()
@@ -37,6 +39,9 @@ export default function Home({ type }) {
 
 
       <Homepage />
+
+
+      <button onClick={()=>setAlertcloseTimer(true)}>Click me</button>
 
     </div>
   )

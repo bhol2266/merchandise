@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import MerchContext from '../../context/MerchContext';
 import { setCookies, getCookie } from "cookies-next";
 import { postUserinfo, getUserinfo, postAccountInfo, getAccountInfo } from "../../lib/Creator_API";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -106,20 +107,20 @@ const Account = () => {
     const submitFormAccountDetails = async () => {
 
         if (firstName === '') {
-            alert("Enter firstName")
+            toast.info("Enter firstName")
             return
         }
 
         if (lastName === '') {
-            alert("Enter lastName")
+            toast.info("Enter lastName")
             return
         }
         if (phone === '') {
-            alert("Enter phone")
+            toast.info("Enter phone")
             return
         }
         if (state === '') {
-            alert("Select State")
+            toast.info("Select State")
             return
         }
 
@@ -157,19 +158,19 @@ const Account = () => {
     const submitFormABankDetails = async () => {
 
         if (IFSC === '') {
-            alert("Enter IFSC")
+            toast.info("Enter IFSC")
             return
         }
         if (accountName === '') {
-            alert("Enter accountName")
+            toast.info("Enter accountName")
             return
         }
         if (accountNumber === '') {
-            alert("Enter accountNumber")
+            toast.info("Enter accountNumber")
             return
         }
         if (upiID === '') {
-            alert("Enter upiID")
+            toast.info("Enter upiID")
             return
         }
 

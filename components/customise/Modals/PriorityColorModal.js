@@ -1,6 +1,7 @@
 import { XCircleIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 import { useContext, useEffect, useState } from 'react';
 import MerchContext from '../../../context/MerchContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -13,7 +14,7 @@ const PriorityColorModal = () => {
 
     const setPrioityOnclick = index => {
         if (index === 0) {
-            alert('Already in priority')
+            toast.info('Already in priority')
             return
         }
         let newArr = [...selectedTshirtsForUpload]; // copying the old datas array

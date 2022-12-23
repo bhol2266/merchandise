@@ -4,6 +4,8 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { statesOfINdia } from "../Data/statesOfINdia";
 import { putAddress, postAddress } from "../lib/Address_API";
 import MerchContext from "../context/MerchContext";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 
@@ -135,35 +137,35 @@ const AddressForm = (props) => {
 
         if (firstTimeAddressSave) {
             if (!firstname) {
-                alert("Enter firstname")
+                toast.warn("Enter firstname");
                 return
             }
             if (!lastname) {
-                alert("Enter lastname")
+                toast.warn("Enter lastname");
                 return
             }
             if (!mobilenumber) {
-                alert("Enter Mobile number")
+                toast.warn("Enter mobilenumber");
                 return
             }
             if (!state) {
-                alert("Select state")
+                toast.warn("Select state");
                 return
             }
             if (!pincode) {
-                alert("Enter pincode")
+                toast.warn("Enter pincode");
                 return
             }
             if (!town) {
-                alert("Enter town")
+                toast.warn("Enter town");
                 return
             }
             if (!landmark) {
-                alert("Enter landmark")
+                toast.warn("Enter landmark");
                 return
             }
             if (!address) {
-                alert("Enter address")
+                toast.warn("Enter address");
                 return
             }
 
@@ -201,7 +203,8 @@ const AddressForm = (props) => {
         const message = await response.json()
         console.log(message[0].Status);
         if (message[0].Status === "Error") {
-            alert("Pincode Error")
+            toast.error("Pincode Error");
+
         }
 
 

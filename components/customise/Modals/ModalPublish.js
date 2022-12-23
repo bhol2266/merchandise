@@ -4,6 +4,7 @@ import MerchContext from '../../../context/MerchContext';
 import { publishTshirtsDesign, uploadSingleImage, uploadImageBase64 } from '../../../lib/Creator_API'
 import Cookies from 'js-cookie'
 import { BeatLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -27,7 +28,7 @@ const ModalPublish = () => {
             if (response.sucess) {
                 art_url = response.data.imageURL
             } else {
-                alert(response.message)
+                toast.info(response.message)
                 return
             }
 
@@ -56,7 +57,7 @@ const ModalPublish = () => {
 
                     colorsData.push({ name: selectedTshirtsForUpload[index].name, imageUrl: [response.data.imageURL, ...imageDataArray] })
                 } else {
-                    alert(response.message)
+                    toast.info(response.message)
                     return
                 }
 
@@ -69,9 +70,9 @@ const ModalPublish = () => {
             const response2 = await publishTshirtsDesign(data)
             if (response2.sucess) {
                 setbeatLoader(false)
-                alert('T-Shirts Published')
+                toast.info('T-Shirts Published')
             } else {
-                alert(response2.message)
+                toast.info(response2.message)
                 setbeatLoader(false)
                 return
             }
@@ -79,7 +80,7 @@ const ModalPublish = () => {
 
 
         } catch (error) {
-            alert(error)
+            toast.info(error)
             setbeatLoader(false)
             return
         }

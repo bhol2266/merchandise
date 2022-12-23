@@ -3,6 +3,8 @@ import { TrashIcon, ChevronRightIcon, EyeOffIcon, EyeIcon } from '@heroicons/rea
 import PriorityNumberModal from './Modals/PriorityNumberModal';
 import MerchContext from '../../context/MerchContext';
 import { deletePublishedProducts } from '../../lib/Creator_API';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export default function PublishedItem(props) {
 
@@ -60,10 +62,10 @@ export default function PublishedItem(props) {
                 setcreatorsProductList(array)
 
             } else {
-                alert(response.message)
+                toast.info(response.message)
             }
         } catch (error) {
-            alert(error)
+            toast.info(error)
             return
         }
     }

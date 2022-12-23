@@ -1,7 +1,7 @@
 import { XCircleIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 import { useContext, useEffect, useState } from 'react';
 import MerchContext from '../../../context/MerchContext';
-
+import { ToastContainer, toast } from 'react-toastify';
 import { setPublishedProductsPriority } from '../../../lib/Creator_API';
 
 const PriorityNumberModal = (props) => {
@@ -58,10 +58,10 @@ const PriorityNumberModal = (props) => {
 
 
             } else {
-                alert(response.message)
+                toast.info(response.message)
             }
         } catch (error) {
-            alert(error)
+            toast.info(error)
             return
         }
     }

@@ -14,6 +14,8 @@ import MerchContext from '../context/MerchContext'
 import { useContext } from 'react'
 import Script from 'next/script'
 import { CreatorNavbar } from '../components/CreatorNavBar'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -29,7 +31,7 @@ function MyApp({ Component, pageProps }) {
 
 
 
-
+ 
 
 
 
@@ -43,6 +45,19 @@ function MyApp({ Component, pageProps }) {
       <GlobalStates>
         <Navigation />
         <CreatorNavbar />
+
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <LoginForm />
         <SignUpForm />
         <SignUpFormOTP />
