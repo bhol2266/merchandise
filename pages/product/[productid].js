@@ -45,8 +45,6 @@ const Product = ({ productdetails }) => {
     const discountPercent = 100 - ((dicountPriceInteger * 100) / mrpInteger)
 
 
-
-
     const scrollbarRef = useRef(null)
     const [itemQuantity, setitemQuantity] = useState(1)
     const [currentImageShowing, setcurrentImageShowing] = useState('')
@@ -72,8 +70,8 @@ const Product = ({ productdetails }) => {
                 }
             })
 
-            const response2 = await getYoutubersProductsList('kundan') //closmkundna
 
+            const response2 = await getYoutubersProductsList('abinash') //closmkundna
             if (response2.sucess) {
                 setproductlist(response2.data.products)
             } else {
@@ -330,13 +328,13 @@ const Product = ({ productdetails }) => {
                                 <h1 className='font-inter text-[11px] lg:text-[16px] text-[#323232] cursor-pointer hidden' onClick={checkPincode}>Check</h1>
 
 
-                                  {pincode.length === 6 &&
+                                {pincode.length === 6 &&
                                     <h1 className='mx-1 font-inter text-[10px] lg:text-[13px] text-[#323232]'>{pincodeVerified ? "Available" : "Not Available"}</h1>
 
                                 }
 
                                 {!pincodeVerified && pincode.length === 6 && <XIcon className='h-[16px] lg:h-[18px] p-0 text-red-500' />}
-                              
+
 
                                 {pincodeVerified && <CheckIcon className='h-[16px] lg:h-[18px] p-0 text-green-500' />}
 
@@ -380,7 +378,7 @@ const Product = ({ productdetails }) => {
 
                 {!toggleDescript_ReturnPolicy &&
                     <div >
-                        <h1 className='text-[11px] lg:text-[16px] font-inter text-[#313131] mt-[8px] lg:mt-[20px] leading-[20px]'>
+                        <h1 className='whitespace-pre	  text-[11px] lg:text-[16px] font-inter text-[#313131] mt-[8px] lg:mt-[20px] leading-[20px]'>
                             {productDescription}
                         </h1>
                     </div>

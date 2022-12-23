@@ -15,34 +15,25 @@ export const tshirtscotton = [
 
 export const size = ["S", "M", "L", "XL", "XXL"]
 
-export const description_tshirtCotton = `Tshirt cotton The standard, traditional t-shirt for everyday wear
-Classic, generous fit`
-    + "\n" + "\n" + "\n" + "\n" +
+export const description_tshirtCotton = `
+Tshirt cotton The standard, traditional t-shirt for everyday wear
+Classic, generous fit
 
+Sizing Notes:
+Round neck features a regular sized fit
 
-
-    `Sizing Notes:
-        Round neck features a regular sized fit`
-
-    + "\n" + "\n" + "\n" +
-
-
-    `
 Artwork Method:
 - Screen printed chest
-    - Front woven tag`
-
-    + "\n" + "\n" + "\n" +
-
-
-    `Fabric & Care:
+- Front woven tag
+    
+Fabric & Care:
 100 % Cotton, 180 GSM
 
-    - Warm machine wash
-        - Do not bleach
-            - Low tumble dry
-                - Warm iron
-                    - Dry cleanable with care
+- Warm machine wash
+- Do not bleach
+- Low tumble dry
+- Warm iron
+- Dry cleanable with care
                         `
 
 export const originalPrice_tshirtCotton = 300
