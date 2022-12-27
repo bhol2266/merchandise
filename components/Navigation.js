@@ -56,7 +56,7 @@ export const Navigation = () => {
                     <LoginMenu />
 
                     <Link href="/mybag">
-                        <img src='/homepageImages/cart.png' className='cursor-pointer w-[23px] h-[22px] lg:w-[28px] lg:h-[26px]'></img>
+                        <img src='/homepageImages/bag.svg' className='cursor-pointer w-[23px] h-[22px] lg:w-[28px] lg:h-[26px]'></img>
 
                         {/* <ShoppingBagIcon className='cursor-pointer w-[20px] h-[20px] text-black'/> */}
                     </Link>

@@ -55,7 +55,7 @@ function LoginMenu() {
     <Menu as="div" className="relative inline-block text-left ">
       <div>
         <Menu.Button className=" ">
-          <img src='/homepageImages/account.png' className='cursor-pointer w-[20px] h-[20px] mt-1 lg:w-[26px] lg:h-[25px]'></img>
+          <img src='/homepageImages/profile.svg' className='cursor-pointer w-[23px] h-[22px] lg:w-[28px] lg:h-[26px] mt-1 '></img>
         </Menu.Button>
       </div>
 
@@ -94,27 +94,30 @@ function LoginMenu() {
           }
 
           <Menu.Item>
-            <h2 className='cursor-pointer text-[11px] font-DMsans text-[#001857] w-fit mx-auto mb-28px mt-[14px]'>Need Help ?</h2>
+            <Link href='/policy'>
+
+              <h2 className='cursor-pointer text-[11px] font-DMsans text-[#001857] w-fit mx-auto mb-28px mt-[14px]'>Need Help ?</h2>
+            </Link>
           </Menu.Item>
 
           <div className=' flex flex-col justify-between  w-[220px]  mt-[25px]'>
             <Menu.Item as='div' className='w-full '>
-                <Link  href='/order'>
-                  <div className=' w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>
-                    <ShoppingCartIcon className='w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] text-gray-400' />
-                    <h1 className='font-Opensans text-[#323232] text-[11px] lg:text-[15px] cursor-pointer'>Orders</h1>
-                  </div>
-                </Link>
+              <Link href='/order'>
+                <div className=' w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>
+                  <ShoppingCartIcon className='w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] text-gray-400' />
+                  <h1 className='font-Opensans text-[#323232] text-[11px] lg:text-[15px] cursor-pointer'>Orders</h1>
+                </div>
+              </Link>
             </Menu.Item>
 
             <Menu.Item as='div'>
-                <Link href='/wishlist'>
-                  <div className='w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>
-                    {/* <img src='./homepageImages/heart2.png' className='w-[12px] h-[12px] lg:w-[16px] lg:h-[16px] '></img> */}
-                    <HeartIcon className='w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] text-gray-400' />
-                    <h1 className='font-Opensans text-[#323232] text-[11px] lg:text-[15px] cursor-pointer'>Wishlist</h1>
-                  </div>
-                </Link>
+              <Link href='/wishlist'>
+                <div className='w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>
+                  {/* <img src='./homepageImages/heart2.png' className='w-[12px] h-[12px] lg:w-[16px] lg:h-[16px] '></img> */}
+                  <HeartIcon className='w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] text-gray-400' />
+                  <h1 className='font-Opensans text-[#323232] text-[11px] lg:text-[15px] cursor-pointer'>Wishlist</h1>
+                </div>
+              </Link>
             </Menu.Item>
             {/* <Menu.Item as='div'>
               <div className='w-full  flex items-center space-x-5  hover:bg-gray-200 py-2 px-4'>

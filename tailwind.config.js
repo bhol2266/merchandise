@@ -50,6 +50,7 @@ module.exports = {
         'lg': "1000px",
         'xl': "1250px",
         '2xl': "1500px",
+        '3xl': "1800px",
       },
       colors: {
         'github': '#24292F',

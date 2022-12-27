@@ -8,6 +8,7 @@ import { getUnitTraking } from "../../lib/Creator_API";
 import { getPublishedProducts } from "../../lib/Creator_API";
 import Script from "next/script";
 import Head from "next/head";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
 
@@ -135,9 +136,9 @@ const Dashboard = () => {
 
 
 
-                    <Link className="font-inter text-[10px] lg:text-[14px] text-[#323232] text-left  underline" href='/' >
+                    <h1 className="cursor-pointer font-inter text-[10px] lg:text-[14px] text-[#323232] text-left  underline" onClick={()=>{toast.error('Insufficient fund')}} >
                         Withdraw Amount
-                    </Link>
+                    </h1>
 
 
 
@@ -151,8 +152,7 @@ const Dashboard = () => {
                         <div>
                             <h2 className="font-inter font-medium text-[12px] lg:text-[14px] text-[#323232] text-left mt-[1px]">Track Units</h2>
 
-                            <h2 className="pr-4 lg:pr-1 font-inter text-[10px] lg:text-[13px] text-[#6C6C6C] text-left mt-[5px]">Track your Profit , Charges &
-                                Withdraw Amount to your Bank Account</h2>
+                            <h2 className="pr-4 lg:pr-1 font-inter text-[10px] lg:text-[13px] text-[#6C6C6C] text-left mt-[5px]">Track your Profit and Sold Units ,Inprogess and Cancelled Units</h2>
 
 
                         </div>

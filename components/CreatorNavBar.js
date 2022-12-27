@@ -4,45 +4,49 @@ import LoginMenu from './LoginMenu'
 import MerchContext from '../context/MerchContext'
 import { useRouter } from 'next/router'
 import { ShoppingBagIcon } from '@heroicons/react/outline'
-import { getYoutubersProductsList } from '../lib/Creator_API'
+import { getYoutubersProductsList ,getYoutubersDetail  } from '../lib/Creator_API'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export const CreatorNavbar = () => {
     const { youtuberLogo, setyoutuberLogo, NavbarUserORcreator, setNavbarUserORcreator } = useContext(MerchContext)
 
-    const [youtuberName , setyoutuberName ] = useState('');
-
-
-
-    const router = useRouter()
+    const [youtuberName, setyoutuberName] = useState('');
 
     async function fetchData() {
-        try {
-            const response = await getYoutubersProductsList('kundan')
-            if (response.sucess) {
-                let logo = response.data.creatorLogo
 
-                if (!logo.includes('https://')) {
-                    logo = 'https://' + logo
+        try {
+            const response = await getYoutubersDetail()
+            if (response.success) {
+                const data = response.data
+            
+                if (!data.creatorLogo.includes('https://')) {
+                    setyoutuberLogo('https://' + data.creatorLogo)
+                } else {
+                    setyoutuberLogo(data.creatorLogo)
                 }
-                setyoutuberLogo(logo)
-                setyoutuberName(response.data.creatorName)
-                // productlist = response.data.products
+
+                setyoutuberName(data.creatorName)
+
+
             } else {
-                console.log(response.message)
+                toast.info(response.message)
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            toast.info(error)
+            return
         }
-
-
     }
 
 
-    useEffect( () => {
-
+    useEffect(() => {
         fetchData()
+    }, []);
 
-    }, [])
+
+
+   
 
 
 

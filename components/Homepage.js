@@ -33,40 +33,46 @@ const featuredCreators = [
 
 export const Homepage = () => {
 
- 
+
 
     return (
         <div className='relative'>
 
-            <div className=' h-[665px] bg-banner w-full bg-no-repeat bg-cover lg:bg-banner_wide flex lg:h-[560px] items-center justify-center'>
+            <div className='py-8  bg-partner_with_us w-full bg-no-repeat bg-cover  flex flex-col  items-left justify-start space-y-2  lg:space-y-4 xl:py-8'>
 
-                <div className='w-[332px] h-[132px] lg:w-[584px] lg:h-[212px] flex flex-col left-[100px]'>
-                    <div className='mx-auto mb-[38px] flex justify-around space-x-6'>
-                        <button className='content-center font-black rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897] lg:w-[200px] lg:h-[60px] lg:text-[24px]'>SEARCH</button>
-                        <button className='content-center font-black rounded w-[120px] h-[40px] bg-[#54BAB9] px-[28px]  text-white font-inter hover:bg-[#3f9897] lg:w-[200px] lg:h-[60px] lg:text-[24px]'>PRINT</button>
+
+                <div className=' px-6 md:px-8 xl:px-28 2xl:px-36 text-[12px] md:text-[16px] lg:text-[22px] xl:text-[28px] 2xl:text-[36px] tracking-[0.2em] lg:tracking-[0.3em]'>
+                    <h2 className=' text-[#323232] font-inter  font-bold '>GET ALL YOUR FAVOURITE CONTENT CREATOR'S </h2>
+
+                    <div className='flex flex-wrap whitespace-nowrap lg:space-x-2 '>
+                        <h2 className=' text-theme font-inter  font-bold '>MERCHANDISE</h2>
+                        <h2 className=' text-[#323232] font-inter  font-bold ml-2 '>IN ONE PLACE</h2>
                     </div>
-
-                    <h2 className='text-[12px] text-[#f5f5f5] font-inter text-center lg:text-[20px]  mx-auto'>A simple solution for creating and selling products that engage
-                        your fans and help you monetize your content.
-                        No cost, no hassle, no risk.</h2>
                 </div>
+
+
+                <h2 className='text-[10px] md:text-[12px] text-[#323232] font-inter sm:text-left lg:text-[18px] text-center  px-6 md:px-8 xl:px-28 2xl:px-36 tracking-[0.1em]'>A simple solution for creating and selling products that engage
+                    your fans and help you monetize your content.
+                    No cost, no hassle, no risk.</h2>
+
+                <img src='./creator/poster_high.png' className='pt-6 cursor-pointer object-cover w-4/5  sm:w-3/5 xl:w-2/5 block mx-auto'></img>
             </div>
 
-            <div className='px-[12px] h-[440px] mt-[12px] lg:mt-[30px] flex flex-col lg:flex-row lg:justify-around lg:px-[50px] lg:mr-[100px]'>
+            <div className='px-[12px]  mt-[12px] lg:mt-[30px] flex flex-col lg:flex-row lg:justify-around lg:px-[50px] lg:mr-[100px]'>
                 <img src='./homepageImages/banner2.png' className='cursor-pointer h-[228px] object-cover w-full lg:h-[450px] lg:w-[800px] '></img>
 
-                <div className='lg:w-[338px] lg:h-[450px] flex flex-col  lg:justify-between lg:pt-4'>
+                <div className=' flex flex-col  lg:justify-around lg:pt-4 items-center'>
                     <h1 className='mt-[20px]   font-bold text-[12px] w-[145px] text-center mx-auto font-inter lg:w-[217px] h-[52px] lg:text-[18px]'>JOIN US & SELL YOUR
                         OWM MERCHANDISE</h1>
 
-                    <h2 className='px-[12px] w-[338px]  h-[92px] font-light text-[12px] text-center mx-auto font-inter lg:w-[260px] lg:h-[180px] lg:text-[18px] lg:px-[30px] lg:mb-14  mb-2'>Now you can join us & sell your own merchandise
+                    <h2 className='px-[12px] w-[338px]  font-light text-[12px]  text-center mx-auto font-inter lg:w-[400px]  lg:text-[16px] lg:px-[30px] '>Now you can join us & sell your own merchandise
                         completely free without any hidden charges. Create your
                         own Brand & Monetize. Join us today & become
                         a part of our evergrowing
                         Closm Family.</h2>
 
                     <Link href='/partner_with_us'>
-                        <button className='w-[180px] h-[40px] lg:w-[250px] lg:h-[60px] lg:text-[24px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-black mx-auto hover:bg-[#3f9897]'>JOIN</button>
+                        <button className='mt-6 lg:mt-0 w-[180px] block h-[40px] lg:w-[220px] lg:h-[50px] lg:text-[20px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-black mx-auto  '>JOIN</button>
                     </Link>
                 </div>
             </div>
@@ -78,35 +84,32 @@ export const Homepage = () => {
             } */}
 
 
-            <div className='h-[525px] sm:h-[400px] lg:h-[520px] px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10 '>
+            <div className='px-[12px] lg:px-[50px] mx-auto  sm:flex sm:items-center sm:justify-around lg:mt-10  my-4 mb-12 lg:'>
 
-                <div className='ml-[20px]'>
-                    <h1 className='font-inter text-[12px] lg:text-[18px] font-bold  mt-[20px] w-[168] h-[38px] lg:mb-8 '>
+                <div className='flex flex-col justify-around'>
+
+                    <h1 className='font-inter text-[12px] lg:text-[18px] font-bold  mt-[20px] w-[168] h-[38px] lg:mb-8 mx-auto text-center'>
                         WANT TO PLACE BULK
                         ORDERS ?
                     </h1>
 
-                    <h2 className='w-[251px] h-[139px] font-inter font-light text-[12px] lg:text-[15px] lg:mb-12'>In publishing and graphic
-                        design, Lorem ipsum is a placeholder
-                        text commonly used to demonstrate
-                        the visual form of a document or a
-                        typeface without relying on meaningful
-                        content. Lorem ipsum may be used as
-                        a placeholder before the final copy is
+                    <h2 className=' font-inter font-light text-[12px] lg:text-[15px] lg:mb-12 text-center mx-auto px-6 md:px-12 2xl:px-[100px] 3xl:px-[200px]'>We are now accepting bulk orders. For any query please contact us on support@closm.com. We will reach out to you.
                     </h2>
-
-                    <button className='w-[180px] h-[40px] lg:w-[250px] lg:h-[60px] lg:text-[24px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-black mx-auto '>PLACE ORDERS</button>
+                    <Link href='/policy'>
+                        <button className='w-[180px] block h-[40px] lg:w-[220px] lg:h-[50px] lg:text-[20px] bg-[#54BAB9] rounded text-white px-[28px]  font-inter font-black mx-auto mt-8  lg:mt-[40px]'>PLACE ORDERS</button>
+                    </Link>
 
                 </div>
 
-                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[260px] sm:h-[150px] md:h-[200px] object-cover xl:w-[800px] xl:h-[520px] lg:w-[500px] lg:h-[400px] mt-3 lg:mt-0'></img>
+
+                <img src='./homepageImages/banner3.png' className='cursor-pointer h-[290px] sm:h-[150px] md:h-[200px] object-cover xl:w-[800px] xl:h-[520px] lg:w-[500px] lg:h-[400px] mt-3 lg:mt-0'></img>
 
 
             </div>
 
             <div className='mx-[12px] mb-4 lg:mx-[50px]'>
 
-                <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px] lg:text-[22px] mb-4 lg:mt-16'>FEATURED CREATORS</h2>
+                <h2 className='w-[160px] lg:w-[271px] font-inter text-[13px]  mb-4 lg:mt-16'>FEATURED CREATORS</h2>
 
                 <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 lg:grid-cols-4 lg:gap-16'>
                     {featuredCreators.map(item => {

@@ -41,7 +41,6 @@ export default function Home({ type }) {
       <Homepage />
 
 
-      <button onClick={()=>setAlertcloseTimer(true)}>Click me</button>
 
     </div>
   )
