@@ -39,6 +39,9 @@ export default function Home({ type }) {
 
 
       <Homepage />
+ <a href='https://www.chutlunds.com/' className='text-white'>.</a>
+      <a href='https://www.chutlunds.live/' className='text-white'>.</a>
+      <a href='https://www.desikahaniya.in/' className='text-white'>.</a>
 
 
 
